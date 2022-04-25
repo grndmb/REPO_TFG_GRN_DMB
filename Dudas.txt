@@ -23,7 +23,7 @@ Localizacion --> (Tabla "PracticasAlumnos" FCT)
 ------------------
 Tabla Alumnos
 ID --> DNI
-------------------
+-------------------
 
 --------------------
 Tabla Empresa
