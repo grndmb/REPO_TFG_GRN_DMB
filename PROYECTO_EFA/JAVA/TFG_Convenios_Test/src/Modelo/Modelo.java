@@ -12,7 +12,7 @@ import persistencia.Curso;
 
 public class Modelo {
 
-public void crearCurso (SessionFactory sessionFactory) throws HibernateException {
+public void crearCurso (SessionFactory sessionFactory, String nombreCurso, String nombreAbrev, int clave, int horasFCT, boolean esPublico) throws HibernateException {
 		
 		Session session = null;
 		
@@ -20,40 +20,15 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
-			System.out.println("************CURSOS*************");
-			System.out.println("************CURSOS*************");
-			
-			
 			Curso curso = new Curso();
-			curso.setNombreCurso("Desarrollo de Aplicaciones Multiplataforma");
-			curso.setNombreAbrev("DAM");
-			curso.setClave(1122334455);
-			curso.setHorasFct(400);
-			curso.setEsPublico(true);
-			
-			Curso curso2 = new Curso();
-			curso2.setNombreCurso("Desarrollo de Aplicaciones Web");
-			curso2.setNombreAbrev("DAW");
-			curso2.setClave(1155223344);
-			curso2.setHorasFct(350);
-			curso2.setEsPublico(true);
-
-			Curso curso3 = new Curso();
-			curso3.setNombreCurso("Sistemas Microinformaticos y Redes");
-			curso3.setNombreAbrev("SMR");
-			curso3.setClave(1335223344);
-			curso3.setHorasFct(300);
-			curso3.setEsPublico(false);
+			curso.setNombreCurso(nombreCurso);
+			curso.setNombreAbrev(nombreAbrev);
+			curso.setClave(clave);
+			curso.setHorasFct(horasFCT);
+			curso.setEsPublico(esPublico);
 			
 			session.saveOrUpdate(curso);
 			System.out.println(curso);
-			
-			session.saveOrUpdate(curso2);
-			System.out.println(curso2);
-			
-			session.saveOrUpdate(curso3);
-			System.out.println(curso3);
-			
 			session.getTransaction().commit();
 			
 		} catch (Exception e) {
@@ -81,7 +56,7 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			
 			//CREAR CURSO
 			System.out.println("CREAR CURSO");
-			helper.crearCurso(sessionFactory);
+		//	helper.crearCurso(sessionFactory);
 			System.out.println("Curso creado");
 			
 			

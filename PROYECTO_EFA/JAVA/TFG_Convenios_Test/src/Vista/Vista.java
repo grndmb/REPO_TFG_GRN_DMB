@@ -7,12 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Dimension;
-
 import javax.swing.border.LineBorder;
-
-import Controlador.Controlador;
-
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -48,16 +43,13 @@ public class Vista extends JFrame {
 			public void run() {
 				try {
 					Vista frame = new Vista();
-					Controlador controlador = new Controlador(frame);
 					frame.setVisible(true);
-					centreWindow(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-//viosta ver
 	/**
 	 * Create the frame.
 	 */
@@ -70,10 +62,14 @@ public class Vista extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		/**
 		 * Panel nuevo alumno
 		 */
 		panelNuevoAlumno = new JPanel();
+
+		
+		JPanel panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(0, 0, 859, 610);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -157,10 +153,4 @@ public class Vista extends JFrame {
 			txtCodigoPostalUSU.setBounds(468, 284, 96, 19);
 			panelNuevoAlumno.add(txtCodigoPostalUSU);
 	}
-	public static void centreWindow(Window frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y - 18);
-    }
 }
