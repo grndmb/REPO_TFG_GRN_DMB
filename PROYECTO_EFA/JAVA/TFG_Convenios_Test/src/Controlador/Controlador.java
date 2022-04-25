@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import Vista.Vista;
 import Modelo.Modelo;
 
@@ -16,6 +19,8 @@ public class Controlador implements ActionListener{
 	//Constructor
 	public Controlador(Vista v) {
 		this.vista = v;
+		
+		this.vista.btnAnadirAlumno.addActionListener(this);
 	}
 
 	//Controlador de eventos
@@ -30,5 +35,40 @@ public class Controlador implements ActionListener{
         configuration.configure("hibernate.cfg.xml");
         sessionFactory = configuration.buildSessionFactory();
 		
+        if(e.getSource() == vista.btnAnadirAlumno) {
+			try {
+				
+				String nif = vista.txtNIFUSU.getText();
+				String nombreCompleto = vista.txtNombreCompletoUSU.getText();
+				
+				boolean seleccionado;
+				if(vista.chbSeleccionado.isSelected()) {
+					 seleccionado = true;
+				} else {
+					 seleccionado = false;
+				}
+				
+				int telefono = Integer.parseInt(vista.txtTelefonoUSU.getText()); 
+				
+				String correo = vista.txtCorreoUSU.getText();
+		
+				//Fecha Nacimiento
+				String fechaNacimientoUSU = vista.txtFechaNacimientoUSU.getText();
+				String formato = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formato);
+				Date fechaNacimiento = (Date) simpleDateFormat.parse(fechaNacimientoUSU);
+				
+				
+				
+			} catch (Exception exception) {
+				// TODO: handle exception
+				exception.printStackTrace();
+				
+				
+			}
+		}
+        
+        
+        
 	}
 }

@@ -21,24 +21,27 @@ public class Vista extends JFrame {
 
 	public JPanel contentPane;
 	public JPanel panelNuevoAlumno;
-		public JLabel txtNIF;
-		public JLabel txtNombreCompleto;
-		public JLabel txtTelefono;
-		public JLabel txtCorreo;
-		public JLabel txtFechaNacimiento;
+		public JLabel lblNIF;
+		public JLabel lblNombreCompleto;
+		public JLabel lblTelefono;
+		public JLabel lblCorreo;
+		public JLabel lblFechaNacimiento;
+		public JLabel lblTituloNuevoAlumno;
+		public JLabel lblNombreCursoAlumno;
+		public JLabel lblCodigoPostalAlumno;
+		public JLabel lblSeleccionado;
+		
 		public JTextField txtNIFUSU;
 		public JTextField txtNombreCompletoUSU;
 		public JTextField txtTelefonoUSU;
 		public JTextField txtCorreoUSU;
 		public JTextField txtFechaNacimientoUSU;
-		public JLabel txtTituloNuevoAlumno;
-		public JLabel txtNombreCursoAlumno;
-		public JLabel txtCodigoPostalAlumno;
 		public JTextField txtNombreCursoUSU;
 		public JTextField txtCodigoPostalUSU;
-		public JButton btnAnadirAlumno;
-		public JLabel txtSeleccionado;
 		public JCheckBox chbSeleccionado;
+		
+		public JButton btnAnadirAlumno;
+
 		
 	/**
 	 * Launch the application.
@@ -82,31 +85,31 @@ public class Vista extends JFrame {
 		panelNuevoAlumno.setLayout(null);
 		contentPane.add(panelNuevoAlumno);
 		
-			txtNIF = new JLabel();
-			txtNIF.setText("NIF");
-			txtNIF.setBounds(212, 88, 110, 19);
-			panelNuevoAlumno.add(txtNIF);
+			lblNIF = new JLabel();
+			lblNIF.setText("NIF");
+			lblNIF.setBounds(212, 88, 110, 19);
+			panelNuevoAlumno.add(lblNIF);
 			
 			
-			txtNombreCompleto = new JLabel();
-			txtNombreCompleto.setText("NOMBRE COMPLETO");
-			txtNombreCompleto.setBounds(212, 124, 136, 19);
-			panelNuevoAlumno.add(txtNombreCompleto);
+			lblNombreCompleto = new JLabel();
+			lblNombreCompleto.setText("NOMBRE COMPLETO");
+			lblNombreCompleto.setBounds(212, 124, 136, 19);
+			panelNuevoAlumno.add(lblNombreCompleto);
 			
-			txtTelefono = new JLabel();
-			txtTelefono.setText("TELEFONO");
-			txtTelefono.setBounds(212, 245, 96, 19);
-			panelNuevoAlumno.add(txtTelefono);
+			lblTelefono = new JLabel();
+			lblTelefono.setText("TELEFONO");
+			lblTelefono.setBounds(212, 245, 96, 19);
+			panelNuevoAlumno.add(lblTelefono);
 			
-			txtCorreo = new JLabel();
-			txtCorreo.setText("CORREO");
-			txtCorreo.setBounds(212, 202, 96, 19);
-			panelNuevoAlumno.add(txtCorreo);
+			lblCorreo = new JLabel();
+			lblCorreo.setText("CORREO");
+			lblCorreo.setBounds(212, 202, 96, 19);
+			panelNuevoAlumno.add(lblCorreo);
 			
-			txtFechaNacimiento = new JLabel();
-			txtFechaNacimiento.setText("FECHA NACIMIENTO");
-			txtFechaNacimiento.setBounds(212, 162, 136, 19);
-			panelNuevoAlumno.add(txtFechaNacimiento);
+			lblFechaNacimiento = new JLabel();
+			lblFechaNacimiento.setText("FECHA NACIMIENTO");
+			lblFechaNacimiento.setBounds(212, 162, 136, 19);
+			panelNuevoAlumno.add(lblFechaNacimiento);
 			
 			txtNIFUSU = new JTextField();
 			txtNIFUSU.setColumns(10);
@@ -133,21 +136,21 @@ public class Vista extends JFrame {
 			txtFechaNacimientoUSU.setBounds(468, 162, 96, 19);
 			panelNuevoAlumno.add(txtFechaNacimientoUSU);
 			
-			txtTituloNuevoAlumno = new JLabel();
-			txtTituloNuevoAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
-			txtTituloNuevoAlumno.setText("NUEVO ALUMNO");
-			txtTituloNuevoAlumno.setBounds(296, 21, 236, 35);
-			panelNuevoAlumno.add(txtTituloNuevoAlumno);
+			lblTituloNuevoAlumno = new JLabel();
+			lblTituloNuevoAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
+			lblTituloNuevoAlumno.setText("NUEVO ALUMNO");
+			lblTituloNuevoAlumno.setBounds(296, 21, 236, 35);
+			panelNuevoAlumno.add(lblTituloNuevoAlumno);
 			
-			txtNombreCursoAlumno = new JLabel();
-			txtNombreCursoAlumno.setText("NOMBRE CURSO");
-			txtNombreCursoAlumno.setBounds(212, 325, 96, 19);
-			panelNuevoAlumno.add(txtNombreCursoAlumno);
+			lblNombreCursoAlumno = new JLabel();
+			lblNombreCursoAlumno.setText("NOMBRE CURSO");
+			lblNombreCursoAlumno.setBounds(212, 325, 96, 19);
+			panelNuevoAlumno.add(lblNombreCursoAlumno);
 			
-			txtCodigoPostalAlumno = new JLabel();
-			txtCodigoPostalAlumno.setText("CODIGO POSTAL");
-			txtCodigoPostalAlumno.setBounds(212, 284, 96, 19);
-			panelNuevoAlumno.add(txtCodigoPostalAlumno);
+			lblCodigoPostalAlumno = new JLabel();
+			lblCodigoPostalAlumno.setText("CODIGO POSTAL");
+			lblCodigoPostalAlumno.setBounds(212, 284, 96, 19);
+			panelNuevoAlumno.add(lblCodigoPostalAlumno);
 			
 			txtNombreCursoUSU = new JTextField();
 			txtNombreCursoUSU.setColumns(10);
@@ -163,10 +166,10 @@ public class Vista extends JFrame {
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
 			panelNuevoAlumno.add(btnAnadirAlumno);
 			
-			txtSeleccionado = new JLabel();
-			txtSeleccionado.setText("SELECCIONADO");
-			txtSeleccionado.setBounds(212, 367, 96, 19);
-			panelNuevoAlumno.add(txtSeleccionado);
+			lblSeleccionado = new JLabel();
+			lblSeleccionado.setText("SELECCIONADO");
+			lblSeleccionado.setBounds(212, 367, 96, 19);
+			panelNuevoAlumno.add(lblSeleccionado);
 			
 			chbSeleccionado = new JCheckBox("");
 			chbSeleccionado.setBackground(Color.WHITE);
