@@ -159,6 +159,7 @@ public class Vista extends JFrame {
 			panelNuevoAlumno.add(lblCodigoPostalAlumno);
 			
 			comboBoxNombreCursoUSU = new JComboBox();
+			comboBoxNombreCursoUSU.setModel(new DefaultComboBoxModel(new String[] {"Desarrollo de Aplicaciones Multiplataforma", "Desarrollo de Aplicaciones Web", "Sistemas Microinformaticos y Redes"}));
 			comboBoxNombreCursoUSU.setBounds(468, 325, 96, 19);
 			panelNuevoAlumno.add(comboBoxNombreCursoUSU);
 			

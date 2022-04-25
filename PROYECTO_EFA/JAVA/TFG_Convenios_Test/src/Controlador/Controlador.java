@@ -47,7 +47,7 @@ public class Controlador implements ActionListener{
         sessionFactory = configuration.buildSessionFactory();
 		
         //Rellenar combobox
-        controlador.rellenarComboBoxCursos(sessionFactory);
+        //controlador.rellenarComboBoxCursos(sessionFactory);
         
         if(e.getSource() == vista.btnAnadirAlumno) {
 			try {
@@ -72,8 +72,10 @@ public class Controlador implements ActionListener{
 		        Date fechaNacimientoUSU = format.parse(vista.txtFechaNacimientoUSU.getText());
 		        java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
 				
-				
-				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento);
+		        int codigoPostal = Integer.parseInt(vista.txtCodigoPostalUSU.getText());
+				String nombreCurso = vista.comboBoxNombreCursoUSU.getSelectedItem().toString();
+		        
+				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento, codigoPostal, nombreCurso);
 
 				System.out.println("ALUMNO CREADOasdasd");
 			} catch (Exception exception) {
@@ -84,7 +86,7 @@ public class Controlador implements ActionListener{
 		} 
 	}
 	
-	public void  rellenarComboBoxCursos (SessionFactory sessionFactory) {
+	/*public void  rellenarComboBoxCursos (SessionFactory sessionFactory) {
 		
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
 		ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
@@ -93,5 +95,5 @@ public class Controlador implements ActionListener{
 			vista.comboBoxNombreCursoUSU.addItem(curso.getNombreCurso().toString());
 		};
  	   	
-    }
+    }*/
 }

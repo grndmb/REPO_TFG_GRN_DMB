@@ -9,11 +9,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ManagedSessionContext;
+import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.hibernate.query.Query;
 import org.hibernate.type.CurrencyType;
 
 import persistencia.Alumno;
 import persistencia.Curso;
+import persistencia.Poblacion;
 
 public class Modelo {
 	
@@ -50,7 +52,7 @@ public class Modelo {
 		}
 	}
 
-	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento) throws HibernateException {
+	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
 	
 		Session session = null;
 		
@@ -66,7 +68,22 @@ public class Modelo {
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
 			
-			session.save(alumno);
+			Query queryPoblacion = session.createQuery("FROM Poblacion WHERE codigoPostal = :codigoPostal");
+			queryPoblacion.setParameter("codigoPostal", codigoPostal);
+			Poblacion poblacion = (Poblacion) queryPoblacion.getSingleResult();
+			
+			alumno.setPoblacion(poblacion);
+			
+			
+			Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
+			queryCurso.setParameter("nombreCurso", nombreCurso);
+			Curso curso = (Curso) queryCurso.getSingleResult();
+			
+			alumno.setCurso(curso);
+			
+		
+			
+			session.saveOrUpdate(alumno);
 			System.out.println(alumno);
 			session.getTransaction().commit();
 			
@@ -110,7 +127,7 @@ public class Modelo {
 			// Cualquier operacion debe hacerse dentro de una transaccion
 			sessionFactory.getCurrentSession().beginTransaction();
 		 
-		// leer todas las asignaturas
+		//Leer todas las asignaturas
 			Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
 			ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 			
