@@ -26,9 +26,19 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			curso.setClave(1122334455);
 			curso.setHorasFct(400);
 			curso.setEsPublico(true);
+			
+			Curso curso2 = new Curso();
+			curso2.setNombreCurso("Desarrollo de Aplicaciones Web");
+			curso2.setNombreAbrev("DAW");
+			curso2.setClave(1155223344);
+			curso2.setHorasFct(350);
+			curso2.setEsPublico(true);
 
 			session.saveOrUpdate(curso);
 			System.out.println(curso);
+			
+			session.saveOrUpdate(curso2);
+			System.out.println(curso2);
 			
 			session.getTransaction().commit();
 			
