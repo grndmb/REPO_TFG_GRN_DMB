@@ -60,88 +60,96 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panelNuevoAlumno = new JPanel();
+		panelNuevoAlumno.setBounds(0, 0, 859, 610);
+		panelNuevoAlumno.setBackground(Color.WHITE);
+		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
+		panelNuevoAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelNuevoAlumno.setLayout(null);
+		contentPane.add(panelNuevoAlumno);
+		
 		txtNIF = new JTextField();
 		txtNIF.setText("NIF");
-		txtNIF.setBounds(71, 86, 121, 51);
-		contentPane.add(txtNIF);
+		txtNIF.setBounds(121, 144, 110, 19);
+		panelNuevoAlumno.add(txtNIF);
 		txtNIF.setColumns(10);
 		
 		txtNombreCompleto = new JTextField();
 		txtNombreCompleto.setText("NOMBRE COMPLETO");
 		txtNombreCompleto.setColumns(10);
-		txtNombreCompleto.setBounds(71, 155, 121, 51);
-		contentPane.add(txtNombreCompleto);
+		txtNombreCompleto.setBounds(121, 173, 96, 19);
+		panelNuevoAlumno.add(txtNombreCompleto);
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setText("TELEFONO");
 		txtTelefono.setColumns(10);
-		txtTelefono.setBounds(71, 233, 121, 51);
-		contentPane.add(txtTelefono);
+		txtTelefono.setBounds(121, 341, 96, 19);
+		panelNuevoAlumno.add(txtTelefono);
 		
 		txtCorreo = new JTextField();
 		txtCorreo.setText("CORREO");
 		txtCorreo.setColumns(10);
-		txtCorreo.setBounds(71, 310, 121, 51);
-		contentPane.add(txtCorreo);
+		txtCorreo.setBounds(121, 231, 96, 19);
+		panelNuevoAlumno.add(txtCorreo);
 		
 		txtFechaNacimiento = new JTextField();
 		txtFechaNacimiento.setText("FECHA NACIMIENTO");
 		txtFechaNacimiento.setColumns(10);
-		txtFechaNacimiento.setBounds(71, 386, 121, 51);
-		contentPane.add(txtFechaNacimiento);
+		txtFechaNacimiento.setBounds(121, 202, 96, 19);
+		panelNuevoAlumno.add(txtFechaNacimiento);
 		
 		txtNIFUSU = new JTextField();
 		txtNIFUSU.setColumns(10);
-		txtNIFUSU.setBounds(243, 86, 121, 51);
-		contentPane.add(txtNIFUSU);
+		txtNIFUSU.setBounds(491, 144, 96, 19);
+		panelNuevoAlumno.add(txtNIFUSU);
 		
 		txtNombreCompletoUSU = new JTextField();
 		txtNombreCompletoUSU.setColumns(10);
-		txtNombreCompletoUSU.setBounds(243, 155, 121, 51);
-		contentPane.add(txtNombreCompletoUSU);
+		txtNombreCompletoUSU.setBounds(491, 173, 96, 19);
+		panelNuevoAlumno.add(txtNombreCompletoUSU);
 		
 		txtTelefonoUSU = new JTextField();
 		txtTelefonoUSU.setColumns(10);
-		txtTelefonoUSU.setBounds(243, 233, 121, 51);
-		contentPane.add(txtTelefonoUSU);
+		txtTelefonoUSU.setBounds(515, 264, 96, 19);
+		panelNuevoAlumno.add(txtTelefonoUSU);
 		
 		txtCorreoUSU = new JTextField();
 		txtCorreoUSU.setColumns(10);
-		txtCorreoUSU.setBounds(243, 310, 121, 51);
-		contentPane.add(txtCorreoUSU);
+		txtCorreoUSU.setBounds(491, 231, 96, 19);
+		panelNuevoAlumno.add(txtCorreoUSU);
 		
 		txtFechaNacimientoUSU = new JTextField();
 		txtFechaNacimientoUSU.setColumns(10);
-		txtFechaNacimientoUSU.setBounds(243, 386, 121, 51);
-		contentPane.add(txtFechaNacimientoUSU);
+		txtFechaNacimientoUSU.setBounds(420, 362, 96, 19);
+		panelNuevoAlumno.add(txtFechaNacimientoUSU);
 		
 		txtTituloNuevoAlumno = new JTextField();
 		txtTituloNuevoAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
 		txtTituloNuevoAlumno.setText("NUEVO ALUMNO");
 		txtTituloNuevoAlumno.setColumns(10);
-		txtTituloNuevoAlumno.setBounds(285, 10, 258, 51);
-		contentPane.add(txtTituloNuevoAlumno);
+		txtTituloNuevoAlumno.setBounds(313, 20, 236, 35);
+		panelNuevoAlumno.add(txtTituloNuevoAlumno);
 		
 		txtNombreCursoAlumno = new JTextField();
 		txtNombreCursoAlumno.setText("NOMBRE CURSO");
 		txtNombreCursoAlumno.setColumns(10);
-		txtNombreCursoAlumno.setBounds(71, 460, 121, 51);
-		contentPane.add(txtNombreCursoAlumno);
+		txtNombreCursoAlumno.setBounds(121, 264, 96, 19);
+		panelNuevoAlumno.add(txtNombreCursoAlumno);
 		
 		txtCodigoPostalAlumno = new JTextField();
 		txtCodigoPostalAlumno.setText("CODIGO POSTAL");
 		txtCodigoPostalAlumno.setColumns(10);
-		txtCodigoPostalAlumno.setBounds(71, 537, 121, 51);
-		contentPane.add(txtCodigoPostalAlumno);
+		txtCodigoPostalAlumno.setBounds(121, 299, 96, 19);
+		panelNuevoAlumno.add(txtCodigoPostalAlumno);
 		
 		txtNombreCursoUSU = new JTextField();
 		txtNombreCursoUSU.setColumns(10);
-		txtNombreCursoUSU.setBounds(243, 460, 121, 51);
-		contentPane.add(txtNombreCursoUSU);
+		txtNombreCursoUSU.setBounds(256, 202, 96, 19);
+		panelNuevoAlumno.add(txtNombreCursoUSU);
 		
 		txtCodigoPostalUSU = new JTextField();
 		txtCodigoPostalUSU.setColumns(10);
-		txtCodigoPostalUSU.setBounds(243, 537, 121, 51);
-		contentPane.add(txtCodigoPostalUSU);
+		txtCodigoPostalUSU.setBounds(491, 299, 96, 19);
+		panelNuevoAlumno.add(txtCodigoPostalUSU);
 	}
 }
