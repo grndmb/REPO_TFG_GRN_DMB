@@ -64,7 +64,7 @@ public class Modelo {
 		alumno.setCorreo(correo);
 		alumno.setFechaNacimiento(fechaNacimiento);
 		
-		session.saveOrUpdate(alumno);
+		session.save(alumno);
 		System.out.println(alumno);
 		session.getTransaction().commit();
 		

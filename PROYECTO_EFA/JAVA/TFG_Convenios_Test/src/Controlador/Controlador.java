@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import Vista.Vista;
@@ -54,10 +54,11 @@ public class Controlador implements ActionListener{
 				String correo = vista.txtCorreoUSU.getText();
 		
 				//Fecha Nacimiento
-				String fechaNacimientoUSU = vista.txtFechaNacimientoUSU.getText();
-				String formato = "dd/MM/yyyy";
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formato);
-				Date fechaNacimiento = (Date) simpleDateFormat.parse(fechaNacimientoUSU);
+				
+				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		        Date fechaNacimientoUSU = format.parse(vista.txtFechaNacimientoUSU.getText());
+		        java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
+				
 				
 				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento);
 
