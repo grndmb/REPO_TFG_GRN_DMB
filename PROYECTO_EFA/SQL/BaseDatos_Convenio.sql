@@ -156,5 +156,5 @@ CONSTRAINT FK_ANEXAR_ALUMNO FOREIGN KEY (NIF_ALUMNO) REFERENCES ALUMNO (NIF)
 ) COMMENT 'Tabla con la informacion de anexar alumno, empresa y practica';
 -- ---------------------------------------
 
-
+SELECT * FROM ALUMNO;
 SELECT * FROM CURSO;
