@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Curso" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="curso">
+        <comment>Tabla con la informacion de curso</comment>
+        <id name="nombreCurso" type="string">
+            <column length="200" name="NOMBRE_CURSO"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nombreAbrev" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="NOMBRE_ABREV" not-null="true">
+                <comment>Nombre abreviado del curso</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="clave" optimistic-lock="true" type="int" unique="false">
+            <column name="CLAVE" not-null="true">
+                <comment>Clave del curso</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="horasFct" optimistic-lock="true" type="int" unique="false">
+            <column name="HORAS_FCT" not-null="true">
+                <comment>Horas realizadas en FCT</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="esPublico" optimistic-lock="true" type="boolean" unique="false">
+            <column name="ES_PUBLICO" not-null="true">
+                <comment>Ensenanza publica o privada</comment>
+            </column>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="practica">
+            <key on-delete="noaction">
+                <column length="200" name="NOMBRE_CURSO" not-null="true">
+                    <comment>Nombre del curso asignado a las practicas</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Practica" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="alumnos" optimistic-lock="true" sort="unsorted" table="alumno">
+            <key on-delete="noaction">
+                <column length="200" name="NOMBRE_CURSO" not-null="true">
+                    <comment>Identificador del curso</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Alumno" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Empresa" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="empresa">
+        <comment>Tabla con la informacion de la empresa</comment>
+        <id name="cifEmpresa" type="string">
+            <column length="10" name="CIF_EMPRESA"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="persistencia.Poblacion" embed-xml="true" fetch="select" insert="true" name="poblacion" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="CODIGO_POSTAL" not-null="true">
+                <comment>Codigo postal de la poblacion</comment>
+            </column>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombreEmpresa" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="NOMBRE_EMPRESA" not-null="true">
+                <comment>Nombre de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="direccionEmpresa" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="DIRECCION_EMPRESA" not-null="true">
+                <comment>Direccion de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="telefono1" optimistic-lock="true" type="int" unique="false">
+            <column name="TELEFONO_1" not-null="true">
+                <comment>Telefono 1 de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="telefono2" optimistic-lock="true" type="int" unique="false">
+            <column name="TELEFONO_2" not-null="true">
+                <comment>Telefono 2 de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="emailEmpresa" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="EMAIL_EMPRESA" not-null="true">
+                <comment>Correo de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="faxEmpresa" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="FAX_EMPRESA" not-null="true">
+                <comment>Fax de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="paginaWeb" optimistic-lock="true" type="string" unique="false">
+            <column length="1000" name="PAGINA_WEB" not-null="true">
+                <comment>Pagina web de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="nombreGerente" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="NOMBRE_GERENTE" not-null="true">
+                <comment>Nombre del gerente de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="dniGerente" optimistic-lock="true" type="string" unique="false">
+            <column length="9" name="DNI_GERENTE" not-null="true">
+                <comment>DNI del gerente de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="personaContacto" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="PERSONA_CONTACTO" not-null="true">
+                <comment>Persona de contacto de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="cargoContacto" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="CARGO_CONTACTO" not-null="true">
+                <comment>Cargo del contacto de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="fechaActualizacion" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="FECHA_ACTUALIZACION" not-null="true">
+                <comment>Fecha de actualizacion de los datos de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="organismoPublico" optimistic-lock="true" type="boolean" unique="false">
+            <column name="ORGANISMO_PUBLICO" not-null="true">
+                <comment>Organismo publico o privado</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="observaciones" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="OBSERVACIONES" not-null="true">
+                <comment>Observaciones</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="idPractica" optimistic-lock="true" type="int" unique="false">
+            <column name="ID_PRACTICA" not-null="true">
+                <comment>Identificador de la empresa</comment>
+            </column>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="convenios" optimistic-lock="true" sort="unsorted" table="convenio">
+            <key on-delete="noaction">
+                <column length="10" name="CIF_EMPRESA" not-null="true">
+                    <comment>Identificador de la empresa</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Convenio" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="anexar">
+            <key on-delete="noaction">
+                <column length="10" name="CIF_EMPRESA" not-null="true">
+                    <comment>Identificador de la empresa</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Anexar" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

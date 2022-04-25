@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Anexar" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="anexar">
+        <comment>Tabla con la informacion de anexar alumno, empresa y practica</comment>
+        <id name="idAnexado" type="int">
+            <column name="ID_ANEXADO"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="persistencia.Alumno" embed-xml="true" fetch="select" insert="true" name="alumno" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="9" name="NIF_ALUMNO" not-null="true">
+                <comment>NIF del alumno</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="persistencia.Empresa" embed-xml="true" fetch="select" insert="true" name="empresa" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="10" name="CIF_EMPRESA" not-null="true">
+                <comment>Identificador de la empresa</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="persistencia.Practica" embed-xml="true" fetch="select" insert="true" name="practica" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="ID_PRACTICA" not-null="true">
+                <comment>Identificador de LA PRACTICA</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

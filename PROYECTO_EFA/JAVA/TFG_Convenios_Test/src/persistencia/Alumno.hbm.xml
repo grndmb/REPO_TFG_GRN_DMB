@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Alumno" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="alumno">
+        <comment>Tabla con la informacion del alumno</comment>
+        <id name="nif" type="string">
+            <column length="9" name="NIF"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="persistencia.Curso" embed-xml="true" fetch="select" insert="true" name="curso" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="200" name="NOMBRE_CURSO" not-null="true">
+                <comment>Identificador del curso</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="persistencia.Poblacion" embed-xml="true" fetch="select" insert="true" name="poblacion" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="CODIGO_POSTAL" not-null="true">
+                <comment>Codigo postal de la poblacion</comment>
+            </column>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombreCompleto" optimistic-lock="true" type="string" unique="false">
+            <column length="60" name="NOMBRE_COMPLETO" not-null="true">
+                <comment>Nombre completo del alumno</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="seleccionado" optimistic-lock="true" type="boolean" unique="false">
+            <column name="SELECCIONADO" not-null="true">
+                <comment>True o False</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="telefono" optimistic-lock="true" type="int" unique="false">
+            <column name="TELEFONO" not-null="true">
+                <comment>Telefono del alumno</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="correo" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="CORREO" not-null="true">
+                <comment>Correo del alumno</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="fechaNacimiento" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="FECHA_NACIMIENTO" not-null="true">
+                <comment>Fecha de nacimiento del alumno</comment>
+            </column>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="anexar">
+            <key on-delete="noaction">
+                <column length="9" name="NIF_ALUMNO" not-null="true">
+                    <comment>NIF del alumno</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Anexar" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

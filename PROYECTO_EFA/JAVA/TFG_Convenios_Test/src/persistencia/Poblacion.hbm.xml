@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Poblacion" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="poblacion">
+        <id name="codigoPostal" type="int">
+            <column name="CODIGO_POSTAL"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="NOMBRE" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="provincia" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="PROVINCIA" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="empresas" optimistic-lock="true" sort="unsorted" table="empresa">
+            <key on-delete="noaction">
+                <column name="CODIGO_POSTAL" not-null="true">
+                    <comment>Codigo postal de la poblacion</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Empresa" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="datosEfas" optimistic-lock="true" sort="unsorted" table="datos_efa">
+            <key on-delete="noaction">
+                <column name="CODIGO_POSTAL" not-null="true"/>
+            </key>
+            <one-to-many class="persistencia.DatosEfa" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="alumnos" optimistic-lock="true" sort="unsorted" table="alumno">
+            <key on-delete="noaction">
+                <column name="CODIGO_POSTAL" not-null="true">
+                    <comment>Codigo postal de la poblacion</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Alumno" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+
+
+-------------------------------------
+Atributo "Marca" en tabla "Empresa"
+Localizacion --> (Tabla "Empresa" FCT)
+QUITAR
+-------------------------------------
+
+---------------------------------------------------
+Atributo "OrganismoPublico" en tabla "Empresa"
+Localizacion --> (Tabla "Empresa" FCT)
+---------------------------------------------------
+
+------------------------
+Tabla Datos EFA
+------------------------
+
+---------------------------------------------------
+Atributo "Publica" en tabla "Practica"
+Localizacion --> (Tabla "PracticasAlumnos" FCT)
+---------------------------------------------------
+
+------------------
+Tabla Alumnos
+ID --> DNI
+------------------
+
+--------------------
+Tabla Empresa
+ID --> CIF Empresa
+(CREAR TABLA CONVENIO )
+QUITAR NUMERO CONVENUD
+--------------------
+
+------------------
+Tabla Curso
+Atributo --> FAMILIA
+Atributo --> AREA
+QUITAR
+------------------
+
+------------------
+Actualizacion platillas
+Anexos
+------------------
+-----------------------------------------------
+
+
+
