@@ -18,25 +18,27 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Window;
+import javax.swing.JLabel;
 
 public class Vista extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField txtNIF;
-	private JTextField txtNombreCompleto;
-	private JTextField txtTelefono;
-	private JTextField txtCorreo;
-	private JTextField txtFechaNacimiento;
-	private JTextField txtNIFUSU;
-	private JTextField txtNombreCompletoUSU;
-	private JTextField txtTelefonoUSU;
-	private JTextField txtCorreoUSU;
-	private JTextField txtFechaNacimientoUSU;
-	private JTextField txtTituloNuevoAlumno;
-	private JTextField txtNombreCursoAlumno;
-	private JTextField txtCodigoPostalAlumno;
-	private JTextField txtNombreCursoUSU;
-	private JTextField txtCodigoPostalUSU;
+	public JPanel contentPane;
+	public JPanel panelNuevoAlumno;
+		public JLabel txtNIF;
+		public JLabel txtNombreCompleto;
+		public JLabel txtTelefono;
+		public JLabel txtCorreo;
+		public JLabel txtFechaNacimiento;
+		public JTextField txtNIFUSU;
+		public JTextField txtNombreCompletoUSU;
+		public JTextField txtTelefonoUSU;
+		public JTextField txtCorreoUSU;
+		public JTextField txtFechaNacimientoUSU;
+		public JLabel txtTituloNuevoAlumno;
+		public JLabel txtNombreCursoAlumno;
+		public JLabel txtCodigoPostalAlumno;
+		public JTextField txtNombreCursoUSU;
+		public JTextField txtCodigoPostalUSU;
 
 	/**
 	 * Launch the application.
@@ -71,7 +73,7 @@ public class Vista extends JFrame {
 		/**
 		 * Panel nuevo alumno
 		 */
-		JPanel panelNuevoAlumno = new JPanel();
+		panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(0, 0, 859, 610);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -79,34 +81,29 @@ public class Vista extends JFrame {
 		panelNuevoAlumno.setLayout(null);
 		contentPane.add(panelNuevoAlumno);
 		
-			txtNIF = new JTextField();
+			txtNIF = new JLabel();
 			txtNIF.setText("NIF");
 			txtNIF.setBounds(212, 88, 110, 19);
 			panelNuevoAlumno.add(txtNIF);
-			txtNIF.setColumns(10);
 			
-			txtNombreCompleto = new JTextField();
+			txtNombreCompleto = new JLabel();
 			txtNombreCompleto.setText("NOMBRE COMPLETO");
-			txtNombreCompleto.setColumns(10);
-			txtNombreCompleto.setBounds(212, 124, 110, 19);
+			txtNombreCompleto.setBounds(212, 124, 136, 19);
 			panelNuevoAlumno.add(txtNombreCompleto);
 			
-			txtTelefono = new JTextField();
+			txtTelefono = new JLabel();
 			txtTelefono.setText("TELEFONO");
-			txtTelefono.setColumns(10);
 			txtTelefono.setBounds(212, 245, 96, 19);
 			panelNuevoAlumno.add(txtTelefono);
 			
-			txtCorreo = new JTextField();
+			txtCorreo = new JLabel();
 			txtCorreo.setText("CORREO");
-			txtCorreo.setColumns(10);
 			txtCorreo.setBounds(212, 202, 96, 19);
 			panelNuevoAlumno.add(txtCorreo);
 			
-			txtFechaNacimiento = new JTextField();
+			txtFechaNacimiento = new JLabel();
 			txtFechaNacimiento.setText("FECHA NACIMIENTO");
-			txtFechaNacimiento.setColumns(10);
-			txtFechaNacimiento.setBounds(212, 162, 110, 19);
+			txtFechaNacimiento.setBounds(212, 162, 136, 19);
 			panelNuevoAlumno.add(txtFechaNacimiento);
 			
 			txtNIFUSU = new JTextField();
@@ -134,22 +131,19 @@ public class Vista extends JFrame {
 			txtFechaNacimientoUSU.setBounds(468, 162, 96, 19);
 			panelNuevoAlumno.add(txtFechaNacimientoUSU);
 			
-			txtTituloNuevoAlumno = new JTextField();
+			txtTituloNuevoAlumno = new JLabel();
 			txtTituloNuevoAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
 			txtTituloNuevoAlumno.setText("NUEVO ALUMNO");
-			txtTituloNuevoAlumno.setColumns(10);
 			txtTituloNuevoAlumno.setBounds(296, 21, 236, 35);
 			panelNuevoAlumno.add(txtTituloNuevoAlumno);
 			
-			txtNombreCursoAlumno = new JTextField();
+			txtNombreCursoAlumno = new JLabel();
 			txtNombreCursoAlumno.setText("NOMBRE CURSO");
-			txtNombreCursoAlumno.setColumns(10);
 			txtNombreCursoAlumno.setBounds(212, 325, 96, 19);
 			panelNuevoAlumno.add(txtNombreCursoAlumno);
 			
-			txtCodigoPostalAlumno = new JTextField();
+			txtCodigoPostalAlumno = new JLabel();
 			txtCodigoPostalAlumno.setText("CODIGO POSTAL");
-			txtCodigoPostalAlumno.setColumns(10);
 			txtCodigoPostalAlumno.setBounds(212, 284, 96, 19);
 			panelNuevoAlumno.add(txtCodigoPostalAlumno);
 			
