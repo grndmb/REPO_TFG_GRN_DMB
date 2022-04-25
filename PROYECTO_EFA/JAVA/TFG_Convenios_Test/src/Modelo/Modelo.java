@@ -20,6 +20,8 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
+			System.out.println("************CURSOS*************");
+			
 			Curso curso = new Curso();
 			curso.setNombreCurso("Desarrollo de Aplicaciones Multiplataforma");
 			curso.setNombreAbrev("DAM");
