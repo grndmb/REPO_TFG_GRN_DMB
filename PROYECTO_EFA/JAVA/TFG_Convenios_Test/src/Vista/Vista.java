@@ -157,7 +157,7 @@ public class Vista extends JFrame {
 			panelNuevoAlumno.add(txtCodigoPostalUSU);
 			
 			JButton btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
-			btnAnadirAlumno.setBounds(307, 408, 189, 76);
+			btnAnadirAlumno.setBounds(306, 422, 189, 76);
 			panelNuevoAlumno.add(btnAnadirAlumno);
 			
 			JLabel txtSeleccionado = new JLabel();
