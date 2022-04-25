@@ -43,7 +43,7 @@ public class Vista extends JFrame {
 		public JComboBox comboBoxCodigoPostalUSU;
 		public JCheckBox checkBoxSeleccionado;
 		public JButton btnAnadirAlumno;
-
+		public JLabel lblErrorNuevoAlumno;
 		
 	/**
 	 * Launch the application.
@@ -190,5 +190,9 @@ public class Vista extends JFrame {
 			checkBoxSeleccionado.setFont(new Font("Tahoma", Font.PLAIN, 50));
 			checkBoxSeleccionado.setBounds(468, 367, 28, 26);
 			panelNuevoAlumno.add(checkBoxSeleccionado);
+			
+			lblErrorNuevoAlumno = new JLabel("");
+			lblErrorNuevoAlumno.setBounds(261, 519, 359, 61);
+			panelNuevoAlumno.add(lblErrorNuevoAlumno);
 	}
 }
