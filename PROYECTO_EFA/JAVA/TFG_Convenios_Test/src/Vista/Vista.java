@@ -144,7 +144,7 @@ public class Vista extends JFrame {
 		
 		txtNombreCursoUSU = new JTextField();
 		txtNombreCursoUSU.setColumns(10);
-		txtNombreCursoUSU.setBounds(256, 202, 96, 19);
+		txtNombreCursoUSU.setBounds(420, 202, 96, 19);
 		panelNuevoAlumno.add(txtNombreCursoUSU);
 		
 		txtCodigoPostalUSU = new JTextField();
