@@ -1,26 +1,20 @@
 package Vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 import Controlador.Controlador;
 
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.Window;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class Vista extends JFrame {
 
@@ -46,7 +40,7 @@ public class Vista extends JFrame {
 		public JTextField txtCorreoUSU;
 		public JTextField txtFechaNacimientoUSU;
 		public JComboBox comboBoxNombreCursoUSU;
-		public JTextField txtCodigoPostalUSU;
+		public JComboBox comboBoxCodigoPostalUSU;
 		public JCheckBox checkBoxSeleccionado;
 		public JButton btnAnadirAlumno;
 
@@ -166,22 +160,21 @@ public class Vista extends JFrame {
 			
 			lblNombreCursoAlumno = new JLabel();
 			lblNombreCursoAlumno.setText("NOMBRE CURSO");
-			lblNombreCursoAlumno.setBounds(212, 325, 96, 19);
+			lblNombreCursoAlumno.setBounds(212, 325, 159, 19);
 			panelNuevoAlumno.add(lblNombreCursoAlumno);
 			
 			lblCodigoPostalAlumno = new JLabel();
 			lblCodigoPostalAlumno.setText("CODIGO POSTAL");
-			lblCodigoPostalAlumno.setBounds(212, 284, 96, 19);
+			lblCodigoPostalAlumno.setBounds(212, 284, 149, 19);
 			panelNuevoAlumno.add(lblCodigoPostalAlumno);
 			
 			comboBoxNombreCursoUSU = new JComboBox();
 			comboBoxNombreCursoUSU.setBounds(468, 325, 219, 19);
 			panelNuevoAlumno.add(comboBoxNombreCursoUSU);
 			
-			txtCodigoPostalUSU = new JTextField();
-			txtCodigoPostalUSU.setColumns(10);
-			txtCodigoPostalUSU.setBounds(468, 284, 96, 19);
-			panelNuevoAlumno.add(txtCodigoPostalUSU);
+			comboBoxCodigoPostalUSU = new JComboBox();
+			comboBoxCodigoPostalUSU.setBounds(468, 284, 73, 19);
+			panelNuevoAlumno.add(comboBoxCodigoPostalUSU);
 			
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
