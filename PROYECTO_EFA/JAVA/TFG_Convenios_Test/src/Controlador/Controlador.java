@@ -54,12 +54,13 @@ public class Controlador implements ActionListener{
 		
 				//Fecha Nacimiento
 				String fechaNacimientoUSU = vista.txtFechaNacimientoUSU.getText();
-				String formato = "yyyy-MM-dd";
+				String formato = "dd/MM/yyyy";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formato);
 				Date fechaNacimiento = (Date) simpleDateFormat.parse(fechaNacimientoUSU);
 				
+				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento);
 				
-				
+				System.out.println("ALUMNO CREADO");
 			} catch (Exception exception) {
 				// TODO: handle exception
 				exception.printStackTrace();
