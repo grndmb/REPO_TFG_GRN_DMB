@@ -1,4 +1,4 @@
-
+F
 
 -------------------------------------
 Atributo "Marca" en tabla "Empresa"
