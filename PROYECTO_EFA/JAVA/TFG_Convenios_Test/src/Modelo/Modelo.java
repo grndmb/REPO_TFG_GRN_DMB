@@ -23,6 +23,7 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			System.out.println("************CURSOS*************");
 			System.out.println("************CURSOS*************");
 			
+			
 			Curso curso = new Curso();
 			curso.setNombreCurso("Desarrollo de Aplicaciones Multiplataforma");
 			curso.setNombreAbrev("DAM");
@@ -37,11 +38,21 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			curso2.setHorasFct(350);
 			curso2.setEsPublico(true);
 
+			Curso curso3 = new Curso();
+			curso3.setNombreCurso("Sistemas Microinformaticos y Redes");
+			curso3.setNombreAbrev("SMR");
+			curso3.setClave(1335223344);
+			curso3.setHorasFct(300);
+			curso3.setEsPublico(false);
+			
 			session.saveOrUpdate(curso);
 			System.out.println(curso);
 			
 			session.saveOrUpdate(curso2);
 			System.out.println(curso2);
+			
+			session.saveOrUpdate(curso3);
+			System.out.println(curso3);
 			
 			session.getTransaction().commit();
 			
