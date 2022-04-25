@@ -82,6 +82,7 @@ public class Vista extends JFrame {
 			txtNIF.setBounds(212, 88, 110, 19);
 			panelNuevoAlumno.add(txtNIF);
 			
+			
 			txtNombreCompleto = new JLabel();
 			txtNombreCompleto.setText("NOMBRE COMPLETO");
 			txtNombreCompleto.setBounds(212, 124, 136, 19);
