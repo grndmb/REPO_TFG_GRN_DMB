@@ -36,7 +36,10 @@ public class Vista extends JFrame {
 		public JLabel txtCodigoPostalAlumno;
 		public JTextField txtNombreCursoUSU;
 		public JTextField txtCodigoPostalUSU;
-
+		public JButton btnAnadirAlumno;
+		public JLabel txtSeleccionado;
+		public JCheckBox chbSeleccionado;
+		
 	/**
 	 * Launch the application.
 	 */
@@ -156,18 +159,18 @@ public class Vista extends JFrame {
 			txtCodigoPostalUSU.setBounds(468, 284, 96, 19);
 			panelNuevoAlumno.add(txtCodigoPostalUSU);
 			
-			JButton btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
+			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
 			panelNuevoAlumno.add(btnAnadirAlumno);
 			
-			JLabel txtSeleccionado = new JLabel();
+			txtSeleccionado = new JLabel();
 			txtSeleccionado.setText("SELECCIONADO");
 			txtSeleccionado.setBounds(212, 367, 96, 19);
 			panelNuevoAlumno.add(txtSeleccionado);
 			
-			JCheckBox chbSeleccionado = new JCheckBox("");
+			chbSeleccionado = new JCheckBox("");
 			chbSeleccionado.setBackground(Color.WHITE);
-			chbSeleccionado.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			chbSeleccionado.setFont(new Font("Tahoma", Font.PLAIN, 50));
 			chbSeleccionado.setBounds(468, 367, 28, 26);
 			panelNuevoAlumno.add(chbSeleccionado);
 	}
