@@ -20,7 +20,7 @@ Atributo "Publica" en tabla "Practica"
 Localizacion --> (Tabla "PracticasAlumnos" FCT)
 ---------------------------------------------------
 
-------------------
+-------------------
 Tabla Alumnos
 ID --> DNI
 -------------------
