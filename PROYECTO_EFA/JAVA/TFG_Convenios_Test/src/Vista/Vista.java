@@ -85,7 +85,7 @@ public class Vista extends JFrame {
 		contentPane.add(txtCorreo);
 		
 		txtFechaNacimiento = new JTextField();
-		txtFechaNacimiento.setText("FECHA NACIMIENTO");
+		txtFechaNacimiento.setText("FECHA NACIMIENTO.");
 		txtFechaNacimiento.setColumns(10);
 		txtFechaNacimiento.setBounds(71, 386, 121, 51);
 		contentPane.add(txtFechaNacimiento);
