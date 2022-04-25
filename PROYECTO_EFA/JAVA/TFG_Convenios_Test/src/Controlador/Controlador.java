@@ -104,8 +104,8 @@ public class Controlador implements ActionListener{
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
 		ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 		
-		for(Curso curso: listaCursos) {
-			vista.comboBoxNombreCursoUSU.addItem(curso.getNombreCurso().toString());
+		for(int i=0;i<listaCursos.size();i++) {
+			vista.comboBoxNombreCursoUSU.addItem(listaCursos.get(i).getNombreCurso().toString());
 		};
  	   	
     }
