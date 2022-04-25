@@ -27,6 +27,7 @@ public class Controlador implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		System.out.println("Hola");
 		Modelo modelo = new Modelo();
 		
     	SessionFactory sessionFactory = null;
