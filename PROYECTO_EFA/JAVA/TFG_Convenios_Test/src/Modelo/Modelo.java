@@ -21,6 +21,7 @@ public void crearCurso (SessionFactory sessionFactory) throws HibernateException
 			session.beginTransaction();
 			
 			System.out.println("************CURSOS*************");
+			System.out.println("************CURSOS*************");
 			
 			Curso curso = new Curso();
 			curso.setNombreCurso("Desarrollo de Aplicaciones Multiplataforma");
