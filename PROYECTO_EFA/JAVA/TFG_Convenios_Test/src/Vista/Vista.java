@@ -25,6 +25,10 @@ import javax.swing.DefaultComboBoxModel;
 public class Vista extends JFrame {
 
 	public JPanel contentPane;
+	
+	public JPanel panelInicio;
+		public JButton btnInicio;
+	
 	public JPanel panelNuevoAlumno;
 		public JLabel lblNIF;
 		public JLabel lblNombreCompleto;
@@ -44,7 +48,6 @@ public class Vista extends JFrame {
 		public JComboBox comboBoxNombreCursoUSU;
 		public JTextField txtCodigoPostalUSU;
 		public JCheckBox checkBoxSeleccionado;
-		
 		public JButton btnAnadirAlumno;
 
 		
@@ -78,12 +81,25 @@ public class Vista extends JFrame {
 		contentPane.setLayout(null);
 
 		/**
+		 * Panel inicio
+		 */
+		panelInicio = new JPanel();
+		panelInicio.setBounds(0, 0, 859, 610);
+		panelInicio.setBackground(Color.WHITE);
+		panelInicio.setForeground(new Color(102, 255, 204));
+		panelInicio.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelInicio.setLayout(null);
+		contentPane.add(panelInicio);
+			
+			btnInicio = new JButton("INICIAR");
+			btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 60));
+			btnInicio.setBounds(300, 422, 255, 76);
+			panelInicio.add(btnInicio);
+		
+		/**
 		 * Panel nuevo alumno
 		 */
 		panelNuevoAlumno = new JPanel();
-
-		
-		JPanel panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(0, 0, 859, 610);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -159,8 +175,7 @@ public class Vista extends JFrame {
 			panelNuevoAlumno.add(lblCodigoPostalAlumno);
 			
 			comboBoxNombreCursoUSU = new JComboBox();
-			comboBoxNombreCursoUSU.setModel(new DefaultComboBoxModel(new String[] {"Desarrollo de Aplicaciones Multiplataforma", "Desarrollo de Aplicaciones Web", "Sistemas Microinformaticos y Redes"}));
-			comboBoxNombreCursoUSU.setBounds(468, 325, 96, 19);
+			comboBoxNombreCursoUSU.setBounds(468, 325, 219, 19);
 			panelNuevoAlumno.add(comboBoxNombreCursoUSU);
 			
 			txtCodigoPostalUSU = new JTextField();

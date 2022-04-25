@@ -31,6 +31,10 @@ public class Controlador implements ActionListener{
 		this.vista = v;
 		
 		this.vista.btnAnadirAlumno.addActionListener(this);
+		this.vista.btnInicio.addActionListener(this);
+		
+		vista.panelInicio.setVisible(true);
+		vista.panelNuevoAlumno.setVisible(false);
 	}
 	
 	
@@ -47,11 +51,18 @@ public class Controlador implements ActionListener{
 		Configuration configuration = new Configuration();
 	    configuration.configure("hibernate.cfg.xml");
 	    sessionFactory = configuration.buildSessionFactory();
-		
-        //Rellenar combobox
-        //controlador.rellenarComboBoxCursos(sessionFactory);
+	    sessionFactory.getCurrentSession().beginTransaction();
         
-        if(e.getSource() == vista.btnAnadirAlumno) {
+        
+	    if(e.getSource() == vista.btnInicio) {
+	    	vista.panelInicio.setVisible(false);
+			vista.panelNuevoAlumno.setVisible(true);
+			
+			//Rellenar combobox Curso
+				controlador.rellenarComboBoxCursos(sessionFactory);
+			
+			
+	    }if(e.getSource() == vista.btnAnadirAlumno) {
 			try {
 				
 				String nif = vista.txtNIFUSU.getText();
@@ -88,7 +99,7 @@ public class Controlador implements ActionListener{
 		} 
 	}
 	
-	/*public void  rellenarComboBoxCursos (SessionFactory sessionFactory) {
+	public void  rellenarComboBoxCursos (SessionFactory sessionFactory) {
 		
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
 		ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
@@ -97,5 +108,5 @@ public class Controlador implements ActionListener{
 			vista.comboBoxNombreCursoUSU.addItem(curso.getNombreCurso().toString());
 		};
  	   	
-    }*/
+    }
 }
