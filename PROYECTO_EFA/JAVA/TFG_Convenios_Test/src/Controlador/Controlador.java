@@ -62,7 +62,7 @@ public class Controlador implements ActionListener{
 				
 				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento);
 
-				System.out.println("ALUMNO CREADOasd");
+				System.out.println("ALUMNO CREADOasdasd");
 			} catch (Exception exception) {
 				// TODO: handle exception
 				exception.printStackTrace();
