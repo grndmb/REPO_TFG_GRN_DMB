@@ -32,7 +32,9 @@ public class Controlador implements ActionListener{
 		
 		this.vista.btnAnadirAlumno.addActionListener(this);
 	}
-
+	
+	
+	
 	//Controlador de eventos
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -40,11 +42,11 @@ public class Controlador implements ActionListener{
 		Modelo modelo = new Modelo();
 		Controlador controlador = new Controlador();
 		
-    	SessionFactory sessionFactory = null;
+		SessionFactory sessionFactory = null;
 
-    	Configuration configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
-        sessionFactory = configuration.buildSessionFactory();
+		Configuration configuration = new Configuration();
+	    configuration.configure("hibernate.cfg.xml");
+	    sessionFactory = configuration.buildSessionFactory();
 		
         //Rellenar combobox
         //controlador.rellenarComboBoxCursos(sessionFactory);
