@@ -1,6 +1,8 @@
 package Modelo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -50,59 +52,71 @@ public class Modelo {
 
 	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento) throws HibernateException {
 	
-	Session session = null;
-	
-	try {
-		session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
-		
-		Alumno alumno = new Alumno();
-		alumno.setNif(nif);
-		alumno.setNombreCompleto(nombreCompleto);
-		alumno.setSeleccionado(seleccionado);
-		alumno.setTelefono(telefono);
-		alumno.setCorreo(correo);
-		alumno.setFechaNacimiento(fechaNacimiento);
-		
-		session.save(alumno);
-		System.out.println(alumno);
-		session.getTransaction().commit();
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-		e.printStackTrace();
-		if(null != session) {
-			session.getTransaction().rollback();
-		}
-	}finally {
-		if(null != session) {
-			session.close();
-		}
-	}
-}
-	
-	
-	public static void main (String [] args) {
-		SessionFactory sessionFactory = null;
-		Modelo helper = new Modelo();
+		Session session = null;
 		
 		try {
-			Configuration configuration = new Configuration();
-			configuration.configure("hibernate.cfg.xml");
-			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
 			
-			//CREAR CURSO
-			System.out.println("CREAR CURSO");
-		//	helper.crearCurso(sessionFactory);
-			System.out.println("Curso creado");
+			Alumno alumno = new Alumno();
+			alumno.setNif(nif);
+			alumno.setNombreCompleto(nombreCompleto);
+			alumno.setSeleccionado(seleccionado);
+			alumno.setTelefono(telefono);
+			alumno.setCorreo(correo);
+			alumno.setFechaNacimiento(fechaNacimiento);
 			
+			session.save(alumno);
+			System.out.println(alumno);
+			session.getTransaction().commit();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
 		}
-	
 	}
-	
+		
+	 public static void listar(String ciudad, SessionFactory sessionFactory, int numeroVotos) throws InterruptedException {
+	        
+		// leer todas las asignaturas
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
+		ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
+		
+		for(Curso curso: listaCursos) {
+			System.out.println(curso);
+		}
+					
+	        
+	 }
+	 
+	 
+	 public static void main (String [] args) {
+		 
+			SessionFactory sessionFactory = null;
+			
+		 
+		//Solo se hace una vez, al iniciar la aplicaci�n
+			Configuration configuration = new Configuration();
+			configuration.configure("hibernate.cfg.xml");
+			sessionFactory = configuration.buildSessionFactory();
+			
+			// Cualquier operacion debe hacerse dentro de una transaccion
+			sessionFactory.getCurrentSession().beginTransaction();
+		 
+		// leer todas las asignaturas
+			Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
+			ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
+			
+			for(Curso curso: listaCursos) {
+				System.out.println(curso.getNombreCurso());
+			}
+	 }
 	
 }

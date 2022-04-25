@@ -95,4 +95,12 @@ public class Curso implements java.io.Serializable {
 		this.alumnos = alumnos;
 	}
 
+	@Override
+	public String toString() {
+		return "Curso [Nombre=" + nombreCurso + ", nombreAbrev=" + nombreAbrev + ", clave=" + clave + ", horasFct="
+				+ horasFct + ", esPublico=" + esPublico + ", practicas=" + practicas + ", alumnos=" + alumnos + "]";
+	}
+	
+	
+
 }
