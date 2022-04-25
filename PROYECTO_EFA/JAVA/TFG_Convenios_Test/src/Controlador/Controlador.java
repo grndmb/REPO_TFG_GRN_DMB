@@ -59,7 +59,8 @@ public class Controlador implements ActionListener{
 				Date fechaNacimiento = (Date) simpleDateFormat.parse(fechaNacimientoUSU);
 				
 				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento);
-				
+
+				System.out.println("ALUMNO CREADOasd");
 			} catch (Exception exception) {
 				// TODO: handle exception
 				exception.printStackTrace();
