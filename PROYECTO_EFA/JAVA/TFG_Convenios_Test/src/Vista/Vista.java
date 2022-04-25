@@ -19,6 +19,8 @@ import java.awt.Window;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Vista extends JFrame {
 
@@ -39,9 +41,9 @@ public class Vista extends JFrame {
 		public JTextField txtTelefonoUSU;
 		public JTextField txtCorreoUSU;
 		public JTextField txtFechaNacimientoUSU;
-		public JTextField txtNombreCursoUSU;
+		public JComboBox comboBoxNombreCursoUSU;
 		public JTextField txtCodigoPostalUSU;
-		public JCheckBox chbSeleccionado;
+		public JCheckBox checkBoxSeleccionado;
 		
 		public JButton btnAnadirAlumno;
 
@@ -156,10 +158,9 @@ public class Vista extends JFrame {
 			lblCodigoPostalAlumno.setBounds(212, 284, 96, 19);
 			panelNuevoAlumno.add(lblCodigoPostalAlumno);
 			
-			txtNombreCursoUSU = new JTextField();
-			txtNombreCursoUSU.setColumns(10);
-			txtNombreCursoUSU.setBounds(468, 325, 96, 19);
-			panelNuevoAlumno.add(txtNombreCursoUSU);
+			comboBoxNombreCursoUSU = new JComboBox();
+			comboBoxNombreCursoUSU.setBounds(468, 325, 96, 19);
+			panelNuevoAlumno.add(comboBoxNombreCursoUSU);
 			
 			txtCodigoPostalUSU = new JTextField();
 			txtCodigoPostalUSU.setColumns(10);
@@ -175,10 +176,10 @@ public class Vista extends JFrame {
 			lblSeleccionado.setBounds(212, 367, 96, 19);
 			panelNuevoAlumno.add(lblSeleccionado);
 			
-			chbSeleccionado = new JCheckBox("");
-			chbSeleccionado.setBackground(Color.WHITE);
-			chbSeleccionado.setFont(new Font("Tahoma", Font.PLAIN, 50));
-			chbSeleccionado.setBounds(468, 367, 28, 26);
-			panelNuevoAlumno.add(chbSeleccionado);
+			checkBoxSeleccionado = new JCheckBox("");
+			checkBoxSeleccionado.setBackground(Color.WHITE);
+			checkBoxSeleccionado.setFont(new Font("Tahoma", Font.PLAIN, 50));
+			checkBoxSeleccionado.setBounds(468, 367, 28, 26);
+			panelNuevoAlumno.add(checkBoxSeleccionado);
 	}
 }
