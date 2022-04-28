@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 28 abr. 2022 14:29:18 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28 abr. 2022 15:55:39 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Curso" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="curso">
         <comment>Tabla con la informacion de curso</comment>
@@ -12,8 +12,8 @@
                 <comment>Nombre abreviado del curso</comment>
             </column>
         </property>
-        <property generated="never" lazy="false" name="clave" optimistic-lock="true" type="int" unique="false">
-            <column name="CLAVE" not-null="true">
+        <property generated="never" lazy="false" name="clave" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="CLAVE" not-null="true">
                 <comment>Clave del curso</comment>
             </column>
         </property>
@@ -24,7 +24,7 @@
         </property>
         <property generated="never" lazy="false" name="esPublico" optimistic-lock="true" type="boolean" unique="false">
             <column name="ES_PUBLICO" not-null="true">
-                <comment>Ensenanza publica o privada</comment>
+                <comment>Enseñanza publica o privada</comment>
             </column>
         </property>
         <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="practica">

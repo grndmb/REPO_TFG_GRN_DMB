@@ -37,7 +37,7 @@ CONSTRAINT FK_DATOS_EFA_POBLACION FOREIGN KEY (CODIGO_POSTAL) REFERENCES POBLACI
 CREATE TABLE CURSO (
 NOMBRE_CURSO VARCHAR (200) NOT NULL COMMENT 'Nombre del curso',
 NOMBRE_ABREV VARCHAR (10) NOT NULL COMMENT 'Nombre abreviado del curso',
-CLAVE INT NOT NULL COMMENT 'Clave del curso',
+CLAVE VARCHAR(20) NOT NULL COMMENT 'Clave del curso',
 HORAS_FCT INT NOT NULL COMMENT 'Horas realizadas en FCT',
 ES_PUBLICO BOOLEAN NOT NULL COMMENT 'Enseñanza publica o privada',
 
@@ -163,13 +163,13 @@ INSERT INTO POBLACION (CODIGO_POSTAL, NOMBRE, PROVINCIA) VALUES
 (13250,'Daimiel', 'Ciudad Real');
 
 INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VALUES
-('2º CFGM Carrocería', '2CA', 1, 400, False),
-('2º CFGM Electromecánica', '2EL', 2, 400, False),
-('2º CFGM Sistemas MicroInformáticos y Redes', '2º SMR', 3, 400, False),
-('2º CFGS Desarrollo de Aplicaciones Multiplataforma', '2º DAM', 4, 400, False),
-('2º CFGS Técnico Superior en Automoción', '2º AUT', 5, 400, False),
-('2º FP Básica Informática y Comunicaciones', '2º FPB Inf', 6, 240, False),
-('2º FP Básica Mantenimiento de Vehículos', '2º FPB Mec', 7, 240, False);
+('2º CFGM Carrocería', '2CA', 'A1', 400, False),
+('2º CFGM Electromecánica', '2EL', 'A2', 400, False),
+('2º CFGM Sistemas MicroInformáticos y Redes', '2º SMR', 'A3', 400, False),
+('2º CFGS Desarrollo de Aplicaciones Multiplataforma', '2º DAM', 'B1', 400, False),
+('2º CFGS Técnico Superior en Automoción', '2º AUT', 'B2', 400, False),
+('2º FP Básica Informática y Comunicaciones', '2º FPB Inf', 'C1', 240, False),
+('2º FP Básica Mantenimiento de Vehículos', '2º FPB Mec', 'C2', 240, False);
 
 SELECT * FROM ALUMNO;
 SELECT * FROM CURSO;

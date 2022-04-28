@@ -35,7 +35,7 @@ public class Modelo {
 	 * @param esPublico
 	 * @throws HibernateException
 	 */
-	public void crearCurso (SessionFactory sessionFactory, String nombreCurso, String nombreAbrev, int clave, int horasFCT, boolean esPublico) throws HibernateException {
+	public void crearCurso (SessionFactory sessionFactory, String nombreCurso, String nombreAbrev, String clave, int horasFCT, boolean esPublico) throws HibernateException {
 		
 		Session session = null;
 		

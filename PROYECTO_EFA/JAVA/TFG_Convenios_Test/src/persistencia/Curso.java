@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 28 abr. 2022 14:29:18 by Hibernate Tools 5.4.32.Final
+// Generated 28 abr. 2022 15:55:39 by Hibernate Tools 5.4.32.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,7 @@ public class Curso implements java.io.Serializable {
 
 	private String nombreCurso;
 	private String nombreAbrev;
-	private int clave;
+	private String clave;
 	private int horasFct;
 	private boolean esPublico;
 	private Set practicas = new HashSet(0);
@@ -20,7 +20,7 @@ public class Curso implements java.io.Serializable {
 	public Curso() {
 	}
 
-	public Curso(String nombreCurso, String nombreAbrev, int clave, int horasFct, boolean esPublico) {
+	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico) {
 		this.nombreCurso = nombreCurso;
 		this.nombreAbrev = nombreAbrev;
 		this.clave = clave;
@@ -28,7 +28,7 @@ public class Curso implements java.io.Serializable {
 		this.esPublico = esPublico;
 	}
 
-	public Curso(String nombreCurso, String nombreAbrev, int clave, int horasFct, boolean esPublico, Set practicas,
+	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico, Set practicas,
 			Set alumnos) {
 		this.nombreCurso = nombreCurso;
 		this.nombreAbrev = nombreAbrev;
@@ -55,11 +55,11 @@ public class Curso implements java.io.Serializable {
 		this.nombreAbrev = nombreAbrev;
 	}
 
-	public int getClave() {
+	public String getClave() {
 		return this.clave;
 	}
 
-	public void setClave(int clave) {
+	public void setClave(String clave) {
 		this.clave = clave;
 	}
 
