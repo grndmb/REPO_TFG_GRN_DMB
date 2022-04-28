@@ -20,9 +20,15 @@ public class Vista extends JFrame {
 
 	public JPanel contentPane;
 	
+	/**
+	 * PANEL PRINCIPAL
+	 */
 	public JPanel panelInicio;
 		public JButton btnInicio;
 	
+	/**
+	 * PANEL NUEVO ALUMNO
+	 */
 	public JPanel panelNuevoAlumno;
 		public JLabel lblNIFAlumno;
 		public JLabel lblNombreCompletoAlumno;
@@ -44,6 +50,9 @@ public class Vista extends JFrame {
 		public JCheckBox checkBoxSeleccionadoUSUAlumno;
 		public JButton btnAnadirAlumno;
 		
+	/**
+	 * PANEL NUEVA EMPRESA
+	 */
 	public JPanel panelNuevaEmpresa;
 		public JLabel lblCIFempresa;
 		public JLabel lblNombreEmpresa;
@@ -64,6 +73,7 @@ public class Vista extends JFrame {
 		public JComboBox comboBoxCodigoPostalUSU;
 		public JCheckBox checkBoxSeleccionado;
 		public JButton btnAnadirEmpresa;
+		
 	/**
 	 * Launch the application.
 	 */
