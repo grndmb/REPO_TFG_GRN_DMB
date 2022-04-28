@@ -178,7 +178,6 @@ public class Controlador implements ActionListener{
 					vista.txtCorreoUSU.setText("");
 					vista.comboBoxCodigoPostalUSU.setSelectedItem("");
 					vista.comboBoxNombreCursoUSU.setSelectedItem("");
-					vista.lblErrorNuevoAlumno.setText("");
 					vista.checkBoxSeleccionado.setSelected(false);
 				} catch (Exception e) {
 					e.printStackTrace();

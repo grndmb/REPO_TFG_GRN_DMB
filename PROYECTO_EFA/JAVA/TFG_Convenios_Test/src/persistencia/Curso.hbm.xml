@@ -24,7 +24,7 @@
         </property>
         <property generated="never" lazy="false" name="esPublico" optimistic-lock="true" type="boolean" unique="false">
             <column name="ES_PUBLICO" not-null="true">
-                <comment>Enseñanza publica o privada</comment>
+                <comment>Ensenanza publica o privada</comment>
             </column>
         </property>
         <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="practica">
