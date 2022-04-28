@@ -13,8 +13,7 @@ NOMBRE VARCHAR (50) NOT NULL,
 PROVINCIA VARCHAR (50) NOT NULL,
 CONSTRAINT PK_POBLACION PRIMARY KEY (CODIGO_POSTAL)
 );
-INSERT INTO POBLACION VALUES(13200, "EFA Moratalaz", "Ciudad Real");
-SELECT * FROM POBLACION;
+
 -- ----------------------
 -- TABLA DATOS EFA
 -- ----------------------
@@ -163,6 +162,15 @@ INSERT INTO POBLACION (CODIGO_POSTAL, NOMBRE, PROVINCIA) VALUES
 (23400,'Ubeda', 'Jaen'),
 (2640,'Almansa', 'Albacete'),
 (13250,'Daimiel', 'Ciudad Real');
+
+INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VALUES
+('2º CFGM Carrocería', '2CA', 'MVA21', 400, False),
+('2º CFGM Electromecánica', '2EL', 'MVA22', 400, False),
+('2º CFGM Sistemas MicroInformáticos y Redes', '2º SMR', 'IFC0221', 400, False),
+('2º CFGS Desarrollo de Aplicaciones Multiplataforma', '2º DAM', 'IFCS02', 400, False),
+('2º CFGS Técnico Superior en Automoción', '2º AUT', '', 400, False),
+('2º FP Básica Informática y Comunicaciones', '2º FPB Inf', 'IFC1-10', 240, False),
+('2º FP Básica Mantenimiento de Vehículos', '2º FPB Mec', 'TMV1-10', 240, False);
 
 SELECT * FROM ALUMNO;
 SELECT * FROM CURSO;
