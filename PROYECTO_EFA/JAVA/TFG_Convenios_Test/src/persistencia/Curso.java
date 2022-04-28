@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final
+// Generated 28 abr. 2022 14:29:18 by Hibernate Tools 5.4.32.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -94,13 +94,5 @@ public class Curso implements java.io.Serializable {
 	public void setAlumnos(Set alumnos) {
 		this.alumnos = alumnos;
 	}
-
-	@Override
-	public String toString() {
-		return "Curso [Nombre=" + nombreCurso + ", nombreAbrev=" + nombreAbrev + ", clave=" + clave + ", horasFct="
-				+ horasFct + ", esPublico=" + esPublico + ", practicas=" + practicas + ", alumnos=" + alumnos + "]";
-	}
-	
-	
 
 }

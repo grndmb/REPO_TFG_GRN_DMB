@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 25 abr. 2022 10:01:27 by Hibernate Tools 5.4.32.Final
+// Generated 28 abr. 2022 14:29:18 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,7 +26,6 @@ public class Empresa implements java.io.Serializable {
 	private Date fechaActualizacion;
 	private boolean organismoPublico;
 	private String observaciones;
-	private int idPractica;
 	private Set convenios = new HashSet(0);
 	private Set anexars = new HashSet(0);
 
@@ -36,7 +35,7 @@ public class Empresa implements java.io.Serializable {
 	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa, int telefono1,
 			int telefono2, String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente,
 			String dniGerente, String personaContacto, String cargoContacto, Date fechaActualizacion,
-			boolean organismoPublico, String observaciones, int idPractica) {
+			boolean organismoPublico, String observaciones) {
 		this.cifEmpresa = cifEmpresa;
 		this.poblacion = poblacion;
 		this.nombreEmpresa = nombreEmpresa;
@@ -53,13 +52,12 @@ public class Empresa implements java.io.Serializable {
 		this.fechaActualizacion = fechaActualizacion;
 		this.organismoPublico = organismoPublico;
 		this.observaciones = observaciones;
-		this.idPractica = idPractica;
 	}
 
 	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa, int telefono1,
 			int telefono2, String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente,
 			String dniGerente, String personaContacto, String cargoContacto, Date fechaActualizacion,
-			boolean organismoPublico, String observaciones, int idPractica, Set convenios, Set anexars) {
+			boolean organismoPublico, String observaciones, Set convenios, Set anexars) {
 		this.cifEmpresa = cifEmpresa;
 		this.poblacion = poblacion;
 		this.nombreEmpresa = nombreEmpresa;
@@ -76,7 +74,6 @@ public class Empresa implements java.io.Serializable {
 		this.fechaActualizacion = fechaActualizacion;
 		this.organismoPublico = organismoPublico;
 		this.observaciones = observaciones;
-		this.idPractica = idPractica;
 		this.convenios = convenios;
 		this.anexars = anexars;
 	}
@@ -207,14 +204,6 @@ public class Empresa implements java.io.Serializable {
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
-	}
-
-	public int getIdPractica() {
-		return this.idPractica;
-	}
-
-	public void setIdPractica(int idPractica) {
-		this.idPractica = idPractica;
 	}
 
 	public Set getConvenios() {

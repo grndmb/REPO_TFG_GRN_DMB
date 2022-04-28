@@ -224,8 +224,8 @@ public class Modelo {
 	        Date fechaNacimientoUSU = format.parse("22/12/2002");
 	        java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
-			helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
-			//helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "987654321", "Carlos", "Jefe SF", "12/01/2022", false, "Trabajo DAM", 13230);
+			//helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
+			helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "987654321", "Carlos", "Jefe SF", "12/01/2022", false, "Trabajo DAM", 13230);
 	
 	 
 	 
