@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 import java.text.SimpleDateFormat;
 
@@ -29,10 +30,11 @@ public class Controlador implements ActionListener{
 		this.vista = v;
 		
 		this.vista.btnAnadirAlumno.addActionListener(this);
+		this.vista.btnNuevaEmpresa.addActionListener(this);
 		this.vista.btnInicio.addActionListener(this);
-		
 		vista.panelInicio.setVisible(true);
 		vista.panelNuevoAlumno.setVisible(false);
+		vista.panelNuevaEmpresa.setVisible(false);
 	}
 	
 	
@@ -56,40 +58,39 @@ public class Controlador implements ActionListener{
 			
 			//Rellenar combobox Curso y Codigo Postal
 				this.rellenarComboBoxCursos(sessionFactory);
-				this.rellenarComboBoxCodigoPostal(sessionFactory);
+				this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxCodigoPostalUSUAlumno);
 			
 	    }if(e.getSource() == vista.btnAnadirAlumno) {
 			try {
 		
 				// NIF
-					String nif = vista.txtNIFUSU.getText();
+					String nif = vista.txtNIFUSUAlumno.getText();
 					
 				// NOMBRE COMPLETO
-					String nombreCompleto = vista.txtNombreCompletoUSU.getText();
+					String nombreCompleto = vista.txtNombreCompletoUSUAlumno.getText();
 					
 				// Está o no seleccionado
 					boolean seleccionado = false;
-					if (vista.checkBoxSeleccionado.isSelected()) {
+					if (vista.checkBoxSeleccionadoUSUAlumno.isSelected()) {
 						seleccionado = true;
 					} else {
 						seleccionado = false;
 					}
 					
 				// Telefono
-					int telefono = Integer.parseInt(vista.txtTelefonoUSU.getText());
+					int telefono = Integer.parseInt(vista.txtTelefonoUSUAlumno.getText());
 
 				// Correo
-					String correo = vista.txtCorreoUSU.getText();
+					String correo = vista.txtCorreoUSUAlumno.getText();
 
 				// Fecha Nacimiento
-					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-					Date fechaNacimientoUSU = format.parse(vista.txtFechaNacimientoUSU.getText());
+					Date fechaNacimientoUSU = vista.dateChooserFechaNacimientoUSUAlumno.getDate();
 					java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
 
 				// Codigo postal
-					int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSU.getSelectedItem().toString());
+					int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString());
 				//Curso
-					String nombreCurso = vista.comboBoxNombreCursoUSU.getSelectedItem().toString();
+					String nombreCurso = vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().toString();
 
 					
 				// INSERT
@@ -100,10 +101,15 @@ public class Controlador implements ActionListener{
 				this.resetFormularioNuevoAlumno();
 				        	
 			} catch (Exception exception) {
-				// TODO: handle exception
 				exception.printStackTrace();
 			}
-		} 
+			
+		}if(e.getSource() == vista.btnNuevaEmpresa) {
+			vista.panelNuevoAlumno.setVisible(false);
+			vista.panelNuevaEmpresa.setVisible(true);
+			//Rellenar combobox Curso y Codigo Postal
+				this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxCodigoPostalUSUEmpresa);
+		}
 	}
 	
 	/*
@@ -120,9 +126,9 @@ public class Controlador implements ActionListener{
 					Query query = session.createQuery("FROM Curso");
 					ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 					
-						vista.comboBoxNombreCursoUSU.addItem("");
+						vista.comboBoxNombreCursoUSUAlumno.addItem("");
 					for(int i=0;i<listaCursos.size();i++) {
-						vista.comboBoxNombreCursoUSU.addItem(listaCursos.get(i).getNombreCurso().toString());
+						vista.comboBoxNombreCursoUSUAlumno.addItem(listaCursos.get(i).getNombreCurso().toString());
 					};
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -140,7 +146,7 @@ public class Controlador implements ActionListener{
 		    }
 			
 		//Método para rellenar el combobox que lista los codigos postales
-			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory) {
+			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory, JComboBox combo) {
 				Session session = null;
 				
 				try {
@@ -150,9 +156,9 @@ public class Controlador implements ActionListener{
 					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion");
 					ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
 					
-						vista.comboBoxCodigoPostalUSU.addItem("");
+						combo.addItem("");
 					for(int i=0;i<listaCodigoPostales.size();i++) {
-						vista.comboBoxCodigoPostalUSU.addItem(listaCodigoPostales.get(i).getCodigoPostal());
+						combo.addItem(listaCodigoPostales.get(i).getCodigoPostal());
 					};
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -171,14 +177,14 @@ public class Controlador implements ActionListener{
 		//Método para restablecer el formulario de nuevoAlumno
 			public void resetFormularioNuevoAlumno() {
 				try {
-					vista.txtNIFUSU.setText("");
-					vista.txtNombreCompletoUSU.setText("");
-					vista.txtFechaNacimientoUSU.setText("");
-					vista.txtTelefonoUSU.setText("");
-					vista.txtCorreoUSU.setText("");
-					vista.comboBoxCodigoPostalUSU.setSelectedItem("");
-					vista.comboBoxNombreCursoUSU.setSelectedItem("");
-					vista.checkBoxSeleccionado.setSelected(false);
+					vista.txtNIFUSUAlumno.setText("");
+					vista.txtNombreCompletoUSUAlumno.setText("");
+					vista.dateChooserFechaNacimientoUSUAlumno.setDate(null);
+					vista.txtTelefonoUSUAlumno.setText("");
+					vista.txtCorreoUSUAlumno.setText("");
+					vista.comboBoxCodigoPostalUSUAlumno.setSelectedItem("");
+					vista.comboBoxNombreCursoUSUAlumno.setSelectedItem("");
+					vista.checkBoxSeleccionadoUSUAlumno.setSelected(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
