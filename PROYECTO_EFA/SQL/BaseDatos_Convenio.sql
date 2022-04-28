@@ -166,7 +166,7 @@ INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VAL
 ('2º CFGM Carrocería', '2CA', 'A1', 400, False),
 ('2º CFGM Electromecánica', '2EL', 'A2', 400, False),
 ('2º CFGM Sistemas MicroInformáticos y Redes', '2º SMR', 'A3', 400, False),
-('2º CFGS Desarrollo de Aplicaciones Multiplataforma', '2º DAM', 'B1', 400, False),
+('2º CFGS Desarrollo de Aplicaciones Multiplataforma', '2º DAM', 'B1', 400, True),
 ('2º CFGS Técnico Superior en Automoción', '2º AUT', 'B2', 400, False),
 ('2º FP Básica Informática y Comunicaciones', '2º FPB Inf', 'C1', 240, False),
 ('2º FP Básica Mantenimiento de Vehículos', '2º FPB Mec', 'C2', 240, False);
@@ -174,3 +174,4 @@ INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VAL
 SELECT * FROM ALUMNO;
 SELECT * FROM CURSO;
 SELECT * FROM EMPRESA;
+SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO;
