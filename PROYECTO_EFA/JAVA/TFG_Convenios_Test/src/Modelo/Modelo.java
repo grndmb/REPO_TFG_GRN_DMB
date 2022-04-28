@@ -1,6 +1,8 @@
 package Modelo;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import org.hibernate.query.Query;
 import org.hibernate.type.CurrencyType;
 
 import persistencia.Alumno;
+import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
 import persistencia.Poblacion;
@@ -136,15 +139,35 @@ public class Modelo {
 	 * @param numeroVotos
 	 * @throws InterruptedException
 	 */
-	 public static void listar(String ciudad, SessionFactory sessionFactory, int numeroVotos) throws InterruptedException {
-	        
-		// leer todas las asignaturas
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
-		ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
+	 public static void listar(SessionFactory sessionFactory) throws InterruptedException {
+	     
+		 Session session = null;
+		 
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				// leer todas las asignaturas
+				Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
+				ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
+				
+				for(Curso curso: listaCursos) {
+					System.out.println(curso.isEsPublico());
+				}
+				
+		 	} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+		 
 		
-		for(Curso curso: listaCursos) {
-			System.out.println(curso);
-		}
 					
 	        
 	 }
@@ -208,7 +231,68 @@ public class Modelo {
 		 
 	 }
 	 
-	 public static void main (String [] args) throws ParseException {
+	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
+		 
+		 Session session = null;
+
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				//MOR/PRIV/C014/22
+				//MOR/C014/22
+				String test;
+				String numeroConvenio;
+				
+				Convenio convenio = new Convenio();
+				
+				BigInteger auxConvenios;
+	    		Query queryNumeroConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO");
+	    		auxConvenios = (BigInteger) queryNumeroConvenio.getSingleResult();
+	    		System.out.println(auxConvenios);
+				
+				Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
+				ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
+				
+				for (int i = 0; i < listaCursos.size(); i++) {
+					if(listaCursos.get(i).isEsPublico() == true) {
+						test = "MOR/";
+						numeroConvenio = test + "/" +  auxConvenios + "/22";
+			    		
+					}else {
+						test = "MOR/PRIV";
+						numeroConvenio = test + "/" +  auxConvenios + "/22";
+			    		
+					}
+					
+					System.out.println(numeroConvenio);
+				}
+				
+				
+				
+				
+	    		
+				/*session.saveOrUpdate(convenio);
+				System.out.println(convenio);
+				session.getTransaction().commit();*/
+				
+		 } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+		 
+		
+		 
+	 }
+	 
+	 public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;
 			
@@ -224,9 +308,12 @@ public class Modelo {
 	        Date fechaNacimientoUSU = format.parse("22/12/2002");
 	        java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
+	        
 			//helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
-			helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "987654321", "Carlos", "Jefe SF", "12/01/2022", false, "Trabajo DAM", 13230);
+	        //helper.listar(sessionFactory);
+	        //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "987654321", "Carlos", "Jefe SF", "12/01/2022", false, "Trabajo DAM", 13230);
 	
+	       helper.crearConvenio(sessionFactory, "1231-FIG");
 	 
 	 
 	 

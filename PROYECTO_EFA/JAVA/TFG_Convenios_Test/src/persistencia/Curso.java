@@ -9,6 +9,8 @@ import java.util.Set;
  */
 public class Curso implements java.io.Serializable {
 
+	
+
 	private String nombreCurso;
 	private String nombreAbrev;
 	private String clave;
@@ -95,4 +97,9 @@ public class Curso implements java.io.Serializable {
 		this.alumnos = alumnos;
 	}
 
+	@Override
+	public String toString() {
+		return "Curso [nombreCurso=" + nombreCurso + ", nombreAbrev=" + nombreAbrev + ", clave=" + clave + ", horasFct="
+				+ horasFct + ", esPublico=" + esPublico + ", practicas=" + practicas + ", alumnos=" + alumnos + "]";
+	}
 }
