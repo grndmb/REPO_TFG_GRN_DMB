@@ -29,9 +29,11 @@ public class Controlador implements ActionListener{
 	public Controlador(Vista v) {
 		this.vista = v;
 		
+		this.vista.btnInicio.addActionListener(this);
 		this.vista.btnAnadirAlumno.addActionListener(this);
 		this.vista.btnNuevaEmpresa.addActionListener(this);
-		this.vista.btnInicio.addActionListener(this);
+		this.vista.btnAnadirEmpresa.addActionListener(this);
+		
 		vista.panelInicio.setVisible(true);
 		vista.panelNuevoAlumno.setVisible(false);
 		vista.panelNuevaEmpresa.setVisible(false);
@@ -51,65 +53,37 @@ public class Controlador implements ActionListener{
 	    configuration.configure("hibernate.cfg.xml");
 	    sessionFactory = configuration.buildSessionFactory();
         
-        
-	    if(e.getSource() == vista.btnInicio) {
-	    	vista.panelInicio.setVisible(false);
-			vista.panelNuevoAlumno.setVisible(true);
+	    //Control de las acciones de los botones
+	    
+	        //Acciones del botón de INICIAR
+		    if(e.getSource() == vista.btnInicio) {
+		    	vista.panelInicio.setVisible(false);
+				vista.panelNuevoAlumno.setVisible(true);
+				
+				//Rellenar combobox Curso y Codigo Postal
+					this.rellenarComboBoxCursos(sessionFactory);
+					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxCodigoPostalUSUAlumno);
 			
-			//Rellenar combobox Curso y Codigo Postal
-				this.rellenarComboBoxCursos(sessionFactory);
-				this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxCodigoPostalUSUAlumno);
+			//Acciones del botón de Añadir Alumno
+		    }if(e.getSource() == vista.btnAnadirAlumno) {
 			
-	    }if(e.getSource() == vista.btnAnadirAlumno) {
-			try {
-		
-				// NIF
-					String nif = vista.txtNIFUSUAlumno.getText();
-					
-				// NOMBRE COMPLETO
-					String nombreCompleto = vista.txtNombreCompletoUSUAlumno.getText();
-					
-				// Está o no seleccionado
-					boolean seleccionado = false;
-					if (vista.checkBoxSeleccionadoUSUAlumno.isSelected()) {
-						seleccionado = true;
-					} else {
-						seleccionado = false;
-					}
-					
-				// Telefono
-					int telefono = Integer.parseInt(vista.txtTelefonoUSUAlumno.getText());
-
-				// Correo
-					String correo = vista.txtCorreoUSUAlumno.getText();
-
-				// Fecha Nacimiento
-					Date fechaNacimientoUSU = vista.dateChooserFechaNacimientoUSUAlumno.getDate();
-					java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
-
-				// Codigo postal
-					int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString());
-				//Curso
-					String nombreCurso = vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().toString();
-
-					
-				// INSERT
-				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento,
-						codigoPostal, nombreCurso);
-
-				// Reset formulario
-				this.resetFormularioNuevoAlumno();
-				        	
-			} catch (Exception exception) {
-				exception.printStackTrace();
+		    	//Llamamos al metodo que realiza el insert del nuevo alumno
+				this.crearNuevoAlumno(sessionFactory, modelo);
+				
+			//Acciones del botón que lleva al panel de Nueva empresa	
+			}if(e.getSource() == vista.btnNuevaEmpresa) {
+				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevaEmpresa.setVisible(true);
+				//Rellenar combobox Codigo Postal
+					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxCodigoPostalUSUEmpresa);
+			
+			//Acciones del botón de Añadir Empresa
+			}if(e.getSource() == vista.btnAnadirEmpresa) {
+		    	
+				//Llamamos al metodo que realiza el insert de la nueva empresa
+				this.crearNuevaEmpresa(sessionFactory, modelo);
+				
 			}
-			
-		}if(e.getSource() == vista.btnNuevaEmpresa) {
-			vista.panelNuevoAlumno.setVisible(false);
-			vista.panelNuevaEmpresa.setVisible(true);
-			//Rellenar combobox Curso y Codigo Postal
-				this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxCodigoPostalUSUEmpresa);
-		}
 	}
 	
 	/*
@@ -173,6 +147,65 @@ public class Controlador implements ActionListener{
 				}
 				
 		    }
+		
+		//Metodo para hacer el insert del nuevo Alumno en la base de datos
+			public void crearNuevoAlumno(SessionFactory sessionFactory, Modelo modelo) {
+			
+				try {
+				// NIF
+					String nif = vista.txtNIFUSUAlumno.getText();
+					
+				// NOMBRE COMPLETO
+					String nombreCompleto = vista.txtNombreCompletoUSUAlumno.getText();
+					
+				// Está o no seleccionado
+					boolean seleccionado = false;
+					if (vista.checkBoxSeleccionadoUSUAlumno.isSelected()) {
+						seleccionado = true;
+					} else {
+						seleccionado = false;
+					}
+					
+				// Telefono
+					int telefono = Integer.parseInt(vista.txtTelefonoUSUAlumno.getText());
+
+				// Correo
+					String correo = vista.txtCorreoUSUAlumno.getText();
+
+				// Fecha Nacimiento
+					Date fechaNacimientoUSU = vista.dateChooserFechaNacimientoUSUAlumno.getDate();
+					java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
+
+				// Codigo postal
+					int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString());
+				//Curso
+					String nombreCurso = vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().toString();
+
+					
+				// INSERT
+				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento,
+						codigoPostal, nombreCurso);
+
+				// Reset formulario
+				this.resetFormularioNuevoAlumno();
+				
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		//Metodo para hacer el insert del nuevo Alumno en la base de datos
+			public void crearNuevaEmpresa(SessionFactory sessionFactory, Modelo modelo) {
+				
+				try {
+					
+					//CIF
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
 			
 		//Método para restablecer el formulario de nuevoAlumno
 			public void resetFormularioNuevoAlumno() {
