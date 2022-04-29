@@ -39,7 +39,7 @@ public class Vista extends JFrame {
 		public JLabel lblFechaNacimientoAlumno;
 		public JLabel lblTituloNuevoAlumno;
 		public JLabel lblNombreCursoAlumno;
-		public JLabel lblCodigoPostalAlumno;
+		public JLabel lblPoblacionAlumno;
 		public JLabel lblSeleccionadoAlumno;
 		
 		public JTextField txtNIFUSUAlumno;
@@ -48,7 +48,7 @@ public class Vista extends JFrame {
 		public JTextField txtCorreoUSUAlumno;
 		public JDateChooser dateChooserFechaNacimientoUSUAlumno;
 		public JComboBox comboBoxNombreCursoUSUAlumno;
-		public JComboBox comboBoxCodigoPostalUSUAlumno;
+		public JComboBox comboBoxPoblacionUSUAlumno;
 		public JCheckBox checkBoxSeleccionadoUSUAlumno;
 		public JButton btnAnadirAlumno;
 		public JButton btnNuevaEmpresa;
@@ -72,7 +72,7 @@ public class Vista extends JFrame {
 		public JLabel lblFechaActualizacionEmpresa;
 		public JLabel lblOrganismoPublicoEmpresa;
 		public JLabel lblObservacionesEmpresa;
-		public JLabel lblCodigoPostalEmpresa;
+		public JLabel lblPoblacionEmpresa;
 		
 		public JTextField txtCIFEmpresa;
 		public JTextField txtNombreEmpresa;
@@ -90,7 +90,7 @@ public class Vista extends JFrame {
 		public JTextField txtObservacionesEmpresa;
 		
 		public JCheckBox checkBoxOrganismoPublicoUSUEmpresa;
-		public JComboBox comboBoxCodigoPostalUSUEmpresa;
+		public JComboBox comboBoxPoblacionUSUEmpresa;
 		public JButton btnAnadirEmpresa;
 		
 	/**
@@ -210,18 +210,18 @@ public class Vista extends JFrame {
 			lblNombreCursoAlumno.setBounds(212, 325, 159, 19);
 			panelNuevoAlumno.add(lblNombreCursoAlumno);
 			
-			lblCodigoPostalAlumno = new JLabel();
-			lblCodigoPostalAlumno.setText("CODIGO POSTAL");
-			lblCodigoPostalAlumno.setBounds(212, 284, 149, 19);
-			panelNuevoAlumno.add(lblCodigoPostalAlumno);
+			lblPoblacionAlumno = new JLabel();
+			lblPoblacionAlumno.setText("POBLACION");
+			lblPoblacionAlumno.setBounds(212, 284, 149, 19);
+			panelNuevoAlumno.add(lblPoblacionAlumno);
 			
 			comboBoxNombreCursoUSUAlumno = new JComboBox();
 			comboBoxNombreCursoUSUAlumno.setBounds(468, 325, 219, 19);
 			panelNuevoAlumno.add(comboBoxNombreCursoUSUAlumno);
 			
-			comboBoxCodigoPostalUSUAlumno = new JComboBox();
-			comboBoxCodigoPostalUSUAlumno.setBounds(468, 284, 219, 19);
-			panelNuevoAlumno.add(comboBoxCodigoPostalUSUAlumno);
+			comboBoxPoblacionUSUAlumno = new JComboBox();
+			comboBoxPoblacionUSUAlumno.setBounds(468, 284, 219, 19);
+			panelNuevoAlumno.add(comboBoxPoblacionUSUAlumno);
 			
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
@@ -335,10 +335,10 @@ public class Vista extends JFrame {
 			lblObservacionesEmpresa.setBounds(199, 480, 136, 19);
 			panelNuevaEmpresa.add(lblObservacionesEmpresa);
 			
-			lblCodigoPostalEmpresa = new JLabel();
-			lblCodigoPostalEmpresa.setText("CODIGO POSTAL");
-			lblCodigoPostalEmpresa.setBounds(199, 167, 136, 19);
-			panelNuevaEmpresa.add(lblCodigoPostalEmpresa);
+			lblPoblacionEmpresa = new JLabel();
+			lblPoblacionEmpresa.setText("POBLACION");
+			lblPoblacionEmpresa.setBounds(199, 167, 136, 19);
+			panelNuevaEmpresa.add(lblPoblacionEmpresa);
 			
 			txtCIFEmpresa = new JTextField();
 			txtCIFEmpresa.setBounds(458, 85, 190, 19);
@@ -402,9 +402,9 @@ public class Vista extends JFrame {
 			txtObservacionesEmpresa.setBounds(458, 480, 190, 19);
 			panelNuevaEmpresa.add(txtObservacionesEmpresa);
 		
-			comboBoxCodigoPostalUSUEmpresa = new JComboBox();
-			comboBoxCodigoPostalUSUEmpresa.setBounds(458, 169, 73, 19);
-			panelNuevaEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
+			comboBoxPoblacionUSUEmpresa = new JComboBox();
+			comboBoxPoblacionUSUEmpresa.setBounds(458, 169, 73, 19);
+			panelNuevaEmpresa.add(comboBoxPoblacionUSUEmpresa);
 			
 			btnAnadirEmpresa = new JButton("A\u00D1ADIR EMPRESA");
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));

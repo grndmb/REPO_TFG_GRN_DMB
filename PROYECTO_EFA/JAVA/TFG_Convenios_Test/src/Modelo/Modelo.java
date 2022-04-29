@@ -83,7 +83,7 @@ public class Modelo {
 	 * @param nombreCurso
 	 * @throws HibernateException
 	 */
-	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
+	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento, String poblacion, String nombreCurso) throws HibernateException {
 		
 		Session session = null;
 		
@@ -99,11 +99,11 @@ public class Modelo {
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
 			
-			Query queryPoblacion = session.createQuery("FROM Poblacion WHERE codigoPostal = :codigoPostal");
-			queryPoblacion.setParameter("codigoPostal", codigoPostal);
-			Poblacion poblacion = (Poblacion) queryPoblacion.getSingleResult();
-			
-			alumno.setPoblacion(poblacion);
+			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
+			poblacionQuery.setParameter("nombre", poblacion);
+			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
+	
+			alumno.setPoblacion(pb);
 			
 			
 			Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
@@ -174,7 +174,7 @@ public class Modelo {
 	 
 	 public void crearEmpresas (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
 			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
-			 String personaContacto, String cargoContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, int codigoPostal) throws HibernateException{
+			 String personaContacto, String cargoContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException{
 		 
 		 Session session = null;
 			
@@ -199,11 +199,11 @@ public class Modelo {
 				empresa.setOrganismoPublico(organismoPublico);
 				empresa.setObservaciones(observaciones);
 				
-				Query queryPoblacion = session.createQuery("FROM Poblacion WHERE codigoPostal = :codigoPostal");
-				queryPoblacion.setParameter("codigoPostal", codigoPostal);
-				Poblacion poblacion = (Poblacion) queryPoblacion.getSingleResult();
-				
-				empresa.setPoblacion(poblacion);
+				Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
+				poblacionQuery.setParameter("nombre", poblacion);
+				Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
+		
+				empresa.setPoblacion(pb);
 				
 				
 				session.saveOrUpdate(empresa);
@@ -319,8 +319,8 @@ public class Modelo {
             //helper.listar(sessionFactory);
             //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
             //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-            helper.crearConvenio(sessionFactory, "1231-FIG");
-            helper.crearConvenio(sessionFactory, "4331-PAT");
+            //helper.crearConvenio(sessionFactory, "1231-FIG");
+           // helper.crearConvenio(sessionFactory, "4331-PAT");
 	 
 	 
 	 
