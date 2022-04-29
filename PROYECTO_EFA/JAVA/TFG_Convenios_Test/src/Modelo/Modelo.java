@@ -194,7 +194,8 @@ public class Modelo {
 				empresa.setDniGerente(dniGerente);
 				empresa.setPersonaContacto(personaContacto);
 				empresa.setCargoContacto(cargoContacto);
-				empresa.setFechaActualizacion(fechaActualizacion);
+		        empresa.setFechaActualizacion(fechaActualizacion); 
+		        
 				empresa.setOrganismoPublico(organismoPublico);
 				empresa.setObservaciones(observaciones);
 				
@@ -206,7 +207,7 @@ public class Modelo {
 				
 				
 				session.saveOrUpdate(empresa);
-				System.out.println(empresa);
+				System.out.println(empresa.getFechaActualizacion().toString());
 				session.getTransaction().commit();
 				
 				
@@ -310,7 +311,7 @@ public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, Str
 			Modelo helper = new Modelo();	
 			
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-	        Date fechaNacimientoUSU = format.parse("22/12/2002");
+	        Date fechaNacimientoUSU = (Date) format.parse("22/12/2002");
 	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
 	        

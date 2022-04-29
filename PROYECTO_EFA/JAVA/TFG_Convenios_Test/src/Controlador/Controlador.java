@@ -9,12 +9,15 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import Vista.Vista;
 import persistencia.Curso;
@@ -63,7 +66,7 @@ public class Controlador implements ActionListener{
 				//Rellenar combobox Curso y Codigo Postal
 					this.rellenarComboBoxCursos(sessionFactory);
 					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
-			
+					
 			//Acciones del botón de Añadir Alumno
 		    }if(e.getSource() == vista.btnAnadirAlumno) {
 			
@@ -77,6 +80,11 @@ public class Controlador implements ActionListener{
 				//Rellenar combobox Codigo Postal
 					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
 			
+				//Rellena el label con la fecha actualizacion =  fecha actual
+					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
+					
+			        
 			//Acciones del botón de Añadir Empresa
 			}if(e.getSource() == vista.btnAnadirEmpresa) {
 		    	
@@ -241,12 +249,15 @@ public class Controlador implements ActionListener{
 						String observacionesEmpresa = vista.txtObservacionesEmpresa.getText();
 						
 					// FECHA ACTUALIZACION DE LOS DATOS  
-						Date fechaActualizacionUSU = vista.dateChooserFechaActualizacionEmpresa.getDate();
-						java.sql.Date fechaActualizacion = new java.sql.Date(fechaActualizacionUSU.getTime());
-					
+				        
+				        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+				        Date fechaActualizacionEmpresa = format.parse(vista.lblFechaActualizacionUSUEmpresa.getText());
+				        java.sql.Date fecha = new java.sql.Date(fechaActualizacionEmpresa.getTime());
+					        
 						
+				        
 					// INSERT
-						modelo.crearEmpresas(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, cargoPersonaContactoEmpresa, fechaActualizacion, organismoPublico, observacionesEmpresa, poblacion);
+						modelo.crearEmpresas(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, cargoPersonaContactoEmpresa, fecha, organismoPublico, observacionesEmpresa, poblacion);
 				
 					// RESET FORMULARIO NUEVA EMPRESA
 						this.resetFormularioNuevaEmpresa();
@@ -290,7 +301,6 @@ public class Controlador implements ActionListener{
 					vista.txtPersonaContactoEmpresa.setText("");
 					vista.txtCargoContactoEmpresaEmpresa.setText("");
 					vista.txtObservacionesEmpresa.setText("");
-					vista.dateChooserFechaActualizacionEmpresa.setDate(null);
 					
 				} catch (Exception e) {
 					e.printStackTrace();

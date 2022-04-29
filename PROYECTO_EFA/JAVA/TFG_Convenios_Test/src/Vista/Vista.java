@@ -84,7 +84,7 @@ public class Vista extends JFrame {
 		public JTextField txtNombreGerenteEmpresa;
 		public JTextField txtPersonaContactoEmpresa;
 		public JTextField txtCargoContactoEmpresaEmpresa;
-		public JDateChooser dateChooserFechaActualizacionEmpresa;
+		public JLabel lblFechaActualizacionUSUEmpresa;
 		public JTextField txtObservacionesEmpresa;
 		
 		public JCheckBox checkBoxOrganismoPublicoUSUEmpresa;
@@ -375,9 +375,9 @@ public class Vista extends JFrame {
 			txtCargoContactoEmpresaEmpresa.setBounds(458, 451, 190, 19);
 			panelNuevaEmpresa.add(txtCargoContactoEmpresaEmpresa);
 			
-			dateChooserFechaActualizacionEmpresa = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
-			dateChooserFechaActualizacionEmpresa.setBounds(458, 509, 190, 19);
-			panelNuevaEmpresa.add(dateChooserFechaActualizacionEmpresa);
+			lblFechaActualizacionUSUEmpresa = new JLabel();
+			lblFechaActualizacionUSUEmpresa.setBounds(458, 509, 190, 19);
+			panelNuevaEmpresa.add(lblFechaActualizacionUSUEmpresa);
 			
 			checkBoxOrganismoPublicoUSUEmpresa = new JCheckBox();
 			checkBoxOrganismoPublicoUSUEmpresa.setBackground(Color.WHITE);
