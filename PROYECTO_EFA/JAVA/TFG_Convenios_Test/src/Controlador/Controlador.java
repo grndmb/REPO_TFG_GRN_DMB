@@ -158,14 +158,6 @@ public class Controlador implements ActionListener{
 				// NOMBRE COMPLETO
 					String nombreCompleto = vista.txtNombreCompletoUSUAlumno.getText();
 					
-				// ESTÁ O NO SELECCIONADO
-					boolean seleccionado = false;
-					if (vista.checkBoxSeleccionadoUSUAlumno.isSelected()) {
-						seleccionado = true;
-					} else {
-						seleccionado = false;
-					}
-					
 				// TELEFONO
 					int telefono = Integer.parseInt(vista.txtTelefonoUSUAlumno.getText());
 
@@ -184,7 +176,7 @@ public class Controlador implements ActionListener{
 
 					
 				// INSERT
-				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento,
+				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, telefono, correo, fechaNacimiento,
 						poblacion, nombreCurso);
 
 				// RESET DEL FORMULARIO NUEVO ALUMNO
@@ -275,7 +267,6 @@ public class Controlador implements ActionListener{
 					vista.txtCorreoUSUAlumno.setText("");
 					vista.comboBoxPoblacionUSUAlumno.setSelectedItem("");
 					vista.comboBoxNombreCursoUSUAlumno.setSelectedItem("");
-					vista.checkBoxSeleccionadoUSUAlumno.setSelected(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

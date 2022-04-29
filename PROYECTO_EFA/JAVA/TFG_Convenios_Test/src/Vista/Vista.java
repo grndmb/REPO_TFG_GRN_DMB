@@ -40,7 +40,6 @@ public class Vista extends JFrame {
 		public JLabel lblTituloNuevoAlumno;
 		public JLabel lblNombreCursoAlumno;
 		public JLabel lblPoblacionAlumno;
-		public JLabel lblSeleccionadoAlumno;
 		
 		public JTextField txtNIFUSUAlumno;
 		public JTextField txtNombreCompletoUSUAlumno;
@@ -49,7 +48,6 @@ public class Vista extends JFrame {
 		public JDateChooser dateChooserFechaNacimientoUSUAlumno;
 		public JComboBox comboBoxNombreCursoUSUAlumno;
 		public JComboBox comboBoxPoblacionUSUAlumno;
-		public JCheckBox checkBoxSeleccionadoUSUAlumno;
 		public JButton btnAnadirAlumno;
 		public JButton btnNuevaEmpresa;
 	/**
@@ -177,26 +175,26 @@ public class Vista extends JFrame {
 			
 			txtNIFUSUAlumno = new JTextField();
 			txtNIFUSUAlumno.setColumns(10);
-			txtNIFUSUAlumno.setBounds(468, 88, 96, 19);
+			txtNIFUSUAlumno.setBounds(468, 88, 219, 19);
 			panelNuevoAlumno.add(txtNIFUSUAlumno);
 			
 			txtNombreCompletoUSUAlumno = new JTextField();
 			txtNombreCompletoUSUAlumno.setColumns(10);
-			txtNombreCompletoUSUAlumno.setBounds(468, 124, 96, 19);
+			txtNombreCompletoUSUAlumno.setBounds(468, 124, 219, 19);
 			panelNuevoAlumno.add(txtNombreCompletoUSUAlumno);
 			
 			txtTelefonoUSUAlumno = new JTextField();
 			txtTelefonoUSUAlumno.setColumns(10);
-			txtTelefonoUSUAlumno.setBounds(468, 245, 96, 19);
+			txtTelefonoUSUAlumno.setBounds(468, 245, 219, 19);
 			panelNuevoAlumno.add(txtTelefonoUSUAlumno);
 			
 			txtCorreoUSUAlumno = new JTextField();
 			txtCorreoUSUAlumno.setColumns(10);
-			txtCorreoUSUAlumno.setBounds(468, 202, 96, 19);
+			txtCorreoUSUAlumno.setBounds(468, 202, 219, 19);
 			panelNuevoAlumno.add(txtCorreoUSUAlumno);
 			
 			dateChooserFechaNacimientoUSUAlumno = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
-			dateChooserFechaNacimientoUSUAlumno.setBounds(468, 162, 96, 19);
+			dateChooserFechaNacimientoUSUAlumno.setBounds(468, 162, 219, 19);
 			panelNuevoAlumno.add(dateChooserFechaNacimientoUSUAlumno);
 			
 			lblTituloNuevoAlumno = new JLabel();
@@ -226,17 +224,6 @@ public class Vista extends JFrame {
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
 			panelNuevoAlumno.add(btnAnadirAlumno);
-			
-			lblSeleccionadoAlumno = new JLabel();
-			lblSeleccionadoAlumno.setText("SELECCIONADO");
-			lblSeleccionadoAlumno.setBounds(212, 367, 96, 19);
-			panelNuevoAlumno.add(lblSeleccionadoAlumno);
-			
-			checkBoxSeleccionadoUSUAlumno = new JCheckBox("");
-			checkBoxSeleccionadoUSUAlumno.setBackground(Color.WHITE);
-			checkBoxSeleccionadoUSUAlumno.setFont(new Font("Tahoma", Font.PLAIN, 50));
-			checkBoxSeleccionadoUSUAlumno.setBounds(468, 367, 28, 26);
-			panelNuevoAlumno.add(checkBoxSeleccionadoUSUAlumno);
 			
 			btnNuevaEmpresa = new JButton("NUEVA EMPRESA");
 			btnNuevaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));

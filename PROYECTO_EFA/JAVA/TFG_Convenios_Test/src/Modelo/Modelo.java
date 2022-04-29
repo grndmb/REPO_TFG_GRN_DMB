@@ -83,7 +83,7 @@ public class Modelo {
 	 * @param nombreCurso
 	 * @throws HibernateException
 	 */
-	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento, String poblacion, String nombreCurso) throws HibernateException {
+	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, String poblacion, String nombreCurso) throws HibernateException {
 		
 		Session session = null;
 		
@@ -94,7 +94,6 @@ public class Modelo {
 			Alumno alumno = new Alumno();
 			alumno.setNif(nif);
 			alumno.setNombreCompleto(nombreCompleto);
-			alumno.setSeleccionado(seleccionado);
 			alumno.setTelefono(telefono);
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
@@ -235,6 +234,7 @@ public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, Str
 				
 				//MOR/PRIV/C014/22
 				//MOR/C014/22
+				
 				String test;
 				String idConvenio = "";
 				
