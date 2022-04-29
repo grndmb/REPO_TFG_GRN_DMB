@@ -403,7 +403,7 @@ public class Vista extends JFrame {
 			panelNuevaEmpresa.add(txtObservacionesEmpresa);
 		
 			comboBoxPoblacionUSUEmpresa = new JComboBox();
-			comboBoxPoblacionUSUEmpresa.setBounds(458, 169, 73, 19);
+			comboBoxPoblacionUSUEmpresa.setBounds(458, 169, 190, 19);
 			panelNuevaEmpresa.add(comboBoxPoblacionUSUEmpresa);
 			
 			btnAnadirEmpresa = new JButton("A\u00D1ADIR EMPRESA");
