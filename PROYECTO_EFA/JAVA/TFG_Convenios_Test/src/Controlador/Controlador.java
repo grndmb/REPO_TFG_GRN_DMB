@@ -158,7 +158,7 @@ public class Controlador implements ActionListener{
 				// NOMBRE COMPLETO
 					String nombreCompleto = vista.txtNombreCompletoUSUAlumno.getText();
 					
-				// Está o no seleccionado
+				// ESTÁ O NO SELECCIONADO
 					boolean seleccionado = false;
 					if (vista.checkBoxSeleccionadoUSUAlumno.isSelected()) {
 						seleccionado = true;
@@ -166,19 +166,20 @@ public class Controlador implements ActionListener{
 						seleccionado = false;
 					}
 					
-				// Telefono
+				// TELEFONO
 					int telefono = Integer.parseInt(vista.txtTelefonoUSUAlumno.getText());
 
-				// Correo
+				// CORREO
 					String correo = vista.txtCorreoUSUAlumno.getText();
 
-				// Fecha Nacimiento
+				// FECHA NACIMIENTO
 					Date fechaNacimientoUSU = vista.dateChooserFechaNacimientoUSUAlumno.getDate();
 					java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
 
-				// Codigo postal
+				// CODIGO POSTAL
 					int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString());
-				//Curso
+				
+				// CURSO
 					String nombreCurso = vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().toString();
 
 					
@@ -186,7 +187,7 @@ public class Controlador implements ActionListener{
 				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento,
 						codigoPostal, nombreCurso);
 
-				// Reset formulario Nuevo Alumno
+				// RESET DEL FORMULARIO NUEVO ALUMNO
 				this.resetFormularioNuevoAlumno();
 				
 				} catch (Exception e) {
@@ -199,32 +200,32 @@ public class Controlador implements ActionListener{
 				
 				try {
 					
-					//CIF
+					// CIF
 						String cifEmpresa = vista.txtCIFEmpresa.getText();
 					
-					//NOMBRE
+					// NOMBRE
 						String nombreEmpresa = vista.txtNombreEmpresa.getText();
 					
-					//DIRECCION
+					// DIRECCION
 						String direccionEmpresa = vista.txtDireccionEmpresa.getText();
 						
-					//CODIGO POSTAL
+					// CODIGO POSTAL
 						int codigoPostalEmpresa = Integer.parseInt(vista.comboBoxCodigoPostalUSUEmpresa.getSelectedItem().toString());
 					
-					//CORREO
+					// CORREO
 						String emailEmpresa = vista.txtEmailEmpresa.getText();
 				
-					//TELEFONO 1 Y TELEFONO 2
+					// TELEFONO 1 Y TELEFONO 2
 						int telefono1 = Integer.parseInt(vista.txtTelefono1Empresa.getText());
 						int telefono2 = Integer.parseInt(vista.txtTelefono2Empresa.getText());
 
-					//FAX
+					// FAX
 						String faxEmpresa = vista.txtFaxEmpresa.getText();
 					
-					//PAGINA WEB
+					// PAGINA WEB
 						String paginaWebEmpresa = vista.txtPaginaWebEmpresa.getText();
 					
-					//ORGANISMO PUBLICO 		BOOOLEEEEAAANOOOO
+					// ORGANISMO PUBLICO
 						boolean organismoPublico = false;
 						if (vista.checkBoxOrganismoPublicoUSUEmpresa.isSelected()) {
 							organismoPublico = true;
@@ -232,32 +233,38 @@ public class Controlador implements ActionListener{
 							organismoPublico = false;
 						}
 					
-					//DNI GERENTE
+					// DNI GERENTE
 						String dniGerenteEmpresa = vista.txtDNIGerenteEmpresa.getText();
 						
-					//NOMBRE GERENTE
+					// NOMBRE GERENTE
 						String nombreGerenteEmpresa = vista.txtNombreGerenteEmpresa.getText();
 						
-					//PERSONA DE CONTACTO
+					// PERSONA DE CONTACTO
 						String personaContactoEmpresa = vista.txtPersonaContactoEmpresa.getText();
 						
-					//CARGO PERSONA DE CONTACTO
+					// CARGO PERSONA DE CONTACTO
 						String cargoPersonaContactoEmpresa = vista.txtCargoContactoEmpresaEmpresa.getText();
 						
-					//OBSERVACIONES
+					// OBSERVACIONES
 						String observacionesEmpresa = vista.txtObservacionesEmpresa.getText();
 						
-					//FECHA ACTUALIZACION DE LOS DATOS  
+					// FECHA ACTUALIZACION DE LOS DATOS  
 						Date fechaActualizacionUSU = vista.dateChooserFechaActualizacionEmpresa.getDate();
 						java.sql.Date fechaActualizacion = new java.sql.Date(fechaActualizacionUSU.getTime());
-					//INSERT
+					
+						
+					// INSERT
 						modelo.crearEmpresas(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, cargoPersonaContactoEmpresa, fechaActualizacion, organismoPublico, observacionesEmpresa, codigoPostalEmpresa);
+				
+					// RESET FORMULARIO NUEVA EMPRESA
+						this.resetFormularioNuevaEmpresa();
+						
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
 			}
-			
+		
 		//Método para restablecer el formulario de nuevoAlumno
 			public void resetFormularioNuevoAlumno() {
 				try {
@@ -269,6 +276,31 @@ public class Controlador implements ActionListener{
 					vista.comboBoxCodigoPostalUSUAlumno.setSelectedItem("");
 					vista.comboBoxNombreCursoUSUAlumno.setSelectedItem("");
 					vista.checkBoxSeleccionadoUSUAlumno.setSelected(false);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		//Método para restablecer el formulario de nuevoAlumno
+			public void resetFormularioNuevaEmpresa() {
+				try {
+					vista.txtCIFEmpresa.setText("");
+					vista.txtNombreEmpresa.setText("");
+					vista.txtDireccionEmpresa.setText("");
+					vista.comboBoxCodigoPostalUSUEmpresa.setSelectedItem("");
+					vista.txtEmailEmpresa.setText("");
+					vista.txtTelefono1Empresa.setText("");
+					vista.txtTelefono2Empresa.setText("");
+					vista.txtFaxEmpresa.setText("");
+					vista.txtPaginaWebEmpresa.setText("");
+					vista.checkBoxOrganismoPublicoUSUEmpresa.setSelected(false);
+					vista.txtDNIGerenteEmpresa.setText("");
+					vista.txtNombreGerenteEmpresa.setText("");
+					vista.txtPersonaContactoEmpresa.setText("");
+					vista.txtCargoContactoEmpresaEmpresa.setText("");
+					vista.txtObservacionesEmpresa.setText("");
+					vista.dateChooserFechaActualizacionEmpresa.setDate(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -220,7 +220,7 @@ public class Vista extends JFrame {
 			panelNuevoAlumno.add(comboBoxNombreCursoUSUAlumno);
 			
 			comboBoxCodigoPostalUSUAlumno = new JComboBox();
-			comboBoxCodigoPostalUSUAlumno.setBounds(468, 284, 73, 19);
+			comboBoxCodigoPostalUSUAlumno.setBounds(468, 284, 219, 19);
 			panelNuevoAlumno.add(comboBoxCodigoPostalUSUAlumno);
 			
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");

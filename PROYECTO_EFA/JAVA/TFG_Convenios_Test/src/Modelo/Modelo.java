@@ -84,7 +84,7 @@ public class Modelo {
 	 * @throws HibernateException
 	 */
 	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, boolean seleccionado, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
-	
+		
 		Session session = null;
 		
 		try {

@@ -154,13 +154,6 @@ CONSTRAINT FK_ANEXAR_ALUMNO FOREIGN KEY (NIF_ALUMNO) REFERENCES ALUMNO (NIF)
 ) COMMENT 'Tabla con la informacion de anexar alumno, empresa y practica';
 -- ---------------------------------------
 
-INSERT INTO POBLACION (CODIGO_POSTAL, NOMBRE, PROVINCIA) VALUES
-(13230,'Membrilla', 'Ciudad Real'),
-(13200,'Manzanares', 'Ciudad Real'),
-(13240,'La Solana', 'Ciudad Real'),
-(23400,'Ubeda', 'Jaen'),
-(2640,'Almansa', 'Albacete'),
-(13250,'Daimiel', 'Ciudad Real');
 
 INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VALUES
 ('2º CFGM Carrocería', '2CA', 'A1', 400, False),
