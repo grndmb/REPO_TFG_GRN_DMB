@@ -224,7 +224,7 @@ public class Modelo {
 			}
 		 
 	 }
-	 
+	 	
 	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
 		 
 		 Session session = null;
@@ -236,39 +236,51 @@ public class Modelo {
 				//MOR/PRIV/C014/22
 				//MOR/C014/22
 				String test;
-				String numeroConvenio;
+				String idConvenio = "";
 				
-				Convenio convenio = new Convenio();
 				
-				BigInteger auxConvenios;
+				BigInteger auxConveniosQuery;
 	    		Query queryNumeroConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO");
-	    		auxConvenios = (BigInteger) queryNumeroConvenio.getSingleResult();
-	    		System.out.println(auxConvenios);
+	    		auxConveniosQuery = (BigInteger) queryNumeroConvenio.getSingleResult();
+	    		System.out.println(auxConveniosQuery);
+	    		
+	    		//Convertir Big Integer a Int
+	    		String auxConvenios1 = String.valueOf(auxConveniosQuery);
+	    		int auxConvenios = Integer.parseInt(auxConvenios1);
 				
+	    		
 				Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
 				ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 				
 				for (int i = 0; i < listaCursos.size(); i++) {
 					if(listaCursos.get(i).isEsPublico() == true) {
-						test = "MOR/";
-						numeroConvenio = test + "/" +  auxConvenios + "/22";
+						test = "MOR";
+						auxConvenios = auxConvenios + 1;
+						idConvenio = test + "/" +  auxConvenios + "/22";
 			    		
 					}else {
 						test = "MOR/PRIV";
-						numeroConvenio = test + "/" +  auxConvenios + "/22";
+						auxConvenios = auxConvenios + 1;
+						idConvenio = test + "/" +  auxConvenios + "/22";
 			    		
 					}
 					
-					System.out.println(numeroConvenio);
 				}
 				
 				
+				//CREAR CONVENIO
+				Convenio convenio = new Convenio();
+				convenio.setIdConvenio(idConvenio);
 				
+				Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+				empresaQuery.setParameter("cifEmpresa", cifEmpresa);
+				Empresa empresa = (Empresa) empresaQuery.getSingleResult();
+				
+				convenio.setEmpresa(empresa);
 				
 	    		
-				/*session.saveOrUpdate(convenio);
-				System.out.println(convenio);
-				session.getTransaction().commit();*/
+				session.saveOrUpdate(convenio);
+				session.getTransaction().commit();
 				
 		 } catch (Exception e) {
 				// TODO: handle exception
@@ -300,14 +312,15 @@ public class Modelo {
 			
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	        Date fechaNacimientoUSU = format.parse("22/12/2002");
-	        java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
+	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
 	        
-			//helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
-	        //helper.listar(sessionFactory);
-	        //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "987654321", "Carlos", "Jefe SF", "12/01/2022", false, "Trabajo DAM", 13230);
-	
-	       helper.crearConvenio(sessionFactory, "1231-FIG");
+	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
+            //helper.listar(sessionFactory);
+            //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
+            //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
+            helper.crearConvenio(sessionFactory, "1231-FIG");
+            helper.crearConvenio(sessionFactory, "4331-PAT");
 	 
 	 
 	 
