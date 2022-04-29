@@ -186,7 +186,7 @@ public class Controlador implements ActionListener{
 				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, seleccionado, telefono, correo, fechaNacimiento,
 						codigoPostal, nombreCurso);
 
-				// Reset formulario
+				// Reset formulario Nuevo Alumno
 				this.resetFormularioNuevoAlumno();
 				
 				} catch (Exception e) {
@@ -200,7 +200,58 @@ public class Controlador implements ActionListener{
 				try {
 					
 					//CIF
+						String cifEmpresa = vista.txtCIFEmpresa.getText();
 					
+					//NOMBRE
+						String nombreEmpresa = vista.txtNombreEmpresa.getText();
+					
+					//DIRECCION
+						String direccionEmpresa = vista.txtDireccionEmpresa.getText();
+						
+					//CODIGO POSTAL
+						int codigoPostalEmpresa = Integer.parseInt(vista.comboBoxCodigoPostalUSUEmpresa.getSelectedItem().toString());
+					
+					//CORREO
+						String emailEmpresa = vista.txtEmailEmpresa.getText();
+				
+					//TELEFONO 1 Y TELEFONO 2
+						int telefono1 = Integer.parseInt(vista.txtTelefono1Empresa.getText());
+						int telefono2 = Integer.parseInt(vista.txtTelefono2Empresa.getText());
+
+					//FAX
+						String faxEmpresa = vista.txtFaxEmpresa.getText();
+					
+					//PAGINA WEB
+						String paginaWebEmpresa = vista.txtPaginaWebEmpresa.getText();
+					
+					//ORGANISMO PUBLICO 		BOOOLEEEEAAANOOOO
+						boolean organismoPublico = false;
+						if (vista.checkBoxOrganismoPublicoUSUEmpresa.isSelected()) {
+							organismoPublico = true;
+						} else {
+							organismoPublico = false;
+						}
+					
+					//DNI GERENTE
+						String dniGerenteEmpresa = vista.txtDNIGerenteEmpresa.getText();
+						
+					//NOMBRE GERENTE
+						String nombreGerenteEmpresa = vista.txtNombreGerenteEmpresa.getText();
+						
+					//PERSONA DE CONTACTO
+						String personaContactoEmpresa = vista.txtPersonaContactoEmpresa.getText();
+						
+					//CARGO PERSONA DE CONTACTO
+						String cargoPersonaContactoEmpresa = vista.txtCargoContactoEmpresaEmpresa.getText();
+						
+					//OBSERVACIONES
+						String observacionesEmpresa = vista.txtObservacionesEmpresa.getText();
+						
+					//FECHA ACTUALIZACION DE LOS DATOS  
+						Date fechaActualizacionUSU = vista.dateChooserFechaActualizacionEmpresa.getDate();
+						java.sql.Date fechaActualizacion = new java.sql.Date(fechaActualizacionUSU.getTime());
+					//INSERT
+						modelo.crearEmpresas(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, cargoPersonaContactoEmpresa, fechaActualizacion, organismoPublico, observacionesEmpresa, codigoPostalEmpresa);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -174,7 +174,7 @@ public class Modelo {
 	 
 	 public void crearEmpresas (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
 			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
-			 String personaContacto, String cargoContacto, String fechaActualizacion, boolean organismoPublico,String observaciones, int codigoPostal) throws HibernateException{
+			 String personaContacto, String cargoContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, int codigoPostal) throws HibernateException{
 		 
 		 Session session = null;
 			
@@ -195,13 +195,7 @@ public class Modelo {
 				empresa.setDniGerente(dniGerente);
 				empresa.setPersonaContacto(personaContacto);
 				empresa.setCargoContacto(cargoContacto);
-				
-				//Fecha Nacimiento
-				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		        Date fechaActualizAUX = format.parse(fechaActualizacion);
-		        java.sql.Date fechaActualizacion1 = new java.sql.Date(fechaActualizAUX.getTime());
-				
-				empresa.setFechaActualizacion(fechaActualizacion1);
+				empresa.setFechaActualizacion(fechaActualizacion);
 				empresa.setOrganismoPublico(organismoPublico);
 				empresa.setObservaciones(observaciones);
 				
