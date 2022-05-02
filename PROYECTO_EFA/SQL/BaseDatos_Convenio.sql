@@ -167,12 +167,13 @@ INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VAL
 ('2º FP Básica Mantenimiento de Vehículos', '2º FPB Mec', 'C2', 240, False);
 
 INSERT INTO EMPRESA (CIF_EMPRESA, NOMBRE_EMPRESA, DIRECCION_EMPRESA, TELEFONO_1, TELEFONO_2, EMAIL_EMPRESA, FAX_EMPRESA, PAGINA_WEB, 
-					NOMBRE_GERENTE, DNI_GERENTE, PERSONA_CONTACTO, CARGO_CONTACTO, FECHA_ACTUALIZACION, ORGANISMO_PUBLICO, OBSERVACIONES, CODIGO_POSTAL) VALUES
-("1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", "2022-04-09", true, "Trabajo DAM", 13230),
-("4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", "2020-03-12", false, "Trabajo Carroceria", 13230);
+					NOMBRE_GERENTE, DNI_GERENTE, PERSONA_CONTACTO, DNI_PERSONA_CONTACTO, FECHA_ACTUALIZACION, ORGANISMO_PUBLICO, OBSERVACIONES, CODIGO_POSTAL) VALUES
+("1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "12345678D", "2022-04-09", true, "Trabajo DAM", 13230),
+("4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230);
 
 SELECT * FROM ALUMNO;
 SELECT * FROM CURSO;
+SELECT * FROM POBLACION;
 
 SELECT * FROM EMPRESA;
 DELETE FROM EMPRESA;

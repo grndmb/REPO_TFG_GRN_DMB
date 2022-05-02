@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 28 abr. 2022 15:55:39 by Hibernate Tools 5.4.32.Final
+// Generated 2 may. 2022 16:04:45 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -14,7 +14,6 @@ public class Alumno implements java.io.Serializable {
 	private Curso curso;
 	private Poblacion poblacion;
 	private String nombreCompleto;
-	private boolean seleccionado;
 	private int telefono;
 	private String correo;
 	private Date fechaNacimiento;
@@ -23,25 +22,23 @@ public class Alumno implements java.io.Serializable {
 	public Alumno() {
 	}
 
-	public Alumno(String nif, Curso curso, Poblacion poblacion, String nombreCompleto, boolean seleccionado,
-			int telefono, String correo, Date fechaNacimiento) {
+	public Alumno(String nif, Curso curso, Poblacion poblacion, String nombreCompleto, int telefono, String correo,
+			Date fechaNacimiento) {
 		this.nif = nif;
 		this.curso = curso;
 		this.poblacion = poblacion;
 		this.nombreCompleto = nombreCompleto;
-		this.seleccionado = seleccionado;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Alumno(String nif, Curso curso, Poblacion poblacion, String nombreCompleto, boolean seleccionado,
-			int telefono, String correo, Date fechaNacimiento, Set anexars) {
+	public Alumno(String nif, Curso curso, Poblacion poblacion, String nombreCompleto, int telefono, String correo,
+			Date fechaNacimiento, Set anexars) {
 		this.nif = nif;
 		this.curso = curso;
 		this.poblacion = poblacion;
 		this.nombreCompleto = nombreCompleto;
-		this.seleccionado = seleccionado;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.fechaNacimiento = fechaNacimiento;
@@ -78,14 +75,6 @@ public class Alumno implements java.io.Serializable {
 
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
-	}
-
-	public boolean isSeleccionado() {
-		return this.seleccionado;
-	}
-
-	public void setSeleccionado(boolean seleccionado) {
-		this.seleccionado = seleccionado;
 	}
 
 	public int getTelefono() {
