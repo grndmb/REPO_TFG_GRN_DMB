@@ -96,6 +96,7 @@ public class Vista extends JFrame {
 		
 		public JCheckBox checkBoxOrganismoPublicoUSUEmpresa;
 		public JComboBox comboBoxPoblacionUSUEmpresa;
+		public JComboBox comboBoxCodigoPostalUSUEmpresa;
 		public JButton btnAnadirEmpresa;
 		
 	/**
@@ -250,7 +251,7 @@ public class Vista extends JFrame {
 		/**
 		 * Panel nueva empresa
 		*/
-			panelNuevaEmpresa = new JPanel();
+		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(0, 0, 859, 610);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
 		panelNuevaEmpresa.setForeground(new Color(102, 255, 204));
@@ -420,6 +421,10 @@ public class Vista extends JFrame {
 			comboBoxPoblacionUSUEmpresa = new JComboBox();
 			comboBoxPoblacionUSUEmpresa.setBounds(458, 169, 190, 19);
 			panelNuevaEmpresa.add(comboBoxPoblacionUSUEmpresa);
+			
+			comboBoxCodigoPostalUSUEmpresa = new JComboBox();
+			comboBoxCodigoPostalUSUEmpresa.setBounds(650, 169, 110, 19);
+			panelNuevaEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
 			
 			btnAnadirEmpresa = new JButton("A\u00D1ADIR EMPRESA");
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
