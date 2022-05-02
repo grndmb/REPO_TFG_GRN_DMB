@@ -46,10 +46,12 @@ public class Vista extends JFrame {
 		public RestrictedTextField restrictedtxtNIFAlumno;
 		public JTextField txtNombreCompletoUSUAlumno;
 		public JTextField txtTelefonoUSUAlumno;
+		public RestrictedTextField restrictedtxtTelefonoUSUAlumno;
 		public JTextField txtCorreoUSUAlumno;
 		public JDateChooser dateChooserFechaNacimientoUSUAlumno;
 		public JComboBox comboBoxNombreCursoUSUAlumno;
 		public JComboBox comboBoxPoblacionUSUAlumno;
+		public JComboBox comboBoxCodigoPostalUSUAlumno;
 		public JButton btnAnadirAlumno;
 		public JButton btnNuevaEmpresa;
 	/**
@@ -79,6 +81,8 @@ public class Vista extends JFrame {
 		public JTextField txtNombreEmpresa;
 		public JTextField txtDireccionEmpresa;
 		public JTextField txtTelefono1Empresa;
+		public RestrictedTextField restrictedtxtTelefono1Empresa;
+		public RestrictedTextField restrictedtxtTelefono2Empresa;
 		public JTextField txtTelefono2Empresa;
 		public JTextField txtEmailEmpresa;
 		public JTextField txtFaxEmpresa;
@@ -193,6 +197,10 @@ public class Vista extends JFrame {
 			txtTelefonoUSUAlumno.setBounds(468, 245, 219, 19);
 			panelNuevoAlumno.add(txtTelefonoUSUAlumno);
 			
+			restrictedtxtTelefonoUSUAlumno = new RestrictedTextField(txtTelefonoUSUAlumno);
+			restrictedtxtTelefonoUSUAlumno.setLimit(9);
+			restrictedtxtTelefonoUSUAlumno.setOnlyNums(true);
+			
 			txtCorreoUSUAlumno = new JTextField();
 			txtCorreoUSUAlumno.setColumns(10);
 			txtCorreoUSUAlumno.setBounds(468, 202, 219, 19);
@@ -225,6 +233,10 @@ public class Vista extends JFrame {
 			comboBoxPoblacionUSUAlumno = new JComboBox();
 			comboBoxPoblacionUSUAlumno.setBounds(468, 284, 219, 19);
 			panelNuevoAlumno.add(comboBoxPoblacionUSUAlumno);
+			
+			comboBoxCodigoPostalUSUAlumno = new JComboBox();
+			comboBoxCodigoPostalUSUAlumno.setBounds(730, 284, 110, 19);
+			panelNuevoAlumno.add(comboBoxCodigoPostalUSUAlumno);
 			
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
@@ -337,8 +349,7 @@ public class Vista extends JFrame {
 			panelNuevaEmpresa.add(txtCIFEmpresa);
 			
 			restrictedtxtCIFEmpresa = new RestrictedTextField(txtCIFEmpresa);
-			restrictedtxtCIFEmpresa.setLimit(9);
-			restrictedtxtCIFEmpresa.setOnlyNums(true);
+			restrictedtxtCIFEmpresa.setLimit(10);
 			
 			txtNombreEmpresa = new JTextField();
 			txtNombreEmpresa.setBounds(458, 114, 190, 19);
@@ -351,10 +362,18 @@ public class Vista extends JFrame {
 			txtTelefono1Empresa = new JTextField();
 			txtTelefono1Empresa.setBounds(458, 226, 190, 19);
 			panelNuevaEmpresa.add(txtTelefono1Empresa);
-				
+			
+			restrictedtxtTelefono1Empresa = new RestrictedTextField(txtTelefono1Empresa);
+			restrictedtxtTelefono1Empresa.setLimit(9);
+			restrictedtxtTelefono1Empresa.setOnlyNums(true);
+			
 			txtTelefono2Empresa = new JTextField();
 			txtTelefono2Empresa.setBounds(458, 253, 190, 19);
 			panelNuevaEmpresa.add(txtTelefono2Empresa);
+			
+			restrictedtxtTelefono2Empresa = new RestrictedTextField(txtTelefono2Empresa);
+			restrictedtxtTelefono2Empresa.setLimit(9);
+			restrictedtxtTelefono2Empresa.setOnlyNums(true);
 			
 			txtEmailEmpresa = new JTextField();
 			txtEmailEmpresa.setBounds(458, 196, 190, 19);
