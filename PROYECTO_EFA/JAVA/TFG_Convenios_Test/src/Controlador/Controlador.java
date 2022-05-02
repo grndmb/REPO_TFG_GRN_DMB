@@ -148,7 +148,7 @@ public class Controlador implements ActionListener{
 					};
 					
 					/**
-					 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior
+					 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
 					 */
 					Query query2 = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre = :nombre");
 					query2.setParameter("nombre", comboPoblacionCP.getSelectedItem().toString());
