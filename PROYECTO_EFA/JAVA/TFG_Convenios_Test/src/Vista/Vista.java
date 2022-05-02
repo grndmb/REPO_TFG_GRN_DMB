@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.Controlador;
 
 import javax.swing.JTextField;
@@ -42,6 +43,7 @@ public class Vista extends JFrame {
 		public JLabel lblPoblacionAlumno;
 		
 		public JTextField txtNIFUSUAlumno;
+		public RestrictedTextField restrictedtxtNIFAlumno;
 		public JTextField txtNombreCompletoUSUAlumno;
 		public JTextField txtTelefonoUSUAlumno;
 		public JTextField txtCorreoUSUAlumno;
@@ -73,6 +75,7 @@ public class Vista extends JFrame {
 		public JLabel lblPoblacionEmpresa;
 		
 		public JTextField txtCIFEmpresa;
+		public RestrictedTextField restrictedtxtCIFEmpresa;
 		public JTextField txtNombreEmpresa;
 		public JTextField txtDireccionEmpresa;
 		public JTextField txtTelefono1Empresa;
@@ -152,7 +155,6 @@ public class Vista extends JFrame {
 			lblNIFAlumno.setBounds(212, 88, 110, 19);
 			panelNuevoAlumno.add(lblNIFAlumno);
 			
-			
 			lblNombreCompletoAlumno = new JLabel();
 			lblNombreCompletoAlumno.setText("NOMBRE COMPLETO");
 			lblNombreCompletoAlumno.setBounds(212, 124, 136, 19);
@@ -177,6 +179,9 @@ public class Vista extends JFrame {
 			txtNIFUSUAlumno.setColumns(10);
 			txtNIFUSUAlumno.setBounds(468, 88, 219, 19);
 			panelNuevoAlumno.add(txtNIFUSUAlumno);
+			
+			restrictedtxtNIFAlumno = new RestrictedTextField(txtNIFUSUAlumno);
+			restrictedtxtNIFAlumno.setLimit(9);
 			
 			txtNombreCompletoUSUAlumno = new JTextField();
 			txtNombreCompletoUSUAlumno.setColumns(10);
@@ -330,6 +335,10 @@ public class Vista extends JFrame {
 			txtCIFEmpresa = new JTextField();
 			txtCIFEmpresa.setBounds(458, 85, 190, 19);
 			panelNuevaEmpresa.add(txtCIFEmpresa);
+			
+			restrictedtxtCIFEmpresa = new RestrictedTextField(txtCIFEmpresa);
+			restrictedtxtCIFEmpresa.setLimit(9);
+			restrictedtxtCIFEmpresa.setOnlyNums(true);
 			
 			txtNombreEmpresa = new JTextField();
 			txtNombreEmpresa.setBounds(458, 114, 190, 19);
