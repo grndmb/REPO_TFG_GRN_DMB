@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 28 abr. 2022 15:55:39 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 may. 2022 16:04:45 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Empresa" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="empresa">
         <comment>Tabla con la informacion de la empresa</comment>
@@ -22,34 +22,29 @@
                 <comment>Direccion de la empresa</comment>
             </column>
         </property>
-        <property generated="never" lazy="false" name="telefono1" optimistic-lock="true" type="int" unique="false">
-            <column name="TELEFONO_1" not-null="true">
-                <comment>Telefono 1 de la empresa</comment>
-            </column>
-        </property>
-        <property generated="never" lazy="false" name="telefono2" optimistic-lock="true" type="int" unique="false">
-            <column name="TELEFONO_2" not-null="true">
-                <comment>Telefono 2 de la empresa</comment>
-            </column>
-        </property>
         <property generated="never" lazy="false" name="emailEmpresa" optimistic-lock="true" type="string" unique="false">
             <column length="100" name="EMAIL_EMPRESA" not-null="true">
                 <comment>Correo de la empresa</comment>
             </column>
         </property>
+        <property generated="never" lazy="false" name="telefono1" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="TELEFONO_1">
+                <comment>Telefono 1 de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="telefono2" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="TELEFONO_2">
+                <comment>Telefono 2 de la empresa</comment>
+            </column>
+        </property>
         <property generated="never" lazy="false" name="faxEmpresa" optimistic-lock="true" type="string" unique="false">
-            <column length="100" name="FAX_EMPRESA" not-null="true">
+            <column length="100" name="FAX_EMPRESA">
                 <comment>Fax de la empresa</comment>
             </column>
         </property>
         <property generated="never" lazy="false" name="paginaWeb" optimistic-lock="true" type="string" unique="false">
-            <column length="1000" name="PAGINA_WEB" not-null="true">
+            <column length="1000" name="PAGINA_WEB">
                 <comment>Pagina web de la empresa</comment>
-            </column>
-        </property>
-        <property generated="never" lazy="false" name="nombreGerente" optimistic-lock="true" type="string" unique="false">
-            <column length="100" name="NOMBRE_GERENTE" not-null="true">
-                <comment>Nombre del gerente de la empresa</comment>
             </column>
         </property>
         <property generated="never" lazy="false" name="dniGerente" optimistic-lock="true" type="string" unique="false">
@@ -57,14 +52,19 @@
                 <comment>DNI del gerente de la empresa</comment>
             </column>
         </property>
+        <property generated="never" lazy="false" name="nombreGerente" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="NOMBRE_GERENTE" not-null="true">
+                <comment>Nombre del gerente de la empresa</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="dniPersonaContacto" optimistic-lock="true" type="string" unique="false">
+            <column length="9" name="DNI_PERSONA_CONTACTO" not-null="true">
+                <comment>DNI de la persona de contacto de la empresa</comment>
+            </column>
+        </property>
         <property generated="never" lazy="false" name="personaContacto" optimistic-lock="true" type="string" unique="false">
             <column length="100" name="PERSONA_CONTACTO" not-null="true">
                 <comment>Persona de contacto de la empresa</comment>
-            </column>
-        </property>
-        <property generated="never" lazy="false" name="cargoContacto" optimistic-lock="true" type="string" unique="false">
-            <column length="100" name="CARGO_CONTACTO" not-null="true">
-                <comment>Cargo del contacto de la empresa</comment>
             </column>
         </property>
         <property generated="never" lazy="false" name="fechaActualizacion" optimistic-lock="true" type="date" unique="false">
@@ -78,7 +78,7 @@
             </column>
         </property>
         <property generated="never" lazy="false" name="observaciones" optimistic-lock="true" type="string" unique="false">
-            <column length="500" name="OBSERVACIONES" not-null="true">
+            <column length="2000" name="OBSERVACIONES">
                 <comment>Observaciones</comment>
             </column>
         </property>

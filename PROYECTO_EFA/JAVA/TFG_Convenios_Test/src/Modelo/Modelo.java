@@ -173,7 +173,7 @@ public class Modelo {
 	 
 	 public void crearEmpresas (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
 			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
-			 String personaContacto, String cargoContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException{
+			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException{
 		 
 		 Session session = null;
 			
@@ -193,7 +193,7 @@ public class Modelo {
 				empresa.setNombreGerente(nombreGerente);
 				empresa.setDniGerente(dniGerente);
 				empresa.setPersonaContacto(personaContacto);
-				empresa.setCargoContacto(cargoContacto);
+				empresa.setDniPersonaContacto(dniPersonaContacto);
 		        empresa.setFechaActualizacion(fechaActualizacion); 
 		        
 				empresa.setOrganismoPublico(organismoPublico);
@@ -225,7 +225,7 @@ public class Modelo {
 		 
 	 }
 	 	
-public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso) throws HibernateException {
+	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -241,7 +241,7 @@ public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, Str
 				
 				
 				BigInteger auxConveniosQuery;
-	    		Query queryNumeroConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO");
+	    		Query queryNumeroConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = 'FCT'");
 	    		auxConveniosQuery = (BigInteger) queryNumeroConvenio.getSingleResult();
 	    		System.out.println(auxConveniosQuery);
 	    		

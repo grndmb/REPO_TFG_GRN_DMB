@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 28 abr. 2022 15:55:39 by Hibernate Tools 5.4.32.Final
+// Generated 2 may. 2022 16:04:45 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -14,15 +14,15 @@ public class Empresa implements java.io.Serializable {
 	private Poblacion poblacion;
 	private String nombreEmpresa;
 	private String direccionEmpresa;
-	private int telefono1;
-	private int telefono2;
 	private String emailEmpresa;
+	private Integer telefono1;
+	private Integer telefono2;
 	private String faxEmpresa;
 	private String paginaWeb;
-	private String nombreGerente;
 	private String dniGerente;
+	private String nombreGerente;
+	private String dniPersonaContacto;
 	private String personaContacto;
-	private String cargoContacto;
 	private Date fechaActualizacion;
 	private boolean organismoPublico;
 	private String observaciones;
@@ -32,45 +32,39 @@ public class Empresa implements java.io.Serializable {
 	public Empresa() {
 	}
 
-	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa, int telefono1,
-			int telefono2, String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente,
-			String dniGerente, String personaContacto, String cargoContacto, Date fechaActualizacion,
-			boolean organismoPublico, String observaciones) {
+	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa,
+			String emailEmpresa, String dniGerente, String nombreGerente, String dniPersonaContacto,
+			String personaContacto, Date fechaActualizacion, boolean organismoPublico) {
 		this.cifEmpresa = cifEmpresa;
 		this.poblacion = poblacion;
 		this.nombreEmpresa = nombreEmpresa;
 		this.direccionEmpresa = direccionEmpresa;
-		this.telefono1 = telefono1;
-		this.telefono2 = telefono2;
 		this.emailEmpresa = emailEmpresa;
-		this.faxEmpresa = faxEmpresa;
-		this.paginaWeb = paginaWeb;
-		this.nombreGerente = nombreGerente;
 		this.dniGerente = dniGerente;
+		this.nombreGerente = nombreGerente;
+		this.dniPersonaContacto = dniPersonaContacto;
 		this.personaContacto = personaContacto;
-		this.cargoContacto = cargoContacto;
 		this.fechaActualizacion = fechaActualizacion;
 		this.organismoPublico = organismoPublico;
-		this.observaciones = observaciones;
 	}
 
-	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa, int telefono1,
-			int telefono2, String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente,
-			String dniGerente, String personaContacto, String cargoContacto, Date fechaActualizacion,
-			boolean organismoPublico, String observaciones, Set convenios, Set anexars) {
+	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa,
+			String emailEmpresa, Integer telefono1, Integer telefono2, String faxEmpresa, String paginaWeb,
+			String dniGerente, String nombreGerente, String dniPersonaContacto, String personaContacto,
+			Date fechaActualizacion, boolean organismoPublico, String observaciones, Set convenios, Set anexars) {
 		this.cifEmpresa = cifEmpresa;
 		this.poblacion = poblacion;
 		this.nombreEmpresa = nombreEmpresa;
 		this.direccionEmpresa = direccionEmpresa;
+		this.emailEmpresa = emailEmpresa;
 		this.telefono1 = telefono1;
 		this.telefono2 = telefono2;
-		this.emailEmpresa = emailEmpresa;
 		this.faxEmpresa = faxEmpresa;
 		this.paginaWeb = paginaWeb;
-		this.nombreGerente = nombreGerente;
 		this.dniGerente = dniGerente;
+		this.nombreGerente = nombreGerente;
+		this.dniPersonaContacto = dniPersonaContacto;
 		this.personaContacto = personaContacto;
-		this.cargoContacto = cargoContacto;
 		this.fechaActualizacion = fechaActualizacion;
 		this.organismoPublico = organismoPublico;
 		this.observaciones = observaciones;
@@ -110,28 +104,28 @@ public class Empresa implements java.io.Serializable {
 		this.direccionEmpresa = direccionEmpresa;
 	}
 
-	public int getTelefono1() {
-		return this.telefono1;
-	}
-
-	public void setTelefono1(int telefono1) {
-		this.telefono1 = telefono1;
-	}
-
-	public int getTelefono2() {
-		return this.telefono2;
-	}
-
-	public void setTelefono2(int telefono2) {
-		this.telefono2 = telefono2;
-	}
-
 	public String getEmailEmpresa() {
 		return this.emailEmpresa;
 	}
 
 	public void setEmailEmpresa(String emailEmpresa) {
 		this.emailEmpresa = emailEmpresa;
+	}
+
+	public Integer getTelefono1() {
+		return this.telefono1;
+	}
+
+	public void setTelefono1(Integer telefono1) {
+		this.telefono1 = telefono1;
+	}
+
+	public Integer getTelefono2() {
+		return this.telefono2;
+	}
+
+	public void setTelefono2(Integer telefono2) {
+		this.telefono2 = telefono2;
 	}
 
 	public String getFaxEmpresa() {
@@ -150,14 +144,6 @@ public class Empresa implements java.io.Serializable {
 		this.paginaWeb = paginaWeb;
 	}
 
-	public String getNombreGerente() {
-		return this.nombreGerente;
-	}
-
-	public void setNombreGerente(String nombreGerente) {
-		this.nombreGerente = nombreGerente;
-	}
-
 	public String getDniGerente() {
 		return this.dniGerente;
 	}
@@ -166,20 +152,28 @@ public class Empresa implements java.io.Serializable {
 		this.dniGerente = dniGerente;
 	}
 
+	public String getNombreGerente() {
+		return this.nombreGerente;
+	}
+
+	public void setNombreGerente(String nombreGerente) {
+		this.nombreGerente = nombreGerente;
+	}
+
+	public String getDniPersonaContacto() {
+		return this.dniPersonaContacto;
+	}
+
+	public void setDniPersonaContacto(String dniPersonaContacto) {
+		this.dniPersonaContacto = dniPersonaContacto;
+	}
+
 	public String getPersonaContacto() {
 		return this.personaContacto;
 	}
 
 	public void setPersonaContacto(String personaContacto) {
 		this.personaContacto = personaContacto;
-	}
-
-	public String getCargoContacto() {
-		return this.cargoContacto;
-	}
-
-	public void setCargoContacto(String cargoContacto) {
-		this.cargoContacto = cargoContacto;
 	}
 
 	public Date getFechaActualizacion() {
