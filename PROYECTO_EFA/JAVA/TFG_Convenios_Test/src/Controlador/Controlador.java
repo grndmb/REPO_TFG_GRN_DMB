@@ -65,7 +65,8 @@ public class Controlador implements ActionListener{
 				
 				//Rellenar combobox Curso y Codigo Postal
 					this.rellenarComboBoxCursos(sessionFactory);
-					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
+					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
+					this.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxCodigoPostalUSUAlumno);
 					
 			//Acciones del bot�n de A�adir Alumno
 		    }if(e.getSource() == vista.btnAnadirAlumno) {
@@ -78,7 +79,7 @@ public class Controlador implements ActionListener{
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(true);
 				//Rellenar combobox Codigo Postal
-					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
+					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
 			
 				//Rellena el label con la fecha actualizacion =  fecha actual
 					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
@@ -128,7 +129,7 @@ public class Controlador implements ActionListener{
 		    }
 			
 		//M�todo para rellenar el combobox que lista los codigos postales
-			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory, JComboBox comboPoblacionNombre, JComboBox comboPoblacionCP) {
+			public void rellenarComboBoxNombreCiudad (SessionFactory sessionFactory, JComboBox comboPoblacionNombre) {
 				Session session = null;
 				
 				try {
@@ -147,17 +148,7 @@ public class Controlador implements ActionListener{
 						comboPoblacionNombre.addItem(listaNombresPoblacion.get(i).getNombre());
 					};
 					
-					/**
-					 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
-					 */
-					Query query2 = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre = :nombre");
-					query2.setParameter("nombre", comboPoblacionCP.getSelectedItem().toString());
-					ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query2.list();
-					
-					for(int i=0;i<listaCodigoPostales.size();i++) {
-						comboPoblacionCP.addItem(listaCodigoPostales.get(i).getNombre());
-					};
-									
+						
 					
 					
 				} catch (Exception e) {
@@ -173,6 +164,38 @@ public class Controlador implements ActionListener{
 				}
 				
 		    }
+			
+			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory, JComboBox comboPoblacionCP) {
+				
+				Session session = null; 
+				
+				try {
+					
+					/**
+					 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
+					 */
+					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre = :nombre");
+					query.setParameter("nombre", comboPoblacionCP.getSelectedItem().toString());
+					ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
+					
+					for(int i=0;i<listaCodigoPostales.size();i++) {
+						comboPoblacionCP.addItem(listaCodigoPostales.get(i).getNombre());
+					};
+								
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					if(null != session) {
+						session.getTransaction().rollback();
+					}
+				}finally {
+					if(null != session) {
+						session.close();
+					}
+				}
+				
+			}
 		
 		//Metodo para hacer el insert del nuevo Alumno en la base de datos
 			public void crearNuevoAlumno(SessionFactory sessionFactory, Modelo modelo) {
