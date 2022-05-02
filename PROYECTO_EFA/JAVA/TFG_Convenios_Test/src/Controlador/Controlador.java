@@ -58,34 +58,34 @@ public class Controlador implements ActionListener{
         
 	    //Control de las acciones de los botones
 	    
-	        //Acciones del botón de INICIAR
+	        //Acciones del botï¿½n de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
 		    	vista.panelInicio.setVisible(false);
 				vista.panelNuevoAlumno.setVisible(true);
 				
 				//Rellenar combobox Curso y Codigo Postal
 					this.rellenarComboBoxCursos(sessionFactory);
-					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
+					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
 					
-			//Acciones del botón de Añadir Alumno
+			//Acciones del botï¿½n de Aï¿½adir Alumno
 		    }if(e.getSource() == vista.btnAnadirAlumno) {
 			
 		    	//Llamamos al metodo que realiza el insert del nuevo alumno
 				this.crearNuevoAlumno(sessionFactory, modelo);
 				
-			//Acciones del botón que lleva al panel de Nueva empresa	
+			//Acciones del botï¿½n que lleva al panel de Nueva empresa	
 			}if(e.getSource() == vista.btnNuevaEmpresa) {
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(true);
 				//Rellenar combobox Codigo Postal
-					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
+					this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
 			
 				//Rellena el label con la fecha actualizacion =  fecha actual
 					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
 					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
 					
 			        
-			//Acciones del botón de Añadir Empresa
+			//Acciones del botï¿½n de Aï¿½adir Empresa
 			}if(e.getSource() == vista.btnAnadirEmpresa) {
 		    	
 				//Llamamos al metodo que realiza el insert de la nueva empresa
@@ -95,9 +95,9 @@ public class Controlador implements ActionListener{
 	}
 	
 	/*
-	 * Métodos del panelNuevoAlumno
+	 * Mï¿½todos del panelNuevoAlumno
 	 */
-		//Método para rellenar el combobox que lista los cursos
+		//Mï¿½todo para rellenar el combobox que lista los cursos
 			public void rellenarComboBoxCursos (SessionFactory sessionFactory) {
 				Session session = null;
 				
@@ -127,21 +127,39 @@ public class Controlador implements ActionListener{
 		 	   	
 		    }
 			
-		//Método para rellenar el combobox que lista los codigos postales
-			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory, JComboBox combo) {
+		//Mï¿½todo para rellenar el combobox que lista los codigos postales
+			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory, JComboBox comboPoblacionNombre, JComboBox comboPoblacionCP) {
 				Session session = null;
 				
 				try {
 					session = sessionFactory.getCurrentSession();
 					session.beginTransaction();
 					
+					/**
+					 * Consulta para obtener los nombres de las poblaciones
+					 */
 					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion ORDER BY Nombre ASC");
-					ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
+					ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
 					
-						combo.addItem("");
-					for(int i=0;i<listaCodigoPostales.size();i++) {
-						combo.addItem(listaCodigoPostales.get(i).getNombre());
+						comboPoblacionNombre.addItem("");
+						
+					for(int i=0;i<listaNombresPoblacion.size();i++) {
+						comboPoblacionNombre.addItem(listaNombresPoblacion.get(i).getNombre());
 					};
+					
+					/**
+					 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior
+					 */
+					Query query2 = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre = :nombre");
+					query2.setParameter("nombre", comboPoblacionCP.getSelectedItem().toString());
+					ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query2.list();
+					
+					for(int i=0;i<listaCodigoPostales.size();i++) {
+						comboPoblacionCP.addItem(listaCodigoPostales.get(i).getNombre());
+					};
+									
+					
+					
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
@@ -268,7 +286,7 @@ public class Controlador implements ActionListener{
 				
 			}
 		
-		//Método para restablecer el formulario de nuevoAlumno
+		//Mï¿½todo para restablecer el formulario de nuevoAlumno
 			public void resetFormularioNuevoAlumno() {
 				try {
 					vista.txtNIFUSUAlumno.setText("");
@@ -283,7 +301,7 @@ public class Controlador implements ActionListener{
 				}
 			}
 			
-		//Método para restablecer el formulario de nuevoAlumno
+		//Mï¿½todo para restablecer el formulario de nuevoAlumno
 			public void resetFormularioNuevaEmpresa() {
 				try {
 					vista.txtCIFEmpresa.setText("");
