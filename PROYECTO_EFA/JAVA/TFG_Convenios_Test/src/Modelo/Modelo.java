@@ -83,7 +83,7 @@ public class Modelo {
 	 * @param nombreCurso
 	 * @throws HibernateException
 	 */
-	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, String poblacion, String nombreCurso) throws HibernateException {
+	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, String codigoPostal, String nombreCurso) throws HibernateException {
 		
 		Session session = null;
 		
@@ -98,8 +98,8 @@ public class Modelo {
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
 			
-			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
-			poblacionQuery.setParameter("nombre", poblacion);
+			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
+			poblacionQuery.setParameter("codigoPostal", codigoPostal);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 	
 			alumno.setPoblacion(pb);
@@ -225,7 +225,7 @@ public class Modelo {
 		 
 	 }
 	 	
-	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso) throws HibernateException {
+	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -241,8 +241,9 @@ public class Modelo {
 				
 				
 				BigInteger auxConveniosQuery;
-	    		Query queryNumeroConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = 'FCT'");
-	    		auxConveniosQuery = (BigInteger) queryNumeroConvenio.getSingleResult();
+	    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
+	    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
+	    		auxConveniosQuery = (BigInteger) queryCantidadConvenio.getSingleResult();
 	    		System.out.println(auxConveniosQuery);
 	    		
 	    		//Convertir Big Integer a Int
@@ -277,7 +278,7 @@ public class Modelo {
 				Empresa empresa = (Empresa) empresaQuery.getSingleResult();
 				
 				convenio.setEmpresa(empresa);
-				
+				convenio.setTipoConvenio(tipoConvenio);
 	    		
 				session.saveOrUpdate(convenio);
 				session.getTransaction().commit();
@@ -319,8 +320,8 @@ public class Modelo {
          //helper.listar(sessionFactory);
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-         helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma");
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería");
+         helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT");
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE");
 	 
 	 
 	 
