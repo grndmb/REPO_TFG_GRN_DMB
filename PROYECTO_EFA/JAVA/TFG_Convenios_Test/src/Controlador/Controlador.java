@@ -194,8 +194,8 @@ public class Controlador implements ActionListener{
 					Date fechaNacimientoUSU = vista.dateChooserFechaNacimientoUSUAlumno.getDate();
 					java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
 
-				// POBLACION
-					String poblacion = vista.comboBoxPoblacionUSUAlumno.getSelectedItem().toString();
+				// CODIGO POSTAL
+					int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString());
 					
 				// CURSO
 					String nombreCurso = vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().toString();
@@ -203,7 +203,7 @@ public class Controlador implements ActionListener{
 					
 				// INSERT
 				modelo.crearAlumno(sessionFactory, nif, nombreCompleto, telefono, correo, fechaNacimiento,
-						poblacion, nombreCurso);
+						codigoPostal, nombreCurso);
 
 				// RESET DEL FORMULARIO NUEVO ALUMNO
 				this.resetFormularioNuevoAlumno();
