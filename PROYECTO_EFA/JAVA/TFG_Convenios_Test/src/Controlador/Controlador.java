@@ -171,6 +171,9 @@ public class Controlador implements ActionListener{
 				
 				try {
 					
+					session = sessionFactory.getCurrentSession();
+					session.beginTransaction();
+					
 					/**
 					 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
 					 */
