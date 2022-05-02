@@ -207,7 +207,6 @@ public class Modelo {
 				
 				
 				session.saveOrUpdate(empresa);
-				System.out.println(empresa.getFechaActualizacion().toString());
 				session.getTransaction().commit();
 				
 				

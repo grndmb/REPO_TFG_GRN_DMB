@@ -81,8 +81,11 @@ public class Controlador implements ActionListener{
 		    
 		    if(e.getSource() == vista.btnAnadirAlumno) {
 			
-		    	//Llamamos al metodo que realiza el insert del nuevo alumno
-				this.crearNuevoAlumno(sessionFactory, modelo);
+		    	if(this.anadirAlumnoValido() == true) {
+		    		//Llamamos al metodo que realiza el insert del nuevo alumno
+					this.crearNuevoAlumno(sessionFactory, modelo);
+		    	}
+		    	
 				
 			//Acciones del botï¿½n que lleva al panel de Nueva empresa	
 			}if(e.getSource() == vista.btnNuevaEmpresa) {
@@ -327,7 +330,33 @@ public class Controlador implements ActionListener{
 				}
 				
 			}
-		
+			
+		//Metodo para validar que todo los campos del alumno están rellenos
+			public boolean anadirAlumnoValido() {
+				boolean valido = true;
+
+				try {
+					
+					if(
+						vista.txtNIFUSUAlumno.getText().equals("")
+						&& vista.txtNombreCompletoUSUAlumno.getText().equals("")
+						&& vista.dateChooserFechaNacimientoUSUAlumno != null
+						&& vista.txtTelefonoUSUAlumno.getText().equals("")
+						&& vista.txtCorreoUSUAlumno.getText().equals("")
+						&& vista.comboBoxPoblacionUSUAlumno.getSelectedItem().equals("")
+						&& vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().equals("")
+						&& vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().equals("")
+							) {
+						valido = false;
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				return valido;
+			}
+			
 		//Mï¿½todo para restablecer el formulario de nuevoAlumno
 			public void resetFormularioNuevoAlumno() {
 				try {
@@ -336,6 +365,7 @@ public class Controlador implements ActionListener{
 					vista.dateChooserFechaNacimientoUSUAlumno.setDate(null);
 					vista.txtTelefonoUSUAlumno.setText("");
 					vista.txtCorreoUSUAlumno.setText("");
+					vista.comboBoxPoblacionUSUAlumno.setSelectedItem("");
 					vista.comboBoxPoblacionUSUAlumno.setSelectedItem("");
 					vista.comboBoxNombreCursoUSUAlumno.setSelectedItem("");
 				} catch (Exception e) {
