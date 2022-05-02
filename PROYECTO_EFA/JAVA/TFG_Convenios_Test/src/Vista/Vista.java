@@ -250,7 +250,7 @@ public class Vista extends JFrame {
 		/**
 		 * Panel nueva empresa
 		*/
-		panelNuevaEmpresa = new JPanel();
+			panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(0, 0, 859, 610);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
 		panelNuevaEmpresa.setForeground(new Color(102, 255, 204));
