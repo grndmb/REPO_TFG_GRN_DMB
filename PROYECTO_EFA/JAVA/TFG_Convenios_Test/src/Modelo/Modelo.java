@@ -29,7 +29,7 @@ public class Modelo {
 	
 
 	/**
-	 * Metodo para crear e insertar un nuevo Curso
+	 * Metodo para crear e insertar un nuevo curso en la base de datos
 	 * @param sessionFactory
 	 * @param nombreCurso
 	 * @param nombreAbrev
@@ -70,7 +70,7 @@ public class Modelo {
 	}
 
 	/**
-	 * Metodo para crear e insertar un nuevo Alumno
+	 * Metodo para crear e insertar un nuevo alumno en la base de datos
 	 * @param sessionFactory
 	 * @param nif
 	 * @param nombreCompleto
@@ -128,47 +128,28 @@ public class Modelo {
 		}
 	}
 		
-	
-	/**
-	 * Metodo Prueba para consultas
-	 * @param ciudad
-	 * @param sessionFactory
-	 * @param numeroVotos
-	 * @throws InterruptedException
-	 */
-	 public static void listar(SessionFactory sessionFactory) throws InterruptedException {
-	     
-		 Session session = null;
-		 
-		 	try {
-		 		session = sessionFactory.getCurrentSession();
-				session.beginTransaction();
-				
-				// leer todas las asignaturas
-				Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso");
-				ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
-				
-				for(Curso curso: listaCursos) {
-					System.out.println(curso.isEsPublico());
-				}
-				
-		 	} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				if(null != session) {
-					session.getTransaction().rollback();
-				}
-			}finally {
-				if(null != session) {
-					session.close();
-				}
-			}
-		 
-		
-					
-	        
-	 }
-	 
+
+	 /**
+	  * Metodo para crear e insertar una nueva empresa en la base de datos
+	  * @param sessionFactory
+	  * @param cifEmpresa
+	  * @param nombreEmpresa
+	  * @param direccionEmpresa
+	  * @param telefono1
+	  * @param telefono2
+	  * @param emailEmpresa
+	  * @param faxEmpresa
+	  * @param paginaWeb
+	  * @param nombreGerente
+	  * @param dniGerente
+	  * @param personaContacto
+	  * @param dniPersonaContacto
+	  * @param fechaActualizacion
+	  * @param organismoPublico
+	  * @param observaciones
+	  * @param poblacion
+	  * @throws HibernateException
+	  */
 	 public void crearEmpresas (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
 			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
 			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException{
@@ -222,6 +203,13 @@ public class Modelo {
 		 
 	 }
 	 	
+	 /**
+	  * Metodo para crear e insertar una nueva poblacion en la base de datos
+	  * @param sessionFactory
+	  * @param codigoPostal
+	  * @param nombre
+	  * @param provincia
+	  */
 	 public void crearPoblacion (SessionFactory sessionFactory, int codigoPostal, String nombre, String provincia) {
 		 
 		 Session session = null;
@@ -252,6 +240,16 @@ public class Modelo {
 		 
 	 }
 
+	 
+	 
+	 /**
+	  * Metodo para crear e insertar un convenio con una empresa (Puede ser "FCT" o "PFE")
+	  * @param sessionFactory
+	  * @param cifEmpresa
+	  * @param nombreCurso
+	  * @param tipoConvenio
+	  * @throws HibernateException
+	  */
 	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio) throws HibernateException {
 		 
 		 Session session = null;
@@ -344,7 +342,6 @@ public class Modelo {
 			
 	        
 	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
-         //helper.listar(sessionFactory);
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
          helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT");
