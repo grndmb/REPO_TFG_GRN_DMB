@@ -54,7 +54,6 @@ public class Modelo {
 			curso.setEsPublico(esPublico);
 			
 			session.saveOrUpdate(curso);
-			System.out.println(curso);
 			session.getTransaction().commit();
 			
 		} catch (Exception e) {
@@ -114,7 +113,6 @@ public class Modelo {
 		
 			
 			session.saveOrUpdate(alumno);
-			System.out.println(alumno);
 			session.getTransaction().commit();
 			
 		} catch (Exception e) {
@@ -224,6 +222,36 @@ public class Modelo {
 		 
 	 }
 	 	
+	 public void crearPoblacion (SessionFactory sessionFactory, int codigoPostal, String nombre, String provincia) {
+		 
+		 Session session = null;
+			
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Poblacion poblacion = new Poblacion();
+				poblacion.setCodigoPostal(codigoPostal);
+				poblacion.setNombre(nombre);
+				poblacion.setProvincia(provincia);			
+				
+				session.saveOrUpdate(poblacion);
+				session.getTransaction().commit();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+		 
+	 }
+
 	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio) throws HibernateException {
 		 
 		 Session session = null;

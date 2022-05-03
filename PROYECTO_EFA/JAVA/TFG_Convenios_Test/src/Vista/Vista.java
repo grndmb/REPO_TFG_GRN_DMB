@@ -20,6 +20,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
+
 public class Vista extends JFrame {
 
 	public JPanel contentPane;
@@ -138,6 +142,7 @@ public class Vista extends JFrame {
 					Vista frame = new Vista();
 					Controlador controlador = new Controlador(frame);
 					frame.setVisible(true);
+					centreWindow(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -149,7 +154,7 @@ public class Vista extends JFrame {
 	 */
 	public Vista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 873, 647);
+		setBounds(100, 100, 1560, 832);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setForeground(new Color(102, 255, 204));
@@ -329,7 +334,7 @@ public class Vista extends JFrame {
 			panelNuevoCurso.add(lblHorasFCTCurso);
 			
 			lblEsPublicoCurso = new JLabel();
-			lblEsPublicoCurso.setText("¿ES PÚBLICO?");
+			lblEsPublicoCurso.setText("ï¿½ES Pï¿½BLICO?");
 			lblEsPublicoCurso.setBounds(235, 307, 96, 19);
 			panelNuevoCurso.add(lblEsPublicoCurso);
 			
@@ -374,7 +379,7 @@ public class Vista extends JFrame {
 			btnAnadirCurso.setBounds(306, 422, 189, 76);
 			panelNuevoCurso.add(btnAnadirCurso);
 			
-			btnAtrasCurso = new JButton("ATRÁS");
+			btnAtrasCurso = new JButton("ATRï¿½S");
 			btnAtrasCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			btnAtrasCurso.setBounds(696, 560, 153, 40);
 			panelNuevoCurso.add(btnAtrasCurso);
@@ -567,4 +572,12 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
 	}
+	
+	public static void centreWindow(Window frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y - 18);
+	}
+	
 }
