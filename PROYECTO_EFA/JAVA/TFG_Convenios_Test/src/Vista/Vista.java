@@ -76,6 +76,8 @@ public class Vista extends JFrame {
 		public JLabel lblErroresNuevoAlumno;
 		
 		public JList list;
+		public DefaultListModel model;
+		
 		
 	/**
 	 * PANEL NUEVO CURSO
@@ -369,17 +371,13 @@ public class Vista extends JFrame {
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
 			
 			
-			DefaultListModel model = new DefaultListModel();
+			model = new DefaultListModel();
 		    list = new JList(model);
 		    list.setBounds(772, 453, 149, 88);
 			panelNuevoAlumno.add(list);
 			
-	
-		    // Initialize the list with items
-		    String[] items = { "A", "B", "C", "D" };
-		    for (int i = 0; i < items.length; i++) {
-		      model.add(i, items[i]);
-		    }
+			
+		    
 		  
 		/**
 		 * Panel nueva Poblacion

@@ -15,7 +15,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -68,6 +70,7 @@ public class Controlador implements ActionListener{
 	
 	
 	//Controlador de eventos
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -83,7 +86,6 @@ public class Controlador implements ActionListener{
 	    
 	        //Acciones del bot�n de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
-				vista.panelNuevoAlumno.setVisible(true);
 				
 				//Rellenar combobox Curso y Codigo Postal
 					this.rellenarComboBoxCursos(sessionFactory);
@@ -109,8 +111,24 @@ public class Controlador implements ActionListener{
 				vista.panelNuevoCurso.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(false);
 				
+				try {
+					
+					vista.list.setModel(vista.model);
 
-			    
+					
+					ArrayList <Alumno> listaAlumnos = modelo.listarAlumnos(sessionFactory);
+					
+					for (int i = 0; i < listaAlumnos.size(); i++) {
+						
+						vista.model.addElement(listaAlumnos.get(i).getNombreCompleto());
+						vista.list.setModel(vista.model);
+					}
+					
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 		    }
 		    
 		  //BOTON ADD ALUMNO
@@ -261,7 +279,7 @@ public class Controlador implements ActionListener{
 		    }
 			
 		//M�todo para rellenar el combobox que lista los codigos postales
-			public void rellenarComboBoxNombreCiudad (SessionFactory sessionFactory, JComboBox comboPoblacionNombre) {
+			public void rellenarComboBoxNombreCiudad (SessionFactory sessionFactory, JComboBox<String> comboPoblacionNombre) {
 				Session session = null;
 				
 				try {
@@ -298,7 +316,7 @@ public class Controlador implements ActionListener{
 		    }
 		
 		//Metodo que rellen el combobox de Codigo Postal
-			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory,JComboBox comboPoblacionNombre, JComboBox comboPoblacionCP) {
+			public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory,JComboBox<String> comboPoblacionNombre, JComboBox<Integer> comboPoblacionCP) {
 				
 				Session session = null; 
 				

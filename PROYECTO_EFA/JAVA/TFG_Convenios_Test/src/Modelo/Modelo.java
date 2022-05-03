@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -129,22 +131,23 @@ public class Modelo {
 	}
 		
 
-	 public static void listarAlumnos (SessionFactory sessionFactory) throws InterruptedException {
+	 public ArrayList<Alumno> listarAlumnos (SessionFactory sessionFactory) throws InterruptedException {
 	        
 		 Session session = null;
-			
+		 ArrayList<Alumno> listaAlumnos = null;	
+		 
 			try {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
 		 
-		 
 				// leer todas las asignaturas
 				Query query = sessionFactory.getCurrentSession().createQuery("FROM Alumno");
-				ArrayList<Alumno> listaAlumnos = (ArrayList<Alumno>) query.list();
-				
-				for(Alumno alumno: listaAlumnos) {
-					System.out.println(alumno);
+				listaAlumnos = (ArrayList<Alumno>) query.list();
+		
+				for ( int i = 0; i < listaAlumnos.size(); i++ ){
+					
+				 System.out.println(listaAlumnos.get(i).getNombreCompleto());
 				}
 						
 			} catch (Exception e) {
@@ -157,8 +160,12 @@ public class Modelo {
 				if(null != session) {
 					session.close();
 				}
-			}   
-		 }
+			}
+			
+			
+			return listaAlumnos;   
+			
+	 }
 	
 	 /**
 	  * Metodo para crear e insertar una nueva empresa en la base de datos
