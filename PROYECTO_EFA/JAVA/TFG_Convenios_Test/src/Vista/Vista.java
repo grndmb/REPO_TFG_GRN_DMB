@@ -16,6 +16,7 @@ import Controlador.Controlador;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -24,6 +25,7 @@ import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import javax.swing.JList;
 
 public class Vista extends JFrame {
 
@@ -71,8 +73,9 @@ public class Vista extends JFrame {
 		public JButton btnNuevoCursoAlumno;
 		public JButton btnNuevaPoblacionAlumno;
 		public JButton btnAnadirAlumno;
-		public JButton btnNuevaEmpresa;
 		public JLabel lblErroresNuevoAlumno;
+		
+		public JList list;
 		
 	/**
 	 * PANEL NUEVO CURSO
@@ -250,12 +253,12 @@ public class Vista extends JFrame {
 		 * Panel nuevo alumno
 		 */
 		panelNuevoAlumno = new JPanel();
-		panelNuevoAlumno.setBounds(0, 0, 859, 610);
+		panelNuevoAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
 		panelNuevoAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panelNuevoAlumno.setLayout(null);
-		contentPane.add(panelNuevoAlumno);
+		panelPrincipal.add(panelNuevoAlumno);
 		
 			lblNIFAlumno = new JLabel();
 			lblNIFAlumno.setText("NIF");
@@ -350,11 +353,6 @@ public class Vista extends JFrame {
 			btnAnadirAlumno.setBounds(306, 422, 189, 76);
 			panelNuevoAlumno.add(btnAnadirAlumno);
 			
-			btnNuevaEmpresa = new JButton("NUEVA EMPRESA");
-			btnNuevaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnNuevaEmpresa.setBounds(696, 560, 153, 40);
-			panelNuevoAlumno.add(btnNuevaEmpresa);
-			
 			btnNuevaPoblacionAlumno = new JButton("NUEVA POBLACION");
 			btnNuevaPoblacionAlumno.setFont(new Font("Tahoma", Font.BOLD, 10));
 			btnNuevaPoblacionAlumno.setBounds(681, 284, 149, 19);
@@ -369,17 +367,30 @@ public class Vista extends JFrame {
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(247, 523, 352, 56);
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
+			
+			
+			DefaultListModel model = new DefaultListModel();
+		    list = new JList(model);
+		    list.setBounds(772, 453, 149, 88);
+			panelNuevoAlumno.add(list);
+			
 	
+		    // Initialize the list with items
+		    String[] items = { "A", "B", "C", "D" };
+		    for (int i = 0; i < items.length; i++) {
+		      model.add(i, items[i]);
+		    }
+		  
 		/**
 		 * Panel nueva Poblacion
 		 */
 		panelNuevaPoblacion = new JPanel();
-		panelNuevaPoblacion.setBounds(0, 0, 859, 610);
+		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
 		panelNuevaPoblacion.setForeground(new Color(102, 255, 204));
 		panelNuevaPoblacion.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panelNuevaPoblacion.setLayout(null);
-		contentPane.add(panelNuevaPoblacion);
+		panelPrincipal.add(panelNuevaPoblacion);
 		
 			lblCodigoPostalPoblacion = new JLabel();
 			lblCodigoPostalPoblacion.setText("CODIGO POSTAL");
@@ -436,12 +447,12 @@ public class Vista extends JFrame {
 			 * Panel nuevo Curso
 			 */
 			panelNuevoCurso = new JPanel();
-			panelNuevoCurso.setBounds(0, 0, 859, 610);
+			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
 			panelNuevoCurso.setForeground(new Color(102, 255, 204));
 			panelNuevoCurso.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 			panelNuevoCurso.setLayout(null);
-			contentPane.add(panelNuevoCurso);
+			panelPrincipal.add(panelNuevoCurso);
 			
 				lblNombreCurso = new JLabel();
 				lblNombreCurso.setText("NOMBRE");
@@ -520,12 +531,12 @@ public class Vista extends JFrame {
 		 * Panel nueva empresa
 		*/
 		panelNuevaEmpresa = new JPanel();
-		panelNuevaEmpresa.setBounds(0, 0, 859, 610);
+		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
 		panelNuevaEmpresa.setForeground(new Color(102, 255, 204));
 		panelNuevaEmpresa.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panelNuevaEmpresa.setLayout(null);
-		contentPane.add(panelNuevaEmpresa);
+		panelPrincipal.add(panelNuevaEmpresa);
 			
 			lblTituloNuevoEmpresa = new JLabel();
 			lblTituloNuevoEmpresa.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -698,6 +709,8 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
+			
+			
+			
 	}
-	
 }

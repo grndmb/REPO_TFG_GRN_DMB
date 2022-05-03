@@ -129,6 +129,37 @@ public class Modelo {
 	}
 		
 
+	 public static void listarAlumnos (SessionFactory sessionFactory) throws InterruptedException {
+	        
+		 Session session = null;
+			
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+		 
+		 
+				// leer todas las asignaturas
+				Query query = sessionFactory.getCurrentSession().createQuery("FROM Alumno");
+				ArrayList<Alumno> listaAlumnos = (ArrayList<Alumno>) query.list();
+				
+				for(Alumno alumno: listaAlumnos) {
+					System.out.println(alumno);
+				}
+						
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}   
+		 }
+	
 	 /**
 	  * Metodo para crear e insertar una nueva empresa en la base de datos
 	  * @param sessionFactory
@@ -344,9 +375,10 @@ public class Modelo {
 	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-         helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT");
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE");
+        // helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT");
+         //helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE");
 	 
+	        helper.listarAlumnos(sessionFactory);
 	 
 	 
 	 

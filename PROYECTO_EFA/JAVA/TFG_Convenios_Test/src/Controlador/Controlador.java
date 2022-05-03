@@ -38,9 +38,13 @@ public class Controlador implements ActionListener{
 		//Botones Panel Inicio
 			this.vista.btnInicio.addActionListener(this);
 		
+		//Botones Menu
+			this.vista.btnPanelAlumnos.addActionListener(this);
+			this.vista.btnPanelEmpresas.addActionListener(this);
+			
+			
 		//Botones Panel Nuevo Alumno
 			this.vista.btnAnadirAlumno.addActionListener(this);
-			this.vista.btnNuevaEmpresa.addActionListener(this);
 			this.vista.comboBoxPoblacionUSUAlumno.addActionListener(this);
 			this.vista.btnNuevaPoblacionAlumno.addActionListener(this);
 			this.vista.btnNuevoCursoAlumno.addActionListener(this);
@@ -85,6 +89,7 @@ public class Controlador implements ActionListener{
 					this.rellenarComboBoxCursos(sessionFactory);
 					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
 				
+					vista.btnInicio.setVisible(false);
 			
 			//Acciones del botï¿½n de Aï¿½adir Alumno
 		    }if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
@@ -94,19 +99,66 @@ public class Controlador implements ActionListener{
 		    }
 		    
 		    
-		    if(e.getSource() == vista.btnAnadirAlumno) {
+		    /**
+		     * ACCIONES DEL PANEL ALUMNOS
+		     */
+		    if(e.getSource() == vista.btnPanelAlumnos) {
+		    	
+				vista.panelNuevoAlumno.setVisible(true);
+				vista.panelNuevaPoblacion.setVisible(false);
+				vista.panelNuevoCurso.setVisible(false);
+				vista.panelNuevaEmpresa.setVisible(false);
+				
+
+			    
+			    
+				//BOTON ADD ALUMNO
+			    if(e.getSource() == vista.btnAnadirAlumno) {
+				
+			    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
+			    		//Llamamos al metodo que realiza el insert del nuevo alumno
+						this.crearNuevoAlumno(sessionFactory, modelo);
+			    	}
+				
+			    //Acciones del boton que lleva al panel de Nueva Poblacion	
+				}
+				
+				
+				
+		    }
+		    
+		    if(e.getSource() == vista.btnPanelEmpresas) {
+
+		    	vista.panelNuevaEmpresa.setVisible(true);
+		    	vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevaPoblacion.setVisible(false);
+				vista.panelNuevoCurso.setVisible(false);
+				
+				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevaEmpresa.setVisible(true);
+				//Rellenar combobox Codigo Postal
+					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
 			
-		    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
-		    		//Llamamos al metodo que realiza el insert del nuevo alumno
-					this.crearNuevoAlumno(sessionFactory, modelo);
-		    	}
-			
-		    //Acciones del boton que lleva al panel de Nueva Poblacion	
-			}if(e.getSource() == vista.btnNuevaPoblacionAlumno) {	
+				//Rellena el label con la fecha actualizacion =  fecha actual
+					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
+		    	
+		    }
+		    
+		    if(e.getSource() == vista.btnPanelPracticas) {
+		    
+		    	
+		    	
+		    	
+		    }
+		    
+		    
+		    
+		    if(e.getSource() == vista.btnNuevaPoblacionAlumno) {	
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(true);		
 		    	
-			//Acciones del boton de Añadir Poblacion
+			//Acciones del boton de Aï¿½adir Poblacion
 			}if(e.getSource() == vista.btnAnadirPoblacion) {
 		    	
 				if(this.anadirPoblacionValido() == true) {
@@ -123,14 +175,14 @@ public class Controlador implements ActionListener{
 				
 				//Recargamos el comboBox de cursos
 				vista.comboBoxPoblacionUSUAlumno.removeAllItems();
-				this.rellenarComboBoxCursos(sessionFactory);
+				this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 			
 			//Acciones del boton que lleva al panel de Nuevo Curso	
 			}if(e.getSource() == vista.btnNuevoCursoAlumno) {	
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevoCurso.setVisible(true);	
 				
-			//Acciones del boton de Añadir Curso
+			//Acciones del boton de Aï¿½adir Curso
 			}if(e.getSource() == vista.btnAnadirCurso) {
 		    	
 				if(this.anadirCursoValido() == true) {
@@ -148,21 +200,8 @@ public class Controlador implements ActionListener{
 				//Recargamos el comboBox de cursos
 				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
 				this.rellenarComboBoxCursos(sessionFactory);
-			
-				
-			//Acciones del boton que lleva al panel de Nueva empresa	
-			}if(e.getSource() == vista.btnNuevaEmpresa) {
-				vista.panelNuevoAlumno.setVisible(false);
-				vista.panelNuevaEmpresa.setVisible(true);
-				//Rellenar combobox Codigo Postal
-					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
-			
-				//Rellena el label con la fecha actualizacion =  fecha actual
-					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
-					
-			        
-			//Acciones del boton de Añadir Empresa
+			  
+			//Acciones del boton de Aï¿½adir Empresa
 			}if(e.getSource() == vista.btnAnadirEmpresa) {
 		    	
 				//Llamamos al metodo que realiza el insert de la nueva empresa
@@ -205,7 +244,6 @@ public class Controlador implements ActionListener{
 		    }
 			
 		//Mï¿½todo para rellenar el combobox que lista los codigos postales
-			@SuppressWarnings("deprecation")
 			public void rellenarComboBoxNombreCiudad (SessionFactory sessionFactory, JComboBox comboPoblacionNombre) {
 				Session session = null;
 				
@@ -215,10 +253,7 @@ public class Controlador implements ActionListener{
 					
 					/**
 					 * Consulta para obtener los nombres de las poblaciones
-					 */
-					
-					
-					
+					 */	
 					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion ORDER BY Nombre ASC");
 					query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 					ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
@@ -329,7 +364,7 @@ public class Controlador implements ActionListener{
 				}
 				
 
-			//Metodo para validar que todo los campos del alumno están rellenos
+			//Metodo para validar que todo los campos del alumno estï¿½n rellenos
 				public boolean anadirAlumnoValido() {
 					boolean valido = true;
 	
@@ -445,7 +480,7 @@ public class Controlador implements ActionListener{
 					}
 			}
 		
-			//Metodo para validar que todo los campos del alumno están rellenos
+			//Metodo para validar que todo los campos del alumno estï¿½n rellenos
 				public boolean anadirPoblacionValido() {
 					boolean valido = true;
 	
@@ -520,7 +555,7 @@ public class Controlador implements ActionListener{
 					}
 			}
 		
-			//Metodo para validar que todo los campos del alumno están rellenos
+			//Metodo para validar que todo los campos del alumno estï¿½n rellenos
 				public boolean anadirCursoValido() {
 					boolean valido = true;
 	
