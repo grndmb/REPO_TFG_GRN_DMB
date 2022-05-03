@@ -566,6 +566,5 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
-			
 	}
 }

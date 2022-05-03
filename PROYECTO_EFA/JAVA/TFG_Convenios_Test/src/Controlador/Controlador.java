@@ -97,9 +97,20 @@ public class Controlador implements ActionListener{
 		    		//Llamamos al metodo que realiza el insert del nuevo alumno
 					this.crearNuevoAlumno(sessionFactory, modelo);
 		    	}
-		    	
+			 
+		    //Acciones del boton que lleva al panel de Nueva empresa	
+			}if(e.getSource() == vista.btnNuevoCursoAlumno) {	
+				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevoCurso.setVisible(true);
 				
-			//Acciones del botï¿½n que lleva al panel de Nueva empresa	
+			//Acciones del boton de Añadir Empresa
+			}if(e.getSource() == vista.btnAnadirEmpresa) {
+		    	
+				//Llamamos al metodo que realiza el insert de la nueva empresa
+				this.crearNuevoCurso(sessionFactory, modelo);
+					
+				
+			//Acciones del boton que lleva al panel de Nueva empresa	
 			}if(e.getSource() == vista.btnNuevaEmpresa) {
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(true);
@@ -111,7 +122,7 @@ public class Controlador implements ActionListener{
 					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
 					
 			        
-			//Acciones del botï¿½n de Aï¿½adir Empresa
+			//Acciones del boton de Añadir Empresa
 			}if(e.getSource() == vista.btnAnadirEmpresa) {
 		    	
 				//Llamamos al metodo que realiza el insert de la nueva empresa
@@ -376,7 +387,38 @@ public class Controlador implements ActionListener{
 		//METODOS DEL PANEL NUEVO CURSO
 						
 			//Metodo para hacer el insert del nuevo Curso en la base de datos
-				
+				public void crearNuevoCurso(SessionFactory sessionFactory, Modelo modelo) {
+					
+					try {
+						
+						// NOMBRE CURSO
+							String nombreCurso = vista.txtNombreUSUCurso.getText();
+						
+						// NOMBRE ABREV
+							String nombreAbrev = vista.txtNombreAbrevUSUCurso.getText();
+						
+						// CLAVE
+							String clave = vista.txtClaveUSUCurso.getText();
+							
+						// HORAS FCT
+							int horasFCT = Integer.parseInt(vista.txtHorasFCTUSUCurso.toString());
+						
+						// ES PUBLICO
+							boolean esPublico = false;
+							if (vista.checkBoxEsPublicoUSUCurso.isSelected()) {
+								esPublico = true;
+							} else {
+								esPublico = false;
+							}
+					        
+						// INSERT
+							modelo.crearCurso(sessionFactory, nombreCurso, nombreAbrev, clave, horasFCT, esPublico);
+							
+					}catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+			}
 	/*
 	 * METODOS DE LA EMPRESA	
      */
