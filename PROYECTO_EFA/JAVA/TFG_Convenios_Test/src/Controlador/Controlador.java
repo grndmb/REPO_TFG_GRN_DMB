@@ -111,63 +111,32 @@ public class Controlador implements ActionListener{
 				
 
 			    
-			    
-				//BOTON ADD ALUMNO
-			    if(e.getSource() == vista.btnAnadirAlumno) {
-				
-			    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
-			    		//Llamamos al metodo que realiza el insert del nuevo alumno
-						this.crearNuevoAlumno(sessionFactory, modelo);
-			    	}
-				
-			    //Acciones del boton que lleva al panel de Nueva Poblacion	
-				}
-				
-				
-				
 		    }
 		    
-		    if(e.getSource() == vista.btnPanelEmpresas) {
-
-		    	vista.panelNuevaEmpresa.setVisible(true);
-		    	vista.panelNuevoAlumno.setVisible(false);
-				vista.panelNuevaPoblacion.setVisible(false);
-				vista.panelNuevoCurso.setVisible(false);
-				
-				vista.panelNuevoAlumno.setVisible(false);
-				vista.panelNuevaEmpresa.setVisible(true);
-				//Rellenar combobox Codigo Postal
-					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
+		  //BOTON ADD ALUMNO
+		    if(e.getSource() == vista.btnAnadirAlumno) {
 			
-				//Rellena el label con la fecha actualizacion =  fecha actual
-					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
-		    	
-		    }
+		    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
+		    		//Llamamos al metodo que realiza el insert del nuevo alumno
+					this.crearNuevoAlumno(sessionFactory, modelo);
+		    	}
+			}
 		    
-		    if(e.getSource() == vista.btnPanelPracticas) {
-		    
-		    	
-		    	
-		    	
-		    }
-		    
-		    
-		    
+		    //BOTON ADD --> NUEVA POBLACION ALUMNOS
 		    if(e.getSource() == vista.btnNuevaPoblacionAlumno) {	
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(true);		
-		    	
-			//Acciones del boton de A�adir Poblacion
-			}if(e.getSource() == vista.btnAnadirPoblacion) {
+			}
+			
+		    if(e.getSource() == vista.btnAnadirPoblacion) {
 		    	
 				if(this.anadirPoblacionValido() == true) {
 		    		//Llamamos al metodo que realiza el insert del nueva poblacion
 					this.crearNuevaPoblacion(sessionFactory, modelo);
-		    	}
-					
-			//Acciones del boton de Atras Poblacion
-			}if(e.getSource() == vista.btnAtrasPoblacion) {
+				}
+			}
+		    
+		    if(e.getSource() == vista.btnAtrasPoblacion) {
 		    	
 				//Volvemos al panel Alumno
 				vista.panelNuevaPoblacion.setVisible(false);
@@ -176,9 +145,10 @@ public class Controlador implements ActionListener{
 				//Recargamos el comboBox de cursos
 				vista.comboBoxPoblacionUSUAlumno.removeAllItems();
 				this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
-			
-			//Acciones del boton que lleva al panel de Nuevo Curso	
-			}if(e.getSource() == vista.btnNuevoCursoAlumno) {	
+			}
+		    
+		    //BOTON ADD --> NUEVO CURSO ALUMNOS
+		    if(e.getSource() == vista.btnNuevoCursoAlumno) {	
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevoCurso.setVisible(true);	
 				
@@ -200,14 +170,61 @@ public class Controlador implements ActionListener{
 				//Recargamos el comboBox de cursos
 				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
 				this.rellenarComboBoxCursos(sessionFactory);
-			  
-			//Acciones del boton de A�adir Empresa
-			}if(e.getSource() == vista.btnAnadirEmpresa) {
+			}
+		    
+		    
+		    
+		    // --------------------------------------------		   
+			// --------------------------------------------
+
+		    
+			/**
+			 * ACCIONES DEL PANEL EMPRESA
+			 */
+		    if(e.getSource() == vista.btnPanelEmpresas) {
+
+		    	vista.panelNuevaEmpresa.setVisible(true);
+		    	vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevaPoblacion.setVisible(false);
+				vista.panelNuevoCurso.setVisible(false);
+				
+				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevaEmpresa.setVisible(true);
+				//Rellenar combobox Codigo Postal
+					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
+			
+				//Rellena el label con la fecha actualizacion =  fecha actual
+					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);
+		    	
+				
+					
+		    }
+		    
+		    if(e.getSource() == vista.btnAnadirEmpresa) {
 		    	
 				//Llamamos al metodo que realiza el insert de la nueva empresa
 				this.crearNuevaEmpresa(sessionFactory, modelo);
-				
 			}
+		    
+		    
+		    // --------------------------------------------		   
+			// --------------------------------------------
+
+		    
+		    /**
+		     * ACCIONES DEL PANEL PRACTICAS
+		     */
+		    if(e.getSource() == vista.btnPanelPracticas) {
+		    
+		    	
+		    	
+		    	
+		    }
+		    
+		    
+		    
+		   
 	}
 	
 	/*
