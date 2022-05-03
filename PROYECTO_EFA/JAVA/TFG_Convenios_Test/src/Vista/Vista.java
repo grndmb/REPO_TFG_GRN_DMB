@@ -34,6 +34,15 @@ public class Vista extends JFrame {
 	 */
 	public JPanel panelPrincipal;
 		public JButton btnInicio;
+		public JLabel labelTitulo;
+		public JPanel panelMenu;
+		public JButton btnPanelAlumnos;
+		public JButton btnPanelEmpresas;
+		public JButton btnPanelPracticas;
+		public JButton btnPanelDocumentos;
+
+		
+		
 	
 	/**
 	 * PANEL NUEVO ALUMNO
@@ -181,7 +190,7 @@ public class Vista extends JFrame {
 		contentPane.setLayout(null);
 
 		/**
-		 * Panel inicio
+		 * Panel Principal
 		 */
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1556, 807);
@@ -199,59 +208,44 @@ public class Vista extends JFrame {
 			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
 			panelPrincipal.add(btnInicio);
 			
-			JLabel labelTitulo = new JLabel("                         EFA MORATALAZ");
+			labelTitulo = new JLabel("                         EFA MORATALAZ");
 			labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 			labelTitulo.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 60));
 			labelTitulo.setForeground(Color.WHITE);
 			labelTitulo.setBounds(0, 0, 1548, 114);
 			panelPrincipal.add(labelTitulo);
 			
-			JPanel panelMenu = new JPanel();
+			panelMenu = new JPanel();
 			panelMenu.setBackground(new Color(51, 204, 102));
 			panelMenu.setBorder(new MatteBorder(5, 3, 5, 3, (Color) new Color(0, 0, 0)));
 			panelMenu.setBounds(10, 132, 324, 648);
 			panelPrincipal.add(panelMenu);
 			panelMenu.setLayout(null);
 			
-			JButton btnPanelAlumnos = new JButton("Alumnos");
+			btnPanelAlumnos = new JButton("Alumnos");
 			btnPanelAlumnos.setBackground(Color.WHITE);
 			btnPanelAlumnos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelAlumnos.setBounds(49, 50, 219, 37);
 			panelMenu.add(btnPanelAlumnos);
 			
-			JButton btnPanelEmpresas = new JButton("Empresas");
+			btnPanelEmpresas = new JButton("Empresas");
 			btnPanelEmpresas.setBackground(Color.WHITE);
 			btnPanelEmpresas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelEmpresas.setBounds(49, 130, 219, 37);
 			panelMenu.add(btnPanelEmpresas);
 			
-			JButton btnPanelPracticas = new JButton("Practicas");
+			btnPanelPracticas = new JButton("Practicas");
 			btnPanelPracticas.setBackground(Color.WHITE);
 			btnPanelPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelPracticas.setBounds(49, 210, 219, 37);
 			panelMenu.add(btnPanelPracticas);
 			
-			JButton btnPanelDocumentos = new JButton("Documentos");
+			btnPanelDocumentos = new JButton("Documentos");
 			btnPanelDocumentos.setBackground(Color.WHITE);
 			btnPanelDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelDocumentos.setBounds(49, 491, 219, 37);
 			panelMenu.add(btnPanelDocumentos);
-		/**
-		 * Panel Principal
-		 */
-		panelPrincipal = new JPanel();
-		panelPrincipal.setBounds(0, 0, 859, 610);
-		panelPrincipal.setBackground(Color.WHITE);
-		panelPrincipal.setForeground(new Color(102, 255, 204));
-		panelPrincipal.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelPrincipal.setLayout(null);
-		contentPane.add(panelPrincipal);
-			
-			btnInicio = new JButton("INICIAR");
-			btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 60));
-			btnInicio.setBounds(300, 422, 255, 76);
-			panelPrincipal.add(btnInicio);
-					
+				
 		/**
 		 * Panel nuevo alumno
 		 */
