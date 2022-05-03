@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -156,9 +157,9 @@ public class Vista extends JFrame {
 			public void run() {
 				try {
 					Vista frame = new Vista();
-					Controlador controlador = new Controlador(frame);
-					frame.setVisible(true);
-					centreWindow(frame);
+                    Controlador controlador = new Controlador(frame);
+                    frame.setVisible(true);
+                    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -169,15 +170,72 @@ public class Vista extends JFrame {
 	 * Create the frame.
 	 */
 	public Vista() {
+		setAlwaysOnTop(true);
+		setTitle("EFA MORATALAZ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1560, 832);
+		setBounds(100, 100, 1560, 844);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setForeground(new Color(102, 255, 204));
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		/**
+		 * Panel inicio
+		 */
+		panelInicio = new JPanel();
+		panelInicio.setBounds(0, 0, 1556, 807);
+		panelInicio.setBackground(new Color(53, 100, 54));
+		panelInicio.setForeground(new Color(255, 255, 255));
+		panelInicio.setVisible(false);
+		panelInicio.setFont(new Font("Freestyle Script", Font.PLAIN, 40));
+		contentPane.add(panelInicio);
+			panelInicio.setLayout(null);
+			
+			btnInicio = new JButton("Iniciar AplicaciÃ³n");
+			btnInicio.setBackground(new Color(255, 255, 255));
+			btnInicio.setForeground(new Color(0, 128, 0));
+			btnInicio.setBounds(727, 401, 479, 76);
+			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
+			panelInicio.add(btnInicio);
+			
+			JLabel labelTitulo = new JLabel("                         EFA MORATALAZ");
+			labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+			labelTitulo.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 60));
+			labelTitulo.setForeground(Color.WHITE);
+			labelTitulo.setBounds(0, 0, 1548, 114);
+			panelInicio.add(labelTitulo);
+			
+			JPanel panelMenu = new JPanel();
+			panelMenu.setBackground(new Color(51, 204, 102));
+			panelMenu.setBorder(new MatteBorder(5, 3, 5, 3, (Color) new Color(0, 0, 0)));
+			panelMenu.setBounds(10, 132, 324, 648);
+			panelInicio.add(panelMenu);
+			panelMenu.setLayout(null);
+			
+			JButton btnPanelAlumnos = new JButton("Alumnos");
+			btnPanelAlumnos.setBackground(Color.WHITE);
+			btnPanelAlumnos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+			btnPanelAlumnos.setBounds(49, 50, 219, 37);
+			panelMenu.add(btnPanelAlumnos);
+			
+			JButton btnPanelEmpresas = new JButton("Empresas");
+			btnPanelEmpresas.setBackground(Color.WHITE);
+			btnPanelEmpresas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+			btnPanelEmpresas.setBounds(49, 130, 219, 37);
+			panelMenu.add(btnPanelEmpresas);
+			
+			JButton btnPanelPracticas = new JButton("Practicas");
+			btnPanelPracticas.setBackground(Color.WHITE);
+			btnPanelPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+			btnPanelPracticas.setBounds(49, 210, 219, 37);
+			panelMenu.add(btnPanelPracticas);
+			
+			JButton btnPanelDocumentos = new JButton("Documentos");
+			btnPanelDocumentos.setBackground(Color.WHITE);
+			btnPanelDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+			btnPanelDocumentos.setBounds(49, 491, 219, 37);
+			panelMenu.add(btnPanelDocumentos);
 		/**
 		 * Panel inicio
 		 */
@@ -412,7 +470,7 @@ public class Vista extends JFrame {
 				panelNuevoCurso.add(lblHorasFCTCurso);
 				
 				lblEsPublicoCurso = new JLabel();
-				lblEsPublicoCurso.setText("ENSEÑANZA PUBLICA");
+				lblEsPublicoCurso.setText("ENSEï¿½ANZA PUBLICA");
 				lblEsPublicoCurso.setBounds(235, 307, 136, 19);
 				panelNuevoCurso.add(lblEsPublicoCurso);
 				
