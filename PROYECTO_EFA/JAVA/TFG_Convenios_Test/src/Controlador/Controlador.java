@@ -98,17 +98,30 @@ public class Controlador implements ActionListener{
 					this.crearNuevoAlumno(sessionFactory, modelo);
 		    	}
 			 
-		    //Acciones del boton que lleva al panel de Nueva empresa	
+		    //Acciones del boton que lleva al panel de Nuevo Curso	
 			}if(e.getSource() == vista.btnNuevoCursoAlumno) {	
 				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevoCurso.setVisible(true);
 				
-			//Acciones del boton de Añadir Empresa
-			}if(e.getSource() == vista.btnAnadirEmpresa) {
+			//Acciones del boton de Añadir Curso
+			}if(e.getSource() == vista.btnAnadirCurso) {
 		    	
-				//Llamamos al metodo que realiza el insert de la nueva empresa
-				this.crearNuevoCurso(sessionFactory, modelo);
+				if(this.anadirCursoValido() == true) {
+		    		//Llamamos al metodo que realiza el insert del nuevo curso
+					this.crearNuevoCurso(sessionFactory, modelo);
+		    	}
 					
+			//Acciones del boton de Atras Curso
+			}if(e.getSource() == vista.btnAtrasCurso) {
+		    	
+				//Volvemos al panel Alumno
+				vista.panelNuevoCurso.setVisible(false);
+				vista.panelNuevoAlumno.setVisible(true);
+				
+				//Recargamos el comboBox de cursos
+				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+				this.rellenarComboBoxCursos(sessionFactory);
+			
 				
 			//Acciones del boton que lleva al panel de Nueva empresa	
 			}if(e.getSource() == vista.btnNuevaEmpresa) {
@@ -288,8 +301,7 @@ public class Controlador implements ActionListener{
 					}
 				}
 				
-			
-				
+
 			//Metodo para validar que todo los campos del alumno están rellenos
 				public boolean anadirAlumnoValido() {
 					boolean valido = true;
@@ -357,6 +369,7 @@ public class Controlador implements ActionListener{
 					
 					return valido;
 				}
+			
 				
 			//Metodo para restablecer el formulario de nuevoAlumno
 				public void resetFormularioNuevoAlumno() {
@@ -379,7 +392,78 @@ public class Controlador implements ActionListener{
 	 */
 		//METODOS DEL PANEL NUEVA POBLACION
 			
-				//Metodo para hacer el insert de la nueva Poblacion en la base de datos
+				//Metodo para hacer el insert del nuevo Curso en la base de datos
+				public void crearNuevaPoblacion(SessionFactory sessionFactory, Modelo modelo) {
+					
+					try {
+						
+						// CODIGO POSTAL
+							String codigoPostal = vista.txtCodigoPostalUSUPoblacion.getText();
+						
+						// NOMBRE POBLACION
+							String nombrePoblacion = vista.txtNombreUSUPoblacion.getText();
+						
+						// PROVINCIA
+							String provincia = vista.txtClaveUSUCurso.getText();
+							
+						// HORAS FCT
+							String horasFCT = vista.txtHorasFCTUSUCurso.getText();
+						// ES PUBLICO
+							boolean esPublico = false;
+							if (vista.checkBoxEsPublicoUSUCurso.isSelected()) {
+								esPublico = true;
+							} else {
+								esPublico = false;
+							}
+					        
+						// INSERT
+							modelo.crearCurso(sessionFactory, nombreCurso, nombreAbrev, clave, horasFCT, esPublico);
+						
+						// RESET DEL FORMULARIO NUEVO CURSO
+							this.resetFormularioNuevoCurso();
+					}catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+			}
+		
+			//Metodo para validar que todo los campos del alumno están rellenos
+				public boolean anadirCursoValido() {
+					boolean valido = true;
+	
+					try {
+						
+						if(
+							vista.txtNombreUSUCurso.getText().equals("")
+							|| vista.txtNombreAbrevUSUCurso.getText().equals("")
+							|| vista.txtClaveUSUCurso.getText().equals("")
+							|| vista.txtHorasFCTUSUCurso.getText().equals("")
+								) {
+							valido = false;
+							
+							vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
+							vista.lblErroresNuevoCurso.setForeground(Color.RED);
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					return valido;
+				}		
+			//Metodo para restablecer el formulario de nuevoCurso
+				public void resetFormularioNuevoCurso() {
+					try {
+						vista.txtNombreUSUCurso.setText("");
+						vista.txtNombreAbrevUSUCurso.setText("");
+						vista.txtClaveUSUCurso.setText("");
+						vista.txtHorasFCTUSUCurso.setText("");
+						vista.checkBoxEsPublicoUSUCurso.setSelected(false);
+						vista.lblErroresNuevoCurso.setText("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 	
 	/*
 	 * METODOS DE CURSO			
@@ -401,8 +485,7 @@ public class Controlador implements ActionListener{
 							String clave = vista.txtClaveUSUCurso.getText();
 							
 						// HORAS FCT
-							int horasFCT = Integer.parseInt(vista.txtHorasFCTUSUCurso.toString());
-						
+							String horasFCT = vista.txtHorasFCTUSUCurso.getText();
 						// ES PUBLICO
 							boolean esPublico = false;
 							if (vista.checkBoxEsPublicoUSUCurso.isSelected()) {
@@ -413,12 +496,52 @@ public class Controlador implements ActionListener{
 					        
 						// INSERT
 							modelo.crearCurso(sessionFactory, nombreCurso, nombreAbrev, clave, horasFCT, esPublico);
-							
+						
+						// RESET DEL FORMULARIO NUEVO CURSO
+							this.resetFormularioNuevoCurso();
 					}catch (Exception e) {
 						// TODO: handle exception
 						e.printStackTrace();
 					}
 			}
+		
+			//Metodo para validar que todo los campos del alumno están rellenos
+				public boolean anadirCursoValido() {
+					boolean valido = true;
+	
+					try {
+						
+						if(
+							vista.txtNombreUSUCurso.getText().equals("")
+							|| vista.txtNombreAbrevUSUCurso.getText().equals("")
+							|| vista.txtClaveUSUCurso.getText().equals("")
+							|| vista.txtHorasFCTUSUCurso.getText().equals("")
+								) {
+							valido = false;
+							
+							vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
+							vista.lblErroresNuevoCurso.setForeground(Color.RED);
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					return valido;
+				}		
+			//Metodo para restablecer el formulario de nuevoCurso
+				public void resetFormularioNuevoCurso() {
+					try {
+						vista.txtNombreUSUCurso.setText("");
+						vista.txtNombreAbrevUSUCurso.setText("");
+						vista.txtClaveUSUCurso.setText("");
+						vista.txtHorasFCTUSUCurso.setText("");
+						vista.checkBoxEsPublicoUSUCurso.setSelected(false);
+						vista.lblErroresNuevoCurso.setText("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 	/*
 	 * METODOS DE LA EMPRESA	
      */

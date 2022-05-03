@@ -80,12 +80,28 @@ public class Vista extends JFrame {
 		public JTextField txtNombreAbrevUSUCurso;
 		public JTextField txtClaveUSUCurso;
 		public JTextField txtHorasFCTUSUCurso;
-		public RestrictedTextField restrictedtxtHorasFCTUSUCurso;
 		public JCheckBox checkBoxEsPublicoUSUCurso;
 		public JButton btnAnadirCurso;
 		public JButton btnAtrasCurso;
 		public JLabel lblErroresNuevoCurso;
 	
+	/**
+	 * PANEL NUEVA POBLACION
+	 */
+	public JPanel panelNuevaPoblacion;
+
+		public JLabel lblTituloNuevaPoblacion;
+		public JLabel lblCodigoPostalPoblacion;
+		public JLabel lblNombrePoblacion;
+		public JLabel lblProvinciaPoblacion;
+				
+		public JTextField txtCodigoPostalUSUPoblacion;
+		public JTextField txtNombreUSUPoblacion;
+		public JTextField txtProvinciaUSUPoblacion;
+		public JButton btnAnadirPoblacion;
+		public JButton btnAtrasPoblacion;
+		public JLabel lblErroresNuevaPoblacion;	
+		
 	/**
 	 * PANEL NUEVA EMPRESA
 	 */
@@ -165,7 +181,7 @@ public class Vista extends JFrame {
 		/**
 		 * Panel inicio
 		 */
-		panelInicio = new JPanel();
+	/*	panelInicio = new JPanel();
 		panelInicio.setBounds(0, 0, 859, 610);
 		panelInicio.setBackground(Color.WHITE);
 		panelInicio.setForeground(new Color(102, 255, 204));
@@ -177,11 +193,11 @@ public class Vista extends JFrame {
 			btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 60));
 			btnInicio.setBounds(300, 422, 255, 76);
 			panelInicio.add(btnInicio);
-					
+	*/				
 		/**
 		 * Panel nuevo alumno
 		 */
-		panelNuevoAlumno = new JPanel();
+	/*	panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(0, 0, 859, 610);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -301,94 +317,153 @@ public class Vista extends JFrame {
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(247, 523, 352, 56);
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
-	
+	*/
 		/**
-		 * Panel nuevo Curso
+		 * Panel nueva Poblacion
 		 */
-		panelNuevoCurso = new JPanel();
-		panelNuevoCurso.setBounds(0, 0, 859, 610);
-		panelNuevoCurso.setBackground(Color.WHITE);
-		panelNuevoCurso.setForeground(new Color(102, 255, 204));
-		panelNuevoCurso.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelNuevoCurso.setLayout(null);
-		contentPane.add(panelNuevoCurso);
+		panelNuevaPoblacion = new JPanel();
+		panelNuevaPoblacion.setBounds(0, 0, 859, 610);
+		panelNuevaPoblacion.setBackground(Color.WHITE);
+		panelNuevaPoblacion.setForeground(new Color(102, 255, 204));
+		panelNuevaPoblacion.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelNuevaPoblacion.setLayout(null);
+		contentPane.add(panelNuevaPoblacion);
 		
-			lblNombreCurso = new JLabel();
-			lblNombreCurso.setText("NOMBRE");
-			lblNombreCurso.setBounds(235, 123, 110, 19);
-			panelNuevoCurso.add(lblNombreCurso);
+			lblCodigoPostalPoblacion = new JLabel();
+			lblCodigoPostalPoblacion.setText("CODIGO POSTAL");
+			lblCodigoPostalPoblacion.setBounds(234, 157, 110, 19);
+			panelNuevaPoblacion.add(lblCodigoPostalPoblacion);
 			
-			lblNombreAbrevCurso = new JLabel();
-			lblNombreAbrevCurso.setText("NOMBRE ABREVIADO");
-			lblNombreAbrevCurso.setBounds(235, 169, 136, 19);
-			panelNuevoCurso.add(lblNombreAbrevCurso);
+			lblNombrePoblacion = new JLabel();
+			lblNombrePoblacion.setText("NOMBRE POBLACION");
+			lblNombrePoblacion.setBounds(234, 203, 136, 19);
+			panelNuevaPoblacion.add(lblNombrePoblacion);
 			
-			lblClaveCurso = new JLabel();
-			lblClaveCurso.setText("CLAVE");
-			lblClaveCurso.setBounds(235, 214, 96, 19);
-			panelNuevoCurso.add(lblClaveCurso);
+			lblProvinciaPoblacion = new JLabel();
+			lblProvinciaPoblacion.setText("PROVINCIA");
+			lblProvinciaPoblacion.setBounds(234, 248, 96, 19);
+			panelNuevaPoblacion.add(lblProvinciaPoblacion);
 			
-			lblHorasFCTCurso = new JLabel();
-			lblHorasFCTCurso.setText("HORAS FCT");
-			lblHorasFCTCurso.setBounds(235, 263, 96, 19);
-			panelNuevoCurso.add(lblHorasFCTCurso);
+			txtCodigoPostalUSUPoblacion = new JTextField();
+			txtCodigoPostalUSUPoblacion.setColumns(10);
+			txtCodigoPostalUSUPoblacion.setBounds(432, 157, 219, 19);
+			panelNuevaPoblacion.add(txtCodigoPostalUSUPoblacion);
 			
-			lblEsPublicoCurso = new JLabel();
-			lblEsPublicoCurso.setText("ï¿½ES Pï¿½BLICO?");
-			lblEsPublicoCurso.setBounds(235, 307, 96, 19);
-			panelNuevoCurso.add(lblEsPublicoCurso);
+			txtNombreUSUPoblacion = new JTextField();
+			txtNombreUSUPoblacion.setColumns(10);
+			txtNombreUSUPoblacion.setBounds(432, 203, 219, 19);
+			panelNuevaPoblacion.add(txtNombreUSUPoblacion);
 			
-			txtNombreUSUCurso = new JTextField();
-			txtNombreUSUCurso.setColumns(10);
-			txtNombreUSUCurso.setBounds(433, 123, 219, 19);
-			panelNuevoCurso.add(txtNombreUSUCurso);
-			
-			txtNombreAbrevUSUCurso = new JTextField();
-			txtNombreAbrevUSUCurso.setColumns(10);
-			txtNombreAbrevUSUCurso.setBounds(433, 169, 219, 19);
-			panelNuevoCurso.add(txtNombreAbrevUSUCurso);
-			
-			txtClaveUSUCurso = new JTextField();
-			txtClaveUSUCurso.setColumns(10);
-			txtClaveUSUCurso.setBounds(433, 214, 219, 19);
-			panelNuevoCurso.add(txtClaveUSUCurso);
-			
-			txtHorasFCTUSUCurso = new JTextField();
-			txtHorasFCTUSUCurso.setColumns(10);
-			txtHorasFCTUSUCurso.setBounds(433, 263, 219, 19);
-			panelNuevoCurso.add(txtHorasFCTUSUCurso);
-			
-			restrictedtxtHorasFCTUSUCurso = new RestrictedTextField(txtHorasFCTUSUCurso);
-			restrictedtxtHorasFCTUSUCurso.setLimit(9);
-			restrictedtxtHorasFCTUSUCurso.setOnlyNums(true);
-			
-			lblTituloNuevoCurso = new JLabel();
-			lblTituloNuevoCurso.setHorizontalAlignment(SwingConstants.CENTER);
-			lblTituloNuevoCurso.setFont(new Font("Tahoma", Font.BOLD, 24));
-			lblTituloNuevoCurso.setText("NUEVO CURSO");
-			lblTituloNuevoCurso.setBounds(296, 21, 236, 35);
-			panelNuevoCurso.add(lblTituloNuevoCurso);
-			
-			checkBoxEsPublicoUSUCurso = new JCheckBox();
-			checkBoxEsPublicoUSUCurso.setBackground(Color.WHITE);
-			checkBoxEsPublicoUSUCurso.setFont(new Font("Tahoma", Font.PLAIN, 50));
-			checkBoxEsPublicoUSUCurso.setBounds(433, 307, 28, 21);
-			panelNuevoCurso.add(checkBoxEsPublicoUSUCurso);
-			
-			btnAnadirCurso = new JButton("A\u00D1ADIR CURSO");
-			btnAnadirCurso.setBounds(306, 422, 189, 76);
-			panelNuevoCurso.add(btnAnadirCurso);
-			
-			btnAtrasCurso = new JButton("ATRï¿½S");
-			btnAtrasCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnAtrasCurso.setBounds(696, 560, 153, 40);
-			panelNuevoCurso.add(btnAtrasCurso);
-			
-			lblErroresNuevoCurso = new JLabel();
-			lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
-			panelNuevoCurso.add(lblErroresNuevoCurso);
+			txtProvinciaUSUPoblacion = new JTextField();
+			txtProvinciaUSUPoblacion.setColumns(10);
+			txtProvinciaUSUPoblacion.setBounds(432, 248, 219, 19);
+			panelNuevaPoblacion.add(txtProvinciaUSUPoblacion);
 		
+			lblTituloNuevaPoblacion = new JLabel();
+			lblTituloNuevaPoblacion.setHorizontalAlignment(SwingConstants.CENTER);
+			lblTituloNuevaPoblacion.setFont(new Font("Tahoma", Font.BOLD, 24));
+			lblTituloNuevaPoblacion.setText("NUEVA POBLACION");
+			lblTituloNuevaPoblacion.setBounds(296, 21, 268, 35);
+			panelNuevaPoblacion.add(lblTituloNuevaPoblacion);
+			
+			btnAnadirPoblacion = new JButton("A\u00D1ADIR POBLACION");
+			btnAnadirPoblacion.setBounds(306, 422, 189, 76);
+			panelNuevaPoblacion.add(btnAnadirPoblacion);
+			
+			btnAtrasPoblacion = new JButton("ATRAS");
+			btnAtrasPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnAtrasPoblacion.setBounds(696, 560, 153, 40);
+			panelNuevaPoblacion.add(btnAtrasPoblacion);
+			
+			lblErroresNuevaPoblacion = new JLabel();
+			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblErroresNuevaPoblacion.setBounds(247, 523, 352, 56);
+			panelNuevaPoblacion.add(lblErroresNuevaPoblacion);
+	
+			/**
+			 * Panel nuevo Curso
+			 */
+			panelNuevoCurso = new JPanel();
+			panelNuevoCurso.setBounds(0, 0, 859, 610);
+			panelNuevoCurso.setBackground(Color.WHITE);
+			panelNuevoCurso.setForeground(new Color(102, 255, 204));
+			panelNuevoCurso.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelNuevoCurso.setLayout(null);
+			contentPane.add(panelNuevoCurso);
+			
+				lblNombreCurso = new JLabel();
+				lblNombreCurso.setText("NOMBRE");
+				lblNombreCurso.setBounds(235, 123, 110, 19);
+				panelNuevoCurso.add(lblNombreCurso);
+				
+				lblNombreAbrevCurso = new JLabel();
+				lblNombreAbrevCurso.setText("NOMBRE ABREVIADO");
+				lblNombreAbrevCurso.setBounds(235, 169, 136, 19);
+				panelNuevoCurso.add(lblNombreAbrevCurso);
+				
+				lblClaveCurso = new JLabel();
+				lblClaveCurso.setText("CLAVE");
+				lblClaveCurso.setBounds(235, 214, 96, 19);
+				panelNuevoCurso.add(lblClaveCurso);
+				
+				lblHorasFCTCurso = new JLabel();
+				lblHorasFCTCurso.setText("HORAS FCT");
+				lblHorasFCTCurso.setBounds(235, 263, 96, 19);
+				panelNuevoCurso.add(lblHorasFCTCurso);
+				
+				lblEsPublicoCurso = new JLabel();
+				lblEsPublicoCurso.setText("ENSEÑANZA PUBLICA");
+				lblEsPublicoCurso.setBounds(235, 307, 136, 19);
+				panelNuevoCurso.add(lblEsPublicoCurso);
+				
+				txtNombreUSUCurso = new JTextField();
+				txtNombreUSUCurso.setColumns(10);
+				txtNombreUSUCurso.setBounds(433, 123, 219, 19);
+				panelNuevoCurso.add(txtNombreUSUCurso);
+				
+				txtNombreAbrevUSUCurso = new JTextField();
+				txtNombreAbrevUSUCurso.setColumns(10);
+				txtNombreAbrevUSUCurso.setBounds(433, 169, 219, 19);
+				panelNuevoCurso.add(txtNombreAbrevUSUCurso);
+				
+				txtClaveUSUCurso = new JTextField();
+				txtClaveUSUCurso.setColumns(10);
+				txtClaveUSUCurso.setBounds(433, 214, 219, 19);
+				panelNuevoCurso.add(txtClaveUSUCurso);
+				
+				txtHorasFCTUSUCurso = new JTextField();
+				txtHorasFCTUSUCurso.setColumns(10);
+				txtHorasFCTUSUCurso.setBounds(433, 263, 219, 19);
+				panelNuevoCurso.add(txtHorasFCTUSUCurso);
+				
+				lblTituloNuevoCurso = new JLabel();
+				lblTituloNuevoCurso.setHorizontalAlignment(SwingConstants.CENTER);
+				lblTituloNuevoCurso.setFont(new Font("Tahoma", Font.BOLD, 24));
+				lblTituloNuevoCurso.setText("NUEVO CURSO");
+				lblTituloNuevoCurso.setBounds(296, 21, 236, 35);
+				panelNuevoCurso.add(lblTituloNuevoCurso);
+				
+				checkBoxEsPublicoUSUCurso = new JCheckBox();
+				checkBoxEsPublicoUSUCurso.setBackground(Color.WHITE);
+				checkBoxEsPublicoUSUCurso.setFont(new Font("Tahoma", Font.PLAIN, 50));
+				checkBoxEsPublicoUSUCurso.setBounds(433, 307, 28, 21);
+				panelNuevoCurso.add(checkBoxEsPublicoUSUCurso);
+				
+				btnAnadirCurso = new JButton("A\u00D1ADIR CURSO");
+				btnAnadirCurso.setBounds(306, 422, 189, 76);
+				panelNuevoCurso.add(btnAnadirCurso);
+				
+				btnAtrasCurso = new JButton("ATRAS");
+				btnAtrasCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				btnAtrasCurso.setBounds(696, 560, 153, 40);
+				panelNuevoCurso.add(btnAtrasCurso);
+				
+				lblErroresNuevoCurso = new JLabel();
+				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
+				panelNuevoCurso.add(lblErroresNuevoCurso);
+					
+			
 		/**
 		 * Panel nueva empresa
 		*/

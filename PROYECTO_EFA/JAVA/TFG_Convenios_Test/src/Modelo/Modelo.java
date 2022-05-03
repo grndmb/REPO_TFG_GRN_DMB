@@ -38,7 +38,7 @@ public class Modelo {
 	 * @param esPublico
 	 * @throws HibernateException
 	 */
-	public void crearCurso (SessionFactory sessionFactory, String nombreCurso, String nombreAbrev, String clave, int horasFCT, boolean esPublico) throws HibernateException {
+	public void crearCurso (SessionFactory sessionFactory, String nombreCurso, String nombreAbrev, String clave, String horasFCT, boolean esPublico) throws HibernateException {
 		
 		Session session = null;
 		
@@ -50,7 +50,7 @@ public class Modelo {
 			curso.setNombreCurso(nombreCurso);
 			curso.setNombreAbrev(nombreAbrev);
 			curso.setClave(clave);
-			curso.setHorasFct(horasFCT);
+			curso.setHorasFct(Integer.parseInt(horasFCT));
 			curso.setEsPublico(esPublico);
 			
 			session.saveOrUpdate(curso);
