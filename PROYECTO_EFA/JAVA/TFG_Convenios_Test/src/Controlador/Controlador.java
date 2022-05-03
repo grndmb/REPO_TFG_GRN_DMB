@@ -44,6 +44,9 @@ public class Controlador implements ActionListener{
 			this.vista.comboBoxPoblacionUSUAlumno.addActionListener(this);
 			this.vista.btnNuevaPoblacionAlumno.addActionListener(this);
 			this.vista.btnNuevoCursoAlumno.addActionListener(this);
+		//Botones Panel Nueva Poblacion
+			this.vista.btnAnadirPoblacion.addActionListener(this);
+			this.vista.btnAtrasPoblacion.addActionListener(this);
 		//Botones Panel Nuevo Curso
 			this.vista.btnAnadirCurso.addActionListener(this);
 			this.vista.btnAtrasCurso.addActionListener(this);
@@ -51,8 +54,9 @@ public class Controlador implements ActionListener{
 			this.vista.btnAnadirEmpresa.addActionListener(this);
 		
 		//VISTAS
-			vista.panelInicio.setVisible(true);
+			vista.panelPrincipal.setVisible(true);
 			vista.panelNuevoAlumno.setVisible(false);
+			vista.panelNuevaPoblacion.setVisible(false);
 			vista.panelNuevoCurso.setVisible(false);
 			vista.panelNuevaEmpresa.setVisible(false);
 	}
@@ -75,7 +79,6 @@ public class Controlador implements ActionListener{
 	    
 	        //Acciones del botï¿½n de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
-		    	vista.panelInicio.setVisible(false);
 				vista.panelNuevoAlumno.setVisible(true);
 				
 				//Rellenar combobox Curso y Codigo Postal
@@ -97,11 +100,35 @@ public class Controlador implements ActionListener{
 		    		//Llamamos al metodo que realiza el insert del nuevo alumno
 					this.crearNuevoAlumno(sessionFactory, modelo);
 		    	}
-			 
-		    //Acciones del boton que lleva al panel de Nuevo Curso	
+			
+		    //Acciones del boton que lleva al panel de Nueva Poblacion	
+			}if(e.getSource() == vista.btnNuevaPoblacionAlumno) {	
+				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevaPoblacion.setVisible(true);		
+		    	
+			//Acciones del boton de Añadir Poblacion
+			}if(e.getSource() == vista.btnAnadirPoblacion) {
+		    	
+				if(this.anadirPoblacionValido() == true) {
+		    		//Llamamos al metodo que realiza el insert del nueva poblacion
+					this.crearNuevaPoblacion(sessionFactory, modelo);
+		    	}
+					
+			//Acciones del boton de Atras Poblacion
+			}if(e.getSource() == vista.btnAtrasPoblacion) {
+		    	
+				//Volvemos al panel Alumno
+				vista.panelNuevaPoblacion.setVisible(false);
+				vista.panelNuevoAlumno.setVisible(true);
+				
+				//Recargamos el comboBox de cursos
+				vista.comboBoxPoblacionUSUAlumno.removeAllItems();
+				this.rellenarComboBoxCursos(sessionFactory);
+			
+			//Acciones del boton que lleva al panel de Nuevo Curso	
 			}if(e.getSource() == vista.btnNuevoCursoAlumno) {	
 				vista.panelNuevoAlumno.setVisible(false);
-				vista.panelNuevoCurso.setVisible(true);
+				vista.panelNuevoCurso.setVisible(true);	
 				
 			//Acciones del boton de Añadir Curso
 			}if(e.getSource() == vista.btnAnadirCurso) {
@@ -392,13 +419,13 @@ public class Controlador implements ActionListener{
 	 */
 		//METODOS DEL PANEL NUEVA POBLACION
 			
-				//Metodo para hacer el insert del nuevo Curso en la base de datos
+				//Metodo para hacer el insert de la nueva poblacion en la base de datos
 				public void crearNuevaPoblacion(SessionFactory sessionFactory, Modelo modelo) {
 					
 					try {
 						
 						// CODIGO POSTAL
-							String codigoPostal = vista.txtCodigoPostalUSUPoblacion.getText();
+							int codigoPostal = Integer.parseInt(vista.txtCodigoPostalUSUPoblacion.getText());
 						
 						// NOMBRE POBLACION
 							String nombrePoblacion = vista.txtNombreUSUPoblacion.getText();
@@ -406,21 +433,12 @@ public class Controlador implements ActionListener{
 						// PROVINCIA
 							String provincia = vista.txtClaveUSUCurso.getText();
 							
-						// HORAS FCT
-							String horasFCT = vista.txtHorasFCTUSUCurso.getText();
-						// ES PUBLICO
-							boolean esPublico = false;
-							if (vista.checkBoxEsPublicoUSUCurso.isSelected()) {
-								esPublico = true;
-							} else {
-								esPublico = false;
-							}
 					        
 						// INSERT
-							modelo.crearCurso(sessionFactory, nombreCurso, nombreAbrev, clave, horasFCT, esPublico);
+							modelo.crearPoblacion(sessionFactory, codigoPostal, nombrePoblacion, provincia);
 						
-						// RESET DEL FORMULARIO NUEVO CURSO
-							this.resetFormularioNuevoCurso();
+						// RESET DEL FORMULARIO NUEVA POBLACION
+							this.resetFormularioNuevaPoblacion();
 					}catch (Exception e) {
 						// TODO: handle exception
 						e.printStackTrace();
@@ -428,16 +446,15 @@ public class Controlador implements ActionListener{
 			}
 		
 			//Metodo para validar que todo los campos del alumno están rellenos
-				public boolean anadirCursoValido() {
+				public boolean anadirPoblacionValido() {
 					boolean valido = true;
 	
 					try {
 						
 						if(
-							vista.txtNombreUSUCurso.getText().equals("")
-							|| vista.txtNombreAbrevUSUCurso.getText().equals("")
-							|| vista.txtClaveUSUCurso.getText().equals("")
-							|| vista.txtHorasFCTUSUCurso.getText().equals("")
+							vista.txtCodigoPostalUSUPoblacion.getText().equals("")
+							|| vista.txtNombreUSUPoblacion.getText().equals("")
+							|| vista.txtProvinciaUSUPoblacion.getText().equals("")
 								) {
 							valido = false;
 							
@@ -451,15 +468,13 @@ public class Controlador implements ActionListener{
 					
 					return valido;
 				}		
-			//Metodo para restablecer el formulario de nuevoCurso
-				public void resetFormularioNuevoCurso() {
+			//Metodo para restablecer el formulario de nuevaPoblacion
+				public void resetFormularioNuevaPoblacion() {
 					try {
-						vista.txtNombreUSUCurso.setText("");
-						vista.txtNombreAbrevUSUCurso.setText("");
-						vista.txtClaveUSUCurso.setText("");
-						vista.txtHorasFCTUSUCurso.setText("");
-						vista.checkBoxEsPublicoUSUCurso.setSelected(false);
-						vista.lblErroresNuevoCurso.setText("");
+						vista.txtCodigoPostalUSUPoblacion.setText("");
+						vista.txtNombreUSUPoblacion.setText("");
+						vista.txtProvinciaUSUPoblacion.setText("");
+						vista.lblErroresNuevaPoblacion.setText("");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

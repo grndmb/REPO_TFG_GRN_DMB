@@ -32,7 +32,7 @@ public class Vista extends JFrame {
 	/**
 	 * PANEL PRINCIPAL
 	 */
-	public JPanel panelInicio;
+	public JPanel panelPrincipal;
 		public JButton btnInicio;
 	
 	/**
@@ -183,34 +183,34 @@ public class Vista extends JFrame {
 		/**
 		 * Panel inicio
 		 */
-		panelInicio = new JPanel();
-		panelInicio.setBounds(0, 0, 1556, 807);
-		panelInicio.setBackground(new Color(53, 100, 54));
-		panelInicio.setForeground(new Color(255, 255, 255));
-		panelInicio.setVisible(false);
-		panelInicio.setFont(new Font("Freestyle Script", Font.PLAIN, 40));
-		contentPane.add(panelInicio);
-			panelInicio.setLayout(null);
+		panelPrincipal = new JPanel();
+		panelPrincipal.setBounds(0, 0, 1556, 807);
+		panelPrincipal.setBackground(new Color(53, 100, 54));
+		panelPrincipal.setForeground(new Color(255, 255, 255));
+		panelPrincipal.setVisible(false);
+		panelPrincipal.setFont(new Font("Freestyle Script", Font.PLAIN, 40));
+		contentPane.add(panelPrincipal);
+			panelPrincipal.setLayout(null);
 			
 			btnInicio = new JButton("Iniciar Aplicación");
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
 			btnInicio.setBounds(727, 401, 479, 76);
 			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
-			panelInicio.add(btnInicio);
+			panelPrincipal.add(btnInicio);
 			
 			JLabel labelTitulo = new JLabel("                         EFA MORATALAZ");
 			labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 			labelTitulo.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 60));
 			labelTitulo.setForeground(Color.WHITE);
 			labelTitulo.setBounds(0, 0, 1548, 114);
-			panelInicio.add(labelTitulo);
+			panelPrincipal.add(labelTitulo);
 			
 			JPanel panelMenu = new JPanel();
 			panelMenu.setBackground(new Color(51, 204, 102));
 			panelMenu.setBorder(new MatteBorder(5, 3, 5, 3, (Color) new Color(0, 0, 0)));
 			panelMenu.setBounds(10, 132, 324, 648);
-			panelInicio.add(panelMenu);
+			panelPrincipal.add(panelMenu);
 			panelMenu.setLayout(null);
 			
 			JButton btnPanelAlumnos = new JButton("Alumnos");
@@ -237,25 +237,25 @@ public class Vista extends JFrame {
 			btnPanelDocumentos.setBounds(49, 491, 219, 37);
 			panelMenu.add(btnPanelDocumentos);
 		/**
-		 * Panel inicio
+		 * Panel Principal
 		 */
-	/*	panelInicio = new JPanel();
-		panelInicio.setBounds(0, 0, 859, 610);
-		panelInicio.setBackground(Color.WHITE);
-		panelInicio.setForeground(new Color(102, 255, 204));
-		panelInicio.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelInicio.setLayout(null);
-		contentPane.add(panelInicio);
+		panelPrincipal = new JPanel();
+		panelPrincipal.setBounds(0, 0, 859, 610);
+		panelPrincipal.setBackground(Color.WHITE);
+		panelPrincipal.setForeground(new Color(102, 255, 204));
+		panelPrincipal.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelPrincipal.setLayout(null);
+		contentPane.add(panelPrincipal);
 			
 			btnInicio = new JButton("INICIAR");
 			btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 60));
 			btnInicio.setBounds(300, 422, 255, 76);
-			panelInicio.add(btnInicio);
-	*/				
+			panelPrincipal.add(btnInicio);
+					
 		/**
 		 * Panel nuevo alumno
 		 */
-	/*	panelNuevoAlumno = new JPanel();
+		panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(0, 0, 859, 610);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -375,7 +375,7 @@ public class Vista extends JFrame {
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(247, 523, 352, 56);
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
-	*/
+	
 		/**
 		 * Panel nueva Poblacion
 		 */
@@ -704,13 +704,6 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
-	}
-	
-	public static void centreWindow(Window frame) {
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-	    frame.setLocation(x, y - 18);
 	}
 	
 }
