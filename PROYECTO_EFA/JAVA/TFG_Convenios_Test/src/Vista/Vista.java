@@ -258,7 +258,7 @@ public class Vista extends JFrame {
 		/**
 		 * Panel nuevo alumno
 		 */
-	/*	panelNuevoAlumno = new JPanel();
+		panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -379,11 +379,11 @@ public class Vista extends JFrame {
 		    list = new JList(model);
 		    list.setBounds(772, 453, 149, 88);
 			panelNuevoAlumno.add(list);
-	*/	  
+		  
 		/**
 		 * Panel nueva Poblacion
 		 */
-	/*	panelNuevaPoblacion = new JPanel();
+		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
 		panelNuevaPoblacion.setForeground(new Color(102, 255, 204));
@@ -441,11 +441,11 @@ public class Vista extends JFrame {
 			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevaPoblacion.setBounds(247, 523, 352, 56);
 			panelNuevaPoblacion.add(lblErroresNuevaPoblacion);
-*/	
+	
 			/**
 			 * Panel nuevo Curso
 			 */
-/*			panelNuevoCurso = new JPanel();
+			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
 			panelNuevoCurso.setForeground(new Color(102, 255, 204));
@@ -524,12 +524,12 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);
-*/					
+					
 			
 		/**
 		 * Panel nueva empresa
 		*/
-/*		panelNuevaEmpresa = new JPanel();
+		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
 		panelNuevaEmpresa.setForeground(new Color(102, 255, 204));
@@ -709,7 +709,7 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
 			
-*/			
+			
 			
 	}
 }
