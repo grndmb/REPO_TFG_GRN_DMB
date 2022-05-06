@@ -44,6 +44,9 @@ public class Controlador implements ActionListener{
 			this.vista.btnPanelAlumnos.addActionListener(this);
 			this.vista.btnPanelEmpresas.addActionListener(this);
 			
+		//BOTONES PANEL LISTA ALUMNOS
+			this.vista.btnPanelAddAlumno.addActionListener(this);
+			this.vista.comboBoxListaCursoAlumno.addActionListener(this);
 			
 		//Botones Panel Nuevo Alumno
 			this.vista.btnAnadirAlumno.addActionListener(this);
@@ -61,6 +64,7 @@ public class Controlador implements ActionListener{
 		
 		//VISTAS
 			vista.panelPrincipal.setVisible(true);
+			vista.panelListaAlumno.setVisible(false);
 			vista.panelMenu.setVisible(false);
 			vista.panelNuevoAlumno.setVisible(false);
 			vista.panelNuevaPoblacion.setVisible(false);
@@ -89,13 +93,16 @@ public class Controlador implements ActionListener{
 	    
 	        //Acciones del bot�n de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
+		    	
 				//Mostrar panel menu
 		    	vista.panelMenu.setVisible(true);
+		    	
 		    	//Situar el lbl de EFA MORATALAZ
 		    	vista.labelTitulo.setBounds(330, 0, 1218, 114);
+		    	
 				//Rellenar combobox Curso y Codigo Postal
-					this.rellenarComboBoxCursos(sessionFactory);
-					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
+				//	this.rellenarComboBoxCursos(sessionFactory);
+				//	this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
 				
 					vista.btnInicio.setVisible(false);
 			
@@ -103,7 +110,7 @@ public class Controlador implements ActionListener{
 		    }if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
 		    	
 				this.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
-		    	
+				
 		    }
 		    
 		    
@@ -114,18 +121,33 @@ public class Controlador implements ActionListener{
 		    	
 		    	vista.model.removeAllElements();
 		    	
-				vista.panelNuevoAlumno.setVisible(true);
+		    	//PANELES CONSULTAS
+		    	vista.panelListaAlumno.setVisible(true);
+		    	
+		    	//PANELES INSERTS
+				vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(false);
 				vista.panelNuevoCurso.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(false);
 				
+				rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);				
+				
+				
+		    }
+		    
+		    if(e.getSource() == vista.comboBoxListaCursoAlumno) {
+		    	
+
 				try {
 					
-					listaAlumnos = modelo.listarAlumnos(sessionFactory);
+					vista.model.removeAllElements();
+					
+					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
 					
 					for (int i = 0; i < listaAlumnos.size(); i++) {
 						
-						vista.model.addElement(listaAlumnos.get(i).getNombreCompleto());
+						vista.model.add(i, listaAlumnos.get(i).getNif());
+						vista.model.add(i, listaAlumnos.get(i).getNombreCompleto());
 						vista.list.setModel(vista.model);
 					}
 					
@@ -135,6 +157,15 @@ public class Controlador implements ActionListener{
 				}
 				
 		    }
+		    
+		  //BOTON AÑADIR ALUMNOS PANEL
+		    if(e.getSource() == vista.btnPanelAddAlumno) {
+		    	
+		    	vista.panelListaAlumno.setVisible(false);
+		    	vista.panelNuevoAlumno.setVisible(true);
+		    	
+		    }
+		    
 		    
 		  //BOTON ADD ALUMNO
 		    if(e.getSource() == vista.btnAnadirAlumno) {
@@ -192,7 +223,7 @@ public class Controlador implements ActionListener{
 				
 				//Recargamos el comboBox de cursos
 				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
-				this.rellenarComboBoxCursos(sessionFactory);
+				this.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
 			}
 		    
 		    
@@ -207,14 +238,14 @@ public class Controlador implements ActionListener{
 		    if(e.getSource() == vista.btnPanelEmpresas) {
 
 		    	vista.panelNuevaEmpresa.setVisible(true);
+		    	
+		    	
+		    	vista.panelListaAlumno.setVisible(false);
 		    	vista.panelNuevoAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(false);
 				vista.panelNuevoCurso.setVisible(false);
-				
-				vista.panelNuevoAlumno.setVisible(false);
-				vista.panelNuevaEmpresa.setVisible(true);
 				//Rellenar combobox Codigo Postal
-					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUEmpresa);
+					this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
 			
 				//Rellena el label con la fecha actualizacion =  fecha actual
 					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
@@ -222,7 +253,12 @@ public class Controlador implements ActionListener{
 		    	
 				
 					
+		    }if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
+		    	
+				this.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
+				
 		    }
+		    
 		    
 		    if(e.getSource() == vista.btnAnadirEmpresa) {
 		    	
@@ -249,7 +285,7 @@ public class Controlador implements ActionListener{
 	 * METODOS DE RELLENO DE COMBOBOX
 	 */
 		//Metodo para rellenar el combobox que lista los cursos
-			public void rellenarComboBoxCursos (SessionFactory sessionFactory) {
+			public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox<String> comboBox) {
 				Session session = null;
 				
 				try {
@@ -259,9 +295,9 @@ public class Controlador implements ActionListener{
 					Query query = session.createQuery("FROM Curso");
 					ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 					
-						vista.comboBoxNombreCursoUSUAlumno.addItem("");
+						comboBox.addItem("");
 					for(int i=0;i<listaCursos.size();i++) {
-						vista.comboBoxNombreCursoUSUAlumno.addItem(listaCursos.get(i).getNombreCurso().toString());
+						comboBox.addItem(listaCursos.get(i).getNombreCurso().toString());
 					};
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -334,7 +370,7 @@ public class Controlador implements ActionListener{
 					query.setParameter("nombre", comboPoblacionNombre.getSelectedItem().toString());
 					ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
 					
-					for(int i=0;i<listaCodigoPostales.size();i++) {
+					for(int i=0 ; i < listaCodigoPostales.size() ; i++) {
 						comboPoblacionCP.addItem(listaCodigoPostales.get(i).getCodigoPostal());
 					};
 								
