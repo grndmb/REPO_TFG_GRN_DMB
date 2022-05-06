@@ -256,9 +256,9 @@ public class Controlador implements ActionListener{
 					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
 					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);	
 		    }if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
-		    	
+		    
 				this.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
-				
+	
 		    }
 		    
 		    
