@@ -14,6 +14,9 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.Controlador;
 
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
@@ -25,7 +28,15 @@ import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JDesktopPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class Vista extends JFrame {
 
@@ -45,7 +56,23 @@ public class Vista extends JFrame {
 
 		
 		
-	
+	// -----------------------------------------------------------
+		
+	/**
+	 * PANEL ALUMNOS	
+	 */
+		
+	public JPanel panelListaAlumno;
+		public JComboBox comboBoxListaCursoAlumno;
+		public JButton btnPanelAddAlumno;
+		public JButton btnPanelModificarAlumno;
+		public JButton btnEliminarAlumno;
+		
+		public JList list;
+		public DefaultListModel model;
+
+		
+		
 	/**
 	 * PANEL NUEVO ALUMNO
 	 */
@@ -75,10 +102,10 @@ public class Vista extends JFrame {
 		public JButton btnAnadirAlumno;
 		public JLabel lblErroresNuevoAlumno;
 		
-		public JList list;
-		public DefaultListModel model;
 		
 		
+		
+	// ---------------------------------------------------------------------
 	/**
 	 * PANEL NUEVO CURSO
 	 */
@@ -114,7 +141,8 @@ public class Vista extends JFrame {
 		public JTextField txtNombreUSUPoblacion;
 		public JTextField txtProvinciaUSUPoblacion;
 		public JButton btnAnadirPoblacion;
-		public JButton btnAtrasPoblacion;
+		public JButton btnAtrasPoblacionAlumno;
+		public JButton btnAtrasPoblacionEmpresa;
 		public JLabel lblErroresNuevaPoblacion;	
 		
 	/**
@@ -132,12 +160,13 @@ public class Vista extends JFrame {
 		public JLabel lblPaginaWebEmpresa;
 		public JLabel lblDNIGerenteEmpresa;
 		public JLabel lblNombreGerenteEmpresa;
-		public JLabel lblPersonaContactoEmpresa;
-		public JLabel lblCargoContactoEmpresaEmpresa;
+		public JLabel lblDNIPersonaContactoEmpresa;
+		public JLabel lblPersonaContactoEmpresaEmpresa;
 		public JLabel lblFechaActualizacionEmpresa;
 		public JLabel lblOrganismoPublicoEmpresa;
 		public JLabel lblObservacionesEmpresa;
 		public JLabel lblPoblacionEmpresa;
+		public JLabel lblCodigoPostalEmpresa;
 		
 		public JTextField txtCIFEmpresa;
 		public RestrictedTextField restrictedtxtCIFEmpresa;
@@ -151,16 +180,20 @@ public class Vista extends JFrame {
 		public JTextField txtFaxEmpresa;
 		public JTextField txtPaginaWebEmpresa;
 		public JTextField txtDNIGerenteEmpresa;
+		public RestrictedTextField restrictedtxtDNIGerenteEmpresa;
 		public JTextField txtNombreGerenteEmpresa;
 		public JTextField txtPersonaContactoEmpresa;
-		public JTextField txtCargoContactoEmpresaEmpresa;
+		public JTextField txtDNIPersonaContactoEmpresaEmpresa;
+		public RestrictedTextField restrictedtxtDNIPersonaContactoEmpresaEmpresa;
 		public JLabel lblFechaActualizacionUSUEmpresa;
 		public JTextField txtObservacionesEmpresa;
+		public JLabel lblErroresNuevaEmpresa;
 		
 		public JCheckBox checkBoxOrganismoPublicoUSUEmpresa;
 		public JComboBox comboBoxPoblacionUSUEmpresa;
 		public JComboBox comboBoxCodigoPostalUSUEmpresa;
 		public JButton btnAnadirEmpresa;
+		public JButton btnNuevaPoblacionEmpresa;
 		
 		
 	/**
@@ -254,9 +287,73 @@ public class Vista extends JFrame {
 			JLabel lblLogo = new JLabel("");
 			lblLogo.setBounds(10, 10, 324, 104);
 			panelPrincipal.add(lblLogo);
-				
+			
+			
+			// -----------------------------------------------------------------
+			/**
+			 * PANEL ALUMNOS	
+			 */
+			
+			panelListaAlumno = new JPanel();
+			panelListaAlumno.setBackground(Color.WHITE);
+			panelListaAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelListaAlumno.setBounds(368, 132, 1138, 648);
+			panelPrincipal.add(panelListaAlumno);
+			panelListaAlumno.setLayout(null);
+			
+			JLabel lblTituloAlumnos = new JLabel("ALUMNOS");
+			lblTituloAlumnos.setFont(new Font("Agency FB", Font.BOLD, 50));
+			lblTituloAlumnos.setBounds(136, 26, 992, 55);
+			panelListaAlumno.add(lblTituloAlumnos);
+		
+			
+			list = new JList<String>();
+			list.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+             
+            model = new DefaultListModel<>();
+     
+            JScrollPane listPane = new JScrollPane();
+            listPane.setBounds(50, 179, 721, 429);
+            listPane.setViewportView(list);
+            list.setLayoutOrientation(JList.VERTICAL);
+            panelListaAlumno.add(listPane);
+            
+            JLabel lblFiltroAlumno = new JLabel("Curso -->");
+            lblFiltroAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+            lblFiltroAlumno.setBounds(50, 114, 124, 38);
+            panelListaAlumno.add(lblFiltroAlumno);
+            
+            comboBoxListaCursoAlumno = new JComboBox();
+            comboBoxListaCursoAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            comboBoxListaCursoAlumno.setBackground(Color.WHITE);
+            comboBoxListaCursoAlumno.setBounds(184, 114, 584, 38);
+            panelListaAlumno.add(comboBoxListaCursoAlumno);
+            
+            btnPanelAddAlumno = new JButton("AÑADIR NUEVO");
+            btnPanelAddAlumno.setBackground(Color.GREEN);
+            btnPanelAddAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelAddAlumno.setBounds(874, 518, 205, 55);
+            panelListaAlumno.add(btnPanelAddAlumno);
+            
+            btnPanelModificarAlumno = new JButton("MODIFICAR");
+            btnPanelModificarAlumno.setBackground(Color.ORANGE);
+            btnPanelModificarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelModificarAlumno.setBounds(874, 230, 205, 55);
+            panelListaAlumno.add(btnPanelModificarAlumno);
+            
+            btnEliminarAlumno = new JButton("ELIMINAR");
+            btnEliminarAlumno.setBackground(Color.RED);
+            btnEliminarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnEliminarAlumno.setBounds(874, 312, 205, 55);
+            panelListaAlumno.add(btnEliminarAlumno);
+
+             
+		
+			
+			
+			
 		/**
-		 * Panel nuevo alumno
+		 * PANEL NUEVO ALUMNO
 		 */
 		panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(368, 132, 1138, 648);
@@ -373,13 +470,11 @@ public class Vista extends JFrame {
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(247, 523, 352, 56);
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
-			
-			
-			model = new DefaultListModel();
-		    list = new JList(model);
-		    list.setBounds(772, 453, 149, 88);
-			panelNuevoAlumno.add(list);
-		  
+
+        // -----------------------------------------------------------------
+     
+            
+            
 		/**
 		 * Panel nueva Poblacion
 		 */
@@ -432,10 +527,16 @@ public class Vista extends JFrame {
 			btnAnadirPoblacion.setBounds(306, 422, 189, 76);
 			panelNuevaPoblacion.add(btnAnadirPoblacion);
 			
-			btnAtrasPoblacion = new JButton("ATRAS");
-			btnAtrasPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnAtrasPoblacion.setBounds(696, 560, 153, 40);
-			panelNuevaPoblacion.add(btnAtrasPoblacion);
+			btnAtrasPoblacionAlumno = new JButton("ATRAS");
+			btnAtrasPoblacionAlumno.setBackground(Color.PINK);
+			btnAtrasPoblacionAlumno.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnAtrasPoblacionAlumno.setBounds(696, 560, 153, 40);
+			panelNuevaPoblacion.add(btnAtrasPoblacionAlumno);
+			
+			btnAtrasPoblacionEmpresa = new JButton("ATRAS");
+			btnAtrasPoblacionEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnAtrasPoblacionEmpresa.setBounds(696, 560, 153, 40);
+			panelNuevaPoblacion.add(btnAtrasPoblacionEmpresa);
 			
 			lblErroresNuevaPoblacion = new JLabel();
 			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -524,11 +625,11 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);
-					
+				
 			
 		/**
 		 * Panel nueva empresa
-		*/
+		 */
 		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
@@ -540,106 +641,111 @@ public class Vista extends JFrame {
 			lblTituloNuevoEmpresa = new JLabel();
 			lblTituloNuevoEmpresa.setFont(new Font("Tahoma", Font.BOLD, 24));
 			lblTituloNuevoEmpresa.setText("NUEVA EMPRESA");
-			lblTituloNuevoEmpresa.setBounds(300, 21, 217, 35);
+			lblTituloNuevoEmpresa.setBounds(457, 20, 217, 35);
 			panelNuevaEmpresa.add(lblTituloNuevoEmpresa);
 		
 			lblCIFEmpresa = new JLabel();
 			lblCIFEmpresa.setText("CIF");
-			lblCIFEmpresa.setBounds(199, 85, 110, 19);
+			lblCIFEmpresa.setBounds(374, 84, 110, 19);
 			panelNuevaEmpresa.add(lblCIFEmpresa);
 			
 			lblNombreEmpresa = new JLabel();
 			lblNombreEmpresa.setText("NOMBRE");
-			lblNombreEmpresa.setBounds(199, 114, 136, 19);
+			lblNombreEmpresa.setBounds(374, 113, 136, 19);
 			panelNuevaEmpresa.add(lblNombreEmpresa);
 				
 			lblDireccionEmpresa = new JLabel();
 			lblDireccionEmpresa.setText("DIRECCION");
-			lblDireccionEmpresa.setBounds(199, 143, 96, 19);
+			lblDireccionEmpresa.setBounds(374, 142, 96, 19);
 			panelNuevaEmpresa.add(lblDireccionEmpresa);
 			
 			lblTelefono1Empresa = new JLabel();
 			lblTelefono1Empresa.setText("TELEFONO 1");
-			lblTelefono1Empresa.setBounds(199, 226, 96, 19);
+			lblTelefono1Empresa.setBounds(374, 246, 96, 19);
 			panelNuevaEmpresa.add(lblTelefono1Empresa);
 				
 			lblTelefono2Empresa = new JLabel();
 			lblTelefono2Empresa.setText("TELEFONO 2");
-			lblTelefono2Empresa.setBounds(199, 253, 136, 19);
+			lblTelefono2Empresa.setBounds(374, 273, 136, 19);
 			panelNuevaEmpresa.add(lblTelefono2Empresa);
 			
 			lblEmailEmpresa = new JLabel();
 			lblEmailEmpresa.setText("CORREO");
-			lblEmailEmpresa.setBounds(199, 196, 136, 19);
+			lblEmailEmpresa.setBounds(374, 220, 136, 19);
 			panelNuevaEmpresa.add(lblEmailEmpresa);
 			
 			lblFaxEmpresa = new JLabel();
 			lblFaxEmpresa.setText("FAX");
-			lblFaxEmpresa.setBounds(199, 280, 136, 19);
+			lblFaxEmpresa.setBounds(374, 300, 136, 19);
 			panelNuevaEmpresa.add(lblFaxEmpresa);
 			
 			lblPaginaWebEmpresa = new JLabel();
 			lblPaginaWebEmpresa.setText("PAGINA WEB");
-			lblPaginaWebEmpresa.setBounds(199, 306, 136, 19);
+			lblPaginaWebEmpresa.setBounds(374, 326, 136, 19);
 			panelNuevaEmpresa.add(lblPaginaWebEmpresa);
 			
 			lblDNIGerenteEmpresa = new JLabel();
 			lblDNIGerenteEmpresa.setText("DNI GERENTE");
-			lblDNIGerenteEmpresa.setBounds(199, 362, 136, 19);
+			lblDNIGerenteEmpresa.setBounds(374, 384, 136, 19);
 			panelNuevaEmpresa.add(lblDNIGerenteEmpresa);
 			
 			lblNombreGerenteEmpresa = new JLabel();
 			lblNombreGerenteEmpresa.setText("NOMBRE GERENTE");
-			lblNombreGerenteEmpresa.setBounds(199, 393, 136, 19);
+			lblNombreGerenteEmpresa.setBounds(374, 415, 136, 19);
 			panelNuevaEmpresa.add(lblNombreGerenteEmpresa);
 			
-			lblPersonaContactoEmpresa = new JLabel();
-			lblPersonaContactoEmpresa.setText("PERSONA DE CONTACTO");
-			lblPersonaContactoEmpresa.setBounds(199, 422, 204, 19);
-			panelNuevaEmpresa.add(lblPersonaContactoEmpresa);
+			lblDNIPersonaContactoEmpresa = new JLabel();
+			lblDNIPersonaContactoEmpresa.setText("DNI PERSONA DE CONTACTO");
+			lblDNIPersonaContactoEmpresa.setBounds(374, 444, 204, 19);
+			panelNuevaEmpresa.add(lblDNIPersonaContactoEmpresa);
 			
-			lblCargoContactoEmpresaEmpresa = new JLabel();
-			lblCargoContactoEmpresaEmpresa.setText("CARGO PERSONA DE CONTACTO");
-			lblCargoContactoEmpresaEmpresa.setBounds(199, 451, 222, 19);
-			panelNuevaEmpresa.add(lblCargoContactoEmpresaEmpresa);
+			lblPersonaContactoEmpresaEmpresa = new JLabel();
+			lblPersonaContactoEmpresaEmpresa.setText("PERSONA DE CONTACTO");
+			lblPersonaContactoEmpresaEmpresa.setBounds(374, 473, 222, 19);
+			panelNuevaEmpresa.add(lblPersonaContactoEmpresaEmpresa);
 			
 			lblFechaActualizacionEmpresa = new JLabel();
 			lblFechaActualizacionEmpresa.setText("FECHA ACTUALIZACION DATOS");
-			lblFechaActualizacionEmpresa.setBounds(199, 509, 192, 19);
+			lblFechaActualizacionEmpresa.setBounds(374, 531, 192, 19);
 			panelNuevaEmpresa.add(lblFechaActualizacionEmpresa);
 			
 			lblOrganismoPublicoEmpresa = new JLabel();
 			lblOrganismoPublicoEmpresa.setText("ORGANISMO PUBLICO");
-			lblOrganismoPublicoEmpresa.setBounds(199, 333, 136, 19);
+			lblOrganismoPublicoEmpresa.setBounds(374, 355, 136, 19);
 			panelNuevaEmpresa.add(lblOrganismoPublicoEmpresa);
 			
 			lblObservacionesEmpresa = new JLabel();
 			lblObservacionesEmpresa.setText("OBSERVACIONES");
-			lblObservacionesEmpresa.setBounds(199, 480, 136, 19);
+			lblObservacionesEmpresa.setBounds(374, 502, 136, 19);
 			panelNuevaEmpresa.add(lblObservacionesEmpresa);
 			
 			lblPoblacionEmpresa = new JLabel();
 			lblPoblacionEmpresa.setText("POBLACION");
-			lblPoblacionEmpresa.setBounds(199, 167, 136, 19);
+			lblPoblacionEmpresa.setBounds(374, 166, 136, 19);
 			panelNuevaEmpresa.add(lblPoblacionEmpresa);
 			
+			lblCodigoPostalEmpresa = new JLabel();
+			lblCodigoPostalEmpresa.setText("CODIGO POSTAL");
+			lblCodigoPostalEmpresa.setBounds(374, 194, 149, 19);
+			panelNuevaEmpresa.add(lblCodigoPostalEmpresa);
+			
 			txtCIFEmpresa = new JTextField();
-			txtCIFEmpresa.setBounds(458, 85, 190, 19);
+			txtCIFEmpresa.setBounds(633, 84, 190, 19);
 			panelNuevaEmpresa.add(txtCIFEmpresa);
 			
 			restrictedtxtCIFEmpresa = new RestrictedTextField(txtCIFEmpresa);
 			restrictedtxtCIFEmpresa.setLimit(10);
 			
 			txtNombreEmpresa = new JTextField();
-			txtNombreEmpresa.setBounds(458, 114, 190, 19);
+			txtNombreEmpresa.setBounds(633, 113, 190, 19);
 			panelNuevaEmpresa.add(txtNombreEmpresa);
 				
 			txtDireccionEmpresa = new JTextField();
-			txtDireccionEmpresa.setBounds(458, 143, 190, 19);
+			txtDireccionEmpresa.setBounds(633, 142, 190, 19);
 			panelNuevaEmpresa.add(txtDireccionEmpresa);
 			
 			txtTelefono1Empresa = new JTextField();
-			txtTelefono1Empresa.setBounds(458, 226, 190, 19);
+			txtTelefono1Empresa.setBounds(633, 246, 190, 19);
 			panelNuevaEmpresa.add(txtTelefono1Empresa);
 			
 			restrictedtxtTelefono1Empresa = new RestrictedTextField(txtTelefono1Empresa);
@@ -647,7 +753,7 @@ public class Vista extends JFrame {
 			restrictedtxtTelefono1Empresa.setOnlyNums(true);
 			
 			txtTelefono2Empresa = new JTextField();
-			txtTelefono2Empresa.setBounds(458, 253, 190, 19);
+			txtTelefono2Empresa.setBounds(633, 273, 190, 19);
 			panelNuevaEmpresa.add(txtTelefono2Empresa);
 			
 			restrictedtxtTelefono2Empresa = new RestrictedTextField(txtTelefono2Empresa);
@@ -655,61 +761,75 @@ public class Vista extends JFrame {
 			restrictedtxtTelefono2Empresa.setOnlyNums(true);
 			
 			txtEmailEmpresa = new JTextField();
-			txtEmailEmpresa.setBounds(458, 196, 190, 19);
+			txtEmailEmpresa.setBounds(633, 220, 190, 19);
 			panelNuevaEmpresa.add(txtEmailEmpresa);
 			
 			txtFaxEmpresa = new JTextField();
-			txtFaxEmpresa.setBounds(458, 280, 190, 19);
+			txtFaxEmpresa.setBounds(633, 300, 190, 19);
 			panelNuevaEmpresa.add(txtFaxEmpresa);
 			
 			txtPaginaWebEmpresa = new JTextField();
-			txtPaginaWebEmpresa.setBounds(458, 306, 190, 19);
+			txtPaginaWebEmpresa.setBounds(633, 326, 190, 19);
 			panelNuevaEmpresa.add(txtPaginaWebEmpresa);
 			
 			txtDNIGerenteEmpresa = new JTextField();
-			txtDNIGerenteEmpresa.setBounds(458, 362, 190, 19);
+			txtDNIGerenteEmpresa.setBounds(633, 384, 190, 19);
 			panelNuevaEmpresa.add(txtDNIGerenteEmpresa);
 			
+			restrictedtxtDNIGerenteEmpresa = new RestrictedTextField(txtDNIGerenteEmpresa);
+			restrictedtxtDNIGerenteEmpresa.setLimit(9);
+			
 			txtNombreGerenteEmpresa = new JTextField();
-			txtNombreGerenteEmpresa.setBounds(458, 393, 190, 19);
+			txtNombreGerenteEmpresa.setBounds(633, 415, 190, 19);
 			panelNuevaEmpresa.add(txtNombreGerenteEmpresa);
 			
 			txtPersonaContactoEmpresa = new JTextField();
-			txtPersonaContactoEmpresa.setBounds(458, 422, 190, 19);
+			txtPersonaContactoEmpresa.setBounds(633, 473, 190, 19);
 			panelNuevaEmpresa.add(txtPersonaContactoEmpresa);
 			
-			txtCargoContactoEmpresaEmpresa = new JTextField();
-			txtCargoContactoEmpresaEmpresa.setBounds(458, 451, 190, 19);
-			panelNuevaEmpresa.add(txtCargoContactoEmpresaEmpresa);
+			txtDNIPersonaContactoEmpresaEmpresa = new JTextField();
+			txtDNIPersonaContactoEmpresaEmpresa.setBounds(633, 444, 190, 19);
+			panelNuevaEmpresa.add(txtDNIPersonaContactoEmpresaEmpresa);
+			
+			restrictedtxtDNIPersonaContactoEmpresaEmpresa = new RestrictedTextField(txtDNIPersonaContactoEmpresaEmpresa);
+			restrictedtxtDNIPersonaContactoEmpresaEmpresa.setLimit(9);
 			
 			lblFechaActualizacionUSUEmpresa = new JLabel();
-			lblFechaActualizacionUSUEmpresa.setBounds(458, 509, 190, 19);
+			lblFechaActualizacionUSUEmpresa.setBounds(633, 531, 190, 19);
 			panelNuevaEmpresa.add(lblFechaActualizacionUSUEmpresa);
 			
 			checkBoxOrganismoPublicoUSUEmpresa = new JCheckBox();
 			checkBoxOrganismoPublicoUSUEmpresa.setBackground(Color.WHITE);
 			checkBoxOrganismoPublicoUSUEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 50));
-			checkBoxOrganismoPublicoUSUEmpresa.setBounds(458, 334, 28, 21);
+			checkBoxOrganismoPublicoUSUEmpresa.setBounds(633, 353, 28, 21);
 			panelNuevaEmpresa.add(checkBoxOrganismoPublicoUSUEmpresa);
 			
 			txtObservacionesEmpresa = new JTextField();
-			txtObservacionesEmpresa.setBounds(458, 480, 190, 19);
+			txtObservacionesEmpresa.setBounds(633, 502, 190, 19);
 			panelNuevaEmpresa.add(txtObservacionesEmpresa);
 		
 			comboBoxPoblacionUSUEmpresa = new JComboBox();
-			comboBoxPoblacionUSUEmpresa.setBounds(458, 169, 190, 19);
+			comboBoxPoblacionUSUEmpresa.setBounds(633, 168, 190, 19);
 			panelNuevaEmpresa.add(comboBoxPoblacionUSUEmpresa);
 			
 			comboBoxCodigoPostalUSUEmpresa = new JComboBox();
-			comboBoxCodigoPostalUSUEmpresa.setBounds(650, 169, 110, 19);
+			comboBoxCodigoPostalUSUEmpresa.setBounds(633, 194, 190, 19);
 			panelNuevaEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
 			
 			btnAnadirEmpresa = new JButton("A\u00D1ADIR EMPRESA");
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
+			btnAnadirEmpresa.setBounds(457, 576, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
 			
+			btnNuevaPoblacionEmpresa = new JButton("NUEVA POBLACION");
+			btnNuevaPoblacionEmpresa.setFont(new Font("Tahoma", Font.BOLD, 10));
+			btnNuevaPoblacionEmpresa.setBounds(849, 168, 149, 19);
+			panelNuevaEmpresa.add(btnNuevaPoblacionEmpresa);
 			
+			lblErroresNuevaEmpresa = new JLabel();
+			lblErroresNuevaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblErroresNuevaEmpresa.setBounds(745, 570, 352, 56);
+			panelNuevaEmpresa.add(lblErroresNuevaEmpresa);
 			
 	}
 }
