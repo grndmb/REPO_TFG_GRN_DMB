@@ -131,7 +131,7 @@ public class Modelo {
 	}
 		
 
-	 public ArrayList<Alumno> listarAlumnos (SessionFactory sessionFactory) throws InterruptedException {
+	 public ArrayList<Alumno> listarAlumnos (SessionFactory sessionFactory, String nombreCurso) throws InterruptedException {
 	        
 		 Session session = null;
 		 
@@ -141,9 +141,17 @@ public class Modelo {
 				session.beginTransaction();
 				
 		 
-				// leer todas las asignaturas
-				Query query = sessionFactory.getCurrentSession().createQuery("FROM Alumno");
-				listaAlumnos = (ArrayList<Alumno>) query.list();
+				Query cursoQuery = sessionFactory.getCurrentSession().createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
+				cursoQuery.setParameter("nombreCurso", nombreCurso);
+				Curso curso = (Curso) cursoQuery.getSingleResult();
+				
+				System.out.println(curso.getNombreCurso());
+				
+				Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso =:curso");
+				alumnoQuery.setParameter("curso", curso);
+				
+				listaAlumnos = (ArrayList<Alumno>) alumnoQuery.list();
+				
 		
 				for ( int i = 0; i < listaAlumnos.size(); i++ ){
 					
@@ -385,8 +393,8 @@ public class Modelo {
          //helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE");
 	 
 	        
-			ArrayList <Alumno> listaAlumnos = null;
-			helper.listarAlumnos(sessionFactory);
+			//ArrayList <Alumno> listaAlumnos = null;
+			//helper.listarAlumnos(sessionFactory);
 	 
 	 
 	 
