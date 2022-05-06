@@ -77,6 +77,8 @@ public class Controlador implements ActionListener{
 
 		Modelo modelo = new Modelo();
 		
+		ArrayList <Alumno> listaAlumnos = null;
+		
 		SessionFactory sessionFactory = null;
 
 		Configuration configuration = new Configuration();
@@ -120,7 +122,7 @@ public class Controlador implements ActionListener{
 					vista.list.setModel(vista.model);
 
 					
-					ArrayList <Alumno> listaAlumnos = modelo.listarAlumnos(sessionFactory);
+					listaAlumnos = modelo.listarAlumnos(sessionFactory);
 					
 					for (int i = 0; i < listaAlumnos.size(); i++) {
 						
@@ -238,15 +240,10 @@ public class Controlador implements ActionListener{
 		     * ACCIONES DEL PANEL PRACTICAS
 		     */
 		    if(e.getSource() == vista.btnPanelPracticas) {
-		    
-		    	
 		    	
 		    	
 		    }
-		    
-		    
-		    
-		   
+			   
 	}
 	
 	/*
