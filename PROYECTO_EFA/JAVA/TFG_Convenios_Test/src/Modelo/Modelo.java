@@ -393,7 +393,7 @@ public class Modelo {
          //helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE");
 	 
 	        
-			//ArrayList <Alumno> listaAlumnos = null;
+			ArrayList <Alumno> listaAlumnos = null;
 			//helper.listarAlumnos(sessionFactory);
 	 
 	 
