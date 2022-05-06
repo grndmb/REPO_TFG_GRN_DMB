@@ -134,8 +134,8 @@ public class Modelo {
 	 public ArrayList<Alumno> listarAlumnos (SessionFactory sessionFactory) throws InterruptedException {
 	        
 		 Session session = null;
-		 ArrayList<Alumno> listaAlumnos = null;	
 		 
+		 ArrayList<Alumno> listaAlumnos = new ArrayList<Alumno>();
 			try {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
@@ -162,8 +162,7 @@ public class Modelo {
 				}
 			}
 			
-			
-			return listaAlumnos;   
+			return listaAlumnos;	
 			
 	 }
 	
@@ -385,7 +384,9 @@ public class Modelo {
         // helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT");
          //helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE");
 	 
-	        helper.listarAlumnos(sessionFactory);
+	        
+			ArrayList <Alumno> listaAlumnos = null;
+			helper.listarAlumnos(sessionFactory);
 	 
 	 
 	 

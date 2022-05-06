@@ -14,6 +14,9 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.Controlador;
 
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
@@ -25,7 +28,15 @@ import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JDesktopPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class Vista extends JFrame {
 
@@ -45,7 +56,23 @@ public class Vista extends JFrame {
 
 		
 		
-	
+	// -----------------------------------------------------------
+		
+	/**
+	 * PANEL ALUMNOS	
+	 */
+		
+	public JPanel panelListaAlumno;
+		public JComboBox comboBoxListaCursoAlumno;
+		public JButton btnAddAlumno;
+		public JButton btnModificarAlumno;
+		public JButton btnEliminarAlumno;
+		
+		public JList list;
+		public DefaultListModel model;
+
+		
+		
 	/**
 	 * PANEL NUEVO ALUMNO
 	 */
@@ -75,10 +102,10 @@ public class Vista extends JFrame {
 		public JButton btnAnadirAlumno;
 		public JLabel lblErroresNuevoAlumno;
 		
-		public JList list;
-		public DefaultListModel model;
 		
 		
+		
+	// ---------------------------------------------------------------------
 	/**
 	 * PANEL NUEVO CURSO
 	 */
@@ -213,12 +240,12 @@ public class Vista extends JFrame {
 			labelTitulo.setBounds(0, 0, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
-			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
+			/*btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
 			btnInicio.setBounds(530, 450, 479, 76);
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
 			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
-			panelPrincipal.add(btnInicio);
+			panelPrincipal.add(btnInicio);*/
 			
 			panelMenu = new JPanel();
 			panelMenu.setBackground(new Color(51, 204, 102));
@@ -254,10 +281,72 @@ public class Vista extends JFrame {
 			JLabel lblLogo = new JLabel("");
 			lblLogo.setBounds(10, 10, 324, 104);
 			panelPrincipal.add(lblLogo);
-				
+			
+			
+			// -----------------------------------------------------------------
+			/**
+			 * PANEL ALUMNOS	
+			 */
+			
+			panelListaAlumno = new JPanel();
+			panelListaAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelListaAlumno.setBounds(368, 132, 1138, 648);
+			panelPrincipal.add(panelListaAlumno);
+			panelListaAlumno.setLayout(null);
+			
+			JLabel lblTituloAlumnos = new JLabel("ALUMNOS");
+			lblTituloAlumnos.setFont(new Font("Agency FB", Font.BOLD, 50));
+			lblTituloAlumnos.setBounds(136, 26, 992, 55);
+			panelListaAlumno.add(lblTituloAlumnos);
+		
+			
+			list = new JList<String>();
+			list.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+             
+            model = new DefaultListModel<>();
+     
+            JScrollPane listScroller = new JScrollPane();
+            listScroller.setBounds(50, 179, 721, 429);
+            listScroller.setViewportView(list);
+            list.setLayoutOrientation(JList.VERTICAL);
+            panelListaAlumno.add(listScroller);
+            
+            JLabel lblFiltroAlumno = new JLabel("Curso -->");
+            lblFiltroAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+            lblFiltroAlumno.setBounds(50, 114, 124, 38);
+            panelListaAlumno.add(lblFiltroAlumno);
+            
+            comboBoxListaCursoAlumno = new JComboBox();
+            comboBoxListaCursoAlumno.setBackground(Color.WHITE);
+            comboBoxListaCursoAlumno.setBounds(184, 114, 584, 38);
+            panelListaAlumno.add(comboBoxListaCursoAlumno);
+            
+            btnAddAlumno = new JButton("AÑADIR NUEVO");
+            btnAddAlumno.setBackground(Color.GREEN);
+            btnAddAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnAddAlumno.setBounds(874, 518, 205, 55);
+            panelListaAlumno.add(btnAddAlumno);
+            
+            btnModificarAlumno = new JButton("MODIFICAR");
+            btnModificarAlumno.setBackground(Color.ORANGE);
+            btnModificarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnModificarAlumno.setBounds(874, 230, 205, 55);
+            panelListaAlumno.add(btnModificarAlumno);
+            
+            btnEliminarAlumno = new JButton("ELIMINAR");
+            btnEliminarAlumno.setBackground(Color.RED);
+            btnEliminarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnEliminarAlumno.setBounds(874, 312, 205, 55);
+            panelListaAlumno.add(btnEliminarAlumno);
+
+             
+		
+			
+			
+			
 		/**
-		 * Panel nuevo alumno
-		 */
+		 * PANEL NUEVO ALUMNO
+		 
 		panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoAlumno.setBackground(Color.WHITE);
@@ -373,16 +462,14 @@ public class Vista extends JFrame {
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(247, 523, 352, 56);
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
-			
-			
-			model = new DefaultListModel();
-		    list = new JList(model);
-		    list.setBounds(772, 453, 149, 88);
-			panelNuevoAlumno.add(list);
-		  
+
+        // -----------------------------------------------------------------
+     
+            
+            
 		/**
 		 * Panel nueva Poblacion
-		 */
+		 
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
@@ -444,7 +531,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			 */
+			 
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -528,7 +615,7 @@ public class Vista extends JFrame {
 			
 		/**
 		 * Panel nueva empresa
-		*/
+		
 		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
@@ -709,7 +796,7 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
 			
-			
+			*/
 			
 	}
 }

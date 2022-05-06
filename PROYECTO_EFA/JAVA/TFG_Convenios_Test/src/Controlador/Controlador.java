@@ -77,7 +77,7 @@ public class Controlador implements ActionListener{
 
 		Modelo modelo = new Modelo();
 		
-		ArrayList <Alumno> listaAlumnos = null;
+		ArrayList <Alumno> listaAlumnos = new ArrayList<Alumno>();
 		
 		SessionFactory sessionFactory = null;
 
@@ -112,15 +112,14 @@ public class Controlador implements ActionListener{
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
 		    	
+		    	vista.model.removeAllElements();
+		    	
 				vista.panelNuevoAlumno.setVisible(true);
 				vista.panelNuevaPoblacion.setVisible(false);
 				vista.panelNuevoCurso.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(false);
 				
 				try {
-					
-					vista.list.setModel(vista.model);
-
 					
 					listaAlumnos = modelo.listarAlumnos(sessionFactory);
 					
