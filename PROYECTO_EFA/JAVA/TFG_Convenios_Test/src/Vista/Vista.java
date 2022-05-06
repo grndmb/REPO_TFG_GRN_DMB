@@ -206,19 +206,19 @@ public class Vista extends JFrame {
 		contentPane.add(panelPrincipal);
 			panelPrincipal.setLayout(null);
 			
-			btnInicio = new JButton("Iniciar Aplicación");
-			btnInicio.setBackground(new Color(255, 255, 255));
-			btnInicio.setForeground(new Color(0, 128, 0));
-			btnInicio.setBounds(727, 401, 479, 76);
-			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
-			panelPrincipal.add(btnInicio);
-			
-			labelTitulo = new JLabel("                         EFA MORATALAZ");
+			labelTitulo = new JLabel("EFA MORATALAZ");
 			labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 			labelTitulo.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 60));
 			labelTitulo.setForeground(Color.WHITE);
-			labelTitulo.setBounds(0, 0, 1548, 114);
+			labelTitulo.setBounds(0, 0, 1538, 114);
 			panelPrincipal.add(labelTitulo);
+			
+			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
+			btnInicio.setBounds(530, 450, 479, 76);
+			btnInicio.setBackground(new Color(255, 255, 255));
+			btnInicio.setForeground(new Color(0, 128, 0));
+			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
+			panelPrincipal.add(btnInicio);
 			
 			panelMenu = new JPanel();
 			panelMenu.setBackground(new Color(51, 204, 102));
@@ -250,11 +250,15 @@ public class Vista extends JFrame {
 			btnPanelDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelDocumentos.setBounds(49, 491, 219, 37);
 			panelMenu.add(btnPanelDocumentos);
+			
+			JLabel lblLogo = new JLabel("");
+			lblLogo.setBounds(10, 10, 324, 104);
+			panelPrincipal.add(lblLogo);
 				
 		/**
 		 * Panel nuevo alumno
 		 */
-		panelNuevoAlumno = new JPanel();
+	/*	panelNuevoAlumno = new JPanel();
 		panelNuevoAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoAlumno.setBackground(Color.WHITE);
 		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
@@ -375,14 +379,11 @@ public class Vista extends JFrame {
 		    list = new JList(model);
 		    list.setBounds(772, 453, 149, 88);
 			panelNuevoAlumno.add(list);
-			
-			
-		    
-		  
+	*/	  
 		/**
 		 * Panel nueva Poblacion
 		 */
-		panelNuevaPoblacion = new JPanel();
+	/*	panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
 		panelNuevaPoblacion.setForeground(new Color(102, 255, 204));
@@ -440,11 +441,11 @@ public class Vista extends JFrame {
 			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevaPoblacion.setBounds(247, 523, 352, 56);
 			panelNuevaPoblacion.add(lblErroresNuevaPoblacion);
-	
+*/	
 			/**
 			 * Panel nuevo Curso
 			 */
-			panelNuevoCurso = new JPanel();
+/*			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
 			panelNuevoCurso.setForeground(new Color(102, 255, 204));
@@ -523,12 +524,12 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);
-					
+*/					
 			
 		/**
 		 * Panel nueva empresa
 		*/
-		panelNuevaEmpresa = new JPanel();
+/*		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
 		panelNuevaEmpresa.setForeground(new Color(102, 255, 204));
@@ -708,7 +709,7 @@ public class Vista extends JFrame {
 			btnAnadirEmpresa.setBounds(300, 550, 217, 50);
 			panelNuevaEmpresa.add(btnAnadirEmpresa);	
 			
-			
+*/			
 			
 	}
 }

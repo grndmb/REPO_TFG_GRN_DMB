@@ -61,6 +61,7 @@ public class Controlador implements ActionListener{
 		
 		//VISTAS
 			vista.panelPrincipal.setVisible(true);
+			vista.panelMenu.setVisible(false);
 			vista.panelNuevoAlumno.setVisible(false);
 			vista.panelNuevaPoblacion.setVisible(false);
 			vista.panelNuevoCurso.setVisible(false);
@@ -86,7 +87,10 @@ public class Controlador implements ActionListener{
 	    
 	        //Acciones del bot�n de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
-				
+				//Mostrar panel menu
+		    	vista.panelMenu.setVisible(true);
+		    	//Situar el lbl de EFA MORATALAZ
+		    	vista.labelTitulo.setBounds(330, 0, 1218, 114);
 				//Rellenar combobox Curso y Codigo Postal
 					this.rellenarComboBoxCursos(sessionFactory);
 					this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
