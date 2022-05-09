@@ -111,6 +111,6 @@ public class Alumno implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "- DNI -> " + nif + "     NOMBRE -> "+ nombreCompleto  ;
+		return "         " + nif + "              |               "+ nombreCompleto  ;
 	}
 }

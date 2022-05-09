@@ -313,7 +313,7 @@ public class Vista extends JFrame {
             model = new DefaultListModel<>();
      
             JScrollPane listPane = new JScrollPane();
-            listPane.setBounds(50, 179, 721, 429);
+            listPane.setBounds(50, 219, 721, 389);
             listPane.setViewportView(list);
             list.setLayoutOrientation(JList.VERTICAL);
             panelListaAlumno.add(listPane);
@@ -346,6 +346,18 @@ public class Vista extends JFrame {
             btnEliminarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
             btnEliminarAlumno.setBounds(874, 312, 205, 55);
             panelListaAlumno.add(btnEliminarAlumno);
+            
+            JLabel lblTituloDNIListaAlumno = new JLabel("DNI");
+            lblTituloDNIListaAlumno.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            lblTituloDNIListaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
+            lblTituloDNIListaAlumno.setBounds(50, 173, 228, 36);
+            panelListaAlumno.add(lblTituloDNIListaAlumno);
+            
+            JLabel lblNombrelListaAlumno = new JLabel("NOMBRE COMPLETO");
+            lblNombrelListaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
+            lblNombrelListaAlumno.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            lblNombrelListaAlumno.setBounds(301, 173, 470, 36);
+            panelListaAlumno.add(lblNombrelListaAlumno);
 
              
 		
@@ -365,32 +377,32 @@ public class Vista extends JFrame {
 		
 			lblNIFAlumno = new JLabel();
 			lblNIFAlumno.setText("NIF");
-			lblNIFAlumno.setBounds(234, 88, 110, 19);
+			lblNIFAlumno.setBounds(319, 91, 110, 19);
 			panelNuevoAlumno.add(lblNIFAlumno);
 			
 			lblNombreCompletoAlumno = new JLabel();
 			lblNombreCompletoAlumno.setText("NOMBRE COMPLETO");
-			lblNombreCompletoAlumno.setBounds(234, 124, 136, 19);
+			lblNombreCompletoAlumno.setBounds(319, 127, 136, 19);
 			panelNuevoAlumno.add(lblNombreCompletoAlumno);
 			
 			lblTelefonoAlumno = new JLabel();
 			lblTelefonoAlumno.setText("TELEFONO");
-			lblTelefonoAlumno.setBounds(234, 245, 96, 19);
+			lblTelefonoAlumno.setBounds(319, 248, 96, 19);
 			panelNuevoAlumno.add(lblTelefonoAlumno);
 			
 			lblCorreoAlumno = new JLabel();
 			lblCorreoAlumno.setText("CORREO");
-			lblCorreoAlumno.setBounds(234, 202, 96, 19);
+			lblCorreoAlumno.setBounds(319, 205, 96, 19);
 			panelNuevoAlumno.add(lblCorreoAlumno);
 			
 			lblFechaNacimientoAlumno = new JLabel();
 			lblFechaNacimientoAlumno.setText("FECHA NACIMIENTO");
-			lblFechaNacimientoAlumno.setBounds(234, 162, 136, 19);
+			lblFechaNacimientoAlumno.setBounds(319, 165, 136, 19);
 			panelNuevoAlumno.add(lblFechaNacimientoAlumno);
 			
 			txtNIFUSUAlumno = new JTextField();
 			txtNIFUSUAlumno.setColumns(10);
-			txtNIFUSUAlumno.setBounds(432, 88, 219, 19);
+			txtNIFUSUAlumno.setBounds(517, 91, 219, 19);
 			panelNuevoAlumno.add(txtNIFUSUAlumno);
 			
 			restrictedtxtNIFAlumno = new RestrictedTextField(txtNIFUSUAlumno);
@@ -398,12 +410,12 @@ public class Vista extends JFrame {
 			
 			txtNombreCompletoUSUAlumno = new JTextField();
 			txtNombreCompletoUSUAlumno.setColumns(10);
-			txtNombreCompletoUSUAlumno.setBounds(432, 124, 219, 19);
+			txtNombreCompletoUSUAlumno.setBounds(517, 127, 219, 19);
 			panelNuevoAlumno.add(txtNombreCompletoUSUAlumno);
 			
 			txtTelefonoUSUAlumno = new JTextField();
 			txtTelefonoUSUAlumno.setColumns(10);
-			txtTelefonoUSUAlumno.setBounds(432, 245, 219, 19);
+			txtTelefonoUSUAlumno.setBounds(517, 248, 219, 19);
 			panelNuevoAlumno.add(txtTelefonoUSUAlumno);
 			
 			restrictedtxtTelefonoUSUAlumno = new RestrictedTextField(txtTelefonoUSUAlumno);
@@ -412,63 +424,63 @@ public class Vista extends JFrame {
 			
 			txtCorreoUSUAlumno = new JTextField();
 			txtCorreoUSUAlumno.setColumns(10);
-			txtCorreoUSUAlumno.setBounds(432, 202, 219, 19);
+			txtCorreoUSUAlumno.setBounds(517, 205, 219, 19);
 			panelNuevoAlumno.add(txtCorreoUSUAlumno);
 			
 			dateChooserFechaNacimientoUSUAlumno = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
-			dateChooserFechaNacimientoUSUAlumno.setBounds(432, 162, 219, 19);
+			dateChooserFechaNacimientoUSUAlumno.setBounds(517, 165, 219, 19);
 			panelNuevoAlumno.add(dateChooserFechaNacimientoUSUAlumno);
 			
 			lblTituloNuevoAlumno = new JLabel();
 			lblTituloNuevoAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
 			lblTituloNuevoAlumno.setText("NUEVO ALUMNO");
-			lblTituloNuevoAlumno.setBounds(296, 21, 236, 35);
+			lblTituloNuevoAlumno.setBounds(403, 24, 236, 35);
 			panelNuevoAlumno.add(lblTituloNuevoAlumno);
 			
 			lblNombreCursoAlumno = new JLabel();
 			lblNombreCursoAlumno.setText("NOMBRE CURSO");
-			lblNombreCursoAlumno.setBounds(234, 361, 159, 19);
+			lblNombreCursoAlumno.setBounds(319, 364, 159, 19);
 			panelNuevoAlumno.add(lblNombreCursoAlumno);
 			
 			lblPoblacionAlumno = new JLabel();
 			lblPoblacionAlumno.setText("POBLACION");
-			lblPoblacionAlumno.setBounds(234, 284, 149, 19);
+			lblPoblacionAlumno.setBounds(319, 287, 149, 19);
 			panelNuevoAlumno.add(lblPoblacionAlumno);
 			
 			lblCodigoPostalAlumno = new JLabel();
 			lblCodigoPostalAlumno.setText("CODIGO POSTAL");
-			lblCodigoPostalAlumno.setBounds(234, 323, 149, 19);
+			lblCodigoPostalAlumno.setBounds(319, 326, 149, 19);
 			panelNuevoAlumno.add(lblCodigoPostalAlumno);
 			
 			comboBoxNombreCursoUSUAlumno = new JComboBox();
-			comboBoxNombreCursoUSUAlumno.setBounds(432, 361, 219, 19);
+			comboBoxNombreCursoUSUAlumno.setBounds(517, 364, 219, 19);
 			panelNuevoAlumno.add(comboBoxNombreCursoUSUAlumno);
 			
 			comboBoxPoblacionUSUAlumno = new JComboBox();
-			comboBoxPoblacionUSUAlumno.setBounds(432, 284, 219, 19);
+			comboBoxPoblacionUSUAlumno.setBounds(517, 287, 219, 19);
 			panelNuevoAlumno.add(comboBoxPoblacionUSUAlumno);
 			
 			comboBoxCodigoPostalUSUAlumno = new JComboBox();
-			comboBoxCodigoPostalUSUAlumno.setBounds(432, 323, 219, 19);
+			comboBoxCodigoPostalUSUAlumno.setBounds(517, 326, 219, 19);
 			panelNuevoAlumno.add(comboBoxCodigoPostalUSUAlumno);
 			
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
-			btnAnadirAlumno.setBounds(306, 422, 189, 76);
+			btnAnadirAlumno.setBounds(403, 423, 189, 76);
 			panelNuevoAlumno.add(btnAnadirAlumno);
 			
 			btnNuevaPoblacionAlumno = new JButton("NUEVA POBLACION");
 			btnNuevaPoblacionAlumno.setFont(new Font("Tahoma", Font.BOLD, 10));
-			btnNuevaPoblacionAlumno.setBounds(681, 284, 149, 19);
+			btnNuevaPoblacionAlumno.setBounds(766, 287, 149, 19);
 			panelNuevoAlumno.add(btnNuevaPoblacionAlumno);
 			
 			btnNuevoCursoAlumno = new JButton("NUEVO CURSO");
 			btnNuevoCursoAlumno.setFont(new Font("Tahoma", Font.BOLD, 10));
-			btnNuevoCursoAlumno.setBounds(681, 360, 149, 19);
+			btnNuevoCursoAlumno.setBounds(766, 363, 149, 19);
 			panelNuevoAlumno.add(btnNuevoCursoAlumno);
 			
 			lblErroresNuevoAlumno = new JLabel();
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblErroresNuevoAlumno.setBounds(247, 523, 352, 56);
+			lblErroresNuevoAlumno.setBounds(337, 528, 352, 56);
 			panelNuevoAlumno.add(lblErroresNuevoAlumno);
 
         // -----------------------------------------------------------------
@@ -624,7 +636,7 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);
-				
+			
 			
 		/**
 		 * Panel nueva empresa
@@ -829,6 +841,6 @@ public class Vista extends JFrame {
 			lblErroresNuevaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevaEmpresa.setBounds(745, 570, 352, 56);
 			panelNuevaEmpresa.add(lblErroresNuevaEmpresa);
-			
+		
 	}
 }
