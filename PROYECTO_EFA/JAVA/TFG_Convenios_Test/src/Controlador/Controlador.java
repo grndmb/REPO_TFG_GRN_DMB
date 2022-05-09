@@ -143,7 +143,7 @@ public class Controlador implements ActionListener{
 				vista.panelNuevoCurso.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(false);
 				
-				
+				this.resetFormularioNuevoAlumno();
 				vista.comboBoxListaCursoAlumno.removeAllItems();
 				rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);				
 				
@@ -195,9 +195,11 @@ public class Controlador implements ActionListener{
 			    	vista.btnModificarAlumno.setVisible(true);
 			    	vista.lblTituloModificarAlumno.setVisible(true);
 			    	
-			    	rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);		
-			    	rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
-			    	rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);		
+			    	
+			    	this.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
+			    	this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
+			    	this.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);		
+			    	
 			    	try {
 			    		
 						listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
@@ -205,19 +207,64 @@ public class Controlador implements ActionListener{
 						//Seteamos los valores del alumno seleccioando
 						vista.txtNIFUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getNif());
 						vista.txtNombreCompletoUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getNombreCompleto());
-						vista.dateChooserFechaNacimientoUSUAlumno.setDate(listaAlumnos.get(vista.list.getSelectedIndex()).getFechaNacimiento());
+						
+						int tlf = listaAlumnos.get(vista.list.getSelectedIndex()).getTelefono();
+					
+						
+						vista.txtTelefonoUSUAlumno.setText(String.valueOf(tlf));
 						vista.txtCorreoUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getCorreo());
-						vista.txtTelefonoUSUAlumno.setText(Integer.toString(listaAlumnos.get(vista.list.getSelectedIndex()).getTelefono()));
-						vista.comboBoxPoblacionUSUAlumno.setSelectedItem(listaAlumnos.get(vista.list.getSelectedIndex()).getPoblacion());
-						vista.comboBoxPoblacionUSUAlumno.setSelectedItem(listaAlumnos.get(vista.list.getSelectedIndex()).getPoblacion().getCodigoPostal());
-						vista.comboBoxNombreCursoUSUAlumno.setSelectedItem(listaAlumnos.get(vista.list.getSelectedIndex()).getCurso());
-					} catch (InterruptedException e1) {
+						vista.dateChooserFechaNacimientoUSUAlumno.setDate(listaAlumnos.get(vista.list.getSelectedIndex()).getFechaNacimiento());
+						
+						
+						
+						Session session = null;
+						
+						try {
+							session = sessionFactory.getCurrentSession();
+							session.beginTransaction();
+							
+							
+							Query query = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE nif =:nif");
+							query.setParameter("nif", listaAlumnos.get(vista.list.getSelectedIndex()).getNif());
+							Alumno alumno = (Alumno) query.getSingleResult();
+							
+							vista.comboBoxCodigoPostalUSUAlumno.setSelectedItem(alumno.getPoblacion().getCodigoPostal());
+							vista.comboBoxPoblacionUSUAlumno.setSelectedItem(alumno.getPoblacion().getNombre());
+							vista.comboBoxNombreCursoUSUAlumno.setSelectedItem(alumno.getCurso().getNombreCurso());
+						
+							
+							
+						} catch (Exception e1) {
+							// TODO: handle exception
+							e1.printStackTrace();
+							if(null != session) {
+								session.getTransaction().rollback();
+							}
+						}finally {
+							if(null != session) {
+								session.close();
+							}
+						}
+							
+						
+			    	
+			    	} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 		    	}
 		    }
 		    
+		    if(e.getSource() == vista.btnModificarAlumno) {
+		    	
+		    	
+		    	modelo.actualizarAlumno(sessionFactory, vista.txtNIFUSUAlumno.getText(), vista.txtNombreCompletoUSUAlumno.getText(), Integer.parseInt(vista.txtTelefonoUSUAlumno.getText()), 
+						vista.txtCorreoUSUAlumno.getText(), vista.dateChooserFechaNacimientoUSUAlumno.getDate(), 
+						Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString()), vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().toString());
+				
+		    	this.resetFormularioNuevoAlumno();
+		    	
+		    }
 		    
 		  //BOTON INSERT ALUMNO
 		    if(e.getSource() == vista.btnAnadirAlumno) {
