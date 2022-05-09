@@ -49,30 +49,35 @@ public class Controlador implements ActionListener{
 			this.vista.btnPanelAddAlumno.addActionListener(this);
 			this.vista.comboBoxListaCursoAlumno.addActionListener(this);
 			
-		//Botones Panel Nuevo Alumno
+		//BOTONES PANEL NUEVO Y ACTUALIZAR ALUMNOS
 			this.vista.btnAnadirAlumno.addActionListener(this);
 			this.vista.comboBoxPoblacionUSUAlumno.addActionListener(this);
 			this.vista.btnNuevaPoblacionAlumno.addActionListener(this);
 			this.vista.btnNuevoCursoAlumno.addActionListener(this);
+			this.vista.btnPanelModificarAlumno.addActionListener(this);
+			
 		//Botones Panel Nueva Poblacion
 			this.vista.btnAnadirPoblacion.addActionListener(this);
 			this.vista.btnAtrasPoblacionAlumno.addActionListener(this);
 			this.vista.btnAtrasPoblacionEmpresa.addActionListener(this);
+			
 		//Botones Panel Nuevo Curso
 			this.vista.btnAnadirCurso.addActionListener(this);
 			this.vista.btnAtrasCurso.addActionListener(this);
+			
 		//Botones Panel Nueva Empresa
 			this.vista.btnAnadirEmpresa.addActionListener(this);
 			this.vista.comboBoxPoblacionUSUEmpresa.addActionListener(this);
 			this.vista.btnNuevaPoblacionEmpresa.addActionListener(this);
+			
 		//VISTAS
-			vista.panelPrincipal.setVisible(true);
-			vista.panelListaAlumno.setVisible(false);
-			vista.panelMenu.setVisible(false);
-			vista.panelNuevoAlumno.setVisible(false);
-			vista.panelNuevaPoblacion.setVisible(false);
-			vista.panelNuevoCurso.setVisible(false);
-			vista.panelNuevaEmpresa.setVisible(false);
+			this.vista.panelPrincipal.setVisible(true);
+			this.vista.panelListaAlumno.setVisible(false);
+			this.vista.panelMenu.setVisible(false);
+			this.vista.panelNuevoActualizarAlumno.setVisible(false);
+			this.vista.panelNuevaPoblacion.setVisible(false);
+			this.vista.panelNuevoCurso.setVisible(false);
+			this.vista.panelNuevaEmpresa.setVisible(false);
 	}
 	
 	
@@ -84,6 +89,10 @@ public class Controlador implements ActionListener{
 
 		Modelo modelo = new Modelo();
 		
+		
+		/**
+		 * ARRAYLIST JLIST
+		 */
 		ArrayList <Alumno> listaAlumnos = new ArrayList<Alumno>();
 		
 		SessionFactory sessionFactory = null;
@@ -128,11 +137,13 @@ public class Controlador implements ActionListener{
 		    	vista.panelListaAlumno.setVisible(true);
 		    	
 		    	//PANELES INSERTS
-				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(false);
 				vista.panelNuevoCurso.setVisible(false);
 				vista.panelNuevaEmpresa.setVisible(false);
 				
+				
+				vista.comboBoxListaCursoAlumno.removeAllItems();
 				rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);				
 				
 				
@@ -142,7 +153,7 @@ public class Controlador implements ActionListener{
 		    	
 
 				try {
-					
+
 					vista.model.removeAllElements();
 					
 					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
@@ -165,12 +176,35 @@ public class Controlador implements ActionListener{
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
-		    	vista.panelNuevoAlumno.setVisible(true);
+		    	vista.panelNuevoActualizarAlumno.setVisible(true);
 		    	
 		    }
 		    
 		    
-		  //BOTON ADD ALUMNO
+		    if(e.getSource() == vista.btnPanelModificarAlumno) {
+		    	
+		    	vista.panelListaAlumno.setVisible(false);
+		    	vista.panelNuevoActualizarAlumno.setVisible(true);
+
+		    	
+		    	try {
+		    		
+					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
+				
+			    	System.out.println(listaAlumnos.get(vista.list.getSelectedIndex()).getNif());
+					
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    	
+		    	
+				
+			
+		    }
+		    
+		    
+		  //BOTON INSERT ALUMNO
 		    if(e.getSource() == vista.btnAnadirAlumno) {
 			
 		    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
@@ -181,7 +215,7 @@ public class Controlador implements ActionListener{
 		    
 		    //BOTON ADD --> NUEVA POBLACION ALUMNOS
 		    if(e.getSource() == vista.btnNuevaPoblacionAlumno) {
-				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(true);
 				vista.btnAtrasPoblacionAlumno.setVisible(true);
 				vista.btnAtrasPoblacionEmpresa.setVisible(false);
@@ -199,7 +233,7 @@ public class Controlador implements ActionListener{
 		    	
 				//Volvemos al panel Alumno
 				vista.panelNuevaPoblacion.setVisible(false);
-				vista.panelNuevoAlumno.setVisible(true);
+				vista.panelNuevoActualizarAlumno.setVisible(true);
 				
 				//Recargamos el comboBox de poblaciones
 				vista.comboBoxPoblacionUSUAlumno.removeAllItems();
@@ -208,10 +242,10 @@ public class Controlador implements ActionListener{
 		    
 		    //BOTON ADD --> NUEVO CURSO ALUMNOS
 		    if(e.getSource() == vista.btnNuevoCursoAlumno) {	
-				vista.panelNuevoAlumno.setVisible(false);
+				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevoCurso.setVisible(true);	
 				
-			//Acciones del boton de Añadir Curso
+			//Acciones del boton de Aï¿½adir Curso
 			}if(e.getSource() == vista.btnAnadirCurso) {
 		    	
 				if(this.anadirCursoValido() == true) {
@@ -224,7 +258,7 @@ public class Controlador implements ActionListener{
 		    	
 				//Volvemos al panel Alumno
 				vista.panelNuevoCurso.setVisible(false);
-				vista.panelNuevoAlumno.setVisible(true);
+				vista.panelNuevoActualizarAlumno.setVisible(true);
 				
 				//Recargamos el comboBox de cursos
 				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
@@ -246,7 +280,7 @@ public class Controlador implements ActionListener{
 		    	
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
-		    	vista.panelNuevoAlumno.setVisible(false);
+		    	vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(false);
 				vista.panelNuevoCurso.setVisible(false);
 				//Rellenar combobox Codigo Postal

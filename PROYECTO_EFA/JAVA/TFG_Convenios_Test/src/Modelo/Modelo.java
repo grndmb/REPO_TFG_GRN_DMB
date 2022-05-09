@@ -153,10 +153,6 @@ public class Modelo {
 				listaAlumnos = (ArrayList<Alumno>) alumnoQuery.list();
 				
 		
-				for ( int i = 0; i < listaAlumnos.size(); i++ ){
-					
-				 System.out.println(listaAlumnos.get(i).getNombreCompleto());
-				}
 						
 			} catch (Exception e) {
 				// TODO: handle exception

@@ -36,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
 
 
 public class Vista extends JFrame {
@@ -76,7 +77,7 @@ public class Vista extends JFrame {
 	/**
 	 * PANEL NUEVO ALUMNO
 	 */
-	public JPanel panelNuevoAlumno;
+	public JPanel panelNuevoActualizarAlumno;
 		public JLabel lblNIFAlumno;
 		public JLabel lblNombreCompletoAlumno;
 		public JLabel lblTelefonoAlumno;
@@ -308,9 +309,10 @@ public class Vista extends JFrame {
 		
 			
 			list = new JList<String>();
-			list.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-             
+			list.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             model = new DefaultListModel<>();
+            
      
             JScrollPane listPane = new JScrollPane();
             listPane.setBounds(50, 219, 721, 389);
@@ -358,6 +360,13 @@ public class Vista extends JFrame {
             lblNombrelListaAlumno.setFont(new Font("Tahoma", Font.PLAIN, 30));
             lblNombrelListaAlumno.setBounds(301, 173, 470, 36);
             panelListaAlumno.add(lblNombrelListaAlumno);
+            
+            JSeparator separator = new JSeparator();
+            separator.setBackground(Color.BLACK);
+            separator.setForeground(Color.BLACK);
+            separator.setOrientation(SwingConstants.VERTICAL);
+            separator.setBounds(274, 13, 1, 535);
+            list.add(separator);
 
              
 		
@@ -367,43 +376,43 @@ public class Vista extends JFrame {
 		/**
 		 * PANEL NUEVO ALUMNO
 		 */
-		panelNuevoAlumno = new JPanel();
-		panelNuevoAlumno.setBounds(368, 132, 1138, 648);
-		panelNuevoAlumno.setBackground(Color.WHITE);
-		panelNuevoAlumno.setForeground(new Color(102, 255, 204));
-		panelNuevoAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelNuevoAlumno.setLayout(null);
-		panelPrincipal.add(panelNuevoAlumno);
+		panelNuevoActualizarAlumno = new JPanel();
+		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
+		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
+		panelNuevoActualizarAlumno.setForeground(new Color(102, 255, 204));
+		panelNuevoActualizarAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelNuevoActualizarAlumno.setLayout(null);
+		panelPrincipal.add(panelNuevoActualizarAlumno);
 		
 			lblNIFAlumno = new JLabel();
 			lblNIFAlumno.setText("NIF");
 			lblNIFAlumno.setBounds(319, 91, 110, 19);
-			panelNuevoAlumno.add(lblNIFAlumno);
+			panelNuevoActualizarAlumno.add(lblNIFAlumno);
 			
 			lblNombreCompletoAlumno = new JLabel();
 			lblNombreCompletoAlumno.setText("NOMBRE COMPLETO");
 			lblNombreCompletoAlumno.setBounds(319, 127, 136, 19);
-			panelNuevoAlumno.add(lblNombreCompletoAlumno);
+			panelNuevoActualizarAlumno.add(lblNombreCompletoAlumno);
 			
 			lblTelefonoAlumno = new JLabel();
 			lblTelefonoAlumno.setText("TELEFONO");
 			lblTelefonoAlumno.setBounds(319, 248, 96, 19);
-			panelNuevoAlumno.add(lblTelefonoAlumno);
+			panelNuevoActualizarAlumno.add(lblTelefonoAlumno);
 			
 			lblCorreoAlumno = new JLabel();
 			lblCorreoAlumno.setText("CORREO");
 			lblCorreoAlumno.setBounds(319, 205, 96, 19);
-			panelNuevoAlumno.add(lblCorreoAlumno);
+			panelNuevoActualizarAlumno.add(lblCorreoAlumno);
 			
 			lblFechaNacimientoAlumno = new JLabel();
 			lblFechaNacimientoAlumno.setText("FECHA NACIMIENTO");
 			lblFechaNacimientoAlumno.setBounds(319, 165, 136, 19);
-			panelNuevoAlumno.add(lblFechaNacimientoAlumno);
+			panelNuevoActualizarAlumno.add(lblFechaNacimientoAlumno);
 			
 			txtNIFUSUAlumno = new JTextField();
 			txtNIFUSUAlumno.setColumns(10);
 			txtNIFUSUAlumno.setBounds(517, 91, 219, 19);
-			panelNuevoAlumno.add(txtNIFUSUAlumno);
+			panelNuevoActualizarAlumno.add(txtNIFUSUAlumno);
 			
 			restrictedtxtNIFAlumno = new RestrictedTextField(txtNIFUSUAlumno);
 			restrictedtxtNIFAlumno.setLimit(9);
@@ -411,12 +420,12 @@ public class Vista extends JFrame {
 			txtNombreCompletoUSUAlumno = new JTextField();
 			txtNombreCompletoUSUAlumno.setColumns(10);
 			txtNombreCompletoUSUAlumno.setBounds(517, 127, 219, 19);
-			panelNuevoAlumno.add(txtNombreCompletoUSUAlumno);
+			panelNuevoActualizarAlumno.add(txtNombreCompletoUSUAlumno);
 			
 			txtTelefonoUSUAlumno = new JTextField();
 			txtTelefonoUSUAlumno.setColumns(10);
 			txtTelefonoUSUAlumno.setBounds(517, 248, 219, 19);
-			panelNuevoAlumno.add(txtTelefonoUSUAlumno);
+			panelNuevoActualizarAlumno.add(txtTelefonoUSUAlumno);
 			
 			restrictedtxtTelefonoUSUAlumno = new RestrictedTextField(txtTelefonoUSUAlumno);
 			restrictedtxtTelefonoUSUAlumno.setLimit(9);
@@ -425,63 +434,63 @@ public class Vista extends JFrame {
 			txtCorreoUSUAlumno = new JTextField();
 			txtCorreoUSUAlumno.setColumns(10);
 			txtCorreoUSUAlumno.setBounds(517, 205, 219, 19);
-			panelNuevoAlumno.add(txtCorreoUSUAlumno);
+			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
 			
 			dateChooserFechaNacimientoUSUAlumno = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
 			dateChooserFechaNacimientoUSUAlumno.setBounds(517, 165, 219, 19);
-			panelNuevoAlumno.add(dateChooserFechaNacimientoUSUAlumno);
+			panelNuevoActualizarAlumno.add(dateChooserFechaNacimientoUSUAlumno);
 			
 			lblTituloNuevoAlumno = new JLabel();
 			lblTituloNuevoAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
 			lblTituloNuevoAlumno.setText("NUEVO ALUMNO");
 			lblTituloNuevoAlumno.setBounds(403, 24, 236, 35);
-			panelNuevoAlumno.add(lblTituloNuevoAlumno);
+			panelNuevoActualizarAlumno.add(lblTituloNuevoAlumno);
 			
 			lblNombreCursoAlumno = new JLabel();
 			lblNombreCursoAlumno.setText("NOMBRE CURSO");
 			lblNombreCursoAlumno.setBounds(319, 364, 159, 19);
-			panelNuevoAlumno.add(lblNombreCursoAlumno);
+			panelNuevoActualizarAlumno.add(lblNombreCursoAlumno);
 			
 			lblPoblacionAlumno = new JLabel();
 			lblPoblacionAlumno.setText("POBLACION");
 			lblPoblacionAlumno.setBounds(319, 287, 149, 19);
-			panelNuevoAlumno.add(lblPoblacionAlumno);
+			panelNuevoActualizarAlumno.add(lblPoblacionAlumno);
 			
 			lblCodigoPostalAlumno = new JLabel();
 			lblCodigoPostalAlumno.setText("CODIGO POSTAL");
 			lblCodigoPostalAlumno.setBounds(319, 326, 149, 19);
-			panelNuevoAlumno.add(lblCodigoPostalAlumno);
+			panelNuevoActualizarAlumno.add(lblCodigoPostalAlumno);
 			
 			comboBoxNombreCursoUSUAlumno = new JComboBox();
 			comboBoxNombreCursoUSUAlumno.setBounds(517, 364, 219, 19);
-			panelNuevoAlumno.add(comboBoxNombreCursoUSUAlumno);
+			panelNuevoActualizarAlumno.add(comboBoxNombreCursoUSUAlumno);
 			
 			comboBoxPoblacionUSUAlumno = new JComboBox();
 			comboBoxPoblacionUSUAlumno.setBounds(517, 287, 219, 19);
-			panelNuevoAlumno.add(comboBoxPoblacionUSUAlumno);
+			panelNuevoActualizarAlumno.add(comboBoxPoblacionUSUAlumno);
 			
 			comboBoxCodigoPostalUSUAlumno = new JComboBox();
 			comboBoxCodigoPostalUSUAlumno.setBounds(517, 326, 219, 19);
-			panelNuevoAlumno.add(comboBoxCodigoPostalUSUAlumno);
+			panelNuevoActualizarAlumno.add(comboBoxCodigoPostalUSUAlumno);
 			
 			btnAnadirAlumno = new JButton("A\u00D1ADIR ALUMNO");
 			btnAnadirAlumno.setBounds(403, 423, 189, 76);
-			panelNuevoAlumno.add(btnAnadirAlumno);
+			panelNuevoActualizarAlumno.add(btnAnadirAlumno);
 			
 			btnNuevaPoblacionAlumno = new JButton("NUEVA POBLACION");
 			btnNuevaPoblacionAlumno.setFont(new Font("Tahoma", Font.BOLD, 10));
 			btnNuevaPoblacionAlumno.setBounds(766, 287, 149, 19);
-			panelNuevoAlumno.add(btnNuevaPoblacionAlumno);
+			panelNuevoActualizarAlumno.add(btnNuevaPoblacionAlumno);
 			
 			btnNuevoCursoAlumno = new JButton("NUEVO CURSO");
 			btnNuevoCursoAlumno.setFont(new Font("Tahoma", Font.BOLD, 10));
 			btnNuevoCursoAlumno.setBounds(766, 363, 149, 19);
-			panelNuevoAlumno.add(btnNuevoCursoAlumno);
+			panelNuevoActualizarAlumno.add(btnNuevoCursoAlumno);
 			
 			lblErroresNuevoAlumno = new JLabel();
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(337, 528, 352, 56);
-			panelNuevoAlumno.add(lblErroresNuevoAlumno);
+			panelNuevoActualizarAlumno.add(lblErroresNuevoAlumno);
 
         // -----------------------------------------------------------------
      
