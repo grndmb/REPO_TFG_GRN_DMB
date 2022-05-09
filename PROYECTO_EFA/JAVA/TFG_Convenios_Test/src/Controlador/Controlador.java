@@ -414,7 +414,7 @@ public class Controlador implements ActionListener{
 	/*
 	 * METODOS DE RELLENO DE COMBOBOX
 	 */
-		//Metodo para rellenar el combobox que lista los cursos
+		//Metodo para rellenar el combobox que lista los cursos.
 			public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox<String> comboBox) {
 				Session session = null;
 				
