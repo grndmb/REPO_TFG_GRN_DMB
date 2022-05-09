@@ -148,6 +148,7 @@ public class Modelo {
 
 				
 				Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso =:curso");
+				//Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso LIKE '=:curso%'");
 				alumnoQuery.setParameter("curso", curso);
 				
 				listaAlumnos = (ArrayList<Alumno>) alumnoQuery.list();

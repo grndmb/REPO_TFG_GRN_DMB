@@ -215,9 +215,9 @@ public class Controlador implements ActionListener{
 						vista.txtNombreCompletoUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getNombreCompleto());
 						
 						int tlf = listaAlumnos.get(vista.list.getSelectedIndex()).getTelefono();
-					
-						
 						vista.txtTelefonoUSUAlumno.setText(String.valueOf(tlf));
+						
+						
 						vista.txtCorreoUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getCorreo());
 						vista.dateChooserFechaNacimientoUSUAlumno.setDate(listaAlumnos.get(vista.list.getSelectedIndex()).getFechaNacimiento());
 						
@@ -466,7 +466,7 @@ public class Controlador implements ActionListener{
 					/**
 					 * Consulta para obtener los nombres de las poblaciones
 					 */	
-					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion ORDER BY Nombre ASC");
+					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion GROUP BY Nombre ORDER BY Nombre ASC");
 					query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 					ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
 					

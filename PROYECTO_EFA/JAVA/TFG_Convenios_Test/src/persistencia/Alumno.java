@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 2 may. 2022 16:04:45 by Hibernate Tools 5.4.32.Final
+// Generated 9 may. 2022 16:28:04 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -109,8 +109,4 @@ public class Alumno implements java.io.Serializable {
 		this.anexars = anexars;
 	}
 
-	@Override
-	public String toString() {
-		return "                " + nif + "                                           " + nombreCompleto  ;
-	}
 }

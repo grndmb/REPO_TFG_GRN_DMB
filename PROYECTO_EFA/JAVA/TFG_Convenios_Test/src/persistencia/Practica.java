@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 2 may. 2022 16:04:45 by Hibernate Tools 5.4.32.Final
+// Generated 9 may. 2022 16:28:04 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -16,7 +16,6 @@ public class Practica implements java.io.Serializable {
 	private String tipoPractica;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private Date fechaAnexo;
 	private boolean enProceso;
 	private Set anexars = new HashSet(0);
 
@@ -24,26 +23,24 @@ public class Practica implements java.io.Serializable {
 	}
 
 	public Practica(int idPractica, Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio,
-			Date fechaFin, Date fechaAnexo, boolean enProceso) {
+			Date fechaFin, boolean enProceso) {
 		this.idPractica = idPractica;
 		this.curso = curso;
 		this.profesor = profesor;
 		this.tipoPractica = tipoPractica;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.fechaAnexo = fechaAnexo;
 		this.enProceso = enProceso;
 	}
 
 	public Practica(int idPractica, Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio,
-			Date fechaFin, Date fechaAnexo, boolean enProceso, Set anexars) {
+			Date fechaFin, boolean enProceso, Set anexars) {
 		this.idPractica = idPractica;
 		this.curso = curso;
 		this.profesor = profesor;
 		this.tipoPractica = tipoPractica;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.fechaAnexo = fechaAnexo;
 		this.enProceso = enProceso;
 		this.anexars = anexars;
 	}
@@ -94,14 +91,6 @@ public class Practica implements java.io.Serializable {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-	public Date getFechaAnexo() {
-		return this.fechaAnexo;
-	}
-
-	public void setFechaAnexo(Date fechaAnexo) {
-		this.fechaAnexo = fechaAnexo;
 	}
 
 	public boolean isEnProceso() {
