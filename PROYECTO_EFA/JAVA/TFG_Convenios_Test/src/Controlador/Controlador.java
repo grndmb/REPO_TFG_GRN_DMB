@@ -113,11 +113,7 @@ public class Controlador implements ActionListener{
 		    	//Situar el lbl de EFA MORATALAZ
 		    	vista.labelTitulo.setBounds(330, 0, 1218, 114);
 		    	
-				//Rellenar combobox Curso y Codigo Postal
-				//	this.rellenarComboBoxCursos(sessionFactory);
-				//	this.rellenarComboBoxNombreCiudad(sessionFactory,vista.comboBoxPoblacionUSUAlumno);
-				
-					vista.btnInicio.setVisible(false);
+				vista.btnInicio.setVisible(false);
 			
 			//Acciones del bot�n de A�adir Alumno
 		    }if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
@@ -150,6 +146,8 @@ public class Controlador implements ActionListener{
 				
 		    }
 		    
+		    
+		    //RELLENA JLIST, EN FUNCIÓN DE LA OPCION EN EL COMBOBOX
 		    if(e.getSource() == vista.comboBoxListaCursoAlumno) {
 		    	
 
@@ -172,7 +170,7 @@ public class Controlador implements ActionListener{
 				
 		    }
 		    
-		  //BOTON AÑADIR ALUMNOS PANEL
+		  //BOTON QUE HACE VISIBLE EL FORMULARIO DE AÑADIR ALUMNO
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
@@ -182,9 +180,16 @@ public class Controlador implements ActionListener{
 		    	vista.btnAnadirAlumno.setVisible(true);
 		    	vista.btnModificarAlumno.setVisible(false);
 		    	vista.lblTituloModificarAlumno.setVisible(false);
+		    	
+		    	vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+		    	
+		    	this.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
+		    	this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
+		    	this.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
+		    	
 		    }
 		    
-		   //BOTON MODIFICAR ALUMNOS PANEL 
+		   //BOTON QUE ABRE PANEL MODIFICAR ALUMNOS
 		    if(e.getSource() == vista.btnPanelModificarAlumno) {
 		    	if(vista.list.getSelectedIndex() != -1){
 			    	vista.panelListaAlumno.setVisible(false);
@@ -195,6 +200,7 @@ public class Controlador implements ActionListener{
 			    	vista.btnModificarAlumno.setVisible(true);
 			    	vista.lblTituloModificarAlumno.setVisible(true);
 			    	
+			    	vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
 			    	
 			    	this.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
 			    	this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
@@ -255,6 +261,8 @@ public class Controlador implements ActionListener{
 		    	}
 		    }
 		    
+		    
+		    // BOTON QUE HACE EL UPDATE DE ALUMNO
 		    if(e.getSource() == vista.btnModificarAlumno) {
 		    	
 		    	
@@ -275,7 +283,7 @@ public class Controlador implements ActionListener{
 		    	}
 			}
 		    
-		    //BOTON ADD --> NUEVA POBLACION ALUMNOS
+		    //BOTON NUEVA POBLACION EN PANEL ALUMNO
 		    if(e.getSource() == vista.btnNuevaPoblacionAlumno) {
 				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(true);
@@ -283,6 +291,7 @@ public class Controlador implements ActionListener{
 				vista.btnAtrasPoblacionEmpresa.setVisible(false);
 			}
 			
+		    //BOTON INSERT POBLACION EN PANEL POBLACION
 		    if(e.getSource() == vista.btnAnadirPoblacion) {
 		    	
 				if(this.anadirPoblacionValido() == true) {
@@ -291,6 +300,7 @@ public class Controlador implements ActionListener{
 				}
 			}
 		    
+		    //BOTON ATRAS EN PANEL POBLACION
 		    if(e.getSource() == vista.btnAtrasPoblacionAlumno) {
 		    	
 				//Volvemos al panel Alumno
@@ -302,12 +312,12 @@ public class Controlador implements ActionListener{
 				this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 			}
 		    
-		    //BOTON ADD --> NUEVO CURSO ALUMNOS
+		    //BOTON NUEVO CURSO EN PANEL ALUMNO
 		    if(e.getSource() == vista.btnNuevoCursoAlumno) {	
 				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevoCurso.setVisible(true);	
 				
-			//Acciones del boton de A�adir Curso
+			//BOTON INSERT EN PANEL CURSO
 			}if(e.getSource() == vista.btnAnadirCurso) {
 		    	
 				if(this.anadirCursoValido() == true) {
@@ -315,7 +325,7 @@ public class Controlador implements ActionListener{
 					this.crearNuevoCurso(sessionFactory, modelo);
 		    	}
 					
-			//Acciones del boton de Atras Curso
+			//BOTON ATRAS EN PANEL CURSO
 			}if(e.getSource() == vista.btnAtrasCurso) {
 		    	
 				//Volvemos al panel Alumno
