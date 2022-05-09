@@ -541,7 +541,7 @@ public class Vista extends JFrame {
             
             JScrollPane listPaneEmpresas = new JScrollPane();
             listPaneEmpresas.setBounds(49, 109, 710, 447);
-            listPaneEmpresas.setViewportView(listAlumnos);
+            listPaneEmpresas.setViewportView(listEmpresas);
             listEmpresas.setLayoutOrientation(JList.VERTICAL);
             panelListaEmpresas.add(listPaneEmpresas);
 			
