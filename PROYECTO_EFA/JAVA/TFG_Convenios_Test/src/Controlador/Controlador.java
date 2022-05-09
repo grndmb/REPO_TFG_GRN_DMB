@@ -55,6 +55,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnNuevaPoblacionAlumno.addActionListener(this);
 			this.vista.btnNuevoCursoAlumno.addActionListener(this);
 			this.vista.btnPanelModificarAlumno.addActionListener(this);
+			this.vista.btnModificarAlumno.addActionListener(this);
 			
 		//Botones Panel Nueva Poblacion
 			this.vista.btnAnadirPoblacion.addActionListener(this);
@@ -161,7 +162,6 @@ public class Controlador implements ActionListener{
 					for (int i = 0; i < listaAlumnos.size(); i++) {
 						
 						vista.model.addElement(listaAlumnos.get(i).toString());
-						//vista.model.add(i, listaAlumnos.get(i).getNombreCompleto());
 						vista.list.setModel(vista.model);
 					}
 					
@@ -178,29 +178,44 @@ public class Controlador implements ActionListener{
 		    	vista.panelListaAlumno.setVisible(false);
 		    	vista.panelNuevoActualizarAlumno.setVisible(true);
 		    	
+		    	vista.lblTituloNuevoAlumno.setVisible(true);
+		    	vista.btnAnadirAlumno.setVisible(true);
+		    	vista.btnModificarAlumno.setVisible(false);
+		    	vista.lblTituloModificarAlumno.setVisible(false);
 		    }
 		    
-		    
+		   //BOTON MODIFICAR ALUMNOS PANEL 
 		    if(e.getSource() == vista.btnPanelModificarAlumno) {
-		    	
-		    	vista.panelListaAlumno.setVisible(false);
-		    	vista.panelNuevoActualizarAlumno.setVisible(true);
-
-		    	
-		    	try {
-		    		
-					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
-				
-			    	System.out.println(listaAlumnos.get(vista.list.getSelectedIndex()).getNif());
+		    	if(vista.list.getSelectedIndex() != -1){
+			    	vista.panelListaAlumno.setVisible(false);
+			    	vista.panelNuevoActualizarAlumno.setVisible(true);
+			    	
+			    	vista.lblTituloNuevoAlumno.setVisible(false);
+			    	vista.btnAnadirAlumno.setVisible(false);
+			    	vista.btnModificarAlumno.setVisible(true);
+			    	vista.lblTituloModificarAlumno.setVisible(true);
+			    	
+			    	rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);		
+			    	rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
+			    	rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);		
+			    	try {
+			    		
+						listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
 					
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		    	
-		    	
-				
-			
+						//Seteamos los valores del alumno seleccioando
+						vista.txtNIFUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getNif());
+						vista.txtNombreCompletoUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getNombreCompleto());
+						vista.dateChooserFechaNacimientoUSUAlumno.setDate(listaAlumnos.get(vista.list.getSelectedIndex()).getFechaNacimiento());
+						vista.txtCorreoUSUAlumno.setText(listaAlumnos.get(vista.list.getSelectedIndex()).getCorreo());
+						vista.txtTelefonoUSUAlumno.setText(Integer.toString(listaAlumnos.get(vista.list.getSelectedIndex()).getTelefono()));
+						vista.comboBoxPoblacionUSUAlumno.setSelectedItem(listaAlumnos.get(vista.list.getSelectedIndex()).getPoblacion());
+						vista.comboBoxPoblacionUSUAlumno.setSelectedItem(listaAlumnos.get(vista.list.getSelectedIndex()).getPoblacion().getCodigoPostal());
+						vista.comboBoxNombreCursoUSUAlumno.setSelectedItem(listaAlumnos.get(vista.list.getSelectedIndex()).getCurso());
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	}
 		    }
 		    
 		    

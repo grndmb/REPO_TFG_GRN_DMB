@@ -72,7 +72,7 @@ public class Vista extends JFrame {
 		public JList list;
 		public DefaultListModel model;
 
-		
+	
 		
 	/**
 	 * PANEL NUEVO ALUMNO
@@ -84,6 +84,7 @@ public class Vista extends JFrame {
 		public JLabel lblCorreoAlumno;
 		public JLabel lblFechaNacimientoAlumno;
 		public JLabel lblTituloNuevoAlumno;
+		public JLabel lblTituloModificarAlumno;
 		public JLabel lblNombreCursoAlumno;
 		public JLabel lblPoblacionAlumno;
 		public JLabel lblCodigoPostalAlumno;
@@ -101,6 +102,7 @@ public class Vista extends JFrame {
 		public JButton btnNuevoCursoAlumno;
 		public JButton btnNuevaPoblacionAlumno;
 		public JButton btnAnadirAlumno;
+		public JButton btnModificarAlumno;
 		public JLabel lblErroresNuevoAlumno;
 		
 		
@@ -368,11 +370,6 @@ public class Vista extends JFrame {
             separator.setBounds(274, 13, 1, 535);
             list.add(separator);
 
-             
-		
-			
-			
-			
 		/**
 		 * PANEL NUEVO ALUMNO
 		 */
@@ -491,6 +488,16 @@ public class Vista extends JFrame {
 			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevoAlumno.setBounds(337, 528, 352, 56);
 			panelNuevoActualizarAlumno.add(lblErroresNuevoAlumno);
+			
+			btnModificarAlumno = new JButton("MODIFICAR ALUMNO");
+			btnModificarAlumno.setBounds(403, 423, 189, 76);
+			panelNuevoActualizarAlumno.add(btnModificarAlumno);
+			
+			lblTituloModificarAlumno = new JLabel();
+			lblTituloModificarAlumno.setText("MODIFICAR ALUMNO");
+			lblTituloModificarAlumno.setFont(new Font("Tahoma", Font.BOLD, 24));
+			lblTituloModificarAlumno.setBounds(403, 24, 300, 50);
+			panelNuevoActualizarAlumno.add(lblTituloModificarAlumno);
 
         // -----------------------------------------------------------------
      
@@ -850,6 +857,6 @@ public class Vista extends JFrame {
 			lblErroresNuevaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevaEmpresa.setBounds(745, 570, 352, 56);
 			panelNuevaEmpresa.add(lblErroresNuevaEmpresa);
-		
+	
 	}
 }
