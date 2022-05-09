@@ -3,7 +3,7 @@ DROP DATABASE BASE_DATOS_CONVENIO;
 CREATE DATABASE BASE_DATOS_CONVENIO;
 USE BASE_DATOS_CONVENIO;
 -- -----------------------------------
-select nombre from poblacion group by nombre;
+
 -- ------------------------
 -- TABLA POBLACION
 -- ------------------------
@@ -83,7 +83,6 @@ ID_PRACTICA INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la practica',
 TIPO_PRACTICA VARCHAR(3) NOT NULL COMMENT 'Tipo de practica --> (PFE - FCT)',
 FECHA_INICIO DATE NOT NULL COMMENT 'Fecha inicial de la practica',
 FECHA_FIN DATE NOT NULL COMMENT 'Fecha final de la practica',
-FECHA_ANEXO DATE NOT NULL COMMENT 'Fecha firma anexo',
 EN_PROCESO BOOLEAN NOT NULL COMMENT 'Indica si la practica esta en proceso',
 
 NOMBRE_CURSO VARCHAR (200) NOT NULL COMMENT 'Nombre del curso asignado a las practicas',
@@ -134,6 +133,7 @@ CREATE TABLE CONVENIO (
 ID_CONVENIO VARCHAR (20) NOT NULL COMMENT 'Identificador del convenio',
 CIF_EMPRESA VARCHAR (10) NOT NULL COMMENT 'Identificador de la empresa',
 TIPO_CONVENIO VARCHAR(3) NOT NULL COMMENT 'Tipo de convenio --> (PFE - FCT)',
+FECHA_ANEXO DATE NOT NULL COMMENT 'Fecha firma anexo',
 
 CONSTRAINT PK_CONVENIO PRIMARY KEY (ID_CONVENIO),
 CONSTRAINT FK_CONVENIO_EMPRESA FOREIGN KEY (CIF_EMPRESA) REFERENCES EMPRESA (CIF_EMPRESA)
