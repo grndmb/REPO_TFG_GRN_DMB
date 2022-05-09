@@ -528,7 +528,6 @@ public class Vista extends JFrame {
 			panelNuevaPoblacion.add(btnAnadirPoblacion);
 			
 			btnAtrasPoblacionAlumno = new JButton("ATRAS");
-			btnAtrasPoblacionAlumno.setBackground(Color.PINK);
 			btnAtrasPoblacionAlumno.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			btnAtrasPoblacionAlumno.setBounds(696, 560, 153, 40);
 			panelNuevaPoblacion.add(btnAtrasPoblacionAlumno);

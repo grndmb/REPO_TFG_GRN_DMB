@@ -144,8 +144,7 @@ public class Modelo {
 				Query cursoQuery = sessionFactory.getCurrentSession().createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
 				cursoQuery.setParameter("nombreCurso", nombreCurso);
 				Curso curso = (Curso) cursoQuery.getSingleResult();
-				
-				System.out.println(curso.getNombreCurso());
+
 				
 				Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso =:curso");
 				alumnoQuery.setParameter("curso", curso);

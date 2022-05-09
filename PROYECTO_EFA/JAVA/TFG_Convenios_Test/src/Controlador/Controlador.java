@@ -149,8 +149,8 @@ public class Controlador implements ActionListener{
 					
 					for (int i = 0; i < listaAlumnos.size(); i++) {
 						
-						vista.model.add(i, listaAlumnos.get(i).getNif());
-						vista.model.add(i, listaAlumnos.get(i).getNombreCompleto());
+						vista.model.addElement(listaAlumnos.get(i).toString());
+						//vista.model.add(i, listaAlumnos.get(i).getNombreCompleto());
 						vista.list.setModel(vista.model);
 					}
 					
