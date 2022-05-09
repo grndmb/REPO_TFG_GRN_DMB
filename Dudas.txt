@@ -11,9 +11,9 @@ Atributo "OrganismoPublico" en tabla "Empresa"
 Localizacion --> (Tabla "Empresa" FCT)
 ---------------------------------------------------
 
-------------------------
+-------------------------
 Tabla Datos EFA
-------------------------
+-------------------------
 
 ---------------------------------------------------
 Atributo "Publica" en tabla "Practica"
