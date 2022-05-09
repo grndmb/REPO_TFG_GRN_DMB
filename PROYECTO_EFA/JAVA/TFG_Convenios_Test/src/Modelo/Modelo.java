@@ -130,7 +130,8 @@ public class Modelo {
 		}
 	}
 		
-
+	
+	
 	 public ArrayList<Alumno> listarAlumnos (SessionFactory sessionFactory, String nombreCurso) throws InterruptedException {
 	        
 		 Session session = null;
@@ -173,6 +174,62 @@ public class Modelo {
 			
 	 }
 	
+	 public void actualizarAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
+		 
+		 Session session=null;
+
+		 try {
+			//Crear sesion e iniciar transaccion
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			 
+			Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
+			query.setParameter("nif", nif);
+			Alumno alumno = (Alumno) query.getSingleResult();
+			 
+			alumno.setNif(nif);
+			alumno.setNombreCompleto(nombreCompleto);
+			alumno.setTelefono(telefono);
+			alumno.setCorreo(correo);
+			alumno.setFechaNacimiento(fechaNacimiento);
+			
+			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
+			poblacionQuery.setParameter("codigoPostal", codigoPostal);
+			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
+	
+			alumno.setPoblacion(pb);
+			
+			
+			Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
+			queryCurso.setParameter("nombreCurso", nombreCurso);
+			Curso curso = (Curso) queryCurso.getSingleResult();
+			
+			alumno.setCurso(curso);
+			
+			
+			
+			session.update(alumno);
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+	 }
+	 
+	 
 	 /**
 	  * Metodo para crear e insertar una nueva empresa en la base de datos
 	  * @param sessionFactory
