@@ -348,7 +348,7 @@ public class Modelo {
 	  * @param tipoConvenio
 	  * @throws HibernateException
 	  */
-	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio) throws HibernateException {
+	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio, Date fechaAnexo) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -379,14 +379,14 @@ public class Modelo {
 				Curso curso = (Curso) query.getSingleResult();
 				
 				if(curso.isEsPublico() == true) {
-					test = "MOR";
+					test = "MOR/C";
 					auxConvenios = auxConvenios + 1;
-					idConvenio = test + "/" +  auxConvenios + "/22";
+					idConvenio = test+  auxConvenios + "/22";
 		    		
 				}else {
-					test = "MOR/PRIV";
+					test = "MOR/PRIV/C";
 					auxConvenios = auxConvenios + 1;
-					idConvenio = test + "/" +  auxConvenios + "/22";
+					idConvenio = test +  auxConvenios + "/22";
 		    		
 				}
 				
@@ -401,10 +401,12 @@ public class Modelo {
 				Empresa empresa = (Empresa) empresaQuery.getSingleResult();
 				
 				convenio.setEmpresa(empresa);
+				convenio.setFechaAnexo(fechaAnexo);
 				convenio.setTipoConvenio(tipoConvenio);
 	    		
 				session.saveOrUpdate(convenio);
 				session.getTransaction().commit();
+				
 				
 		 } catch (Exception e) {
 				// TODO: handle exception
@@ -427,7 +429,7 @@ public class Modelo {
 			SessionFactory sessionFactory = null;
 			
 		 
-		//Solo se hace una vez, al iniciar la aplicaciÃ¯Â¿Â½n
+		//Solo se hace una vez, al iniciar la aplicaciï¿½n
 			Configuration configuration = new Configuration();
 			configuration.configure("hibernate.cfg.xml");
 			sessionFactory = configuration.buildSessionFactory();
@@ -439,14 +441,15 @@ public class Modelo {
 	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
 	        
-	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2Âº CFGM CarrocerÃ­a");
+	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-        // helper.crearConvenio(sessionFactory, "1231-FIG", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT");
-         //helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGM CarrocerÃ­a", "PFE");
-	 
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", fechaNacimientoUSU);
+
 	        
-			ArrayList <Alumno> listaAlumnos = null;
+			//ArrayList <Alumno> listaAlumnos = null;
 			//helper.listarAlumnos(sessionFactory);
 	 
 	 
