@@ -429,7 +429,7 @@ public class Modelo {
 			SessionFactory sessionFactory = null;
 			
 		 
-		//Solo se hace una vez, al iniciar la aplicaciï¿½n
+		//Solo se hace una vez, al iniciar la aplicaci�n
 			Configuration configuration = new Configuration();
 			configuration.configure("hibernate.cfg.xml");
 			sessionFactory = configuration.buildSessionFactory();
@@ -441,12 +441,15 @@ public class Modelo {
 	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
 	        
-	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2º CFGM Carrocería");
+	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2� CFGM Carrocer�a");
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
 	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2� CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "PFE", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "FCT", fechaNacimientoUSU);
 
 	        
 			//ArrayList <Alumno> listaAlumnos = null;

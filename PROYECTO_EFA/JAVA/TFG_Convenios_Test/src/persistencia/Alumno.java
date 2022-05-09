@@ -109,4 +109,9 @@ public class Alumno implements java.io.Serializable {
 		this.anexars = anexars;
 	}
 
+	@Override
+	public String toString() {
+		return "              " + nif + "                                         "+ nombreCompleto;
+	}
+
 }
