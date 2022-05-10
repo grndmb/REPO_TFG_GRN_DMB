@@ -442,7 +442,6 @@ public class Vista extends JFrame {
 			
 			restrictedtxtTelefonoUSUAlumno = new RestrictedTextField(txtTelefonoUSUAlumno);
 			restrictedtxtTelefonoUSUAlumno.setLimit(9);
-			restrictedtxtTelefonoUSUAlumno.setOnlyNums(true);
 			
 			txtCorreoUSUAlumno = new JTextField();
 			txtCorreoUSUAlumno.setColumns(10);

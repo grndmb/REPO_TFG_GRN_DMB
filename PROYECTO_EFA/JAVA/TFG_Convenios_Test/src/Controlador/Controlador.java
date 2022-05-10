@@ -76,6 +76,7 @@ public class Controlador implements ActionListener{
 			this.vista.panelNuevaPoblacion.setVisible(false);
 			this.vista.panelNuevoCurso.setVisible(false);
 			this.vista.panelNuevaEmpresa.setVisible(false);
+			this.vista.panelListaEmpresas.setVisible(false);
 	}
 	
 	
@@ -210,16 +211,6 @@ public class Controlador implements ActionListener{
 					
 						//Seteamos los valores del alumno seleccioando
 						vista.txtNIFUSUAlumno.setText(listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif());
-						vista.txtNombreCompletoUSUAlumno.setText(listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNombreCompleto());
-						
-						int tlf = listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getTelefono();
-						vista.txtTelefonoUSUAlumno.setText(String.valueOf(tlf));
-						
-						
-						vista.txtCorreoUSUAlumno.setText(listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getCorreo());
-						vista.dateChooserFechaNacimientoUSUAlumno.setDate(listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getFechaNacimiento());
-						
-						
 						
 						Session session = null;
 						
@@ -231,6 +222,20 @@ public class Controlador implements ActionListener{
 							Query query = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE nif =:nif");
 							query.setParameter("nif", listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif());
 							Alumno alumno = (Alumno) query.getSingleResult();
+							
+							vista.txtNombreCompletoUSUAlumno.setText(alumno.getNombreCompleto());
+							
+							int tlf = alumno.getTelefono();
+							vista.txtTelefonoUSUAlumno.setText(String.valueOf(tlf));
+							
+							vista.txtCorreoUSUAlumno.setText(alumno.getCorreo());
+							vista.dateChooserFechaNacimientoUSUAlumno.setDate(alumno.getFechaNacimiento());
+							
+							System.out.println(alumno.getTelefono());
+							System.out.println(tlf);
+							System.out.println(vista.txtTelefonoUSUAlumno.getText());
+							
+							
 							
 							vista.comboBoxCodigoPostalUSUAlumno.setSelectedItem(alumno.getPoblacion().getCodigoPostal());
 							vista.comboBoxPoblacionUSUAlumno.setSelectedItem(alumno.getPoblacion().getNombre());
@@ -269,12 +274,14 @@ public class Controlador implements ActionListener{
 		    	//RELLENA EL JLIST DE LOS ALUMNOS
 				this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos);
 				
+				//Selecciona el curso del alumno, si el mismo se modifica
+				vista.comboBoxListaCursoAlumno.setSelectedItem(vista.comboBoxNombreCursoUSUAlumno.getSelectedItem());
+				
 				//Volvemos al panel Alumno
 				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelListaAlumno.setVisible(true);
 				
-				//Selecciona el curso del alumno, si el mismo se modifica
-				vista.comboBoxListaCursoAlumno.setSelectedItem(vista.comboBoxNombreCursoUSUAlumno.getSelectedItem());
+				
 		    	
 		    }
 		    
@@ -284,6 +291,10 @@ public class Controlador implements ActionListener{
 		    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
 		    		//Llamamos al metodo que realiza el insert del nuevo alumno
 					this.crearNuevoAlumno(sessionFactory, modelo);
+					
+					vista.panelNuevoActualizarAlumno.setVisible(false);
+					vista.panelListaAlumno.setVisible(true);
+					this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos);
 		    	}
 			}
 		    
@@ -586,6 +597,8 @@ public class Controlador implements ActionListener{
 							vista.lblErroresNuevoAlumno.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
 							vista.lblErroresNuevoAlumno.setForeground(Color.RED);
 						}
+						vista.lblErroresNuevoAlumno.setText("ALUMNO CREADO");
+						vista.lblErroresNuevoAlumno.setForeground(Color.RED);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
