@@ -206,8 +206,7 @@ public class Vista extends JFrame {
 		public JTextField txtCodigoPostalUSUPoblacion;
 		public JTextField txtNombreUSUPoblacion;
 		public JTextField txtProvinciaUSUPoblacion;
-		public JButton btnAnadirPoblacion;
-		public JButton btnAtrasPoblacionEmpresa;
+		public JButton btnAnadirPoblacion;;
 		public JLabel lblErroresNuevaPoblacion;	
 		
 	
@@ -821,11 +820,6 @@ public class Vista extends JFrame {
 			btnAnadirPoblacion = new JButton("A\u00D1ADIR POBLACION");
 			btnAnadirPoblacion.setBounds(306, 422, 189, 76);
 			panelNuevaPoblacion.add(btnAnadirPoblacion);
-
-			btnAtrasPoblacionEmpresa = new JButton("ATRAS");
-			btnAtrasPoblacionEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnAtrasPoblacionEmpresa.setBounds(696, 560, 153, 40);
-			panelNuevaPoblacion.add(btnAtrasPoblacionEmpresa);
 			
 			lblErroresNuevaPoblacion = new JLabel();
 			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
