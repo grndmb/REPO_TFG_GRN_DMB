@@ -380,10 +380,10 @@ public class Controlador implements ActionListener{
 			 * ACCIONES DEL PANEL EMPRESA
 			 */
 		    if(e.getSource() == vista.btnPanelEmpresas) {
-
-		    	vista.panelNuevaEmpresa.setVisible(true);
 		    	
+		    	vista.panelListaEmpresas.setVisible(true);
 		    	
+		    	vista.panelNuevaEmpresa.setVisible(false);
 		    	vista.panelListaAlumno.setVisible(false);
 		    	vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(false);
@@ -617,9 +617,10 @@ public class Controlador implements ActionListener{
 							
 							vista.lblErroresNuevoAlumno.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
 							vista.lblErroresNuevoAlumno.setForeground(Color.RED);
+						}else {
+							vista.lblErroresNuevoAlumno.setText("ALUMNO CREADO");
+							vista.lblErroresNuevoAlumno.setForeground(Color.RED);
 						}
-						vista.lblErroresNuevoAlumno.setText("ALUMNO CREADO");
-						vista.lblErroresNuevoAlumno.setForeground(Color.RED);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -930,6 +931,8 @@ public class Controlador implements ActionListener{
 										
 										vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
 										vista.lblErroresNuevoCurso.setForeground(Color.RED);
+									}else {
+										valido = true;
 									}
 									
 								} catch (Exception e) {
