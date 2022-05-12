@@ -477,7 +477,6 @@ public class Controlador implements ActionListener{
 					 * Consulta para obtener los nombres de las poblaciones
 					 */	
 					Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion GROUP BY Nombre ORDER BY Nombre ASC");
-					query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 					ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
 					
 						comboPoblacionNombre.addItem("");
