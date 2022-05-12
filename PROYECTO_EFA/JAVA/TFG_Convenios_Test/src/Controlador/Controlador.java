@@ -184,7 +184,7 @@ public class Controlador implements ActionListener{
 		    	this.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
 		    	this.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 		    	this.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
-		    	
+		    	vista.comboBoxListaCursoAlumno.removeAllItems();
 		    }
 		    
 		   //BOTON QUE ABRE PANEL MODIFICAR ALUMNOS
@@ -295,6 +295,9 @@ public class Controlador implements ActionListener{
 					vista.panelNuevoActualizarAlumno.setVisible(false);
 					vista.panelListaAlumno.setVisible(true);
 					this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos);
+					
+					
+					rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
 		    	}
 			}
 		    
