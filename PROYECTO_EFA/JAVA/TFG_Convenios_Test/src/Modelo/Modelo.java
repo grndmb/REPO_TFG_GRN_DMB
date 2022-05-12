@@ -2,6 +2,7 @@ package Modelo;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.awt.Color;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -71,6 +73,37 @@ public class Modelo {
 		}
 	}
 
+	public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox<String> comboBox) {
+		Session session = null;
+		
+		try {
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			
+			Query query = session.createQuery("FROM Curso");
+			ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
+			
+				comboBox.addItem("");
+			for(int i=0;i<listaCursos.size();i++) {
+				comboBox.addItem(listaCursos.get(i).getNombreCurso().toString());
+			};
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		
+ 	   	
+    }
+	
+	
+	
 	/**
 	  * Metodo para crear e insertar una nueva poblacion en la base de datos
 	  * @param sessionFactory
@@ -108,8 +141,81 @@ public class Modelo {
 		 
 	 }
 
-	 
 	
+	 public void rellenarComboBoxNombreCiudad (SessionFactory sessionFactory, JComboBox comboPoblacionNombre) {
+			Session session = null;
+			
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				/**
+				 * Consulta para obtener los nombres de las poblaciones
+				 */	
+				Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion GROUP BY Nombre ORDER BY Nombre ASC");
+				ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
+				
+					comboPoblacionNombre.addItem("");
+					
+				for(int i=0;i<listaNombresPoblacion.size();i++) {
+					comboPoblacionNombre.addItem(listaNombresPoblacion.get(i).getNombre());
+				};
+				
+					
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+			
+	    }
+	
+	 
+	 public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory,JComboBox comboPoblacionNombre, JComboBox comboPoblacionCP) {
+			
+			Session session = null; 
+			
+			try {
+				
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				comboPoblacionCP.removeAllItems();
+				
+				/**
+				 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
+				 */
+				Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre = :nombre");
+				query.setParameter("nombre", comboPoblacionNombre.getSelectedItem().toString());
+				ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
+				
+				for(int i=0 ; i < listaCodigoPostales.size() ; i++) {
+					comboPoblacionCP.addItem(listaCodigoPostales.get(i).getCodigoPostal());
+				};
+							
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+			
+		}
+	 
+	 
 	/**
 	 * Metodo para crear e insertar un nuevo alumno en la base de datos
 	 * @param sessionFactory
@@ -485,4 +591,5 @@ public class Modelo {
 	 
 	 
 	 }
+
 }

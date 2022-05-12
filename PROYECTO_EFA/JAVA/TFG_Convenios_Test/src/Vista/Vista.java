@@ -260,7 +260,7 @@ public class Vista extends JFrame {
 			labelTitulo.setBounds(0, 0, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
-			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
+			//btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
 			btnInicio.setBounds(530, 450, 479, 76);
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
@@ -301,6 +301,21 @@ public class Vista extends JFrame {
 			JLabel lblLogo = new JLabel("");
 			lblLogo.setBounds(10, 10, 324, 104);
 			panelPrincipal.add(lblLogo);
+			
+			
+			
+			
+			
+			JPanel panelConvenios = new JPanel();
+			panelConvenios.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelConvenios.setBounds(368, 132, 1138, 648);
+			panelPrincipal.add(panelConvenios);
+			panelConvenios.setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel("CONVENIOS");
+			lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 35));
+			lblNewLabel.setBounds(72, 61, 295, 45);
+			panelConvenios.add(lblNewLabel);
 			
 			
 				
