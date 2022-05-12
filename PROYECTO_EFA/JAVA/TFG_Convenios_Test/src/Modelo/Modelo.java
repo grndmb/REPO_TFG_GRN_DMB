@@ -72,6 +72,45 @@ public class Modelo {
 	}
 
 	/**
+	  * Metodo para crear e insertar una nueva poblacion en la base de datos
+	  * @param sessionFactory
+	  * @param codigoPostal
+	  * @param nombre
+	  * @param provincia
+	  */
+	 public void crearPoblacion (SessionFactory sessionFactory, int codigoPostal, String nombre, String provincia) {
+		 
+		 Session session = null;
+			
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Poblacion poblacion = new Poblacion();
+				poblacion.setCodigoPostal(codigoPostal);
+				poblacion.setNombre(nombre);
+				poblacion.setProvincia(provincia);			
+				
+				session.saveOrUpdate(poblacion);
+				session.getTransaction().commit();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+		 
+	 }
+
+	 
+	
+	/**
 	 * Metodo para crear e insertar un nuevo alumno en la base de datos
 	 * @param sessionFactory
 	 * @param nif
@@ -84,7 +123,7 @@ public class Modelo {
 	 * @param nombreCurso
 	 * @throws HibernateException
 	 */
-	public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
+	 public void crearAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
 		
 		Session session = null;
 		
@@ -208,24 +247,48 @@ public class Modelo {
 			session.update(alumno);
 			session.getTransaction().commit();
 
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
+		 } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
 		 
 	 }
 	 
+	 
+	 public void eliminarAlumno (SessionFactory sessionFactory, String nif) throws HibernateException {
+		 
+		 Session session = null;
+		 
+		 try {
+			 session = sessionFactory.getCurrentSession();
+			 session.beginTransaction();
+			 
+			 Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
+			 query.setParameter("nif", nif);
+			 Alumno alumno = (Alumno) query.getSingleResult();
+			 
+			 session.delete(alumno);
+			 session.getTransaction().commit();
+			 
+		 } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+	 }
 	 
 	 /**
 	  * Metodo para crear e insertar una nueva empresa en la base de datos
@@ -301,43 +364,6 @@ public class Modelo {
 		 
 	 }
 	 	
-	 /**
-	  * Metodo para crear e insertar una nueva poblacion en la base de datos
-	  * @param sessionFactory
-	  * @param codigoPostal
-	  * @param nombre
-	  * @param provincia
-	  */
-	 public void crearPoblacion (SessionFactory sessionFactory, int codigoPostal, String nombre, String provincia) {
-		 
-		 Session session = null;
-			
-			try {
-				session = sessionFactory.getCurrentSession();
-				session.beginTransaction();
-				
-				Poblacion poblacion = new Poblacion();
-				poblacion.setCodigoPostal(codigoPostal);
-				poblacion.setNombre(nombre);
-				poblacion.setProvincia(provincia);			
-				
-				session.saveOrUpdate(poblacion);
-				session.getTransaction().commit();
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				if(null != session) {
-					session.getTransaction().rollback();
-				}
-			}finally {
-				if(null != session) {
-					session.close();
-				}
-			}
-		 
-	 }
-
 	 
 	 
 	 /**
