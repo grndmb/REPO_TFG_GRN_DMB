@@ -287,8 +287,20 @@ public class Controlador implements ActionListener{
 		   
 		   //BOTON QUE ELIMINA EL ALUMNO
 		    if(e.getSource() == vista.btnEliminarAlumno) {
-		    	//RELLENA EL JLIST DE LOS ALUMNOS
-				this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos);
+		    	
+		    	try {
+					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
+					modelo.eliminarAlumno(sessionFactory, listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif());
+			    	
+			    	//RELLENA EL JLIST DE LOS ALUMNOS
+					this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos);
+					
+					
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    	
 		    }
 		    
 		    
@@ -698,149 +710,7 @@ public class Controlador implements ActionListener{
 				}
 				
 			}
-	/*
-	 * METODOS DE POBLACION			
-	 */
-		//METODOS DEL PANEL NUEVA POBLACION
 			
-				//Metodo para hacer el insert de la nueva poblacion en la base de datos
-				public void crearNuevaPoblacion(SessionFactory sessionFactory, Modelo modelo) {
-					
-					try {
-						
-						// CODIGO POSTAL
-							int codigoPostal = Integer.parseInt(vista.txtCodigoPostalUSUPoblacion.getText());
-						
-						// NOMBRE POBLACION
-							String nombrePoblacion = vista.txtNombreUSUPoblacion.getText();
-						
-						// PROVINCIA
-							String provincia = vista.txtClaveUSUCurso.getText();
-							
-					        
-						// INSERT
-							modelo.crearPoblacion(sessionFactory, codigoPostal, nombrePoblacion, provincia);
-						
-						// RESET DEL FORMULARIO NUEVA POBLACION
-							this.resetFormularioNuevaPoblacion();
-					}catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}
-			}
-		
-			//Metodo para validar que todo los campos del alumno est�n rellenos
-				public boolean anadirPoblacionValido() {
-					boolean valido = true;
-	
-					try {
-						
-						if(
-							vista.txtCodigoPostalUSUPoblacion.getText().equals("")
-							|| vista.txtNombreUSUPoblacion.getText().equals("")
-							|| vista.txtProvinciaUSUPoblacion.getText().equals("")
-								) {
-							valido = false;
-							
-							vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
-							vista.lblErroresNuevoCurso.setForeground(Color.RED);
-						}
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					
-					return valido;
-				}		
-			//Metodo para restablecer el formulario de nuevaPoblacion
-				public void resetFormularioNuevaPoblacion() {
-					try {
-						vista.txtCodigoPostalUSUPoblacion.setText("");
-						vista.txtNombreUSUPoblacion.setText("");
-						vista.txtProvinciaUSUPoblacion.setText("");
-						vista.lblErroresNuevaPoblacion.setText("");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-	
-	/*
-	 * METODOS DE CURSO			
-	 */
-		//METODOS DEL PANEL NUEVO CURSO
-						
-			//Metodo para hacer el insert del nuevo Curso en la base de datos
-				public void crearNuevoCurso(SessionFactory sessionFactory, Modelo modelo) {
-					
-					try {
-						
-						// NOMBRE CURSO
-							String nombreCurso = vista.txtNombreUSUCurso.getText();
-						
-						// NOMBRE ABREV
-							String nombreAbrev = vista.txtNombreAbrevUSUCurso.getText();
-						
-						// CLAVE
-							String clave = vista.txtClaveUSUCurso.getText();
-							
-						// HORAS FCT
-							String horasFCT = vista.txtHorasFCTUSUCurso.getText();
-						// ES PUBLICO
-							boolean esPublico = false;
-							if (vista.checkBoxEsPublicoUSUCurso.isSelected()) {
-								esPublico = true;
-							} else {
-								esPublico = false;
-							}
-					        
-						// INSERT
-							modelo.crearCurso(sessionFactory, nombreCurso, nombreAbrev, clave, horasFCT, esPublico);
-						
-						// RESET DEL FORMULARIO NUEVO CURSO
-							this.resetFormularioNuevoCurso();
-					}catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}
-			}
-		
-			//Metodo para validar que todo los campos del alumno est�n rellenos
-				public boolean anadirCursoValido() {
-					boolean valido = true;
-	
-					try {
-						
-						if(
-							vista.txtNombreUSUCurso.getText().equals("")
-							|| vista.txtNombreAbrevUSUCurso.getText().equals("")
-							|| vista.txtClaveUSUCurso.getText().equals("")
-							|| vista.txtHorasFCTUSUCurso.getText().equals("")
-								) {
-							valido = false;
-							
-							vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
-							vista.lblErroresNuevoCurso.setForeground(Color.RED);
-						}
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					
-					return valido;
-				}		
-			//Metodo para restablecer el formulario de nuevoCurso
-				public void resetFormularioNuevoCurso() {
-					try {
-						vista.txtNombreUSUCurso.setText("");
-						vista.txtNombreAbrevUSUCurso.setText("");
-						vista.txtClaveUSUCurso.setText("");
-						vista.txtHorasFCTUSUCurso.setText("");
-						vista.checkBoxEsPublicoUSUCurso.setSelected(false);
-						vista.lblErroresNuevoCurso.setText("");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
 	/*
 	 * METODOS DE LA EMPRESA	
      */
@@ -1011,4 +881,153 @@ public class Controlador implements ActionListener{
 						e.printStackTrace();
 					}
 				}
+
+
+
+				/*
+				 * METODOS DE POBLACION			
+				 */
+					//METODOS DEL PANEL NUEVA POBLACION
+						
+							//Metodo para hacer el insert de la nueva poblacion en la base de datos
+							public void crearNuevaPoblacion(SessionFactory sessionFactory, Modelo modelo) {
+								
+								try {
+									
+									// CODIGO POSTAL
+										int codigoPostal = Integer.parseInt(vista.txtCodigoPostalUSUPoblacion.getText());
+									
+									// NOMBRE POBLACION
+										String nombrePoblacion = vista.txtNombreUSUPoblacion.getText();
+									
+									// PROVINCIA
+										String provincia = vista.txtClaveUSUCurso.getText();
+										
+								        
+									// INSERT
+										modelo.crearPoblacion(sessionFactory, codigoPostal, nombrePoblacion, provincia);
+									
+									// RESET DEL FORMULARIO NUEVA POBLACION
+										this.resetFormularioNuevaPoblacion();
+								}catch (Exception e) {
+									// TODO: handle exception
+									e.printStackTrace();
+								}
+						}
+					
+						//Metodo para validar que todo los campos del alumno est�n rellenos
+							public boolean anadirPoblacionValido() {
+								boolean valido = true;
+				
+								try {
+									
+									if(
+										vista.txtCodigoPostalUSUPoblacion.getText().equals("")
+										|| vista.txtNombreUSUPoblacion.getText().equals("")
+										|| vista.txtProvinciaUSUPoblacion.getText().equals("")
+											) {
+										valido = false;
+										
+										vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
+										vista.lblErroresNuevoCurso.setForeground(Color.RED);
+									}
+									
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								
+								return valido;
+							}		
+						//Metodo para restablecer el formulario de nuevaPoblacion
+							public void resetFormularioNuevaPoblacion() {
+								try {
+									vista.txtCodigoPostalUSUPoblacion.setText("");
+									vista.txtNombreUSUPoblacion.setText("");
+									vista.txtProvinciaUSUPoblacion.setText("");
+									vista.lblErroresNuevaPoblacion.setText("");
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+				
+				/*
+				 * METODOS DE CURSO			
+				 */
+					//METODOS DEL PANEL NUEVO CURSO
+									
+						//Metodo para hacer el insert del nuevo Curso en la base de datos
+							public void crearNuevoCurso(SessionFactory sessionFactory, Modelo modelo) {
+								
+								try {
+									
+									// NOMBRE CURSO
+										String nombreCurso = vista.txtNombreUSUCurso.getText();
+									
+									// NOMBRE ABREV
+										String nombreAbrev = vista.txtNombreAbrevUSUCurso.getText();
+									
+									// CLAVE
+										String clave = vista.txtClaveUSUCurso.getText();
+										
+									// HORAS FCT
+										String horasFCT = vista.txtHorasFCTUSUCurso.getText();
+									// ES PUBLICO
+										boolean esPublico = false;
+										if (vista.checkBoxEsPublicoUSUCurso.isSelected()) {
+											esPublico = true;
+										} else {
+											esPublico = false;
+										}
+								        
+									// INSERT
+										modelo.crearCurso(sessionFactory, nombreCurso, nombreAbrev, clave, horasFCT, esPublico);
+									
+									// RESET DEL FORMULARIO NUEVO CURSO
+										this.resetFormularioNuevoCurso();
+								}catch (Exception e) {
+									// TODO: handle exception
+									e.printStackTrace();
+								}
+						}
+					
+						//Metodo para validar que todo los campos del alumno est�n rellenos
+							public boolean anadirCursoValido() {
+								boolean valido = true;
+				
+								try {
+									
+									if(
+										vista.txtNombreUSUCurso.getText().equals("")
+										|| vista.txtNombreAbrevUSUCurso.getText().equals("")
+										|| vista.txtClaveUSUCurso.getText().equals("")
+										|| vista.txtHorasFCTUSUCurso.getText().equals("")
+											) {
+										valido = false;
+										
+										vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
+										vista.lblErroresNuevoCurso.setForeground(Color.RED);
+									}
+									
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								
+								return valido;
+							}		
+						//Metodo para restablecer el formulario de nuevoCurso
+							public void resetFormularioNuevoCurso() {
+								try {
+									vista.txtNombreUSUCurso.setText("");
+									vista.txtNombreAbrevUSUCurso.setText("");
+									vista.txtClaveUSUCurso.setText("");
+									vista.txtHorasFCTUSUCurso.setText("");
+									vista.checkBoxEsPublicoUSUCurso.setSelected(false);
+									vista.lblErroresNuevoCurso.setText("");
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+				
+
+
 }
