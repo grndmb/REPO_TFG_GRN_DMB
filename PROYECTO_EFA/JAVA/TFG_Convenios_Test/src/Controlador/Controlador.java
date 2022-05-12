@@ -56,6 +56,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnNuevoCursoAlumno.addActionListener(this);
 			this.vista.btnPanelModificarAlumno.addActionListener(this);
 			this.vista.btnModificarAlumno.addActionListener(this);
+			this.vista.btnEliminarAlumno.addActionListener(this);
 			
 		//Botones Panel Nueva Poblacion
 			this.vista.btnAnadirPoblacion.addActionListener(this);
@@ -260,8 +261,7 @@ public class Controlador implements ActionListener{
 					}
 		    	}
 		    }
-		    
-		    
+		    		    
 		    // BOTON QUE HACE EL UPDATE DE ALUMNO
 		    if(e.getSource() == vista.btnModificarAlumno) {
 		    	
@@ -284,6 +284,13 @@ public class Controlador implements ActionListener{
 				
 		    	
 		    }
+		   
+		   //BOTON QUE ELIMINA EL ALUMNO
+		    if(e.getSource() == vista.btnEliminarAlumno) {
+		    	//RELLENA EL JLIST DE LOS ALUMNOS
+				this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos);
+		    }
+		    
 		    
 		  //BOTON INSERT ALUMNO
 		    if(e.getSource() == vista.btnAnadirAlumno) {
