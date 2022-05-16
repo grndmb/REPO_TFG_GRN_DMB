@@ -76,6 +76,9 @@ public class Controlador implements ActionListener{
 			this.vista.btnAnadirEmpresa.addActionListener(this);
 			this.vista.comboBoxPoblacionUSUEmpresa.addActionListener(this);
 			this.vista.btnNuevaPoblacionEmpresa.addActionListener(this);
+		
+		//Botones panel Convenios
+			this.vista.comboBoxListaCursoConvenio.addActionListener(this);
 			
 		//VISTAS
 			this.vista.panelConvenios.setVisible(false);;
@@ -411,14 +414,20 @@ public class Controlador implements ActionListener{
 	
 		    }
 		    
-		    if(e.getSource() == vista.btnPanelConvenio) {
-		    	
-		    	vista.panelListaEmpresas.setVisible(false);
-		    	vista.panelConvenios.setVisible(true);
-		    	
-		    }
-		    
-		    
+			    /**
+			     * Panel convenios
+			     */
+			    
+				    if(e.getSource() == vista.btnPanelConvenio) {
+				    	
+				    	vista.panelListaEmpresas.setVisible(false);
+				    	vista.panelConvenios.setVisible(true);
+				    	
+				    	vista.comboBoxListaCursoConvenio.removeAllItems();
+						modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoConvenio);
+				    	
+				    }
+				    
 		    if(e.getSource() == vista.btnAnadirEmpresa) {
 	
 		    	if(this.anadirEmpresaValida() == true && this.existeNuevaEmpresa(sessionFactory) == true) {
