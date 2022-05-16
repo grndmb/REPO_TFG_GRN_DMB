@@ -18,6 +18,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JPanel;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -64,12 +65,20 @@ public class Controlador implements ActionListener{
 		//Botones Panel Nuevo Curso
 			this.vista.btnAnadirCurso.addActionListener(this);
 			
+			
+		//BOTONES PANEL LISTA EMPRESAS
+			this.vista.btnPanelConvenio.addActionListener(this);
+			this.vista.btnPanelModificarEmpresa.addActionListener(this);
+			this.vista.btnEliminarEmpresa.addActionListener(this);
+			this.vista.btnAnadirEmpresa.addActionListener(this);
+			
 		//Botones Panel Nueva Empresa
 			this.vista.btnAnadirEmpresa.addActionListener(this);
 			this.vista.comboBoxPoblacionUSUEmpresa.addActionListener(this);
 			this.vista.btnNuevaPoblacionEmpresa.addActionListener(this);
 			
 		//VISTAS
+			this.vista.panelConvenios.setVisible(false);;
 			this.vista.panelPrincipal.setVisible(true);
 			this.vista.panelListaAlumno.setVisible(false);
 			this.vista.panelMenu.setVisible(false);
@@ -395,10 +404,18 @@ public class Controlador implements ActionListener{
 				//Rellena el label con la fecha actualizacion =  fecha actual
 					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
 					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);	
+					
 		    }if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
 		    
 		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
 	
+		    }
+		    
+		    if(e.getSource() == vista.btnPanelConvenio) {
+		    	
+		    	vista.panelListaEmpresas.setVisible(false);
+		    	vista.panelConvenios.setVisible(true);
+		    	
 		    }
 		    
 		    

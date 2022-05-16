@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.awt.Color;
 import java.math.BigInteger;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -471,7 +472,15 @@ public class Modelo {
 	 }
 	 	
 	 
-	 
+	 public ArrayList<Empresa> listaEmpresas (SessionFactory sessionFactory) {
+		
+		 
+		 
+		 
+		 
+		 
+		 return null; 
+	 }
 	 /**
 	  * Metodo para crear e insertar un convenio con una empresa (Puede ser "FCT" o "PFE")
 	  * @param sessionFactory
@@ -514,7 +523,7 @@ public class Modelo {
 					test = "MOR/C";
 					auxConvenios = auxConvenios + 1;
 					idConvenio = test+  auxConvenios + "/22";
-		    		
+
 				}else {
 					test = "MOR/PRIV/C";
 					auxConvenios = auxConvenios + 1;
@@ -556,6 +565,44 @@ public class Modelo {
 		 
 	 }
 	 
+	 
+	 public void verConvenio (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
+		 
+		 Session session = null;
+
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+				empresaQuery.setParameter("cifEmpresa", cifEmpresa);
+				Empresa empresa = (Empresa) empresaQuery.getSingleResult();
+				
+				Query convenioQuery = sessionFactory.getCurrentSession().createQuery("FROM Convenio WHERE empresa = :empresa");
+				convenioQuery.setParameter("empresa", empresa);
+				
+				ArrayList <Convenio> listaConvenio = (ArrayList<Convenio>) convenioQuery.list();
+				
+				for (int i = 0; i < listaConvenio.size(); i++) {
+					System.out.println(listaConvenio.get(i).getIdConvenio() + " -> " + listaConvenio.get(i).getTipoConvenio());
+
+				}
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+		 
+	 }
+	 
 	 public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;
@@ -576,14 +623,15 @@ public class Modelo {
 	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2� CFGM Carrocer�a");
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
+	     /*helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", fechaNacimientoUSU);
 	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", fechaNacimientoUSU);
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2� CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "PFE", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "FCT", fechaNacimientoUSU);
-
+	      */
 	        
+	        helper.verConvenio(sessionFactory, "4331-PAT");
 			//ArrayList <Alumno> listaAlumnos = null;
 			//helper.listarAlumnos(sessionFactory);
 	 

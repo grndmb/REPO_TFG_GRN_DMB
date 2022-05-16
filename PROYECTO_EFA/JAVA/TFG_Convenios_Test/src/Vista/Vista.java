@@ -37,6 +37,12 @@ import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
+import javax.swing.JRadioButton;
+import javax.swing.JTextPane;
+import javax.swing.JMenu;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.Panel;
 
 
 public class Vista extends JFrame {
@@ -120,6 +126,7 @@ public class Vista extends JFrame {
 		public JList listEmpresas;
 		public DefaultListModel modelEmpresas;
 		
+		public JButton btnPanelConvenio;
 		
 	/**
 	* PANEL NUEVA EMPRESA
@@ -170,6 +177,11 @@ public class Vista extends JFrame {
 		public JButton btnAnadirEmpresa;
 		public JButton btnNuevaPoblacionEmpresa;
 			
+	/**
+	 * PANEL CONVENIO
+	 */
+		
+	public JPanel panelConvenios;
 		
 		
 	// ---------------------------------------------------------------------
@@ -260,7 +272,7 @@ public class Vista extends JFrame {
 			labelTitulo.setBounds(0, 0, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
-			//btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
+			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
 			btnInicio.setBounds(530, 450, 479, 76);
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
@@ -306,26 +318,11 @@ public class Vista extends JFrame {
 			
 			
 			
-			JPanel panelConvenios = new JPanel();
-			panelConvenios.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-			panelConvenios.setBounds(368, 132, 1138, 648);
-			panelPrincipal.add(panelConvenios);
-			panelConvenios.setLayout(null);
-			
-			JLabel lblNewLabel = new JLabel("CONVENIOS");
-			lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 35));
-			lblNewLabel.setBounds(72, 61, 295, 45);
-			panelConvenios.add(lblNewLabel);
-			
-			
-				
-		
-			
 			// -----------------------------------------------------------------
 			
 			/**
 			 * PANEL ALUMNOS	
-			 
+			 */
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -402,7 +399,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * PANEL NUEVO ALUMNO
-		 
+		 */
 		panelNuevoActualizarAlumno = new JPanel();
 		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
@@ -533,7 +530,7 @@ public class Vista extends JFrame {
      	// -----------------------------------------------------------------
      	/**
      	 * PANEL EMPRESAS
-     	 
+     	 */
 
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -569,19 +566,25 @@ public class Vista extends JFrame {
             btnPanelModificarEmpresa = new JButton("MODIFICAR");
             btnPanelModificarEmpresa.setBackground(Color.ORANGE);
             btnPanelModificarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-            btnPanelModificarEmpresa.setBounds(874, 230, 205, 55);
+            btnPanelModificarEmpresa.setBounds(874, 272, 205, 55);
             panelListaEmpresas.add(btnPanelModificarEmpresa);
             
             
             btnEliminarEmpresa = new JButton("ELIMINAR");
             btnEliminarEmpresa.setBackground(Color.RED);
             btnEliminarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-            btnEliminarEmpresa.setBounds(874, 312, 205, 55);
+            btnEliminarEmpresa.setBounds(874, 354, 205, 55);
             panelListaEmpresas.add(btnEliminarEmpresa);
+            
+            btnPanelConvenio = new JButton("VER CONVENIO");
+            btnPanelConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelConvenio.setBackground(new Color(0, 51, 255));
+            btnPanelConvenio.setBounds(874, 138, 205, 55);
+            panelListaEmpresas.add(btnPanelConvenio);
             
         /**
 		 * PANEL NUEVA EMPRESA
-		 
+		 */
 		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
@@ -783,10 +786,69 @@ public class Vista extends JFrame {
 			lblErroresNuevaEmpresa.setBounds(745, 570, 352, 56);
 			panelNuevaEmpresa.add(lblErroresNuevaEmpresa);
 	
+			
+		/**
+		 * PANEL CONVENIOS
+		 */
+			
+			panelConvenios = new JPanel();
+			panelConvenios.setBackground(Color.WHITE);
+			panelConvenios.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelConvenios.setBounds(368, 132, 1138, 648);
+			panelPrincipal.add(panelConvenios);
+			panelConvenios.setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel("CONVENIOS");
+			lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 35));
+			lblNewLabel.setBounds(72, 61, 295, 45);
+			panelConvenios.add(lblNewLabel);
+			
+			JPanel panelTipoConvenio = new JPanel();
+			panelTipoConvenio.setBackground(Color.WHITE);
+			panelTipoConvenio.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Convenio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panelTipoConvenio.setBounds(64, 373, 203, 142);
+			panelConvenios.add(panelTipoConvenio);
+			panelTipoConvenio.setLayout(null);
+			
+			JRadioButton radioBtnFCTConvenio = new JRadioButton("FCT");
+			radioBtnFCTConvenio.setBounds(16, 40, 103, 21);
+			panelTipoConvenio.add(radioBtnFCTConvenio);
+			radioBtnFCTConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			radioBtnFCTConvenio.setBackground(Color.WHITE);
+			
+			JRadioButton radioBtnPFEConvenio = new JRadioButton("PFE");
+			radioBtnPFEConvenio.setBounds(16, 80, 103, 21);
+			panelTipoConvenio.add(radioBtnPFEConvenio);
+			radioBtnPFEConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			radioBtnPFEConvenio.setBackground(Color.WHITE);
+			
+			comboBoxListaCursoAlumno = new JComboBox();
+	        comboBoxListaCursoAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+	        comboBoxListaCursoAlumno.setBackground(Color.WHITE);
+	        comboBoxListaCursoAlumno.setBounds(64, 246, 511, 38);
+	        panelConvenios.add(comboBoxListaCursoAlumno);
+	        
+	        JPanel panel_1 = new JPanel();
+	        panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Convenio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	        panel_1.setBounds(646, 33, 437, 321);
+	        panelConvenios.add(panel_1);
+	        panel_1.setLayout(null);
+	        
+	        JLabel lblNewLabel_1 = new JLabel(".");
+	        lblNewLabel_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+	        lblNewLabel_1.setBounds(26, 39, 238, 41);
+	        panel_1.add(lblNewLabel_1);
+	        
+	        JLabel lblNewLabel_2 = new JLabel("CURSO");
+	        lblNewLabel_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+	        lblNewLabel_2.setBounds(64, 179, 197, 45);
+	        panelConvenios.add(lblNewLabel_2);
+				
+		
             
 		/**
 		 * Panel nueva Poblacion
-		 
+		 */
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
@@ -843,7 +905,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			 
+			 */
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -919,7 +981,7 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);
 			
-				*/
+				
 				
 		 	
 	}
