@@ -277,6 +277,13 @@ public class Modelo {
 	}
 		
 	
+	 /**
+	  * Metodo para listar alumnos dependiendo del curso elegido
+	  * @param sessionFactory
+	  * @param nombreCurso
+	  * @return
+	  * @throws InterruptedException
+	  */
 	
 	 public ArrayList<Alumno> listarAlumnos (SessionFactory sessionFactory, String nombreCurso) throws InterruptedException {
 	        
@@ -317,6 +324,19 @@ public class Modelo {
 			
 	 }
 	
+	 
+	 /**
+	  * Metodo para actualizar un alumno
+	  * @param sessionFactory
+	  * @param nif
+	  * @param nombreCompleto
+	  * @param telefono
+	  * @param correo
+	  * @param fechaNacimiento
+	  * @param codigoPostal
+	  * @param nombreCurso
+	  * @throws HibernateException
+	  */
 	 public void actualizarAlumno (SessionFactory sessionFactory, String nif, String nombreCompleto, int telefono, String correo, Date fechaNacimiento, int codigoPostal, String nombreCurso) throws HibernateException {
 		 
 		 Session session=null;
@@ -472,15 +492,82 @@ public class Modelo {
 	 }
 	 	
 	 
+	/**
+	 * Metodo para listar empresas sin filtro 
+	 * @param sessionFactory
+	 * @return
+	 */
 	 public ArrayList<Empresa> listaEmpresas (SessionFactory sessionFactory) {
 		
+		 Session session = null;
 		 
+		 ArrayList<Empresa> listaEmpresa = new ArrayList<Empresa>();
 		 
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Query queryEmpresa = sessionFactory.getCurrentSession().createQuery("FROM Empresa");
+				listaEmpresa = (ArrayList<Empresa>) queryEmpresa.list();
 		 
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+		
 		 
-		 
-		 return null; 
+		 return listaEmpresa; 
 	 }
+	 
+	 
+	 
+	 /**
+	  * Metodo para listar empresas con filtro
+	  * @param sessionFactory
+	  * @param nombreEmpresa
+	  * @return
+	  */
+	 
+	 public ArrayList<Empresa> listaEmpresasFiltro (SessionFactory sessionFactory, String nombreEmpresa) {
+		
+		 Session session = null;
+		 
+		 ArrayList<Empresa> listaEmpresa = new ArrayList<Empresa>();
+		 
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Query queryEmpresa = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE nombreEmpresa LIKE :nombreEmpresa");
+				queryEmpresa.setParameter("nombreEmpresa", "%" + nombreEmpresa + "%");
+		 
+				listaEmpresa = (ArrayList<Empresa>) queryEmpresa.list();
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+		 
+		 return listaEmpresa; 
+	 }
+	 
+	 
+	 
 	 /**
 	  * Metodo para crear e insertar un convenio con una empresa (Puede ser "FCT" o "PFE")
 	  * @param sessionFactory
@@ -489,6 +576,7 @@ public class Modelo {
 	  * @param tipoConvenio
 	  * @throws HibernateException
 	  */
+	 
 	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio, Date fechaAnexo) throws HibernateException {
 		 
 		 Session session = null;
@@ -566,6 +654,13 @@ public class Modelo {
 	 }
 	 
 	 
+	 /**
+	  * Metodo para ver los Convenios de una empresa
+	  * @param sessionFactory
+	  * @param cifEmpresa
+	  * @throws HibernateException
+	  */
+	 
 	 public void verConvenio (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
 		 
 		 Session session = null;
@@ -603,6 +698,9 @@ public class Modelo {
 		 
 	 }
 	 
+	 
+	 
+	 
 	 public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;
@@ -623,15 +721,21 @@ public class Modelo {
 	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2� CFGM Carrocer�a");
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-	     /*helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", fechaNacimientoUSU);
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", fechaNacimientoUSU);
+	     /*helper.crearConvenio(sessionFactory, "1231-FIG", "2� CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "PFE", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "FCT", fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2� CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "PFE", fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "FCT", fechaNacimientoUSU);
 	      */
 	        
-	        helper.verConvenio(sessionFactory, "4331-PAT");
+	        ArrayList<Empresa> listaEmpresas = helper.listaEmpresasFiltro(sessionFactory, "Agro");
+	        
+	        for (int i = 0; i < listaEmpresas.size(); i++) {
+				System.out.println(listaEmpresas.get(i).getNombreEmpresa());
+			}
+	        
+	        //helper.verConvenio(sessionFactory, "4331-PAT");
 			//ArrayList <Alumno> listaAlumnos = null;
 			//helper.listarAlumnos(sessionFactory);
 	 
