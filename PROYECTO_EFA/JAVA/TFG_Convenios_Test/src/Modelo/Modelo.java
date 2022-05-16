@@ -1,26 +1,18 @@
 package Modelo;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.awt.Color;
 import java.math.BigInteger;
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.context.internal.ManagedSessionContext;
-import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.hibernate.query.Query;
-import org.hibernate.type.CurrencyType;
 
 import persistencia.Alumno;
 import persistencia.Convenio;
