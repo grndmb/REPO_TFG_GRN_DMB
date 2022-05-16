@@ -182,7 +182,7 @@ public class Vista extends JFrame {
 	 */
 		
 	public JPanel panelConvenios;
-		
+		public JComboBox comboBoxListaCursoConvenio;
 		
 	// ---------------------------------------------------------------------
 	/**
@@ -822,11 +822,11 @@ public class Vista extends JFrame {
 			radioBtnPFEConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			radioBtnPFEConvenio.setBackground(Color.WHITE);
 			
-			comboBoxListaCursoAlumno = new JComboBox();
-	        comboBoxListaCursoAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-	        comboBoxListaCursoAlumno.setBackground(Color.WHITE);
-	        comboBoxListaCursoAlumno.setBounds(64, 246, 511, 38);
-	        panelConvenios.add(comboBoxListaCursoAlumno);
+			comboBoxListaCursoConvenio = new JComboBox();
+			comboBoxListaCursoConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			comboBoxListaCursoConvenio.setBackground(Color.WHITE);
+			comboBoxListaCursoConvenio.setBounds(184, 114, 584, 38);
+			panelConvenios.add(comboBoxListaCursoConvenio);
 	        
 	        JPanel panel_1 = new JPanel();
 	        panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Convenio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
