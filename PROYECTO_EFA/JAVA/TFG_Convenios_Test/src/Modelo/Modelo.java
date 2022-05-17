@@ -536,16 +536,16 @@ public class Modelo {
 			 session = sessionFactory.getCurrentSession();
 			 session.beginTransaction();
 			 
-			 Query queryConvenio = session.createQuery("FROM Convenio WHERE cifEmpresa = :cifEmpresa");
-			 queryConvenio.setParameter("cifEmpresa", cifEmpresa);
-			 ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) queryConvenio.list();
+			
 			 
 			 
 			 Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 			 queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
 			 Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
 			 
-			
+			 Query queryConvenio = session.createQuery("FROM Convenio WHERE empresa = :empresa");
+			 queryConvenio.setParameter("empresa", empresa);
+			 ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) queryConvenio.list();
 			 
 			 
 			 
