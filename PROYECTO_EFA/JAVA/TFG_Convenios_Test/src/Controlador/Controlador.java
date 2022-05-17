@@ -481,7 +481,7 @@ public class Controlador implements ActionListener{
 			//BOTON QUE MUESTRA EL PANEL DE AÑADIR NUEVA EMPRESA
 				if(e.getSource() == vista.btnPanelAddEmpresa){
 					this.vista.panelListaEmpresas.setVisible(false);
-		    		this.vista.btnPanelAddEmpresa.setVisible(true);
+		    		this.vista.panelNuevaEmpresa.setVisible(true);
 				}
 		
 			//BOTON QUE HACE EL INSERT DE LA EMPRESA
@@ -491,7 +491,7 @@ public class Controlador implements ActionListener{
 			    		//Llamamos al metodo que realiza el insert de la nueva empresa
 			    		this.crearNuevaEmpresa(sessionFactory, modelo);
 			    		this.vista.panelListaEmpresas.setVisible(true);
-			    		this.vista.btnPanelAddEmpresa.setVisible(false);
+			    		this.vista.panelNuevaEmpresa.setVisible(false);
 			    	}
 			}
 		    
