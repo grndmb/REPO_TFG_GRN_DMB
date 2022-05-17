@@ -568,6 +568,50 @@ public class Modelo {
 	 }
 	 
 	 
+	 public void comprobarConvenios (SessionFactory sessionFactory, String cifEmpresa, String tipoConvenio) throws HibernateException {
+		
+		 Session session = null;
+
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+				
+				BigInteger auxComprobacion;
+				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
+				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
+				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
+				
+
+		 		//Convertir Big Integer a Int
+		 		String auxComprobacionP = String.valueOf(auxComprobacion);
+		 		int auxComprobacionB = Integer.parseInt(auxComprobacionP);
+				
+		 		if(auxComprobacionB > 1) {
+		 			
+		 		}
+		 		
+		 		
+		 		System.out.println(auxComprobacionB);
+			 
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+	
+		 
+	 }
 	 
 	 /**
 	  * Metodo para crear e insertar un convenio con una empresa (Puede ser "FCT" o "PFE")
@@ -591,18 +635,11 @@ public class Modelo {
 				//MOR/C014/22
 				//MOR/A014/22
 				
+				
+				
 				String test;
 				String idConvenio = "";
-				
-				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
-				
-				Query query
-				
-				
-				
-				
-				
-				
+	    		
 				BigInteger auxConveniosQuery;
 	    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
 	    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
@@ -672,6 +709,8 @@ public class Modelo {
 				session.save(convenio);
 				session.getTransaction().commit();
 				
+				comprobarConvenios(sessionFactory, cifEmpresa, tipoConvenio);
+
 				
 		 } catch (Exception e) {
 				// TODO: handle exception
