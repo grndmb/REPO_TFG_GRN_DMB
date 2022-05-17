@@ -567,52 +567,7 @@ public class Modelo {
 		 return listaEmpresa; 
 	 }
 	 
-	 
-	 public void comprobarConvenios (SessionFactory sessionFactory, String cifEmpresa, String tipoConvenio) throws HibernateException {
-		
-		 Session session = null;
-
-		 	try {
-		 		session = sessionFactory.getCurrentSession();
-				session.beginTransaction();
-				
-				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
-				
-				BigInteger auxComprobacion;
-				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
-				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
-				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
-				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
-				
-
-		 		//Convertir Big Integer a Int
-		 		String auxComprobacionP = String.valueOf(auxComprobacion);
-		 		int auxComprobacionB = Integer.parseInt(auxComprobacionP);
-				
-		 		if(auxComprobacionB > 1) {
-		 			
-		 		}
-		 		
-		 		
-		 		System.out.println(auxComprobacionB);
-			 
-				
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			if(null != session) {
-				session.getTransaction().rollback();
-			}
-		}finally {
-			if(null != session) {
-				session.close();
-			}
-		}
-		 
 	
-		 
-	 }
-	 
 	 /**
 	  * Metodo para crear e insertar un convenio con una empresa (Puede ser "FCT" o "PFE")
 	  * @param sessionFactory
@@ -664,13 +619,13 @@ public class Modelo {
 						auxConvenios = auxConvenios + 1;
 				        Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-				        idConvenio = test + "A"+  numeroCeros + "/22";
+				        idConvenio = test + "C"+  numeroCeros + "/22";
 						
-					}if(organismoPublico = false) {
+					}else {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "C"+  numeroCeros + "/22";
+						idConvenio = test + "A"+  numeroCeros + "/22";
 					}
 					
 					
@@ -681,12 +636,12 @@ public class Modelo {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "A"+  numeroCeros + "/22";
-					}if(organismoPublico = false) {
+						idConvenio = test + "C"+  numeroCeros + "/22";
+					}else {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "C"+  numeroCeros + "/22";
+						idConvenio = test + "A"+  numeroCeros + "/22";
 					}
 					
 					
@@ -706,11 +661,25 @@ public class Modelo {
 				convenio.setFechaAnexo(fechaAnexo);
 				convenio.setTipoConvenio(tipoConvenio);
 	    		
-				session.save(convenio);
-				session.getTransaction().commit();
 				
-				comprobarConvenios(sessionFactory, cifEmpresa, tipoConvenio);
+				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+				BigInteger auxComprobacion;
+				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
+				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
+				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
+				
 
+		 		//Convertir Big Integer a Int
+		 		String auxComprobacionP = String.valueOf(auxComprobacion);
+		 		int auxComprobacionB = Integer.parseInt(auxComprobacionP);
+				
+		 		if(auxComprobacionB < 1) {
+		 			session.save(convenio);
+					session.getTransaction().commit();	
+		 		}
+		 		
+	
 				
 		 } catch (Exception e) {
 				// TODO: handle exception
@@ -799,7 +768,7 @@ public class Modelo {
 	    
 	        
 	        
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", true, fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformáticos y Redes", "FCT", false, fechaNacimientoUSU);
 	     helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Básica Mantenimiento de Vehículos", "PFE", false, fechaNacimientoUSU);
