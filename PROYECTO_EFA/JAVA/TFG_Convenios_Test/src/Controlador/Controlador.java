@@ -964,7 +964,7 @@ public class Controlador implements ActionListener{
 								}
 						}
 					
-						//Metodo para validar que todo los campos del alumno est�n rellenos
+						//Metodo para validar que todo los campos del alumno estan rellenos
 							public boolean anadirCursoValido() {
 								boolean valido = true;
 				
