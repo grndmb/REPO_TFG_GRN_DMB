@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Convenio extends JFrame {
+import Controlador.Controlador;
+
+public class FrameConvenios extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,8 +20,9 @@ public class Convenio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Convenio frame = new Convenio();
-					frame.setVisible(true);
+					FrameConvenios frameConvenios = new FrameConvenios();
+					Controlador controlador = new Controlador(frameConvenios);
+					frameConvenios.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -30,7 +33,7 @@ public class Convenio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Convenio() {
+	public FrameConvenios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -189,6 +189,7 @@ public class Vista extends JFrame {
 		public JList listConvenios;
 		public DefaultListModel modelConvenios;
 		
+		public JButton btnActualizarConvenio;
 	// ---------------------------------------------------------------------
 	/**
 	 * PANEL NUEVO CURSO
@@ -277,7 +278,7 @@ public class Vista extends JFrame {
 			labelTitulo.setBounds(0, 0, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
-			//btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
+			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
 			btnInicio.setBounds(530, 450, 479, 76);
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
@@ -324,7 +325,7 @@ public class Vista extends JFrame {
 			
 			/**
 			 * PANEL ALUMNOS	
-			 
+			 */
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -401,7 +402,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * PANEL NUEVO ALUMNO
-		 
+		 */
 		panelNuevoActualizarAlumno = new JPanel();
 		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
@@ -532,7 +533,7 @@ public class Vista extends JFrame {
      	// -----------------------------------------------------------------
     	/**
     	 * PANEL EMPRESAS
-     	 
+     	 */
 
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -620,7 +621,7 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
         /**
 		 * PANEL NUEVA EMPRESA
-		 
+		 */
 		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
@@ -887,15 +888,7 @@ public class Vista extends JFrame {
             listConvenios.setLayoutOrientation(JList.VERTICAL);
             panelConvenios.add(listPanelConvenios);
             
-            JButton btnActualizarConvenio = new JButton("Actualizar");
-            btnActualizarConvenio.addActionListener(new ActionListener() {
-            	public void actionPerformed(ActionEvent e) {
-            	
-            		
-            		
-            	}
-            	
-            });
+            btnActualizarConvenio = new JButton("Actualizar");
             btnActualizarConvenio.setBackground(Color.WHITE);
             btnActualizarConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
             btnActualizarConvenio.setBounds(64, 373, 158, 45);
@@ -905,7 +898,7 @@ public class Vista extends JFrame {
             
 		/**
 		 * Panel nueva Poblacion
-		 
+		 */
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
@@ -962,7 +955,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			 
+			 */
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -1037,6 +1030,6 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);		
-		 	*/
+		 	
 	}
 }

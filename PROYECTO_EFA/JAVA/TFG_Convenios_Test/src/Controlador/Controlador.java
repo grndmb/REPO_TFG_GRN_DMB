@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import Vista.Vista;
+import Vista.FrameConvenios;
 import persistencia.Alumno;
 import persistencia.Convenio;
 import persistencia.Curso;
@@ -35,7 +36,8 @@ import Modelo.Modelo;
 public class Controlador implements ActionListener{
 	//Objetos && Variables
 	Vista vista = new Vista();
-
+	FrameConvenios frameConvenios = new FrameConvenios();
+	
 	//Constructor
 	public Controlador(Vista v) {
 		this.vista = v;
@@ -81,6 +83,7 @@ public class Controlador implements ActionListener{
 		
 		//Botones panel Convenios
 			this.vista.comboBoxListaCursoConvenio.addActionListener(this);
+			this.vista.btnActualizarConvenio.addActionListener(this);
 			
 		//VISTAS
 			this.vista.panelConvenios.setVisible(false);;
@@ -447,6 +450,12 @@ public class Controlador implements ActionListener{
 				    	
 				    	vista.comboBoxListaCursoConvenio.removeAllItems();
 						modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoConvenio);
+				    	
+				    }
+				    
+				    if(e.getSource() == vista.btnActualizarConvenio) {
+				    	
+				    	vista.setV
 				    	
 				    }
 				    
