@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.Date;
+import java.util.Formatter;
 import java.util.Iterator;
 import java.awt.Color;
 import java.math.BigInteger;
@@ -577,7 +578,7 @@ public class Modelo {
 	  * @throws HibernateException
 	  */
 	 
-	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio, Date fechaAnexo) throws HibernateException {
+	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio, boolean organismoPublico, Date fechaAnexo) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -586,7 +587,9 @@ public class Modelo {
 				session.beginTransaction();
 				
 				//MOR/PRIV/C014/22
+				//MOR/PRIV/A001/22
 				//MOR/C014/22
+				//MOR/A014/22
 				
 				String test;
 				String idConvenio = "";
@@ -603,20 +606,49 @@ public class Modelo {
 	    		int auxConvenios = Integer.parseInt(auxConvenios1);
 				
 	    		
-				Query query = sessionFactory.getCurrentSession().createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
-				query.setParameter("nombreCurso", nombreCurso);
-				Curso curso = (Curso) query.getSingleResult();
+				Query queryCurso = sessionFactory.getCurrentSession().createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
+				queryCurso.setParameter("nombreCurso", nombreCurso);
+				Curso curso = (Curso) queryCurso.getSingleResult();
+				
+				
 				
 				if(curso.isEsPublico() == true) {
-					test = "MOR/C";
-					auxConvenios = auxConvenios + 1;
-					idConvenio = test+  auxConvenios + "/22";
-
+					test = "MOR/";
+					
+					if(organismoPublico == true) {
+						auxConvenios = auxConvenios + 1;
+				        Formatter obj = new Formatter();
+				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				        System.out.println(numeroCeros);
+				        idConvenio = test + "C"+  numeroCeros + "/22";
+						
+					}else {
+						auxConvenios = auxConvenios + 1;
+						Formatter obj = new Formatter();
+				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				        System.out.println(numeroCeros);
+						idConvenio = test + "A"+  numeroCeros + "/22";
+					}
+					
+					
 				}else {
-					test = "MOR/PRIV/C";
-					auxConvenios = auxConvenios + 1;
-					idConvenio = test +  auxConvenios + "/22";
-		    		
+					test = "MOR/PRIV/";
+					
+					if(organismoPublico == true) {
+						auxConvenios = auxConvenios + 1;
+						Formatter obj = new Formatter();
+				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				        System.out.println(numeroCeros);
+						idConvenio = test + "C"+  numeroCeros + "/22";
+					}else {
+						auxConvenios = auxConvenios + 1;
+						Formatter obj = new Formatter();
+				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				        System.out.println(numeroCeros);
+						idConvenio = test + "A"+  numeroCeros + "/22";
+					}
+					
+					
 				}
 				
 				
@@ -721,12 +753,12 @@ public class Modelo {
 	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2� CFGM Carrocer�a");
          //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
          //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-	     /*helper.crearConvenio(sessionFactory, "1231-FIG", "2� CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "PFE", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "FCT", fechaNacimientoUSU);
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2� CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "PFE", fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2� CFGM Carrocer�a", "FCT", fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", true, fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Electromecánica", "FCT", false, fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Básica Mantenimiento de Vehículos", "PFE", false, fechaNacimientoUSU);
+         /*helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", false, fechaNacimientoUSU);
+         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
 	      */
 	        
 	        ArrayList<Empresa> listaEmpresas = helper.listaEmpresasFiltro(sessionFactory, "Agro");
