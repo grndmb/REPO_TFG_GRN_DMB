@@ -26,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 
 import Vista.Vista;
 import persistencia.Alumno;
+import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
 import persistencia.Poblacion;
@@ -107,6 +108,10 @@ public class Controlador implements ActionListener{
 		
 		//ARRAYLIST JLIST Empresas
 		ArrayList <Empresa> listaEmpresas = new ArrayList<Empresa>();
+		
+		//ARRAYLIST JLIST CONVENIOS
+		ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
+		
 		
 		SessionFactory sessionFactory = null;
 

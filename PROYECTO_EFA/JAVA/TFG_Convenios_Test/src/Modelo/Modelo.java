@@ -689,10 +689,12 @@ public class Modelo {
 	  * @throws HibernateException
 	  */
 	 
-	 public void verConvenio (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
+	 public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
 		 
 		 Session session = null;
 
+		 ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
+		 
 		 	try {
 		 		session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
@@ -704,12 +706,9 @@ public class Modelo {
 				Query convenioQuery = sessionFactory.getCurrentSession().createQuery("FROM Convenio WHERE empresa = :empresa");
 				convenioQuery.setParameter("empresa", empresa);
 				
-				ArrayList <Convenio> listaConvenio = (ArrayList<Convenio>) convenioQuery.list();
+				listaConvenios = (ArrayList<Convenio>) convenioQuery.list();
 				
-				for (int i = 0; i < listaConvenio.size(); i++) {
-					System.out.println(listaConvenio.get(i).getIdConvenio() + " -> " + listaConvenio.get(i).getTipoConvenio());
-
-				}
+				
 				
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -722,6 +721,7 @@ public class Modelo {
 				session.close();
 			}
 		}
+			return listaConvenios;
 		 
 		 
 	 }
