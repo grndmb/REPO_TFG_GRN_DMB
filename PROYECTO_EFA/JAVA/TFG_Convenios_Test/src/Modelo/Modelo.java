@@ -619,13 +619,13 @@ public class Modelo {
 						auxConvenios = auxConvenios + 1;
 				        Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-				        idConvenio = test + "C"+  numeroCeros + "/22";
+				        idConvenio = test + "A"+  numeroCeros + "/22";
 						
 					}if(organismoPublico = false) {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "A"+  numeroCeros + "/22";
+						idConvenio = test + "C"+  numeroCeros + "/22";
 					}
 					
 					
@@ -636,12 +636,12 @@ public class Modelo {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "C"+  numeroCeros + "/22";
+						idConvenio = test + "A"+  numeroCeros + "/22";
 					}if(organismoPublico = false) {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "A"+  numeroCeros + "/22";
+						idConvenio = test + "C"+  numeroCeros + "/22";
 					}
 					
 					
