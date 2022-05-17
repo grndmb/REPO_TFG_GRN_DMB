@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 9 may. 2022 16:28:09 by Hibernate Tools 5.4.32.Final
+// Generated 17 may. 2022 10:17:07 by Hibernate Tools 5.4.32.Final
 
 import java.util.List;
 import java.util.logging.Level;
@@ -85,7 +85,7 @@ public class ConvenioHome {
 		}
 	}
 
-	public Convenio findById(java.lang.String id) {
+	public Convenio findById(java.lang.Integer id) {
 		logger.log(Level.INFO, "getting Convenio instance with id: " + id);
 		try {
 			Convenio instance = (Convenio) sessionFactory.getCurrentSession().get("persistencia.Convenio", id);

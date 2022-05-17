@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 9 may. 2022 16:28:09 by Hibernate Tools 5.4.32.Final
+// Generated 17 may. 2022 10:17:07 by Hibernate Tools 5.4.32.Final
 
 import java.util.List;
 import java.util.logging.Level;

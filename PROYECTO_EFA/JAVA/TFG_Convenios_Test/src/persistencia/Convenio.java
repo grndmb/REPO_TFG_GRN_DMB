@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 9 may. 2022 16:28:04 by Hibernate Tools 5.4.32.Final
+// Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 
@@ -8,27 +8,28 @@ import java.util.Date;
  */
 public class Convenio implements java.io.Serializable {
 
-	private String idConvenio;
+	private Integer id;
 	private Empresa empresa;
+	private String idConvenio;
 	private String tipoConvenio;
 	private Date fechaAnexo;
 
 	public Convenio() {
 	}
 
-	public Convenio(String idConvenio, Empresa empresa, String tipoConvenio, Date fechaAnexo) {
-		this.idConvenio = idConvenio;
+	public Convenio(Empresa empresa, String idConvenio, String tipoConvenio, Date fechaAnexo) {
 		this.empresa = empresa;
+		this.idConvenio = idConvenio;
 		this.tipoConvenio = tipoConvenio;
 		this.fechaAnexo = fechaAnexo;
 	}
 
-	public String getIdConvenio() {
-		return this.idConvenio;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIdConvenio(String idConvenio) {
-		this.idConvenio = idConvenio;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Empresa getEmpresa() {
@@ -37,6 +38,14 @@ public class Convenio implements java.io.Serializable {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	public String getIdConvenio() {
+		return this.idConvenio;
+	}
+
+	public void setIdConvenio(String idConvenio) {
+		this.idConvenio = idConvenio;
 	}
 
 	public String getTipoConvenio() {

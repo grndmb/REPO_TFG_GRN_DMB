@@ -130,12 +130,13 @@ CONSTRAINT FK_EMPRESA_POBLACION FOREIGN KEY (CODIGO_POSTAL) REFERENCES POBLACION
 -- TABLA CONVENIO
 -- ------------------------
 CREATE TABLE CONVENIO (
-ID_CONVENIO VARCHAR (20) NOT NULL COMMENT 'Identificador del convenio',
+ID INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la tabla',
+ID_CONVENIO VARCHAR (20) NOT NULL COMMENT 'Codigo del convenio',
 CIF_EMPRESA VARCHAR (10) NOT NULL COMMENT 'Identificador de la empresa',
 TIPO_CONVENIO VARCHAR(3) NOT NULL COMMENT 'Tipo de convenio --> (PFE - FCT)',
 FECHA_ANEXO DATE NOT NULL COMMENT 'Fecha firma anexo',
 
-CONSTRAINT PK_CONVENIO PRIMARY KEY (ID_CONVENIO),
+CONSTRAINT PK_CONVENIO PRIMARY KEY (ID),
 CONSTRAINT FK_CONVENIO_EMPRESA FOREIGN KEY (CIF_EMPRESA) REFERENCES EMPRESA (CIF_EMPRESA)
 ) COMMENT 'Tabla con la informacion del convenio';
 -- ---------------------------------------
@@ -171,7 +172,8 @@ INSERT INTO EMPRESA (CIF_EMPRESA, NOMBRE_EMPRESA, DIRECCION_EMPRESA, TELEFONO_1,
 ("1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "12345678D", "2022-04-09", true, "Trabajo DAM", 13230),
 ("4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230),
 ("9687-POK", "AgroRoncero", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230),
-("2341-KLO", "GuillermoAgroKILO", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230);
+("2341-KLO", "GuillermoAgroKILO", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230),
+("6217-KIR", "PepeVillalta", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230);
 
 SELECT * FROM ALUMNO;
 SELECT * FROM CURSO;
@@ -183,8 +185,9 @@ DELETE FROM EMPRESA;
 
 DELETE FROM POBLACION;
 
-DELETE FROM CONVENIO;
+
 SELECT * FROM CONVENIO;
+DELETE FROM CONVENIO;
 
 SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO;
 SELECT * FROM ALUMNO WHERE NOMBRE_COMPLETO LIKE 'David%';
