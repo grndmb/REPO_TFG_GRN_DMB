@@ -700,7 +700,6 @@ public class Modelo {
 	    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
 	    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
 	    		auxConveniosQuery = (BigInteger) queryCantidadConvenio.getSingleResult();
-	    		System.out.println(auxConveniosQuery);
 	    		
 	    		//Convertir Big Integer a Int
 	    		String auxConvenios1 = String.valueOf(auxConveniosQuery);
@@ -772,20 +771,38 @@ public class Modelo {
 				
 				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
 				BigInteger auxComprobacion;
-				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO LIKE :id");
+				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
 				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
 				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
-				queryComprobacion.setParameter("id", "%" + "PRIV" + "%");
+
 				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
 				
 				
 		 		//Convertir Big Integer a Int
-		 		String auxComprobacionP = String.valueOf(auxComprobacion);
-		 		int auxComprobacionB = Integer.parseInt(auxComprobacionP);
+		 		String auxComprobacionParset = String.valueOf(auxComprobacion);
+		 		int auxComprobacionN = Integer.parseInt(auxComprobacionParset);
 				
-		 		if(auxComprobacionB < 1) {
-		 			session.save(convenio);
-					session.getTransaction().commit();	
+		 		if(auxComprobacionN < 2) {
+		 			
+		 			//------------------------------------------
+		 			BigInteger auxComprobacion2;
+					Query queryComprobacion2 = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND ID_CONVENIO LIKE :id");
+					queryComprobacion2.setParameter("cifEmpresa", cifEmpresa);
+					queryComprobacion2.setParameter("id", "%" + "PRIV" + "%");
+					auxComprobacion2 = (BigInteger) queryComprobacion2.getSingleResult();
+
+					//Convertir Big Integer a Int
+			 		String auxComprobacionParset2 = String.valueOf(auxComprobacion2);
+			 		int auxComprobacionN2 = Integer.parseInt(auxComprobacionParset2);
+					
+					System.out.println(auxComprobacionN2);
+					
+					//------------------------------------------------------
+					if(auxComprobacionN2 < 1) {
+						session.save(convenio);
+						session.getTransaction().commit();	
+					}
+		 			
 		 		}
 		 		
 		 } catch (Exception e) {
@@ -872,7 +889,7 @@ public class Modelo {
 	    
 	        
 	        
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "FCT", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
@@ -895,3 +912,5 @@ public class Modelo {
 	 }
 
 }
+Modelo.java
+28 KB
