@@ -64,4 +64,10 @@ public class Convenio implements java.io.Serializable {
 		this.fechaAnexo = fechaAnexo;
 	}
 
+	@Override
+	public String toString() {
+		return "                                " + idConvenio + "                        " + tipoConvenio + "                          " + fechaAnexo;
+	}
+
+	
 }

@@ -325,7 +325,7 @@ public class Vista extends JFrame {
 			
 			/**
 			 * PANEL ALUMNOS	
-			 
+			 */
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -336,7 +336,7 @@ public class Vista extends JFrame {
 			
 			JLabel lblTituloAlumnos = new JLabel("ALUMNOS");
 			lblTituloAlumnos.setFont(new Font("Agency FB", Font.BOLD, 50));
-			lblTituloAlumnos.setBounds(136, 26, 992, 55);
+			lblTituloAlumnos.setBounds(136, 21, 992, 55);
 			panelListaAlumno.add(lblTituloAlumnos);
 		
 			
@@ -402,7 +402,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * PANEL NUEVO ALUMNO
-		 
+		 */
 		panelNuevoActualizarAlumno = new JPanel();
 		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
@@ -533,7 +533,7 @@ public class Vista extends JFrame {
      	// -----------------------------------------------------------------
     	/**
     	 * PANEL EMPRESAS
-     	 
+     	*/ 
 
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -542,9 +542,9 @@ public class Vista extends JFrame {
 			panelPrincipal.add(panelListaEmpresas);
 			panelListaEmpresas.setLayout(null);
 			
-			JLabel lblTituloEmpresa = new JLabel("EMPRESA");
+			JLabel lblTituloEmpresa = new JLabel("EMPRESAS");
 			lblTituloEmpresa.setFont(new Font("Agency FB", Font.BOLD, 50));
-			lblTituloEmpresa.setBounds(49, 21, 172, 60);
+			lblTituloEmpresa.setBounds(49, 21, 200, 60);
 			panelListaEmpresas.add(lblTituloEmpresa);
             
 			listEmpresas = new JList<String>();
@@ -585,25 +585,6 @@ public class Vista extends JFrame {
             btnPanelConvenio.setBounds(874, 210, 205, 55);
             panelListaEmpresas.add(btnPanelConvenio);
             
-            JLabel lblTituloCIFListaEmpresas = new JLabel("CIF");
-            lblTituloCIFListaEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lblTituloCIFListaEmpresas.setHorizontalAlignment(SwingConstants.CENTER);
-            lblTituloCIFListaEmpresas.setBounds(63, 164, 228, 36);
-            panelListaEmpresas.add(lblTituloCIFListaEmpresas);
-            
-            JLabel lblNombrelListaEmpresa = new JLabel("NOMBRE");
-            lblNombrelListaEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-            lblNombrelListaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lblNombrelListaEmpresa.setBounds(308, 164, 470, 36);
-            panelListaEmpresas.add(lblNombrelListaEmpresa);
-            
-            JSeparator separator2 = new JSeparator();
-            separator2.setBackground(Color.BLACK);
-            separator2.setForeground(Color.BLACK);
-            separator2.setOrientation(SwingConstants.VERTICAL);
-            separator2.setBounds(324, 0, 2, 410);
-            listEmpresas.add(separator2);
-            
             txtFiltroListaEmpresa = new JTextField();
             txtFiltroListaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
             txtFiltroListaEmpresa.setColumns(10);
@@ -621,7 +602,7 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
         /**
 		 * PANEL NUEVA EMPRESA
-		 
+		 */
 		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
@@ -898,7 +879,7 @@ public class Vista extends JFrame {
             
 		/**
 		 * Panel nueva Poblacion
-		 
+		*/ 
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
@@ -955,7 +936,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			 
+			*/ 
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -1030,6 +1011,6 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);		
-		 	*/
+		
 	}
 }
