@@ -441,7 +441,7 @@ public class Modelo {
 	  */
 	 public void crearEmpresas (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
 			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
-			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException{
+			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException {
 		 
 		 Session session = null;
 			
@@ -528,47 +528,6 @@ public class Modelo {
 	 }
 	 
 	 
-	 public void eliminarEmpresa (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
-		 
-		 Session session = null;
-		 
-		 try {
-			 session = sessionFactory.getCurrentSession();
-			 session.beginTransaction();
-			 
-			
-			 
-			 
-			 Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
-			 queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
-			 Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
-			 
-			 Query queryConvenio = session.createQuery("FROM Convenio WHERE empresa = :empresa");
-			 queryConvenio.setParameter("empresa", empresa);
-			 ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) queryConvenio.list();
-			 
-			 
-			 
-			 for (int i = 0; i < listaConvenios.size(); i++) {
-				 session.delete(listaConvenios.get(i));
-			}
-			
-			 session.delete(empresa);
-			 session.getTransaction().commit();
-			 
-		 } catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				if(null != session) {
-					session.getTransaction().rollback();
-				}
-			}finally {
-				if(null != session) {
-					session.close();
-				}
-			}
-	 }
-	 
 	 /**
 	  * Metodo para listar empresas con filtro
 	  * @param sessionFactory
@@ -605,6 +564,108 @@ public class Modelo {
 			}
 		 
 		 return listaEmpresa; 
+	 }
+	 
+	 
+	 
+	 
+	 public void actualizarEmpresa (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
+			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
+			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException {
+		 
+		 Session session = null;
+
+		 try {
+			//Crear sesion e iniciar transaccion
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			
+			Query query = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+			query.setParameter("cifEmpresa", cifEmpresa);
+			Empresa empresa = (Empresa) query.getSingleResult();
+			
+			empresa.setCifEmpresa(cifEmpresa);
+			empresa.setNombreEmpresa(nombreEmpresa);
+			empresa.setDireccionEmpresa(direccionEmpresa);
+			empresa.setTelefono1(telefono1);
+			empresa.setTelefono2(telefono2);
+			empresa.setEmailEmpresa(emailEmpresa);
+			empresa.setFaxEmpresa(faxEmpresa);
+			empresa.setPaginaWeb(paginaWeb);
+			empresa.setNombreGerente(nombreGerente);
+			empresa.setDniGerente(dniGerente);
+			empresa.setPersonaContacto(personaContacto);
+			empresa.setDniPersonaContacto(dniPersonaContacto);
+	        empresa.setFechaActualizacion(fechaActualizacion); 
+	        
+			empresa.setOrganismoPublico(organismoPublico);
+			empresa.setObservaciones(observaciones);
+			
+			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
+			poblacionQuery.setParameter("nombre", poblacion);
+			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
+	
+			empresa.setPoblacion(pb);
+			
+			
+			session.saveOrUpdate(empresa);
+			session.getTransaction().commit();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+		 
+	 }
+	
+	 
+	 public void eliminarEmpresa (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
+		 
+		 Session session = null;
+		 
+		 try {
+			 session = sessionFactory.getCurrentSession();
+			 session.beginTransaction();
+			 
+			
+			 
+			 
+			 Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+			 queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
+			 Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
+			 
+			 Query queryConvenio = session.createQuery("FROM Convenio WHERE empresa = :empresa");
+			 queryConvenio.setParameter("empresa", empresa);
+			 ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) queryConvenio.list();
+			 
+			 
+			 for (int i = 0; i < listaConvenios.size(); i++) {
+				 session.delete(listaConvenios.get(i));
+			 }
+			
+			 session.delete(empresa);
+			 session.getTransaction().commit();
+			 
+		 } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
 	 }
 	 
 	
@@ -702,14 +763,22 @@ public class Modelo {
 				convenio.setTipoConvenio(tipoConvenio);
 	    		
 				
-				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+				/*COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
 				BigInteger auxComprobacion;
 				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
 				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
 				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();*/
+				
+				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+				BigInteger auxComprobacion;
+				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO LIKE :id");
+				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
+				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+				queryComprobacion.setParameter("id", "%" + "PRIV" + "%");
 				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
 				
-
+				
 		 		//Convertir Big Integer a Int
 		 		String auxComprobacionP = String.valueOf(auxComprobacion);
 		 		int auxComprobacionB = Integer.parseInt(auxComprobacionP);
@@ -719,8 +788,6 @@ public class Modelo {
 					session.getTransaction().commit();	
 		 		}
 		 		
-	
-				
 		 } catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -802,16 +869,10 @@ public class Modelo {
 	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
 	 
-	      /*COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
-			BigInteger auxComprobacion;
-			Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO LIKE :id");
-			queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
-			queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
-			queryComprobacion.setParameter("id", "%" + "PRIV" + "%");*/
-
+	    
 	        
 	        
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carrocería", "FCT", true, fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", true, fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformáticos y Redes", "FCT", false, fechaNacimientoUSU);
 	     helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Básica Mantenimiento de Vehículos", "PFE", false, fechaNacimientoUSU);
@@ -819,6 +880,15 @@ public class Modelo {
          /*helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
 	      */
 	        
+         /*
+          * 2º CFGM Carrocería
+			2º CFGM Electromecánica
+			2º CFGM Sistemas MicroInformáticos y Redes
+			2º CFGS Desarrollo de Aplicaciones Multiplataforma
+			2º CFGS Técnico Superior en Automoción
+			2º FP Básica Informática y Comunicaciones
+			2º FP Básica Mantenimiento de Vehículos
+          */
 	  
 	 
 	 
