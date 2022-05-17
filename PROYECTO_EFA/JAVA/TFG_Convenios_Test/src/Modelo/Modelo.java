@@ -872,13 +872,12 @@ public class Modelo {
 	    
 	        
 	        
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", true, fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformáticos y Redes", "FCT", false, fechaNacimientoUSU);
-	     helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Básica Mantenimiento de Vehículos", "PFE", false, fechaNacimientoUSU);
-         helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carrocería", "PFE", false, fechaNacimientoUSU);
-         /*helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
-	      */
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carroceria", "PFE", false, fechaNacimientoUSU);
+	         /*helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGM CarrocerÃ­a", "FCT", false, fechaNacimientoUSU);
 	        
          /*
           * 2º CFGM Carrocería
