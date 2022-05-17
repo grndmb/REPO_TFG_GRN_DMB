@@ -455,7 +455,7 @@ public class Controlador implements ActionListener{
 				    
 				    if(e.getSource() == vista.btnActualizarConvenio) {
 				    	
-				    	vista.setV
+				    	
 				    	
 				    }
 				    

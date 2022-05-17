@@ -594,6 +594,14 @@ public class Modelo {
 				String test;
 				String idConvenio = "";
 				
+				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+				
+				Query query
+				
+				
+				
+				
+				
 				
 				BigInteger auxConveniosQuery;
 	    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");

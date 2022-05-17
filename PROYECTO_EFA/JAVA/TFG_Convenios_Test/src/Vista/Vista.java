@@ -325,7 +325,7 @@ public class Vista extends JFrame {
 			
 			/**
 			 * PANEL ALUMNOS	
-			 */
+			 
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -402,7 +402,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * PANEL NUEVO ALUMNO
-		 */
+		 
 		panelNuevoActualizarAlumno = new JPanel();
 		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
@@ -533,7 +533,7 @@ public class Vista extends JFrame {
      	// -----------------------------------------------------------------
     	/**
     	 * PANEL EMPRESAS
-     	 */
+     	 
 
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -621,7 +621,7 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
         /**
 		 * PANEL NUEVA EMPRESA
-		 */
+		 
 		panelNuevaEmpresa = new JPanel();
 		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaEmpresa.setBackground(Color.WHITE);
@@ -898,7 +898,7 @@ public class Vista extends JFrame {
             
 		/**
 		 * Panel nueva Poblacion
-		 */
+		 
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
@@ -955,7 +955,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			 */
+			 
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -1030,6 +1030,6 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);		
-		 	
+		 	*/
 	}
 }

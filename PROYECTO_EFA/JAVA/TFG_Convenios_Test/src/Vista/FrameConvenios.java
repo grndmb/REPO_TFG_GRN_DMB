@@ -20,7 +20,7 @@ public class FrameConvenios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameConvenios frameConvenios = new FrameConvenios();
+					Vista frameConvenios = new Vista();
 					Controlador controlador = new Controlador(frameConvenios);
 					frameConvenios.setVisible(true);
 				} catch (Exception e) {
