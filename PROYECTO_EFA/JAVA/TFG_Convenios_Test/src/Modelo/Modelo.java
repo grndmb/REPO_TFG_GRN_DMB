@@ -528,7 +528,7 @@ public class Modelo {
 	 }
 	 
 	 
-	 public void eliminarEmpresa (SessionFactory sessionFactory, String nombreEmpresa) throws HibernateException {
+	 public void eliminarEmpresa (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
 		 
 		 Session session = null;
 		 
@@ -536,10 +536,20 @@ public class Modelo {
 			 session = sessionFactory.getCurrentSession();
 			 session.beginTransaction();
 			 
-			 Query query = session.createQuery("FROM Empresa WHERE nombreEmpresa = :nombreEmpresa");
-			 query.setParameter("nombreEmpresa", nombreEmpresa);
-			 Empresa empresa = (Empresa) query.getSingleResult();
+			 Query queryConvenio = session.createQuery("FROM Convenio WHERE cifEmpresa = :cifEmpresa");
+			 queryConvenio.setParameter("cifEmpresa", cifEmpresa);
+			 ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) queryConvenio.list();
 			 
+			 
+			 Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+			 queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
+			 Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
+			 
+			
+			 
+			 
+			 
+			 session.delete(listaConvenios);
 			 session.delete(empresa);
 			 session.getTransaction().commit();
 			 
@@ -788,14 +798,17 @@ public class Modelo {
 	        Date fechaNacimientoUSU = (Date) format.parse("22/12/2002");
 	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
 			
+	 
+	      /*COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+			BigInteger auxComprobacion;
+			Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO LIKE :id");
+			queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
+			queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+			queryComprobacion.setParameter("id", "%" + "PRIV" + "%");*/
+
 	        
-	      //helper.crearAlumno(sessionFactory, "12345678L", "Guillermo Romero", false, 1243567586, "guillermo@gmail.com", fechaNacimiento, 13230, "2� CFGM Carrocer�a");
-         //helper.crearEmpresas(sessionFactory, "4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "Responsable Oficina", fecha, false, "Trabajo Carroceria", 13230);
-         //helper.crearEmpresas(sessionFactory, "1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "Jefe SF", fecha, true, "Trabajo DAM", 13230);
-	    
 	        
-	        
-	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
+	     helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carrocería", "FCT", true, fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "PFE", true, fechaNacimientoUSU);
          helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformáticos y Redes", "FCT", false, fechaNacimientoUSU);
 	     helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Básica Mantenimiento de Vehículos", "PFE", false, fechaNacimientoUSU);
@@ -803,16 +816,7 @@ public class Modelo {
          /*helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
 	      */
 	        
-	       /*ArrayList<Empresa> listaEmpresas = helper.listaEmpresasFiltro(sessionFactory, "Agro");
-	        
-	        for (int i = 0; i < listaEmpresas.size(); i++) {
-				System.out.println(listaEmpresas.get(i).getNombreEmpresa());
-			}*/
-	        
-	        //helper.verConvenio(sessionFactory, "4331-PAT");
-			//ArrayList <Alumno> listaAlumnos = null;
-			//helper.listarAlumnos(sessionFactory);
-	 
+	  
 	 
 	 
 	 
