@@ -528,6 +528,33 @@ public class Modelo {
 	 }
 	 
 	 
+	 public void eliminarEmpresa (SessionFactory sessionFactory, String nombreEmpresa) throws HibernateException {
+		 
+		 Session session = null;
+		 
+		 try {
+			 session = sessionFactory.getCurrentSession();
+			 session.beginTransaction();
+			 
+			 Query query = session.createQuery("FROM Empresa WHERE nombreEmpresa = :nombreEmpresa");
+			 query.setParameter("nombreEmpresa", nombreEmpresa);
+			 Empresa empresa = (Empresa) query.getSingleResult();
+			 
+			 session.delete(empresa);
+			 session.getTransaction().commit();
+			 
+		 } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+	 }
 	 
 	 /**
 	  * Metodo para listar empresas con filtro
@@ -615,7 +642,7 @@ public class Modelo {
 				if(curso.isEsPublico() == true) {
 					test = "MOR/";
 					
-					if(organismoPublico = true) {
+					if(organismoPublico == true) {
 						auxConvenios = auxConvenios + 1;
 				        Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
@@ -632,7 +659,7 @@ public class Modelo {
 				}else {
 					test = "MOR/PRIV/";
 					
-					if(organismoPublico = true) {
+					if(organismoPublico == true) {
 						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
 				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
