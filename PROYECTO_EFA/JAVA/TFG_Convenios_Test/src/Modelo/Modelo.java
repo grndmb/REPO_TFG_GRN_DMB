@@ -549,7 +549,10 @@ public class Modelo {
 			 
 			 
 			 
-			 session.delete(listaConvenios);
+			 for (int i = 0; i < listaConvenios.size(); i++) {
+				 session.delete(listaConvenios.get(i));
+			}
+			
 			 session.delete(empresa);
 			 session.getTransaction().commit();
 			 
