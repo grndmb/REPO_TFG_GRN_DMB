@@ -357,13 +357,15 @@ public class Modelo {
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
 			
+			
+			//Consulta poblacion
 			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
 			poblacionQuery.setParameter("codigoPostal", codigoPostal);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 	
 			alumno.setPoblacion(pb);
 			
-			
+			//Consulta curso
 			Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
 			queryCurso.setParameter("nombreCurso", nombreCurso);
 			Curso curso = (Curso) queryCurso.getSingleResult();
@@ -601,6 +603,7 @@ public class Modelo {
 			empresa.setOrganismoPublico(organismoPublico);
 			empresa.setObservaciones(observaciones);
 			
+			//Consulta poblacion
 			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
 			poblacionQuery.setParameter("nombre", poblacion);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
@@ -636,12 +639,10 @@ public class Modelo {
 			 session = sessionFactory.getCurrentSession();
 			 session.beginTransaction();
 			 
-			
-			 
-			 
 			 Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 			 queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
 			 Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
+			
 			 
 			 Query queryConvenio = session.createQuery("FROM Convenio WHERE empresa = :empresa");
 			 queryConvenio.setParameter("empresa", empresa);
