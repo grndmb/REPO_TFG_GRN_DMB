@@ -224,7 +224,8 @@ public class Vista extends JFrame {
 		public JTextField txtCodigoPostalUSUPoblacion;
 		public JTextField txtNombreUSUPoblacion;
 		public JTextField txtProvinciaUSUPoblacion;
-		public JButton btnAnadirPoblacion;;
+		public JButton btnAnadirPoblacionAlumno;
+		public JButton btnAnadirPoblacionEmpresa;
 		public JLabel lblErroresNuevaPoblacion;	
 		
 	
@@ -559,7 +560,7 @@ public class Vista extends JFrame {
             panelListaEmpresas.add(listPaneEmpresas);
 			
             
-            btnPanelAddEmpresa = new JButton("AÃ‘ADIR NUEVA");
+            btnPanelAddEmpresa = new JButton("AÑADIR NUEVA");
             btnPanelAddEmpresa.setBackground(Color.GREEN);
             btnPanelAddEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
             btnPanelAddEmpresa.setBounds(874, 565, 205, 55);
@@ -925,9 +926,13 @@ public class Vista extends JFrame {
 			lblTituloNuevaPoblacion.setBounds(296, 21, 268, 35);
 			panelNuevaPoblacion.add(lblTituloNuevaPoblacion);
 			
-			btnAnadirPoblacion = new JButton("A\u00D1ADIR POBLACION");
-			btnAnadirPoblacion.setBounds(306, 422, 189, 76);
-			panelNuevaPoblacion.add(btnAnadirPoblacion);
+			btnAnadirPoblacionAlumno = new JButton("AÑADIR POBLACION");
+			btnAnadirPoblacionAlumno.setBounds(306, 422, 189, 76);
+			panelNuevaPoblacion.add(btnAnadirPoblacionAlumno);
+			
+			btnAnadirPoblacionEmpresa = new JButton("AÑADIR POBLACION");
+			btnAnadirPoblacionEmpresa.setBounds(306, 422, 189, 76);
+			panelNuevaPoblacion.add(btnAnadirPoblacionEmpresa);
 			
 			lblErroresNuevaPoblacion = new JLabel();
 			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));

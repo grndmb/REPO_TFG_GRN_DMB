@@ -63,7 +63,8 @@ public class Controlador implements ActionListener{
 			this.vista.btnEliminarAlumno.addActionListener(this);
 			
 		//Botones Panel Nueva Poblacion
-			this.vista.btnAnadirPoblacion.addActionListener(this);
+			this.vista.btnAnadirPoblacionAlumno.addActionListener(this);
+			this.vista.btnAnadirPoblacionEmpresa.addActionListener(this);
 			
 		//Botones Panel Nuevo Curso
 			this.vista.btnAnadirCurso.addActionListener(this);
@@ -75,6 +76,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnEliminarEmpresa.addActionListener(this);
 			this.vista.btnAnadirEmpresa.addActionListener(this);
 			this.vista.btnBuscarListaEmpresas.addActionListener(this);
+			this.vista.btnPanelAddEmpresa.addActionListener(this);
 			
 		//Botones Panel Nueva Empresa
 			this.vista.btnAnadirEmpresa.addActionListener(this);
@@ -351,10 +353,12 @@ public class Controlador implements ActionListener{
 				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelNuevaPoblacion.setVisible(true);
 
+				vista.btnAnadirPoblacionEmpresa.setVisible(false);
+				vista.btnAnadirPoblacionAlumno.setVisible(true);
 		   }
 			
-		    //BOTON INSERT POBLACION EN PANEL POBLACION
-		    if(e.getSource() == vista.btnAnadirPoblacion) {
+		    //BOTON INSERT POBLACION EN PANEL POBLACION DE ALUMNO
+		    if(e.getSource() == vista.btnAnadirPoblacionAlumno) {
 		    	
 				if(this.anadirPoblacionValido() == true) {
 		    		//Llamamos al metodo que realiza el insert del nueva poblacion
@@ -407,45 +411,48 @@ public class Controlador implements ActionListener{
 			/**
 			 * ACCIONES DEL PANEL EMPRESA
 			 */
-		    if(e.getSource() == vista.btnPanelEmpresas) {
-		    	
-		    	vista.panelListaEmpresas.setVisible(true);
-		    	
-		    	vista.panelNuevaEmpresa.setVisible(false);
-		    	vista.panelListaAlumno.setVisible(false);
-		    	vista.panelNuevoActualizarAlumno.setVisible(false);
-				vista.panelNuevaPoblacion.setVisible(false);
-				vista.panelNuevoCurso.setVisible(false);
-				
-				//Rellenar List de empresas				
-					listaEmpresas = modelo.listaEmpresas(sessionFactory);
-					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
-				
-				//Rellenar combobox Codigo Postal
-				modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
-			
-				//Rellena el label con la fecha actualizacion =  fecha actual
-					String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-					vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);	
+				//BOTON QUE ABRE EL PANEL DONDE SE LSTAN LAS EMPRESAS
+				    if(e.getSource() == vista.btnPanelEmpresas) {
+				    	
+				    	vista.panelListaEmpresas.setVisible(true);
+				    	
+				    	vista.panelListaAlumno.setVisible(false);
+				    	vista.panelNuevoActualizarAlumno.setVisible(false);
+						vista.panelNuevaPoblacion.setVisible(false);
+						vista.panelNuevoCurso.setVisible(false);
+						
+						//RELLENA EL JLIST DEL PANEL LISTAR EMPRESAS			
+							listaEmpresas = modelo.listaEmpresas(sessionFactory);
+							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+						
+						//RELLEANR EL COMBO BOX DE LAS POBLACIONES
+						modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
 					
-		    }if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
-		    
-		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
-	
-		    }
-		    
-		    //Boton buscar de la lista de las empresas
-		    if(e.getSource() == vista.btnBuscarListaEmpresas) {
-		    	//Rellenar List de empresas				
-				listaEmpresas = modelo.listaEmpresasFiltro(sessionFactory, vista.txtFiltroListaEmpresa.getText());
-				this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
-		    }
+						//RELLENA EL CAMPO DE FECHA DE ACTUALIZACION, CON LA FECHA ACTUAL
+							String fechaActualizacion = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+							vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);	
+				    }
+				    
+				//AL PULSAR EN UNA POBLACIÓN CARGA SU CODIGO POSTAL
+				    if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
+				    
+				    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
+			
+				    }
+			    
+			    //BOTON BUSCAR DEL PANEL LISTAR EMPRESAS 
+			    
+				    if(e.getSource() == vista.btnBuscarListaEmpresas) {
+			    	//Rellenar List de empresas				
+					listaEmpresas = modelo.listaEmpresasFiltro(sessionFactory, vista.txtFiltroListaEmpresa.getText());
+					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+			    }
 		    
 		    
 			    /**
 			     * Panel convenios
 			     */
-			    
+			    	//BOTON QUE ABRE EL PANEL DE VER CONVENIOS
 				    if(e.getSource() == vista.btnPanelConvenio) {
 				    	if(vista.listEmpresas.getSelectedIndex() != -1){
 				    		
@@ -454,15 +461,8 @@ public class Controlador implements ActionListener{
 					    	
 					    	listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
-					    	//rellenar jlist con los comvenios de la empresa seleccionda		
+					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
 					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
-					    	
-					    	System.out.println(listaConvenios.size());
-					    	
-					    	for (int i = 0; i < listaConvenios.size(); i++) {
-								System.out.println(listaConvenios.get(i));
-								System.out.println("tiene 1");
-							}
 					    	
 							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 					    	
@@ -473,49 +473,67 @@ public class Controlador implements ActionListener{
 				    	
 				    }
 				    
-				    if(e.getSource() == vista.btnActualizarConvenio) {
+				    //BOTON QUE ACTUALIZA LOS CONVENIOS
+				    	if(e.getSource() == vista.btnActualizarConvenio) {
 				    	
 				    	
 				    	
-				    }
-			//BOTON QUE MUESTRA EL PANEL DE AÑADIR NUEVA EMPRESA
-				if(e.getSource() == vista.btnPanelAddEmpresa){
-					this.vista.panelListaEmpresas.setVisible(false);
-		    		this.vista.panelNuevaEmpresa.setVisible(true);
-				}
-		
-			//BOTON QUE HACE EL INSERT DE LA EMPRESA
-			    if(e.getSource() == vista.btnAnadirEmpresa) {
-	
-			    	if(this.anadirEmpresaValida() == true && this.existeNuevaEmpresa(sessionFactory) == true) {
-			    		//Llamamos al metodo que realiza el insert de la nueva empresa
-			    		this.crearNuevaEmpresa(sessionFactory, modelo);
-			    		this.vista.panelListaEmpresas.setVisible(true);
-			    		this.vista.panelNuevaEmpresa.setVisible(false);
-			    	}
-			}
-		    
-		  //BOTON ADD --> NUEVA POBLACION EMPRESA
-		    if(e.getSource() == vista.btnNuevaPoblacionEmpresa) {
-		    	vista.panelNuevaEmpresa.setVisible(false);
-				vista.panelNuevaPoblacion.setVisible(true);
-			}
+				    	}
+				
+				/**
+				 * Panel Nueva Empresa
+				 */
+				  //BOTON QUE MUESTRA EL PANEL DE AÑADIR NUEVA EMPRESA
+					if(e.getSource() == vista.btnPanelAddEmpresa){
+						this.vista.panelListaEmpresas.setVisible(false);
+			    		this.vista.panelNuevaEmpresa.setVisible(true);
+					}
 			
-		    if(e.getSource() == vista.btnAnadirPoblacion) {
-		    	
-				if(this.anadirPoblacionValido() == true) {
-		    		//Llamamos al metodo que realiza el insert del nueva poblacion
-					this.crearNuevaPoblacion(sessionFactory, modelo);
-				}
-			}
+				//BOTON QUE HACE EL INSERT DE LA EMPRESA
+				    if(e.getSource() == vista.btnAnadirEmpresa) {
+		
+				    	if(this.anadirEmpresaValida() == true && this.existeNuevaEmpresa(sessionFactory) == true) {
+				    		//Llamamos al metodo que realiza el insert de la nueva empresa
+				    		this.crearNuevaEmpresa(sessionFactory, modelo);
+				    		this.vista.panelListaEmpresas.setVisible(true);
+				    		this.vista.panelNuevaEmpresa.setVisible(false);
+				    		
+				    		//Rellenar List de empresas				
+							listaEmpresas = modelo.listaEmpresas(sessionFactory);
+							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+				    	}
+				    }
+				    
+			    /**
+			     * Panel Nueva Poblacion
+			     */
+					  //BOTON QUE ABRE EL PANEL DE NUEVA POBLACION
+					    if(e.getSource() == vista.btnNuevaPoblacionEmpresa) {
+					    	vista.panelNuevaEmpresa.setVisible(false);
+							vista.panelNuevaPoblacion.setVisible(true);
+							
+							vista.btnAnadirPoblacionEmpresa.setVisible(true);
+							vista.btnAnadirPoblacionAlumno.setVisible(false);
+						}
+						
+					  //BOTON QUE HACE EL INSERT DE LA NUEVA POBLACION DEL PANEL EMPRESA
+					    if(e.getSource() == vista.btnAnadirPoblacionEmpresa) {
+					    	
+							if(this.anadirPoblacionValido() == true) {
+					    		//Llamamos al metodo que realiza el insert del nueva poblacion
+								this.crearNuevaPoblacion(sessionFactory, modelo);
+								this.vista.panelNuevaEmpresa.setVisible(true);
+								this.vista.panelNuevaPoblacion.setVisible(false);
+								
+								//RELLENAR EL COMBO BOX DE LAS POBLACIONES
+								modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
+						    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
+							}
+						}
 		    
 		    
 		    
-		    if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
-		    	
-		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
-		    	
-		    }
+		   
 		    // --------------------------------------------		   
 			// --------------------------------------------
 
