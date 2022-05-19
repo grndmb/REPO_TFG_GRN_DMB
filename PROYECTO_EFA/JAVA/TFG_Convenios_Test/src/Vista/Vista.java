@@ -133,8 +133,9 @@ public class Vista extends JFrame {
 	/**
 	* PANEL NUEVA EMPRESA
 	*/
-	public JPanel panelNuevaEmpresa;
+	public JPanel panelNuevaActualizarEmpresa;
 		public JLabel lblTituloNuevoEmpresa;
+		public JLabel lblTituloModificarEmpresa;
 		public JLabel lblCIFEmpresa;
 		public JLabel lblNombreEmpresa;
 		public JLabel lblDireccionEmpresa;
@@ -177,6 +178,7 @@ public class Vista extends JFrame {
 		public JComboBox comboBoxPoblacionUSUEmpresa;
 		public JComboBox comboBoxCodigoPostalUSUEmpresa;
 		public JButton btnAnadirEmpresa;
+		public JButton btnModificarEmpresa;
 		public JButton btnNuevaPoblacionEmpresa;
 			
 	/**
@@ -604,206 +606,215 @@ public class Vista extends JFrame {
         /**
 		 * PANEL NUEVA EMPRESA
 		 */
-		panelNuevaEmpresa = new JPanel();
-		panelNuevaEmpresa.setBounds(368, 132, 1138, 648);
-		panelNuevaEmpresa.setBackground(Color.WHITE);
-		panelNuevaEmpresa.setForeground(new Color(102, 255, 204));
-		panelNuevaEmpresa.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelNuevaEmpresa.setLayout(null);
-		panelPrincipal.add(panelNuevaEmpresa);
+		panelNuevaActualizarEmpresa = new JPanel();
+		panelNuevaActualizarEmpresa.setBounds(368, 132, 1138, 648);
+		panelNuevaActualizarEmpresa.setBackground(Color.WHITE);
+		panelNuevaActualizarEmpresa.setForeground(new Color(102, 255, 204));
+		panelNuevaActualizarEmpresa.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelNuevaActualizarEmpresa.setLayout(null);
+		panelPrincipal.add(panelNuevaActualizarEmpresa);
 			
 			lblTituloNuevoEmpresa = new JLabel();
 			lblTituloNuevoEmpresa.setFont(new Font("Tahoma", Font.BOLD, 24));
 			lblTituloNuevoEmpresa.setText("NUEVA EMPRESA");
 			lblTituloNuevoEmpresa.setBounds(457, 20, 217, 35);
-			panelNuevaEmpresa.add(lblTituloNuevoEmpresa);
+			panelNuevaActualizarEmpresa.add(lblTituloNuevoEmpresa);
 		
 			lblCIFEmpresa = new JLabel();
 			lblCIFEmpresa.setText("CIF");
 			lblCIFEmpresa.setBounds(374, 84, 110, 19);
-			panelNuevaEmpresa.add(lblCIFEmpresa);
+			panelNuevaActualizarEmpresa.add(lblCIFEmpresa);
 			
 			lblNombreEmpresa = new JLabel();
 			lblNombreEmpresa.setText("NOMBRE");
 			lblNombreEmpresa.setBounds(374, 113, 136, 19);
-			panelNuevaEmpresa.add(lblNombreEmpresa);
+			panelNuevaActualizarEmpresa.add(lblNombreEmpresa);
 				
 			lblDireccionEmpresa = new JLabel();
 			lblDireccionEmpresa.setText("DIRECCION");
 			lblDireccionEmpresa.setBounds(374, 142, 96, 19);
-			panelNuevaEmpresa.add(lblDireccionEmpresa);
+			panelNuevaActualizarEmpresa.add(lblDireccionEmpresa);
 			
 			lblTelefono1Empresa = new JLabel();
 			lblTelefono1Empresa.setText("TELEFONO 1");
 			lblTelefono1Empresa.setBounds(374, 246, 96, 19);
-			panelNuevaEmpresa.add(lblTelefono1Empresa);
+			panelNuevaActualizarEmpresa.add(lblTelefono1Empresa);
 				
 			lblTelefono2Empresa = new JLabel();
 			lblTelefono2Empresa.setText("TELEFONO 2");
 			lblTelefono2Empresa.setBounds(374, 273, 136, 19);
-			panelNuevaEmpresa.add(lblTelefono2Empresa);
+			panelNuevaActualizarEmpresa.add(lblTelefono2Empresa);
 			
 			lblEmailEmpresa = new JLabel();
 			lblEmailEmpresa.setText("CORREO");
 			lblEmailEmpresa.setBounds(374, 220, 136, 19);
-			panelNuevaEmpresa.add(lblEmailEmpresa);
+			panelNuevaActualizarEmpresa.add(lblEmailEmpresa);
 			
 			lblFaxEmpresa = new JLabel();
 			lblFaxEmpresa.setText("FAX");
 			lblFaxEmpresa.setBounds(374, 300, 136, 19);
-			panelNuevaEmpresa.add(lblFaxEmpresa);
+			panelNuevaActualizarEmpresa.add(lblFaxEmpresa);
 			
 			lblPaginaWebEmpresa = new JLabel();
 			lblPaginaWebEmpresa.setText("PAGINA WEB");
 			lblPaginaWebEmpresa.setBounds(374, 326, 136, 19);
-			panelNuevaEmpresa.add(lblPaginaWebEmpresa);
+			panelNuevaActualizarEmpresa.add(lblPaginaWebEmpresa);
 			
 			lblDNIGerenteEmpresa = new JLabel();
 			lblDNIGerenteEmpresa.setText("DNI GERENTE");
 			lblDNIGerenteEmpresa.setBounds(374, 384, 136, 19);
-			panelNuevaEmpresa.add(lblDNIGerenteEmpresa);
+			panelNuevaActualizarEmpresa.add(lblDNIGerenteEmpresa);
 			
 			lblNombreGerenteEmpresa = new JLabel();
 			lblNombreGerenteEmpresa.setText("NOMBRE GERENTE");
 			lblNombreGerenteEmpresa.setBounds(374, 415, 136, 19);
-			panelNuevaEmpresa.add(lblNombreGerenteEmpresa);
+			panelNuevaActualizarEmpresa.add(lblNombreGerenteEmpresa);
 			
 			lblDNIPersonaContactoEmpresa = new JLabel();
 			lblDNIPersonaContactoEmpresa.setText("DNI PERSONA DE CONTACTO");
 			lblDNIPersonaContactoEmpresa.setBounds(374, 444, 204, 19);
-			panelNuevaEmpresa.add(lblDNIPersonaContactoEmpresa);
+			panelNuevaActualizarEmpresa.add(lblDNIPersonaContactoEmpresa);
 			
 			lblPersonaContactoEmpresaEmpresa = new JLabel();
 			lblPersonaContactoEmpresaEmpresa.setText("PERSONA DE CONTACTO");
 			lblPersonaContactoEmpresaEmpresa.setBounds(374, 473, 222, 19);
-			panelNuevaEmpresa.add(lblPersonaContactoEmpresaEmpresa);
+			panelNuevaActualizarEmpresa.add(lblPersonaContactoEmpresaEmpresa);
 			
 			lblFechaActualizacionEmpresa = new JLabel();
 			lblFechaActualizacionEmpresa.setText("FECHA ACTUALIZACION DATOS");
 			lblFechaActualizacionEmpresa.setBounds(374, 531, 192, 19);
-			panelNuevaEmpresa.add(lblFechaActualizacionEmpresa);
+			panelNuevaActualizarEmpresa.add(lblFechaActualizacionEmpresa);
 			
 			lblOrganismoPublicoEmpresa = new JLabel();
 			lblOrganismoPublicoEmpresa.setText("ORGANISMO PUBLICO");
 			lblOrganismoPublicoEmpresa.setBounds(374, 355, 136, 19);
-			panelNuevaEmpresa.add(lblOrganismoPublicoEmpresa);
+			panelNuevaActualizarEmpresa.add(lblOrganismoPublicoEmpresa);
 			
 			lblObservacionesEmpresa = new JLabel();
 			lblObservacionesEmpresa.setText("OBSERVACIONES");
 			lblObservacionesEmpresa.setBounds(374, 502, 136, 19);
-			panelNuevaEmpresa.add(lblObservacionesEmpresa);
+			panelNuevaActualizarEmpresa.add(lblObservacionesEmpresa);
 			
 			lblPoblacionEmpresa = new JLabel();
 			lblPoblacionEmpresa.setText("POBLACION");
 			lblPoblacionEmpresa.setBounds(374, 166, 136, 19);
-			panelNuevaEmpresa.add(lblPoblacionEmpresa);
+			panelNuevaActualizarEmpresa.add(lblPoblacionEmpresa);
 			
 			lblCodigoPostalEmpresa = new JLabel();
 			lblCodigoPostalEmpresa.setText("CODIGO POSTAL");
 			lblCodigoPostalEmpresa.setBounds(374, 194, 149, 19);
-			panelNuevaEmpresa.add(lblCodigoPostalEmpresa);
+			panelNuevaActualizarEmpresa.add(lblCodigoPostalEmpresa);
 			
 			txtCIFEmpresa = new JTextField();
 			txtCIFEmpresa.setBounds(633, 84, 190, 19);
-			panelNuevaEmpresa.add(txtCIFEmpresa);
+			panelNuevaActualizarEmpresa.add(txtCIFEmpresa);
 			
 			restrictedtxtCIFEmpresa = new RestrictedTextField(txtCIFEmpresa);
 			restrictedtxtCIFEmpresa.setLimit(10);
 			
 			txtNombreEmpresa = new JTextField();
 			txtNombreEmpresa.setBounds(633, 113, 190, 19);
-			panelNuevaEmpresa.add(txtNombreEmpresa);
+			panelNuevaActualizarEmpresa.add(txtNombreEmpresa);
 				
 			txtDireccionEmpresa = new JTextField();
 			txtDireccionEmpresa.setBounds(633, 142, 190, 19);
-			panelNuevaEmpresa.add(txtDireccionEmpresa);
+			panelNuevaActualizarEmpresa.add(txtDireccionEmpresa);
 			
 			txtTelefono1Empresa = new JTextField();
 			txtTelefono1Empresa.setBounds(633, 246, 190, 19);
-			panelNuevaEmpresa.add(txtTelefono1Empresa);
+			panelNuevaActualizarEmpresa.add(txtTelefono1Empresa);
 			
 			restrictedtxtTelefono1Empresa = new RestrictedTextField(txtTelefono1Empresa);
 			restrictedtxtTelefono1Empresa.setLimit(9);
-			restrictedtxtTelefono1Empresa.setOnlyNums(true);
 			
 			txtTelefono2Empresa = new JTextField();
 			txtTelefono2Empresa.setBounds(633, 273, 190, 19);
-			panelNuevaEmpresa.add(txtTelefono2Empresa);
+			panelNuevaActualizarEmpresa.add(txtTelefono2Empresa);
 			
 			restrictedtxtTelefono2Empresa = new RestrictedTextField(txtTelefono2Empresa);
 			restrictedtxtTelefono2Empresa.setLimit(9);
-			restrictedtxtTelefono2Empresa.setOnlyNums(true);
 			
 			txtEmailEmpresa = new JTextField();
 			txtEmailEmpresa.setBounds(633, 220, 190, 19);
-			panelNuevaEmpresa.add(txtEmailEmpresa);
+			panelNuevaActualizarEmpresa.add(txtEmailEmpresa);
 			
 			txtFaxEmpresa = new JTextField();
 			txtFaxEmpresa.setBounds(633, 300, 190, 19);
-			panelNuevaEmpresa.add(txtFaxEmpresa);
+			panelNuevaActualizarEmpresa.add(txtFaxEmpresa);
 			
 			txtPaginaWebEmpresa = new JTextField();
 			txtPaginaWebEmpresa.setBounds(633, 326, 190, 19);
-			panelNuevaEmpresa.add(txtPaginaWebEmpresa);
+			panelNuevaActualizarEmpresa.add(txtPaginaWebEmpresa);
 			
 			txtDNIGerenteEmpresa = new JTextField();
 			txtDNIGerenteEmpresa.setBounds(633, 384, 190, 19);
-			panelNuevaEmpresa.add(txtDNIGerenteEmpresa);
+			panelNuevaActualizarEmpresa.add(txtDNIGerenteEmpresa);
 			
 			restrictedtxtDNIGerenteEmpresa = new RestrictedTextField(txtDNIGerenteEmpresa);
 			restrictedtxtDNIGerenteEmpresa.setLimit(9);
 			
 			txtNombreGerenteEmpresa = new JTextField();
 			txtNombreGerenteEmpresa.setBounds(633, 415, 190, 19);
-			panelNuevaEmpresa.add(txtNombreGerenteEmpresa);
+			panelNuevaActualizarEmpresa.add(txtNombreGerenteEmpresa);
 			
 			txtPersonaContactoEmpresa = new JTextField();
 			txtPersonaContactoEmpresa.setBounds(633, 473, 190, 19);
-			panelNuevaEmpresa.add(txtPersonaContactoEmpresa);
+			panelNuevaActualizarEmpresa.add(txtPersonaContactoEmpresa);
 			
 			txtDNIPersonaContactoEmpresaEmpresa = new JTextField();
 			txtDNIPersonaContactoEmpresaEmpresa.setBounds(633, 444, 190, 19);
-			panelNuevaEmpresa.add(txtDNIPersonaContactoEmpresaEmpresa);
+			panelNuevaActualizarEmpresa.add(txtDNIPersonaContactoEmpresaEmpresa);
 			
 			restrictedtxtDNIPersonaContactoEmpresaEmpresa = new RestrictedTextField(txtDNIPersonaContactoEmpresaEmpresa);
 			restrictedtxtDNIPersonaContactoEmpresaEmpresa.setLimit(9);
 			
 			lblFechaActualizacionUSUEmpresa = new JLabel();
 			lblFechaActualizacionUSUEmpresa.setBounds(633, 531, 190, 19);
-			panelNuevaEmpresa.add(lblFechaActualizacionUSUEmpresa);
+			panelNuevaActualizarEmpresa.add(lblFechaActualizacionUSUEmpresa);
 			
 			checkBoxOrganismoPublicoUSUEmpresa = new JCheckBox();
 			checkBoxOrganismoPublicoUSUEmpresa.setBackground(Color.WHITE);
 			checkBoxOrganismoPublicoUSUEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 50));
 			checkBoxOrganismoPublicoUSUEmpresa.setBounds(633, 353, 28, 21);
-			panelNuevaEmpresa.add(checkBoxOrganismoPublicoUSUEmpresa);
+			panelNuevaActualizarEmpresa.add(checkBoxOrganismoPublicoUSUEmpresa);
 			
 			txtObservacionesEmpresa = new JTextField();
 			txtObservacionesEmpresa.setBounds(633, 502, 190, 19);
-			panelNuevaEmpresa.add(txtObservacionesEmpresa);
+			panelNuevaActualizarEmpresa.add(txtObservacionesEmpresa);
 		
 			comboBoxPoblacionUSUEmpresa = new JComboBox();
 			comboBoxPoblacionUSUEmpresa.setBounds(633, 168, 190, 19);
-			panelNuevaEmpresa.add(comboBoxPoblacionUSUEmpresa);
+			panelNuevaActualizarEmpresa.add(comboBoxPoblacionUSUEmpresa);
 			
 			comboBoxCodigoPostalUSUEmpresa = new JComboBox();
 			comboBoxCodigoPostalUSUEmpresa.setBounds(633, 194, 190, 19);
-			panelNuevaEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
+			panelNuevaActualizarEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
 			
-			btnAnadirEmpresa = new JButton("A\u00D1ADIR EMPRESA");
+			btnAnadirEmpresa = new JButton("AÑADIR EMPRESA");
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			btnAnadirEmpresa.setBounds(457, 576, 217, 50);
-			panelNuevaEmpresa.add(btnAnadirEmpresa);	
+			panelNuevaActualizarEmpresa.add(btnAnadirEmpresa);	
+			
+			btnModificarEmpresa = new JButton("MODIFICAR EMPRESA");
+			btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			btnModificarEmpresa.setBounds(457, 576, 217, 50);
+			panelNuevaActualizarEmpresa.add(btnModificarEmpresa);	
+			
+			lblTituloModificarEmpresa = new JLabel();
+			lblTituloModificarEmpresa.setText("MODIFICAR EMPRESA");
+			lblTituloModificarEmpresa.setFont(new Font("Tahoma", Font.BOLD, 24));
+			lblTituloModificarEmpresa.setBounds(403, 24, 300, 50);
+			panelNuevaActualizarEmpresa.add(lblTituloModificarEmpresa);
 			
 			btnNuevaPoblacionEmpresa = new JButton("NUEVA POBLACION");
 			btnNuevaPoblacionEmpresa.setFont(new Font("Tahoma", Font.BOLD, 10));
 			btnNuevaPoblacionEmpresa.setBounds(849, 168, 149, 19);
-			panelNuevaEmpresa.add(btnNuevaPoblacionEmpresa);
+			panelNuevaActualizarEmpresa.add(btnNuevaPoblacionEmpresa);
 			
 			lblErroresNuevaEmpresa = new JLabel();
 			lblErroresNuevaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblErroresNuevaEmpresa.setBounds(745, 570, 352, 56);
-			panelNuevaEmpresa.add(lblErroresNuevaEmpresa);
+			panelNuevaActualizarEmpresa.add(lblErroresNuevaEmpresa);
 
 		
 		/**
