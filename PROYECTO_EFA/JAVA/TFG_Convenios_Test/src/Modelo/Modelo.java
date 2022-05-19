@@ -770,41 +770,59 @@ public class Modelo {
 				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
 				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();*/
 				
-				//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
-				BigInteger auxComprobacion;
-				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
-				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
-				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
-
-				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
-				
-				
-		 		//Convertir Big Integer a Int
-		 		String auxComprobacionParset = String.valueOf(auxComprobacion);
-		 		int auxComprobacionN = Integer.parseInt(auxComprobacionParset);
-				
-		 		if(auxComprobacionN < 2) {
-		 			
-		 			//------------------------------------------
-		 			BigInteger auxComprobacion2;
-					Query queryComprobacion2 = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND ID_CONVENIO LIKE :id");
-					queryComprobacion2.setParameter("cifEmpresa", cifEmpresa);
-					queryComprobacion2.setParameter("id", "%" + "PRIV" + "%");
-					auxComprobacion2 = (BigInteger) queryComprobacion2.getSingleResult();
-
-					//Convertir Big Integer a Int
-			 		String auxComprobacionParset2 = String.valueOf(auxComprobacion2);
-			 		int auxComprobacionN2 = Integer.parseInt(auxComprobacionParset2);
+				if(test.equals("MOR/PRIV/")) {
 					
-					System.out.println(auxComprobacionN2);
+				
+					//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+					BigInteger auxComprobacion;
+					Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO LIKE :id");
+					queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
+					queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+					queryComprobacion.setParameter("id",  "%" + "PRIV" + "%");
+	
+					auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
 					
-					//------------------------------------------------------
-					if(auxComprobacionN2 < 1) {
+					
+			 		//Convertir Big Integer a Int
+			 		String auxComprobacionParset = String.valueOf(auxComprobacion);
+			 		int auxComprobacionN = Integer.parseInt(auxComprobacionParset);
+					
+			 		System.out.println(test);
+			 		
+			 		
+			 		if(auxComprobacionN < 1) {
+			 			
 						session.save(convenio);
 						session.getTransaction().commit();	
-					}
-		 			
-		 		}
+			 			
+			 		}
+		 		
+				}if(test.equals("MOR/")) {
+					
+					//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+					BigInteger auxComprobacion;
+					Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO NOT LIKE :id");
+					queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
+					queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
+					queryComprobacion.setParameter("id",  "%" + "PRIV" + "%");
+	
+					auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();
+					
+					
+			 		//Convertir Big Integer a Int
+			 		String auxComprobacionParset = String.valueOf(auxComprobacion);
+			 		int auxComprobacionN = Integer.parseInt(auxComprobacionParset);
+					
+			 		System.out.println(test);
+			 		
+			 		
+			 		if(auxComprobacionN < 1) {
+			 	
+						session.save(convenio);
+						session.getTransaction().commit();	
+			 		}
+					
+				}
 		 		
 		 } catch (Exception e) {
 				// TODO: handle exception
@@ -890,7 +908,7 @@ public class Modelo {
 	    
 	        
 	        
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "FCT", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);

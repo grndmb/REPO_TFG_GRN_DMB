@@ -560,7 +560,7 @@ public class Vista extends JFrame {
             panelListaEmpresas.add(listPaneEmpresas);
 			
             
-            btnPanelAddEmpresa = new JButton("AÑADIR NUEVA");
+            btnPanelAddEmpresa = new JButton("Aï¿½ADIR NUEVA");
             btnPanelAddEmpresa.setBackground(Color.GREEN);
             btnPanelAddEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
             btnPanelAddEmpresa.setBounds(874, 565, 205, 55);
@@ -926,11 +926,11 @@ public class Vista extends JFrame {
 			lblTituloNuevaPoblacion.setBounds(296, 21, 268, 35);
 			panelNuevaPoblacion.add(lblTituloNuevaPoblacion);
 			
-			btnAnadirPoblacionAlumno = new JButton("AÑADIR POBLACION");
+			btnAnadirPoblacionAlumno = new JButton("Aï¿½ADIR POBLACION");
 			btnAnadirPoblacionAlumno.setBounds(306, 422, 189, 76);
 			panelNuevaPoblacion.add(btnAnadirPoblacionAlumno);
 			
-			btnAnadirPoblacionEmpresa = new JButton("AÑADIR POBLACION");
+			btnAnadirPoblacionEmpresa = new JButton("Aï¿½ADIR POBLACION");
 			btnAnadirPoblacionEmpresa.setBounds(306, 422, 189, 76);
 			panelNuevaPoblacion.add(btnAnadirPoblacionEmpresa);
 			

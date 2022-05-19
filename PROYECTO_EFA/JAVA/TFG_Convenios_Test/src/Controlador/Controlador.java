@@ -416,10 +416,13 @@ public class Controlador implements ActionListener{
 				    	
 				    	vista.panelListaEmpresas.setVisible(true);
 				    	
+				    	
 				    	vista.panelListaAlumno.setVisible(false);
 				    	vista.panelNuevoActualizarAlumno.setVisible(false);
 						vista.panelNuevaPoblacion.setVisible(false);
 						vista.panelNuevoCurso.setVisible(false);
+						vista.panelConvenios.setVisible(false);
+						vista.panelNuevaEmpresa.setVisible(false);
 						
 						//RELLENA EL JLIST DEL PANEL LISTAR EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
@@ -433,7 +436,7 @@ public class Controlador implements ActionListener{
 							vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);	
 				    }
 				    
-				//AL PULSAR EN UNA POBLACIÓN CARGA SU CODIGO POSTAL
+				//AL PULSAR EN UNA POBLACIï¿½N CARGA SU CODIGO POSTAL
 				    if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
 				    
 				    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
@@ -483,7 +486,7 @@ public class Controlador implements ActionListener{
 				/**
 				 * Panel Nueva Empresa
 				 */
-				  //BOTON QUE MUESTRA EL PANEL DE AÑADIR NUEVA EMPRESA
+				  //BOTON QUE MUESTRA EL PANEL DE Aï¿½ADIR NUEVA EMPRESA
 					if(e.getSource() == vista.btnPanelAddEmpresa){
 						this.vista.panelListaEmpresas.setVisible(false);
 			    		this.vista.panelNuevaEmpresa.setVisible(true);
