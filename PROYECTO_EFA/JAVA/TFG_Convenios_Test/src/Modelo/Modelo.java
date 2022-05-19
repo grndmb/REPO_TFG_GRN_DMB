@@ -687,13 +687,6 @@ public class Modelo {
 		 		session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				//MOR/PRIV/C014/22
-				//MOR/PRIV/A001/22
-				//MOR/C014/22
-				//MOR/A014/22
-				
-				
-				
 				String test;
 				String idConvenio = "";
 	    		
@@ -749,7 +742,6 @@ public class Modelo {
 				}
 				
 				
-				
 				//CREAR CONVENIO
 				Convenio convenio = new Convenio();
 				convenio.setIdConvenio(idConvenio);
@@ -761,19 +753,11 @@ public class Modelo {
 				convenio.setEmpresa(empresa);
 				convenio.setFechaAnexo(fechaAnexo);
 				convenio.setTipoConvenio(tipoConvenio);
-	    		
-				
-				/*COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
-				BigInteger auxComprobacion;
-				Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio");
-				queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
-				queryComprobacion.setParameter("tipoConvenio", tipoConvenio);
-				auxComprobacion = (BigInteger) queryComprobacion.getSingleResult();*/
 				
 				if(test.equals("MOR/PRIV/")) {
 					
 				
-					//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+					//COMPROBAR QUE COMO MAXIMO SOLO HAY 2 CONVENIOS PRIVADOS POR EMPRESA
 					BigInteger auxComprobacion;
 					Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO LIKE :id");
 					queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
@@ -799,7 +783,7 @@ public class Modelo {
 		 		
 				}if(test.equals("MOR/")) {
 					
-					//COMPROBAR QUE COMO MAXIMO SOLO HAY 4 CONVENIOS POR EMPRESA
+					//COMPROBAR QUE COMO MAXIMO SOLO HAY 2 CONVENIOS PUBLICOS POR EMPRESA
 					BigInteger auxComprobacion;
 					Query queryComprobacion = session.createSQLQuery("SELECT COUNT(*) FROM CONVENIO WHERE CIF_EMPRESA = :cifEmpresa AND TIPO_CONVENIO = :tipoConvenio AND ID_CONVENIO NOT LIKE :id");
 					queryComprobacion.setParameter("cifEmpresa", cifEmpresa);
@@ -840,6 +824,82 @@ public class Modelo {
 		 
 	 }
 	 
+	 
+	 public void actualizarConvenio (SessionFactory sessionFactory, String id, String tipoConvenio, Date fechaAnexo, String cifEmpresa) throws HibernateException {
+		 
+		 
+		 Session session = null;
+
+		 try {
+			//Crear sesion e iniciar transaccion
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			
+			Query query = session.createQuery("FROM Convenio WHERE idConvenio = :id");
+			query.setParameter("id", id);
+			Convenio convenio = (Convenio) query.getSingleResult();
+			
+			
+			BigInteger auxConveniosQuery;
+    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
+    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
+    		auxConveniosQuery = (BigInteger) queryCantidadConvenio.getSingleResult();
+    		
+    		//Convertir Big Integer a Int
+    		String auxConvenios1 = String.valueOf(auxConveniosQuery);
+    		int auxConvenios = Integer.parseInt(auxConvenios1);
+			
+			
+    		//Actualizar Convenio			
+			Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+			empresaQuery.setParameter("cifEmpresa", cifEmpresa);
+			Empresa empresa = (Empresa) empresaQuery.getSingleResult();
+			
+			//NUEVO ID
+			String nuevoIdConvenio;
+			
+			if (!id.contains("PRIV")) {				
+				auxConvenios = auxConvenios + 1;
+				Formatter obj = new Formatter();
+		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				
+		        nuevoIdConvenio = id.replace(id.substring(5, 8), numeroCeros);
+
+			}else {
+				
+				auxConvenios = auxConvenios + 1;
+				Formatter obj = new Formatter();
+		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				
+		        nuevoIdConvenio = id.replace(id.substring(10, 13), numeroCeros);
+				
+			}
+			
+			convenio.setIdConvenio(nuevoIdConvenio);
+			convenio.setEmpresa(empresa);
+			convenio.setFechaAnexo(fechaAnexo);
+			convenio.setTipoConvenio(tipoConvenio);
+    		
+			session.save(convenio);
+			session.getTransaction().commit();	
+			
+		}  catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+		 
+		 
+		 
+		 
+	 }
 	 
 	 /**
 	  * Metodo para ver los Convenios de una empresa
@@ -913,7 +973,11 @@ public class Modelo {
 	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carroceria", "PFE", false, fechaNacimientoUSU);
-	         /*helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGM CarrocerÃ­a", "FCT", false, fechaNacimientoUSU);
+
+	       helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
+	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/C001/22", "PFE", fechaNacimientoUSU, "4331-PAT");
+
+	        
 	        
          /*
           * 2º CFGM Carrocería
