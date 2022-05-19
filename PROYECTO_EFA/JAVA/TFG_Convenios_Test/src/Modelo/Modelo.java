@@ -835,9 +835,14 @@ public class Modelo {
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
-			Query query = session.createQuery("FROM Convenio WHERE idConvenio = :id");
-			query.setParameter("id", id);
-			Convenio convenio = (Convenio) query.getSingleResult();
+			Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+			queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
+			Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
+			
+			Query queryConvenio = session.createQuery("FROM Convenio WHERE idConvenio = :id AND empresa = :empresa");
+			queryConvenio.setParameter("id", id);
+			queryConvenio.setParameter("empresa", empresa);
+			Convenio convenio = (Convenio) queryConvenio.getSingleResult();
 			
 			
 			BigInteger auxConveniosQuery;
@@ -853,7 +858,7 @@ public class Modelo {
     		//Actualizar Convenio			
 			Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 			empresaQuery.setParameter("cifEmpresa", cifEmpresa);
-			Empresa empresa = (Empresa) empresaQuery.getSingleResult();
+			Empresa empresaActualizar = (Empresa) empresaQuery.getSingleResult();
 			
 			//NUEVO ID
 			String nuevoIdConvenio;
@@ -876,7 +881,7 @@ public class Modelo {
 			}
 			
 			convenio.setIdConvenio(nuevoIdConvenio);
-			convenio.setEmpresa(empresa);
+			convenio.setEmpresa(empresaActualizar);
 			convenio.setFechaAnexo(fechaAnexo);
 			convenio.setTipoConvenio(tipoConvenio);
     		
@@ -968,14 +973,15 @@ public class Modelo {
 	    
 	        
 	        
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carroceria", "PFE", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carroceria", "FCT", false, fechaNacimientoUSU);
 
-	       helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
-	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/C001/22", "PFE", fechaNacimientoUSU, "4331-PAT");
+	       //helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
+	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
+	     
 
 	        
 	        
