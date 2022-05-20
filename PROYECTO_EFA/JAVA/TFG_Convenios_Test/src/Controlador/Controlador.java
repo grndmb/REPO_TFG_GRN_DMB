@@ -31,6 +31,7 @@ import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
 import persistencia.Poblacion;
+import persistencia.Practica;
 import Modelo.Modelo;
 
 public class Controlador implements ActionListener{
@@ -90,7 +91,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnActualizarConvenio.addActionListener(this);
 		
 		//Botones del panel Periodos
-			
+			this.vista.btnCrearPeriodo.addActionListener(this);
 			
 		//VISTAS
 			this.vista.panelConvenios.setVisible(false);;
@@ -123,6 +124,8 @@ public class Controlador implements ActionListener{
 		//ARRAYLIST JLIST CONVENIOS
 		ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
 		
+		//ARRAY JLIST PERIODO
+		ArrayList<Practica> listaPeriodos = new ArrayList<Practica>();
 		
 		SessionFactory sessionFactory = null;
 
@@ -199,7 +202,7 @@ public class Controlador implements ActionListener{
 				}
 				
 		    	//RELLENA EL JLIST DE LOS ALUMNOS
-				this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
+				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 		    }
 		    
 		  //BOTON QUE HACE VISIBLE EL FORMULARIO DE AÑADIR ALUMNO
@@ -300,7 +303,7 @@ public class Controlador implements ActionListener{
 				
 		    	this.resetFormularioNuevoAlumno();
 		    	//RELLENA EL JLIST DE LOS ALUMNOS
-				this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
+				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 				
 				//Selecciona el curso del alumno, si el mismo se modifica
 				vista.comboBoxListaCursoAlumno.setSelectedItem(vista.comboBoxNombreCursoUSUAlumno.getSelectedItem());
@@ -321,7 +324,7 @@ public class Controlador implements ActionListener{
 					modelo.eliminarAlumno(sessionFactory, listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif());
 			    	
 			    	//RELLENA EL JLIST DE LOS ALUMNOS
-					this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
+					this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 					
 					
 				} catch (InterruptedException e1) {
@@ -341,7 +344,7 @@ public class Controlador implements ActionListener{
 					
 					vista.panelNuevoActualizarAlumno.setVisible(false);
 					vista.panelListaAlumno.setVisible(true);
-					this.recargaJLIST(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
+					this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 					
 					
 					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
@@ -684,7 +687,45 @@ public class Controlador implements ActionListener{
 						   //RELLENA EL COMBO BOX DE PROFESOR
 						   this.vista.comboBoxListaProfesorPeriodo.removeAllItems();
 						   modelo.rellenarComboBoxProfesor(sessionFactory, vista.comboBoxListaProfesorPeriodo);
+						   
+						 //Rellenar List de empresas				
+						   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+						   for (int i = 0; i < listaPeriodos.size(); i++) {
+								System.out.println(listaPeriodos.get(i).getIdPractica());
+							   }
+							this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodos, vista.listPeriodos, listaPeriodos);
 					   }
+					   
+			//BOTON DE HACER EL INSERT DE PERIODO (PRACTICAS)
+				if(e.getSource() == vista.btnCrearPeriodo) {
+					//Hace el insert del periodo
+					if(this.anadirPeriodoValido() == true) {
+						//FECHA INICIO
+						Date fechaInicioUSU = vista.dateChooserFechaInicioPeriodo.getDate();
+						java.sql.Date fechaInicio = new java.sql.Date(fechaInicioUSU.getTime());
+						
+						//FECHA FIN
+						Date fechaFinUSU = vista.dateChooserFechaFinPeriodo.getDate();
+						java.sql.Date fechaFin = new java.sql.Date(fechaFinUSU.getTime());
+						
+						//INSERT
+						modelo.crearPeriodoPracticas(sessionFactory, vista.comboBoxListaTipoPeriodo.getSelectedItem().toString(), fechaInicio, fechaFin, vista.comboBoxListaCursoPeriodo.getSelectedItem().toString(), vista.comboBoxListaProfesorPeriodo.getSelectedItem().toString());
+						
+						//RESET FORMULARIO
+						vista.comboBoxListaCursoPeriodo.setSelectedItem("");
+						vista.comboBoxListaTipoPeriodo.setSelectedItem("");
+						vista.comboBoxListaProfesorPeriodo.setSelectedItem("");
+						vista.dateChooserFechaInicioPeriodo.setDate(null);
+						vista.dateChooserFechaFinPeriodo.setDate(null);
+						
+						//Rellenar List de empresas	
+						
+						   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+						   this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodos, vista.listPeriodos, listaPeriodos);
+					}
+					
+					
+				}
 		    /**
 		     * ACCIONES DEL PANEL PRACTICAS
 		     */
@@ -844,7 +885,7 @@ public class Controlador implements ActionListener{
 				}
 	
 		//Metodo que recarga el Jlist
-			public void recargaJLIST (SessionFactory sessionFactory,JComboBox comboLista, DefaultListModel model, JList list) {
+			public void recargaJLISTAlumnos (SessionFactory sessionFactory,JComboBox comboLista, DefaultListModel model, JList list) {
 				//Modelo
 				Modelo modelo = new Modelo();
 				
@@ -858,9 +899,10 @@ public class Controlador implements ActionListener{
 					listaAlumnos = modelo.listarAlumnos(sessionFactory, comboLista.getSelectedItem().toString());
 					
 					for (int i = 0; i < listaAlumnos.size(); i++) {
-						
-						model.addElement(listaAlumnos.get(i).toString());
-						list.setModel(model);
+						if(this.anadirAlumnoValido() == true) {
+							model.addElement(listaAlumnos.get(i).toString());
+							list.setModel(model);
+						}
 					}
 					
 				} catch (InterruptedException e1) {
@@ -1298,6 +1340,51 @@ public class Controlador implements ActionListener{
 								}
 							}
 				
-
-
+			/**
+			 * METODOS DE LOS PERIODOS
+			 */
+			//METODO QUE RECARGA EL JLIST DE PERIODOS
+				public void recargaJLISTPeriodos(SessionFactory sessionFactory, DefaultListModel model, JList list, ArrayList<Practica> listaPeriodos) {
+					// Modelo
+					Modelo modelo = new Modelo();
+	
+					try {
+	
+						model.removeAllElements();
+	
+						for (int i = 0; i < listaPeriodos.size(); i++) {
+	
+							model.addElement(listaPeriodos.get(i).toString());
+							list.setModel(model);
+						}
+	
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	
+				}
+				
+			//METODO PARA VALIDAR QUE ESTAN RELLENOS TODOS LOS CAMPOS DEL PERIODO 
+				public  boolean anadirPeriodoValido() {
+					boolean valido = true;
+	
+					try {
+						
+						if(
+							vista.comboBoxListaCursoPeriodo.getSelectedItem().equals("")
+							|| vista.comboBoxListaTipoPeriodo.getSelectedItem().equals("")
+							|| "".equals(vista.dateChooserFechaInicioPeriodo.getDate())
+							|| "".equals(vista.dateChooserFechaFinPeriodo.getDate())
+							|| vista.comboBoxListaProfesorPeriodo.getSelectedItem().equals("")
+								) {
+							valido = false;  
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					return valido;
+				}	
 }
