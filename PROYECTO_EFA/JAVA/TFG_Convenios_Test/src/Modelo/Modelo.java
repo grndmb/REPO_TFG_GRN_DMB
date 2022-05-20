@@ -690,6 +690,20 @@ public class Modelo {
 				String test;
 				String idConvenio = "";
 	    		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				BigInteger auxConveniosQuery;
 	    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
 	    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
@@ -973,14 +987,14 @@ public class Modelo {
 	    
 	        
 	        
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "FCT", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carroceria", "FCT", false, fechaNacimientoUSU);
 
 	       //helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
-	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
+	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
 	     
 
 	        
