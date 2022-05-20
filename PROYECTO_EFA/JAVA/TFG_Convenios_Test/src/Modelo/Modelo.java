@@ -28,6 +28,7 @@ import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
 import persistencia.Poblacion;
+import persistencia.Profesor;
 
 
 
@@ -217,6 +218,40 @@ public class Modelo {
 			
 		}
 	 
+	 public void rellenarComboBoxProfesor (SessionFactory sessionFactory, JComboBox comboProfesor) {
+			Session session = null;
+			
+			try {
+				session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				/**
+				 * Consulta para obtener los nombres de las poblaciones
+				 */	
+				Query query = sessionFactory.getCurrentSession().createQuery("FROM Profesor GROUP BY Nombre ORDER BY Nombre ASC");
+				ArrayList<Profesor> listaProfesor = (ArrayList<Profesor>) query.list();
+				
+					comboProfesor.addItem("");
+					
+				for(int i=0;i<listaProfesor.size();i++) {
+					comboProfesor.addItem(listaProfesor.get(i).getNombre());
+				};
+				
+					
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				if(null != session) {
+					session.getTransaction().rollback();
+				}
+			}finally {
+				if(null != session) {
+					session.close();
+				}
+			}
+			
+	    }
 	 
 	/**
 	 * Metodo para crear e insertar un nuevo alumno en la base de datos

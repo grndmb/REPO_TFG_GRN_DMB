@@ -43,6 +43,7 @@ import javax.swing.JMenu;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Panel;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class Vista extends JFrame {
@@ -55,11 +56,13 @@ public class Vista extends JFrame {
 	public JPanel panelPrincipal;
 		public JButton btnInicio;
 		public JLabel labelTitulo;
+		
 		public JPanel panelMenu;
-		public JButton btnPanelAlumnos;
-		public JButton btnPanelEmpresas;
-		public JButton btnPanelPracticas;
-		public JButton btnPanelDocumentos;
+			public JButton btnPanelAlumnos;
+			public JButton btnPanelEmpresas;
+			public JButton btnPanelPeriodos;
+			public JButton btnPanelPracticas;
+			public JButton btnPanelDocumentos;
 
 		
 		
@@ -229,8 +232,28 @@ public class Vista extends JFrame {
 		public JButton btnAnadirPoblacionAlumno;
 		public JButton btnAnadirPoblacionEmpresa;
 		public JLabel lblErroresNuevaPoblacion;	
-		
 	
+	/**
+	 * PANEL PERIODOS	
+	 */
+	public JPanel panelPeriodos;
+		public JLabel lblTituloPeriodos;
+		public JComboBox comboBoxListaCursoPeriodo;
+		public JComboBox comboBoxListaTipoPeriodo;
+		public JDateChooser dateChooserFechaInicioPeriodo;
+		public JDateChooser dateChooserFechaFinPeriodo;
+		public JComboBox comboBoxListaProfesorPeriodo;
+		public JButton btnCrearPeriodo;
+		public JButton btnEliminarPeriodo;
+		
+		public JList listPeriodos;
+		public DefaultListModel modelPeriodos;	
+		private JLabel lblTipoPeriodos;
+		private JLabel lblFechaInicioPeriodos;
+		private JLabel lblFechaFinPeriodos;
+		private JLabel lblNombreProfesorPeriodos;
+		
+		
 	/**
 	 * Launch the application.
 	 */
@@ -307,10 +330,16 @@ public class Vista extends JFrame {
 			btnPanelEmpresas.setBounds(49, 130, 219, 37);
 			panelMenu.add(btnPanelEmpresas);
 			
+			btnPanelPeriodos = new JButton("Periodos");
+			btnPanelPeriodos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+			btnPanelPeriodos.setBackground(Color.WHITE);
+			btnPanelPeriodos.setBounds(49, 210, 219, 37);
+			panelMenu.add(btnPanelPeriodos);
+			
 			btnPanelPracticas = new JButton("Practicas");
 			btnPanelPracticas.setBackground(Color.WHITE);
 			btnPanelPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelPracticas.setBounds(49, 210, 219, 37);
+			btnPanelPracticas.setBounds(49, 290, 219, 37);
 			panelMenu.add(btnPanelPracticas);
 			
 			btnPanelDocumentos = new JButton("Documentos");
@@ -328,7 +357,7 @@ public class Vista extends JFrame {
 			
 			/**
 			 * PANEL ALUMNOS	
-			 */
+			*/
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -405,7 +434,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * PANEL NUEVO ALUMNO
-		 */
+		*/ 
 		panelNuevoActualizarAlumno = new JPanel();
 		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
 		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
@@ -531,12 +560,10 @@ public class Vista extends JFrame {
 			lblTituloModificarAlumno.setBounds(403, 24, 300, 50);
 			panelNuevoActualizarAlumno.add(lblTituloModificarAlumno);
 
-        // -----------------------------------------------------------------
-     
-     	// -----------------------------------------------------------------
+
     	/**
     	 * PANEL EMPRESAS
-     	*/ 
+     	*/
 
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -605,7 +632,7 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
         /**
 		 * PANEL NUEVA EMPRESA
-		 */
+		*/ 
 		panelNuevaActualizarEmpresa = new JPanel();
 		panelNuevaActualizarEmpresa.setBounds(368, 132, 1138, 648);
 		panelNuevaActualizarEmpresa.setBackground(Color.WHITE);
@@ -952,7 +979,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			*/ 
+			*/
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1138, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -1028,5 +1055,114 @@ public class Vista extends JFrame {
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);		
 		
+			/**
+			 * PANEL PERIODOS
+			*/
+			
+			panelPeriodos = new JPanel();
+			panelPeriodos.setBackground(Color.WHITE);
+			panelPeriodos.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelPeriodos.setBounds(368, 132, 1138, 648);
+			panelPrincipal.add(panelPeriodos);
+			panelPeriodos.setLayout(null);
+			
+				lblTituloPeriodos = new JLabel("PERIODOS");
+				lblTituloPeriodos.setFont(new Font("Agency FB", Font.BOLD, 50));
+				lblTituloPeriodos.setBounds(136, 21, 992, 55);
+				panelPeriodos.add(lblTituloPeriodos);
+			
+				
+				listPeriodos = new JList<String>();
+				listPeriodos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+				listPeriodos.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		        modelPeriodos = new DefaultListModel<>();
+		        
+	            JScrollPane listPanePeriodos = new JScrollPane();
+		        listPanePeriodos.setBounds(699, 160, 364, 409);
+		        listPanePeriodos.setViewportView(listPeriodos);
+		        panelPeriodos.add(listPanePeriodos);
+		        
+		        comboBoxListaCursoPeriodo = new JComboBox();
+		        comboBoxListaCursoPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		        comboBoxListaCursoPeriodo.setBackground(Color.WHITE);
+		        comboBoxListaCursoPeriodo.setBounds(256, 160, 337, 38);
+		        panelPeriodos.add(comboBoxListaCursoPeriodo);
+		        
+		        btnCrearPeriodo = new JButton("CREAR PERIODO");
+		        btnCrearPeriodo.setBackground(Color.ORANGE);
+		        btnCrearPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		        btnCrearPeriodo.setBounds(73, 574, 520, 55);
+		        panelPeriodos.add(btnCrearPeriodo);
+		        
+		        btnEliminarPeriodo = new JButton("ELIMINAR PERIODO");
+		        btnEliminarPeriodo.setBackground(Color.RED);
+		        btnEliminarPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		        btnEliminarPeriodo.setBounds(699, 580, 364, 55);
+		        panelPeriodos.add(btnEliminarPeriodo);
+		        
+		        JLabel lblCursoPeriodos = new JLabel("CURSO");
+		        lblCursoPeriodos.setHorizontalAlignment(SwingConstants.LEFT);
+		        lblCursoPeriodos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		        lblCursoPeriodos.setBounds(73, 161, 169, 47);
+		        panelPeriodos.add(lblCursoPeriodos);
+		        
+		        JLabel lblTituloListaPeriodos = new JLabel("LISTA DE PERIODOS");
+		        lblTituloListaPeriodos.setHorizontalAlignment(SwingConstants.CENTER);
+		        lblTituloListaPeriodos.setFont(new Font("Tahoma", Font.BOLD, 30));
+		        lblTituloListaPeriodos.setBounds(699, 105, 364, 47);
+		        panelPeriodos.add(lblTituloListaPeriodos);
+		        
+		        JLabel lblTituloNuevoPeriodo = new JLabel("NUEVO PERIODO");
+		        lblTituloNuevoPeriodo.setHorizontalAlignment(SwingConstants.CENTER);
+		        lblTituloNuevoPeriodo.setFont(new Font("Tahoma", Font.BOLD, 30));
+		        lblTituloNuevoPeriodo.setBounds(103, 105, 364, 47);
+		        panelPeriodos.add(lblTituloNuevoPeriodo);
+		        
+		        lblTipoPeriodos = new JLabel("TIPO");
+		        lblTipoPeriodos.setHorizontalAlignment(SwingConstants.LEFT);
+		        lblTipoPeriodos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		        lblTipoPeriodos.setBounds(73, 250, 169, 47);
+		        panelPeriodos.add(lblTipoPeriodos);
+		        
+		        lblFechaInicioPeriodos = new JLabel("FECHA INICIO");
+		        lblFechaInicioPeriodos.setHorizontalAlignment(SwingConstants.LEFT);
+		        lblFechaInicioPeriodos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		        lblFechaInicioPeriodos.setBounds(73, 339, 169, 47);
+		        panelPeriodos.add(lblFechaInicioPeriodos);
+		        
+		        lblFechaFinPeriodos = new JLabel("FECHA FIN");
+		        lblFechaFinPeriodos.setHorizontalAlignment(SwingConstants.LEFT);
+		        lblFechaFinPeriodos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		        lblFechaFinPeriodos.setBounds(73, 428, 169, 47);
+		        panelPeriodos.add(lblFechaFinPeriodos);
+		        
+		        lblNombreProfesorPeriodos = new JLabel("PROFESOR");
+		        lblNombreProfesorPeriodos.setHorizontalAlignment(SwingConstants.LEFT);
+		        lblNombreProfesorPeriodos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		        lblNombreProfesorPeriodos.setBounds(73, 517, 169, 47);
+		        panelPeriodos.add(lblNombreProfesorPeriodos);
+		        
+		        comboBoxListaTipoPeriodo = new JComboBox();
+		        comboBoxListaTipoPeriodo.setModel(new DefaultComboBoxModel(new String[] {"", "FCT", "PFE"}));
+		        comboBoxListaTipoPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		        comboBoxListaTipoPeriodo.setBackground(Color.WHITE);
+		        comboBoxListaTipoPeriodo.setBounds(256, 250, 337, 38);
+		        panelPeriodos.add(comboBoxListaTipoPeriodo);
+		        
+		        comboBoxListaProfesorPeriodo = new JComboBox();
+		        comboBoxListaProfesorPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		        comboBoxListaProfesorPeriodo.setBackground(Color.WHITE);
+		        comboBoxListaProfesorPeriodo.setBounds(256, 517, 337, 38);
+		        panelPeriodos.add(comboBoxListaProfesorPeriodo);
+		        
+		        dateChooserFechaInicioPeriodo = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
+		        dateChooserFechaInicioPeriodo.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 50));
+		        dateChooserFechaInicioPeriodo.setBounds(256, 339, 337, 47);
+		        panelPeriodos.add(dateChooserFechaInicioPeriodo);
+				
+		        dateChooserFechaFinPeriodo = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
+		        dateChooserFechaFinPeriodo.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 50));
+		        dateChooserFechaFinPeriodo.setBounds(256, 428, 337, 47);
+		        panelPeriodos.add(dateChooserFechaFinPeriodo);
 	}
 }

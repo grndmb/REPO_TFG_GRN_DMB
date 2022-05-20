@@ -48,6 +48,7 @@ public class Controlador implements ActionListener{
 		//Botones Menu
 			this.vista.btnPanelAlumnos.addActionListener(this);
 			this.vista.btnPanelEmpresas.addActionListener(this);
+			this.vista.btnPanelPeriodos.addActionListener(this);
 			
 		//BOTONES PANEL LISTA ALUMNOS
 			this.vista.btnPanelAddAlumno.addActionListener(this);
@@ -87,6 +88,9 @@ public class Controlador implements ActionListener{
 		//Botones panel Convenios
 			this.vista.comboBoxListaCursoConvenio.addActionListener(this);
 			this.vista.btnActualizarConvenio.addActionListener(this);
+		
+		//Botones del panel Periodos
+			
 			
 		//VISTAS
 			this.vista.panelConvenios.setVisible(false);;
@@ -98,6 +102,7 @@ public class Controlador implements ActionListener{
 			this.vista.panelNuevoCurso.setVisible(false);
 			this.vista.panelNuevaActualizarEmpresa.setVisible(false);
 			this.vista.panelListaEmpresas.setVisible(false);
+			this.vista.panelPeriodos.setVisible(false);
 	}
 	
 	
@@ -410,8 +415,6 @@ public class Controlador implements ActionListener{
 				    if(e.getSource() == vista.btnPanelEmpresas) {
 				    	
 				    	vista.panelListaEmpresas.setVisible(true);
-				    	
-				    	
 				    	vista.panelListaAlumno.setVisible(false);
 				    	vista.panelNuevoActualizarAlumno.setVisible(false);
 						vista.panelNuevaPoblacion.setVisible(false);
@@ -642,31 +645,46 @@ public class Controlador implements ActionListener{
 							}
 						}
 		    
-		    
-		    
-		   
-		    // --------------------------------------------		   
-			// --------------------------------------------
-
-		    
-		  //BOTON QUE ELIMINA LA EMPRESA
-		    if(e.getSource() == vista.btnEliminarEmpresa) {
-		    	
-		    	try {
-					listaEmpresas = modelo.listaEmpresas(sessionFactory);
-					modelo.eliminarEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+			  //BOTON QUE ELIMINA LA EMPRESA
+			    if(e.getSource() == vista.btnEliminarEmpresa) {
 			    	
-					//Rellenar List de empresas				
-					listaEmpresas = modelo.listaEmpresas(sessionFactory);
-					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
-				
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		    	
-		    }
+			    	try {
+						listaEmpresas = modelo.listaEmpresas(sessionFactory);
+						modelo.eliminarEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+				    	
+						//Rellenar List de empresas				
+						listaEmpresas = modelo.listaEmpresas(sessionFactory);
+						this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+					
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    	
+			    }
 		    
+		    /**
+			 * ACCIONES DEL PANEL PERIODOS
+			*/
+				//BOTON QUE ABRE EL PANEL DE PERIODOS
+					   if(e.getSource() == vista.btnPanelPeriodos) {
+						   this.vista.panelPeriodos.setVisible(true);
+						   
+						   vista.panelListaEmpresas.setVisible(false);
+					    	vista.panelListaAlumno.setVisible(false);
+					    	vista.panelNuevoActualizarAlumno.setVisible(false);
+							vista.panelNuevaPoblacion.setVisible(false);
+							vista.panelNuevoCurso.setVisible(false);
+							vista.panelConvenios.setVisible(false);
+							vista.panelNuevaActualizarEmpresa.setVisible(false);
+						   //RELLENA EL COMBO BOX DE CURSOS
+						   this.vista.comboBoxListaCursoPeriodo.removeAllItems();
+						   modelo.rellenarComboBoxCursos(sessionFactory, this.vista.comboBoxListaCursoPeriodo);
+						   
+						   //RELLENA EL COMBO BOX DE PROFESOR
+						   this.vista.comboBoxListaProfesorPeriodo.removeAllItems();
+						   modelo.rellenarComboBoxProfesor(sessionFactory, vista.comboBoxListaProfesorPeriodo);
+					   }
 		    /**
 		     * ACCIONES DEL PANEL PRACTICAS
 		     */
