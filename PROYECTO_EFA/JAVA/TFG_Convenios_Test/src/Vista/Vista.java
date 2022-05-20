@@ -917,7 +917,7 @@ public class Vista extends JFrame {
            
             
 		/**
-		 * Panel nueva Poblacion
+		 *  Panel nueva Poblacion
 		*/ 
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);

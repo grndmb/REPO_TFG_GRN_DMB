@@ -696,7 +696,7 @@ public class Controlador implements ActionListener{
 							this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodos, vista.listPeriodos, listaPeriodos);
 					   }
 					   
-			//BOTON DE HACER EL INSERT DE PERIODO (PRACTICAS)
+			//  BOTON DE HACER EL INSERT DE PERIODO (PRACTICAS)
 				if(e.getSource() == vista.btnCrearPeriodo) {
 					//Hace el insert del periodo
 					if(this.anadirPeriodoValido() == true) {

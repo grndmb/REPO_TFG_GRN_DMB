@@ -1045,7 +1045,7 @@ public class Modelo {
 		 		 
 	 }
 
-	 
+	 // LISTA DE LOS PERIODOS
 	public ArrayList<Practica> listarPeriodoPracticas (SessionFactory sessionFactory) throws HibernateException {
 		
 		 Session session = null;
