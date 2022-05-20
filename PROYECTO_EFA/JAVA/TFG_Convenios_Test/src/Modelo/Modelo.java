@@ -28,6 +28,7 @@ import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
 import persistencia.Poblacion;
+import persistencia.Practica;
 import persistencia.Profesor;
 
 
@@ -155,7 +156,7 @@ public class Modelo {
 				/**
 				 * Consulta para obtener los nombres de las poblaciones
 				 */	
-				Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion GROUP BY Nombre ORDER BY Nombre ASC");
+				Query query = session.createQuery("FROM Poblacion GROUP BY Nombre ORDER BY Nombre ASC");
 				ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
 				
 					comboPoblacionNombre.addItem("");
@@ -195,7 +196,7 @@ public class Modelo {
 				/**
 				 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
 				 */
-				Query query = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre = :nombre");
+				Query query = session.createQuery("FROM Poblacion WHERE nombre = :nombre");
 				query.setParameter("nombre", comboPoblacionNombre.getSelectedItem().toString());
 				ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
 				
@@ -228,7 +229,7 @@ public class Modelo {
 				/**
 				 * Consulta para obtener los nombres de las poblaciones
 				 */	
-				Query query = sessionFactory.getCurrentSession().createQuery("FROM Profesor GROUP BY Nombre ORDER BY Nombre ASC");
+				Query query = session.createQuery("FROM Profesor GROUP BY Nombre ORDER BY Nombre ASC");
 				ArrayList<Profesor> listaProfesor = (ArrayList<Profesor>) query.list();
 				
 					comboProfesor.addItem("");
@@ -281,7 +282,7 @@ public class Modelo {
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
 			
-			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
+			Query poblacionQuery = session.createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
 			poblacionQuery.setParameter("codigoPostal", codigoPostal);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 	
@@ -331,7 +332,7 @@ public class Modelo {
 				session.beginTransaction();
 				
 		 
-				Query cursoQuery = sessionFactory.getCurrentSession().createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
+				Query cursoQuery = session.createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
 				cursoQuery.setParameter("nombreCurso", nombreCurso);
 				Curso curso = (Curso) cursoQuery.getSingleResult();
 
@@ -394,7 +395,7 @@ public class Modelo {
 			
 			
 			//Consulta poblacion
-			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
+			Query poblacionQuery = session.createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
 			poblacionQuery.setParameter("codigoPostal", codigoPostal);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 	
@@ -504,7 +505,7 @@ public class Modelo {
 				empresa.setOrganismoPublico(organismoPublico);
 				empresa.setObservaciones(observaciones);
 				
-				Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
+				Query poblacionQuery = session.createQuery("FROM Poblacion WHERE nombre =:nombre");
 				poblacionQuery.setParameter("nombre", poblacion);
 				Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 		
@@ -545,7 +546,7 @@ public class Modelo {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				Query queryEmpresa = sessionFactory.getCurrentSession().createQuery("FROM Empresa");
+				Query queryEmpresa = session.createQuery("FROM Empresa");
 				listaEmpresa = (ArrayList<Empresa>) queryEmpresa.list();
 		 
 			} catch (Exception e) {
@@ -582,7 +583,7 @@ public class Modelo {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				Query queryEmpresa = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE nombreEmpresa LIKE :nombreEmpresa");
+				Query queryEmpresa = session.createQuery("FROM Empresa WHERE nombreEmpresa LIKE :nombreEmpresa");
 				queryEmpresa.setParameter("nombreEmpresa", "%" + nombreEmpresa + "%");
 		 
 				listaEmpresa = (ArrayList<Empresa>) queryEmpresa.list();
@@ -905,7 +906,7 @@ public class Modelo {
 			
 			
     		//Actualizar Convenio			
-			Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+			Query empresaQuery = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 			empresaQuery.setParameter("cifEmpresa", cifEmpresa);
 			Empresa empresaActualizar = (Empresa) empresaQuery.getSingleResult();
 			
@@ -972,11 +973,11 @@ public class Modelo {
 		 		session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+				Query empresaQuery = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 				empresaQuery.setParameter("cifEmpresa", cifEmpresa);
 				Empresa empresa = (Empresa) empresaQuery.getSingleResult();
 				
-				Query convenioQuery = sessionFactory.getCurrentSession().createQuery("FROM Convenio WHERE empresa = :empresa");
+				Query convenioQuery = session.createQuery("FROM Convenio WHERE empresa = :empresa");
 				convenioQuery.setParameter("empresa", empresa);
 				
 				listaConvenios = (ArrayList<Convenio>) convenioQuery.list();
@@ -999,15 +1000,91 @@ public class Modelo {
 		 
 	 }
 	 
+	 public void crearPeriodoPracticas (SessionFactory sessionFactory, String tipoPractica, Date fechaInicio, Date fechaFin, String nombreCurso, String nombreProfesor) throws HibernateException {
+		 
+		 Session session = null;
+
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Practica practica = new Practica();
+				practica.setTipoPractica(tipoPractica);
+				practica.setFechaInicio(fechaInicio);
+				practica.setFechaFin(fechaFin);
+				practica.setEnProceso(false);
+				
+				//Query Curso
+				Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
+				queryCurso.setParameter("nombreCurso", nombreCurso);
+				Curso curso = (Curso) queryCurso.getSingleResult();
+				
+				practica.setCurso(curso);
+				
+				//Query Profesor
+				Query queryProfesor = session.createQuery("FROM Profesor WHERE nombre = :nombreProfesor");
+				queryProfesor.setParameter("nombreProfesor", nombreProfesor);
+				Profesor profesor = (Profesor) queryProfesor.getSingleResult();
+					
+				practica.setProfesor(profesor);
+				
+				session.saveOrUpdate(practica);
+				session.getTransaction().commit();
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 		 
+	 }
+
+	 
+	public ArrayList<Practica> listarPeriodoPracticas (SessionFactory sessionFactory) throws HibernateException {
+		
+		 Session session = null;
+
+		 ArrayList<Practica> listaPracticas = new ArrayList<Practica>();
+		 
+		 try {
+			
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			 
+			Query query = session.createQuery("FROM Practica");
+			listaPracticas = (ArrayList<Practica>) query.list();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+		 
+		 return listaPracticas;
+	}
+
 	 
 	 
-	 
-	 public static void main (String [] args) throws ParseException, InterruptedException {
+	public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;
 			
 		 
-		//Solo se hace una vez, al iniciar la aplicaci�n
+		//Solo se hace una vez, al iniciar la aplicaciï¿½n
 			Configuration configuration = new Configuration();
 			configuration.configure("hibernate.cfg.xml");
 			sessionFactory = configuration.buildSessionFactory();
@@ -1021,12 +1098,12 @@ public class Modelo {
 	 
 	    
 	        
-	        
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGM Carroceria", "FCT", true, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carroceria", "FCT", false, fechaNacimientoUSU);
+	       
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "6217-KIR", "2Âº CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "2341-KLO", "2Âº FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "9687-POK", "2Âº CFGM Carroceria", "FCT", false, fechaNacimientoUSU);
 
 	       //helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
 	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
@@ -1035,13 +1112,13 @@ public class Modelo {
 	        
 	        
          /*
-          * 2º CFGM Carrocería
-			2º CFGM Electromecánica
-			2º CFGM Sistemas MicroInformáticos y Redes
-			2º CFGS Desarrollo de Aplicaciones Multiplataforma
-			2º CFGS Técnico Superior en Automoción
-			2º FP Básica Informática y Comunicaciones
-			2º FP Básica Mantenimiento de Vehículos
+          * 2Âº CFGM CarrocerÃ­a
+			2Âº CFGM ElectromecÃ¡nica
+			2Âº CFGM Sistemas MicroInformÃ¡ticos y Redes
+			2Âº CFGS Desarrollo de Aplicaciones Multiplataforma
+			2Âº CFGS TÃ©cnico Superior en AutomociÃ³n
+			2Âº FP BÃ¡sica InformÃ¡tica y Comunicaciones
+			2Âº FP BÃ¡sica Mantenimiento de VehÃ­culos
           */
 	  
 	 
