@@ -174,7 +174,7 @@ INSERT INTO EMPRESA (CIF_EMPRESA, NOMBRE_EMPRESA, DIRECCION_EMPRESA, TELEFONO_1,
 ("9687-POK", "AgroRoncero", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022),
 ("2341-KLO", "GuillermoAgroKILO", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022),
 ("6217-KIR", "PepeVillalta", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022);
-
+-- INSERT PROFESORES
 INSERT INTO PROFESOR (DNI_PROFESOR, NOMBRE) VALUES
 	("76546676P", "David Montero Bellón"),
     ("76546673D", "Guillermo Romero Nuñez"),
