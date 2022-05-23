@@ -145,21 +145,14 @@ public class Controlador implements ActionListener{
 		    	vista.labelTitulo.setBounds(330, 0, 1218, 114);
 		    	
 				vista.btnInicio.setVisible(false);
-			
-			//Acciones del botï¿½n de Aï¿½adir Alumno
-		    }if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
-		    	
-				modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
+		    
+							
 				
 		    }
-		    
-		    
 		    /**
 		     * ACCIONES DEL PANEL ALUMNOS
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
-		    	
-		    	vista.modelAlumnos.removeAllElements();
 		    	
 		    	//PANELES CONSULTAS
 		    	vista.panelListaAlumno.setVisible(true);
@@ -171,12 +164,13 @@ public class Controlador implements ActionListener{
 				this.vista.panelNuevoCurso.setVisible(false);
 				this.vista.panelNuevaActualizarEmpresa.setVisible(false);
 				this.vista.panelListaEmpresas.setVisible(false);
+				this.vista.panelPeriodos.setVisible(false);
 				
-				this.resetFormularioNuevoAlumno();
+				
 				vista.comboBoxListaCursoAlumno.removeAllItems();
-				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);				
-				
-				
+				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
 		    }
 		    
 		    
@@ -190,8 +184,9 @@ public class Controlador implements ActionListener{
 					
 					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
 					
+					
+					
 					for (int i = 0; i < listaAlumnos.size(); i++) {
-						
 						vista.modelAlumnos.addElement(listaAlumnos.get(i).toString());
 						vista.listAlumnos.setModel(vista.modelAlumnos);
 					}
@@ -215,14 +210,17 @@ public class Controlador implements ActionListener{
 		    	vista.btnAnadirAlumno.setVisible(true);
 		    	vista.btnModificarAlumno.setVisible(false);
 		    	vista.lblTituloModificarAlumno.setVisible(false);
+		    	vista.panelPeriodos.setVisible(false);
 		    	
-		    	vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
 		    	vista.comboBoxPoblacionUSUAlumno.removeAllItems();
 		    	
-		    	modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
+		    	vista.comboBoxListaCursoAlumno.removeAllItems();
+				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
 		    	modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
-		    	vista.comboBoxListaCursoAlumno.removeAllItems();
+		    	
 		    }
 		    
 		   //BOTON QUE ABRE PANEL MODIFICAR ALUMNOS
@@ -236,10 +234,10 @@ public class Controlador implements ActionListener{
 			    	vista.btnModificarAlumno.setVisible(true);
 			    	vista.lblTituloModificarAlumno.setVisible(true);
 			    	
-			    	vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
-			    	vista.comboBoxPoblacionUSUAlumno.removeAllItems();
-			    	
-			    	modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);				
+					vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
+					
+			    	vista.comboBoxPoblacionUSUAlumno.removeAllItems();			
 			    	modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 			    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);		
 			    	
@@ -348,6 +346,8 @@ public class Controlador implements ActionListener{
 					
 					
 					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
+					
+					this.resetFormularioNuevoAlumno();
 		    	}
 			}
 		    
@@ -398,15 +398,21 @@ public class Controlador implements ActionListener{
 					vista.panelNuevoCurso.setVisible(false);
 					vista.panelNuevoActualizarAlumno.setVisible(true);
 					
-					//Recargamos el comboBox de cursos
-					vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
-					vista.comboBoxListaCursoAlumno.removeAllItems();
-					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
-					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
 		    	}
+				//Recargamos el comboBox de cursos
+				vista.comboBoxListaCursoAlumno.removeAllItems();
+				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
 				
 			}
 		    
+			//AL PULSAR EN UNA OPCIÓN DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
+		    if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
+		    	
+				modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
+				
+		    }
 		    // -------------------------------------------		   
 			// -------------------------------------------
 
@@ -424,6 +430,7 @@ public class Controlador implements ActionListener{
 						vista.panelNuevoCurso.setVisible(false);
 						vista.panelConvenios.setVisible(false);
 						vista.panelNuevaActualizarEmpresa.setVisible(false);
+						vista.panelPeriodos.setVisible(false);
 						
 						//RELLENA EL JLIST DEL PANEL LISTAR EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
@@ -680,6 +687,7 @@ public class Controlador implements ActionListener{
 							vista.panelNuevoCurso.setVisible(false);
 							vista.panelConvenios.setVisible(false);
 							vista.panelNuevaActualizarEmpresa.setVisible(false);
+							
 						   //RELLENA EL COMBO BOX DE CURSOS
 						   this.vista.comboBoxListaCursoPeriodo.removeAllItems();
 						   modelo.rellenarComboBoxCursos(sessionFactory, this.vista.comboBoxListaCursoPeriodo);
@@ -735,14 +743,6 @@ public class Controlador implements ActionListener{
 		    }
 			   
 	}
-	
-	/*
-	 * METODOS DE RELLENO DE COMBOBOX
-	 */
-		
-			
-		
-		
 		
 	
 	/*
@@ -800,11 +800,10 @@ public class Controlador implements ActionListener{
 						if(
 							vista.txtNIFUSUAlumno.getText().equals("")
 							|| vista.txtNombreCompletoUSUAlumno.getText().equals("")
-							|| "".equals(vista.dateChooserFechaNacimientoUSUAlumno.getDate())
+							|| vista.dateChooserFechaNacimientoUSUAlumno.getDate() == null
 							|| vista.txtTelefonoUSUAlumno.getText().equals("")
 							|| vista.txtCorreoUSUAlumno.getText().equals("")
 							|| vista.comboBoxPoblacionUSUAlumno.getSelectedItem().equals("")
-							|| vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().equals("")
 							|| vista.comboBoxNombreCursoUSUAlumno.getSelectedItem().equals("")
 								) {
 							valido = false;
@@ -828,7 +827,7 @@ public class Controlador implements ActionListener{
 				
 			//Metodo para validar si el alumno que se desea crear, existe
 				public boolean existeNuevoAlumno (SessionFactory sessionFactory) {
-					boolean valido = true;
+					boolean existe = true;
 					Session session = null; 
 					
 					
@@ -850,7 +849,7 @@ public class Controlador implements ActionListener{
 							vista.lblErroresNuevoAlumno.setForeground(Color.RED);
 							this.resetFormularioNuevoAlumno();
 							
-							valido = false;
+							existe = false;
 						}
 						
 					} catch (Exception e) {
@@ -864,7 +863,7 @@ public class Controlador implements ActionListener{
 						}
 					}
 					
-					return valido;
+					return existe;
 				}
 			
 				
@@ -899,10 +898,8 @@ public class Controlador implements ActionListener{
 					listaAlumnos = modelo.listarAlumnos(sessionFactory, comboLista.getSelectedItem().toString());
 					
 					for (int i = 0; i < listaAlumnos.size(); i++) {
-						if(this.anadirAlumnoValido() == true) {
 							model.addElement(listaAlumnos.get(i).toString());
 							list.setModel(model);
-						}
 					}
 					
 				} catch (InterruptedException e1) {

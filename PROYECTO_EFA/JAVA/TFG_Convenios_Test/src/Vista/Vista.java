@@ -626,10 +626,6 @@ public class Vista extends JFrame {
             btnBuscarListaEmpresas.setBounds(621, 101, 138, 42);
             panelListaEmpresas.add(btnBuscarListaEmpresas);
             
-            txtCorreoUSUAlumno = new JTextField();
-			txtCorreoUSUAlumno.setColumns(10);
-			txtCorreoUSUAlumno.setBounds(517, 205, 219, 19);
-			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
         /**
 		 * PANEL NUEVA EMPRESA
 		*/ 
