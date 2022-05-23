@@ -95,4 +95,9 @@ public class Curso implements java.io.Serializable {
 		this.alumnos = alumnos;
 	}
 
+	@Override
+	public String toString() {
+		return "" + nombreAbrev;
+	}
+
 }

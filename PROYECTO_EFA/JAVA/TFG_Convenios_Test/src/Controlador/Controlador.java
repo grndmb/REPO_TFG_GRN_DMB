@@ -696,10 +696,10 @@ public class Controlador implements ActionListener{
 						   this.vista.comboBoxListaProfesorPeriodo.removeAllItems();
 						   modelo.rellenarComboBoxProfesor(sessionFactory, vista.comboBoxListaProfesorPeriodo);
 						   
-						 //Rellenar List de empresas				
+						 //Rellenar List de periodo			
 						   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 						   for (int i = 0; i < listaPeriodos.size(); i++) {
-								System.out.println(listaPeriodos.get(i).getIdPractica());
+								listaPeriodos.get(i).getCurso().toString();
 							   }
 							this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodos, vista.listPeriodos, listaPeriodos);
 					   }
@@ -1348,7 +1348,7 @@ public class Controlador implements ActionListener{
 					try {
 	
 						model.removeAllElements();
-	
+						
 						for (int i = 0; i < listaPeriodos.size(); i++) {
 	
 							model.addElement(listaPeriodos.get(i).toString());
