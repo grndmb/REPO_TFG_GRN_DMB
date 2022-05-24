@@ -1348,7 +1348,7 @@ public class Controlador implements ActionListener{
 						
 						for (int i = 0; i < listaPeriodos.size(); i++) {
 	
-							model.addElement(listaPeriodos.get(i).toString());
+							model.addElement(listaPeriodos.get(i).toString()+"ok\n");
 							list.setModel(model);
 						}
 	

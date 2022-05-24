@@ -1076,6 +1076,7 @@ public class Vista extends JFrame {
 	            JScrollPane listPanePeriodos = new JScrollPane();
 		        listPanePeriodos.setBounds(463, 160, 653, 409);
 		        listPanePeriodos.setViewportView(listPeriodos);
+		        listPeriodos.setLayoutOrientation(JList.VERTICAL);
 		        panelPeriodos.add(listPanePeriodos);
 		        
 		        comboBoxListaCursoPeriodo = new JComboBox();
