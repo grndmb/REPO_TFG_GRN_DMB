@@ -17,6 +17,7 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -92,9 +93,9 @@ public class Controlador implements ActionListener{
 		
 		//Botones del panel Periodos
 			this.vista.btnCrearPeriodo.addActionListener(this);
-			
+			this.vista.btnEliminarPeriodo.addActionListener(this);
 		//VISTAS
-			this.vista.panelConvenios.setVisible(false);;
+			this.vista.panelConvenios.setVisible(false);
 			this.vista.panelPrincipal.setVisible(true);
 			this.vista.panelListaAlumno.setVisible(false);
 			this.vista.panelMenu.setVisible(false);
@@ -142,19 +143,26 @@ public class Controlador implements ActionListener{
 		    	vista.panelMenu.setVisible(true);
 		    	
 		    	//Situar el lbl de EFA MORATALAZ
-		    	vista.labelTitulo.setBounds(330, 0, 1218, 114);
+		    	vista.labelTitulo.setBounds(342, 10, 1183, 112);
+		    	vista.labelTitulo.setOpaque(true);
+		    	vista.labelTitulo.setForeground(new Color(53, 100, 54));
 		    	
 				vista.btnInicio.setVisible(false);
 		    
-							
+				//MOSTRAR LOGO
+				vista.lblLogo.setVisible(true);
 				
 		    }
 		    /**
 		     * ACCIONES DEL PANEL ALUMNOS
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
-		    	//CAMBIOS DE COLORES
-		    	
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+		    		vista.btnPanelAlumnos.setBackground(new Color(211, 211, 211));
+		    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
+		    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
+		    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+		    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 		    	//PANELES CONSULTAS
 		    	vista.panelListaAlumno.setVisible(true);
 		    	
@@ -421,6 +429,7 @@ public class Controlador implements ActionListener{
 				//BOTON QUE ABRE EL PANEL DONDE SE LSTAN LAS EMPRESAS
 				    if(e.getSource() == vista.btnPanelEmpresas) {
 				    	
+				    	//DEJAR DE MOSTRAR PANEL DISTINTO AL PANEL EMPRESA
 				    	vista.panelListaEmpresas.setVisible(true);
 				    	vista.panelListaAlumno.setVisible(false);
 				    	vista.panelNuevoActualizarAlumno.setVisible(false);
@@ -429,6 +438,13 @@ public class Controlador implements ActionListener{
 						vista.panelConvenios.setVisible(false);
 						vista.panelNuevaActualizarEmpresa.setVisible(false);
 						vista.panelPeriodos.setVisible(false);
+						
+						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+			    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
+			    		vista.btnPanelEmpresas.setBackground(new Color(211, 211, 211));
+			    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
+			    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+			    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 						
 						//RELLENA EL JLIST DEL PANEL LISTAR EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
@@ -678,13 +694,20 @@ public class Controlador implements ActionListener{
 					   if(e.getSource() == vista.btnPanelPeriodos) {
 						   this.vista.panelPeriodos.setVisible(true);
 						   
-						   vista.panelListaEmpresas.setVisible(false);
+						    vista.panelListaEmpresas.setVisible(false);
 					    	vista.panelListaAlumno.setVisible(false);
 					    	vista.panelNuevoActualizarAlumno.setVisible(false);
 							vista.panelNuevaPoblacion.setVisible(false);
 							vista.panelNuevoCurso.setVisible(false);
 							vista.panelConvenios.setVisible(false);
 							vista.panelNuevaActualizarEmpresa.setVisible(false);
+							
+							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+				    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
+				    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
+				    		vista.btnPanelPeriodos.setBackground(new Color(211, 211, 211));
+				    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+				    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 							
 						   //RELLENA EL COMBO BOX DE CURSOS
 						   this.vista.comboBoxListaCursoPeriodo.removeAllItems();
@@ -729,14 +752,37 @@ public class Controlador implements ActionListener{
 						   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 						   this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodos, vista.listPeriodos, listaPeriodos);
 					}
-					
-					
 				}
+			
+			// BOTON QUE ELIMINA EL PERIODO SELECCIONADO
+				//BOTON QUE ELIMINA EL PERIODO
+			    if(e.getSource() == vista.btnEliminarPeriodo) {
+			    	
+			    	try {
+						listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+						modelo.eliminarPeriodoPractica(sessionFactory, listaPeriodos.get(vista.listPeriodos.getSelectedIndex()).getIdPractica());
+				    	
+				    	//RELLENA EL JLIST DE LOS PERIODOS
+						listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+						this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodos, vista.listPeriodos, listaPeriodos);
+						
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    	
+			    }
 		    /**
 		     * ACCIONES DEL PANEL PRACTICAS
 		     */
 		    if(e.getSource() == vista.btnPanelPracticas) {
-		    	
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
+	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
+	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
+	    		vista.btnPanelPracticas.setBackground(new Color(211, 211, 211));
+	    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 		    	
 		    }
 			   
@@ -1349,7 +1395,7 @@ public class Controlador implements ActionListener{
 						
 						for (int i = 0; i < listaPeriodos.size(); i++) {
 	
-							model.addElement(listaPeriodos.get(i).toString()+"ok\n");
+							model.addElement(listaPeriodos.get(i).toString());
 							list.setModel(model);
 						}
 	

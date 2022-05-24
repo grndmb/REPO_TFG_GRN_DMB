@@ -111,7 +111,7 @@ public class Practica implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "- " + tipoPractica + "   ("+ fechaInicio + " -- " + fechaFin + ") --> *"+curso+"*\n----------------------------------------------------------------" ;
+		return "- " + tipoPractica + "   ("+ fechaInicio + " -- " + fechaFin + ") --> *"+curso+"*\n" ;
 	}
 
 

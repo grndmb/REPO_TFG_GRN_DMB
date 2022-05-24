@@ -20,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -56,6 +57,7 @@ public class Vista extends JFrame {
 	public JPanel panelPrincipal;
 		public JButton btnInicio;
 		public JLabel labelTitulo;
+		public JLabel lblLogo;
 		
 		public JPanel panelMenu;
 			public JButton btnPanelAlumnos;
@@ -298,10 +300,11 @@ public class Vista extends JFrame {
 			panelPrincipal.setLayout(null);
 			
 			labelTitulo = new JLabel("EFA MORATALAZ");
+			labelTitulo.setBackground(new Color(255, 255, 255));
 			labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 			labelTitulo.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 60));
 			labelTitulo.setForeground(Color.WHITE);
-			labelTitulo.setBounds(0, 0, 1538, 114);
+			labelTitulo.setBounds(10, 10, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
 			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
@@ -314,7 +317,7 @@ public class Vista extends JFrame {
 			panelMenu = new JPanel();
 			panelMenu.setBackground(new Color(51, 204, 102));
 			panelMenu.setBorder(new MatteBorder(5, 3, 5, 3, (Color) new Color(0, 0, 0)));
-			panelMenu.setBounds(10, 132, 324, 648);
+			panelMenu.setBounds(20, 132, 324, 648);
 			panelPrincipal.add(panelMenu);
 			panelMenu.setLayout(null);
 			
@@ -348,11 +351,12 @@ public class Vista extends JFrame {
 			btnPanelDocumentos.setBounds(49, 491, 219, 37);
 			panelMenu.add(btnPanelDocumentos);
 			
-			JLabel lblLogo = new JLabel("");
-			lblLogo.setBounds(10, 10, 324, 104);
-			panelPrincipal.add(lblLogo);		
-		
-			
+			lblLogo = new JLabel("");
+			lblLogo.setBounds(20, 10, 324, 112);
+			lblLogo.setBackground(Color.WHITE);
+			lblLogo.setVisible(false);
+			lblLogo.setIcon(new ImageIcon("imagenes/logoEfa.png"));
+			panelPrincipal.add(lblLogo);
 			// -----------------------------------------------------------------
 			
 			/**
@@ -362,13 +366,13 @@ public class Vista extends JFrame {
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
 			panelListaAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-			panelListaAlumno.setBounds(368, 132, 1138, 648);
+			panelListaAlumno.setBounds(368, 132, 1157, 648);
 			panelPrincipal.add(panelListaAlumno);
 			panelListaAlumno.setLayout(null);
 			
 			JLabel lblTituloAlumnos = new JLabel("ALUMNOS");
 			lblTituloAlumnos.setFont(new Font("Agency FB", Font.BOLD, 50));
-			lblTituloAlumnos.setBounds(136, 21, 992, 55);
+			lblTituloAlumnos.setBounds(49, 21, 183, 55);
 			panelListaAlumno.add(lblTituloAlumnos);
 		
 			
@@ -379,14 +383,14 @@ public class Vista extends JFrame {
             
      
             JScrollPane listPaneAlumnos = new JScrollPane();
-            listPaneAlumnos.setBounds(50, 219, 721, 389);
+            listPaneAlumnos.setBounds(49, 219, 721, 389);
             listPaneAlumnos.setViewportView(listAlumnos);
             listAlumnos.setLayoutOrientation(JList.VERTICAL);
             panelListaAlumno.add(listPaneAlumnos);
             
             JLabel lblFiltroAlumno = new JLabel("Curso -->");
             lblFiltroAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-            lblFiltroAlumno.setBounds(50, 114, 124, 38);
+            lblFiltroAlumno.setBounds(49, 114, 124, 38);
             panelListaAlumno.add(lblFiltroAlumno);
             
             comboBoxListaCursoAlumno = new JComboBox();
@@ -436,7 +440,7 @@ public class Vista extends JFrame {
 		 * PANEL NUEVO ALUMNO
 	     */
 		panelNuevoActualizarAlumno = new JPanel();
-		panelNuevoActualizarAlumno.setBounds(368, 132, 1138, 648);
+		panelNuevoActualizarAlumno.setBounds(368, 132, 1157, 648);
 		panelNuevoActualizarAlumno.setBackground(Color.WHITE);
 		panelNuevoActualizarAlumno.setForeground(new Color(102, 255, 204));
 		panelNuevoActualizarAlumno.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -568,7 +572,7 @@ public class Vista extends JFrame {
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 			panelListaEmpresas.setBackground(Color.WHITE);
-			panelListaEmpresas.setBounds(368, 132, 1138, 648);
+			panelListaEmpresas.setBounds(368, 132, 1157, 648);
 			panelPrincipal.add(panelListaEmpresas);
 			panelListaEmpresas.setLayout(null);
 			
@@ -630,7 +634,7 @@ public class Vista extends JFrame {
 		 * PANEL NUEVA EMPRESA
 		*/ 
 		panelNuevaActualizarEmpresa = new JPanel();
-		panelNuevaActualizarEmpresa.setBounds(368, 132, 1138, 648);
+		panelNuevaActualizarEmpresa.setBounds(368, 132, 1157, 648);
 		panelNuevaActualizarEmpresa.setBackground(Color.WHITE);
 		panelNuevaActualizarEmpresa.setForeground(new Color(102, 255, 204));
 		panelNuevaActualizarEmpresa.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -847,7 +851,7 @@ public class Vista extends JFrame {
 			panelConvenios = new JPanel();
 			panelConvenios.setBackground(Color.WHITE);
 			panelConvenios.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-			panelConvenios.setBounds(368, 132, 1138, 648);
+			panelConvenios.setBounds(368, 132, 1157, 648);
 			panelPrincipal.add(panelConvenios);
 			panelConvenios.setLayout(null);
 			
@@ -916,7 +920,7 @@ public class Vista extends JFrame {
 		 *  Panel nueva Poblacion
 		*/
 		panelNuevaPoblacion = new JPanel();
-		panelNuevaPoblacion.setBounds(368, 132, 1138, 648);
+		panelNuevaPoblacion.setBounds(368, 132, 1157, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
 		panelNuevaPoblacion.setForeground(new Color(102, 255, 204));
 		panelNuevaPoblacion.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -977,7 +981,7 @@ public class Vista extends JFrame {
 			 * Panel nuevo Curso
 			*/
 			panelNuevoCurso = new JPanel();
-			panelNuevoCurso.setBounds(368, 132, 1138, 648);
+			panelNuevoCurso.setBounds(368, 132, 1157, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
 			panelNuevoCurso.setForeground(new Color(102, 255, 204));
 			panelNuevoCurso.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -1058,7 +1062,7 @@ public class Vista extends JFrame {
 			panelPeriodos = new JPanel();
 			panelPeriodos.setBackground(Color.WHITE);
 			panelPeriodos.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-			panelPeriodos.setBounds(368, 132, 1138, 648);
+			panelPeriodos.setBounds(368, 132, 1157, 648);
 			panelPrincipal.add(panelPeriodos);
 			panelPeriodos.setLayout(null);
 			
