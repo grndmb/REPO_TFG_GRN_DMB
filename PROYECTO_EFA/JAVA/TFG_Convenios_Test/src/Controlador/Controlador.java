@@ -200,7 +200,7 @@ public class Controlador implements ActionListener{
 				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 		    }
 		    
-		  //BOTON QUE HACE VISIBLE EL FORMULARIO DE AÃ‘ADIR ALUMNO
+		  //BOTON QUE HACE VISIBLE EL PANEL DE AÑADIR ALUMNO
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
@@ -213,13 +213,10 @@ public class Controlador implements ActionListener{
 		    	vista.panelPeriodos.setVisible(false);
 		    	
 		    	vista.comboBoxPoblacionUSUAlumno.removeAllItems();
-		    	
-		    	vista.comboBoxListaCursoAlumno.removeAllItems();
 				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
-				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
-				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);		
+				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);					
 		    	modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
-		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
+		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);	
 		    	
 		    }
 		    
@@ -344,7 +341,7 @@ public class Controlador implements ActionListener{
 					vista.panelListaAlumno.setVisible(true);
 					this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 					
-					
+					vista.comboBoxListaCursoAlumno.removeAllItems();
 					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
 					
 					this.resetFormularioNuevoAlumno();

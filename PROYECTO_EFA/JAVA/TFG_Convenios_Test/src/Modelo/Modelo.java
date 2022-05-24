@@ -1197,8 +1197,8 @@ public class Modelo {
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
 
-	       helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
-	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
+	       //helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
+	      // helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
 	     
 
 	        
