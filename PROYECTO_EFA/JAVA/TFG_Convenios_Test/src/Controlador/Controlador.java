@@ -153,6 +153,7 @@ public class Controlador implements ActionListener{
 		     * ACCIONES DEL PANEL ALUMNOS
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
+		    	//CAMBIOS DE COLORES
 		    	
 		    	//PANELES CONSULTAS
 		    	vista.panelListaAlumno.setVisible(true);
