@@ -9,8 +9,11 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Parameter;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 
@@ -22,6 +25,10 @@ import org.hibernate.context.internal.ManagedSessionContext;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.hibernate.query.Query;
 import org.hibernate.type.CurrencyType;
+
+import java.util.Comparator;
+
+
 
 import persistencia.Alumno;
 import persistencia.Convenio;
@@ -77,6 +84,7 @@ public class Modelo {
 		}
 	}
 
+	
 	public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox<String> comboBox) {
 		Session session = null;
 		
@@ -723,71 +731,154 @@ public class Modelo {
 		 		session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
+				
+				
+				//VARIABLES
 				String test;
 				String idConvenio = "";
 	    		
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				BigInteger auxConveniosQuery;
-	    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
-	    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
-	    		auxConveniosQuery = (BigInteger) queryCantidadConvenio.getSingleResult();
-	    		
-	    		//Convertir Big Integer a Int
-	    		String auxConvenios1 = String.valueOf(auxConveniosQuery);
-	    		int auxConvenios = Integer.parseInt(auxConvenios1);
-				
-	    		
-				Query queryCurso = sessionFactory.getCurrentSession().createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
+		
+				//QUERY CURSO
+				Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
 				queryCurso.setParameter("nombreCurso", nombreCurso);
 				Curso curso = (Curso) queryCurso.getSingleResult();
 				
+				//QUERY PARA FILTRAR POR TIPO DE CONVENIO
+				Query filtrarPorTipoConvenio = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio");
+				filtrarPorTipoConvenio.setParameter("tipoConvenio", tipoConvenio);
+				ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) filtrarPorTipoConvenio.list();
+				
+				
+				/*
+				 * INSERTAR EL PRIMER CONVENIO
+				 */
+						if(listaConvenios.isEmpty()) {
+							
+							if(curso.isEsPublico() == true) {
+								test = "MOR/";
+								
+								if(organismoPublico == true) {
+									
+									Formatter obj = new Formatter();
+							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
+									
+									idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
+									
+								}else {
+									Formatter obj = new Formatter();
+							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
+									
+									idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
+								}
+								
+								
+							}else {
+								test = "MOR/PRIV/";
+							
+								if(organismoPublico == true) {
+									
+									Formatter obj = new Formatter();
+							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
+									
+									idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
+									
+								}else {
+									Formatter obj = new Formatter();
+							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
+									
+									idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
+								}
+								
+							}
+							
+
+							//CREAR CONVENIO
+							Convenio convenio = new Convenio();
+							convenio.setIdConvenio(idConvenio);
+							
+							Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
+							empresaQuery.setParameter("cifEmpresa", cifEmpresa);
+							Empresa empresa = (Empresa) empresaQuery.getSingleResult();
+							
+							convenio.setEmpresa(empresa);
+							convenio.setFechaAnexo(fechaAnexo);
+							convenio.setTipoConvenio(tipoConvenio);
+							
+							session.save(convenio);
+							session.getTransaction().commit();	
+							
+						} else {
+				//----------------------------------------------------------------		
+				
+				ArrayList<Integer> numeroCodigoConvenio = new ArrayList<>();
+				ArrayList<Convenio> listaConveniosPublicos = new ArrayList<Convenio>();
+				ArrayList<Convenio> listaConveniosPrivados = new ArrayList<Convenio>();
+				
+
+				
+					Query conveniosPublicos = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio AND idConvenio NOT LIKE :id");
+					conveniosPublicos.setParameter("tipoConvenio", tipoConvenio);
+					conveniosPublicos.setParameter("id",  "%" + "PRIV" + "%");
+					listaConveniosPublicos = (ArrayList<Convenio>) conveniosPublicos.getResultList();
+					
+					for (int i = 0; i < listaConveniosPublicos.size(); i++) {
+						numeroCodigoConvenio.add(Integer.parseInt(listaConveniosPublicos.get(i).getIdConvenio().substring(5, 8)));
+					}
+					
+					
+					Query conveniosPrivados = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio AND idConvenio LIKE :id");
+					conveniosPrivados.setParameter("tipoConvenio", tipoConvenio);
+					conveniosPrivados.setParameter("id",  "%" + "PRIV" + "%");
+					listaConveniosPrivados = (ArrayList<Convenio>) conveniosPrivados.list();
+					
+					for (int i = 0; i < listaConveniosPrivados.size(); i++) {
+						numeroCodigoConvenio.add(Integer.parseInt(listaConveniosPrivados.get(i).getIdConvenio().substring(10, 13)));
+					}	
+					
+				
+				
+				Comparator<Integer> comparador = Collections.reverseOrder();
+				Collections.sort(numeroCodigoConvenio, comparador);
+						
+				for (int i = 0; i < numeroCodigoConvenio.size(); i++) {
+					System.out.println(numeroCodigoConvenio.get(i));
+				}
 				
 				
 				if(curso.isEsPublico() == true) {
 					test = "MOR/";
 					
 					if(organismoPublico == true) {
-						auxConvenios = auxConvenios + 1;
-				        Formatter obj = new Formatter();
-				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-				        idConvenio = test + "C"+  numeroCeros + "/22";
+						
+						Formatter obj = new Formatter();
+				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
+						
+						idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
 						
 					}else {
-						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
-				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "A"+  numeroCeros + "/22";
+				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
+						
+						idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
 					}
 					
 					
 				}else {
 					test = "MOR/PRIV/";
-					
+				
 					if(organismoPublico == true) {
-						auxConvenios = auxConvenios + 1;
+						
 						Formatter obj = new Formatter();
-				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "C"+  numeroCeros + "/22";
+				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
+						
+						idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
+						
 					}else {
-						auxConvenios = auxConvenios + 1;
 						Formatter obj = new Formatter();
-				        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-						idConvenio = test + "A"+  numeroCeros + "/22";
+				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
+						
+						idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
 					}
-					
 					
 				}
 				
@@ -857,7 +948,8 @@ public class Modelo {
 			 		}
 					
 				}
-		 		
+				
+			}
 		 } catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -1099,26 +1191,26 @@ public class Modelo {
 	    
 	        
 	       
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGM Carroceria", "PFE", true, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "6217-KIR", "2Âº CFGM Sistemas MicroInformaticos y Redes", "FCT", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "2341-KLO", "2Âº FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "9687-POK", "2Âº CFGM Carroceria", "FCT", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "PFE", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
+	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
 
-	       //helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
-	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
+	       helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
+	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
 	     
 
 	        
 	        
          /*
-          * 2Âº CFGM CarrocerÃ­a
-			2Âº CFGM ElectromecÃ¡nica
-			2Âº CFGM Sistemas MicroInformÃ¡ticos y Redes
-			2Âº CFGS Desarrollo de Aplicaciones Multiplataforma
-			2Âº CFGS TÃ©cnico Superior en AutomociÃ³n
-			2Âº FP BÃ¡sica InformÃ¡tica y Comunicaciones
-			2Âº FP BÃ¡sica Mantenimiento de VehÃ­culos
+          * 2º CFGM Carrocería
+			2º CFGM Electromecánica
+			2º CFGM Sistemas MicroInformáticos y Redes
+			2º CFGS Desarrollo de Aplicaciones Multiplataforma
+			2º CFGS Técnico Superior en Automoción
+			2º FP Básica Informática y Comunicaciones
+			2º FP Básica Mantenimiento de Vehículos
           */
 	  
 	 
