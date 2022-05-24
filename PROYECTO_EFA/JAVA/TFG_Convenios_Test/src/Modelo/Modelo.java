@@ -986,7 +986,25 @@ public class Modelo {
 			queryConvenio.setParameter("empresa", empresa);
 			Convenio convenio = (Convenio) queryConvenio.getSingleResult();
 			
+			//NUEVO ID
+			String nuevoIdConvenio;
 			
+			if (!id.contains("PRIV")) {				
+				auxConvenios = auxConvenios + 1;
+				Formatter obj = new Formatter();
+		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				
+		        nuevoIdConvenio = id.replace(id.substring(5, 8), numeroCeros);
+
+			}else {
+				
+				auxConvenios = auxConvenios + 1;
+				Formatter obj = new Formatter();
+		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				
+		        nuevoIdConvenio = id.replace(id.substring(10, 13), numeroCeros);
+				
+			}
 			
 			
 			
@@ -1176,6 +1194,8 @@ public class Modelo {
 		Session session = null;
 		
 		try {
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
 			
 			Query query = session.createQuery("FROM Practica WHERE idPractica = :idPractica");
 			query.setParameter("idPractica", idPractica);
