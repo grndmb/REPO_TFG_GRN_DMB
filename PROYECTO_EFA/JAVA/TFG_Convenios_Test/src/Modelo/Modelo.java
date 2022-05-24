@@ -987,6 +987,10 @@ public class Modelo {
 			Convenio convenio = (Convenio) queryConvenio.getSingleResult();
 			
 			
+			
+			
+			
+			/*
 			BigInteger auxConveniosQuery;
     		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
     		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
@@ -1029,7 +1033,7 @@ public class Modelo {
     		
 			session.save(convenio);
 			session.getTransaction().commit();	
-			
+			*/
 		}  catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -1040,12 +1044,7 @@ public class Modelo {
 			if(null != session) {
 				session.close();
 			}
-		}
-		 
-		 
-		 
-		 
-		 
+		}	 
 	 }
 	 
 	 /**
@@ -1172,7 +1171,7 @@ public class Modelo {
 	/*
 	 * 
 	 */
-	public void eliminarPeriodoPractica (SessionFactory sessionFactory, String idPractica) throws HibernateException{
+	public void eliminarPeriodoPractica (SessionFactory sessionFactory, int idPractica) throws HibernateException{
 		
 		Session session = null;
 		
