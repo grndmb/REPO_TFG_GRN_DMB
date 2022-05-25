@@ -474,7 +474,7 @@ public class Controlador implements ActionListener{
 			    	//Rellenar List de empresas				
 					listaEmpresas = modelo.listaEmpresasFiltro(sessionFactory, vista.txtFiltroListaEmpresa.getText());
 					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
-			    }
+				    }
 		    
 		    
 			    /**
@@ -487,12 +487,13 @@ public class Controlador implements ActionListener{
 					    	vista.panelConvenios.setVisible(true);
 					    	vista.btnPanelCrearNuevoConvenio.setVisible(false);
 					    	
-					    	vista.lblNombreEmpresaConvenios.setText(listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getNombreEmpresa());
 					    	
 					    	listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
 					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
 					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+					    	vista.lblNombreEmpresaConvenios.setText(listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getNombreEmpresa());
+
 					    	
 							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 					    	
@@ -505,13 +506,16 @@ public class Controlador implements ActionListener{
 				    	if(e.getSource() == vista.btnActualizarConvenio) {
 				    		if(vista.listConvenios.getSelectedIndex() != -1){
 				    			
-				    			
-				    			listaConvenios = modelo.listarConvenios(sessionFactory, listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getCifEmpresa());
-				    			
+				    			listaEmpresas = modelo.listaEmpresas(sessionFactory);
+						    	
+						    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
+						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+						    	
 				    			
 				    			modelo.actualizarConvenio(sessionFactory, listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getIdConvenio(), listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getTipoConvenio(), 
 				    					listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getFechaAnexo(), listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getCifEmpresa());
 				    			
+				    			System.out.println("Hola");
 				    		
 								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 				    		
