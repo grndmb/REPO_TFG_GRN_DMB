@@ -517,6 +517,7 @@ public class Controlador implements ActionListener{
 				    			
 				    			System.out.println("Hola");
 				    		
+						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 				    		
 				    		}
