@@ -16,6 +16,7 @@ import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -26,7 +27,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import Vista.Vista;
-import Vista.FrameConvenios;
 import persistencia.Alumno;
 import persistencia.Convenio;
 import persistencia.Curso;
@@ -38,7 +38,6 @@ import Modelo.Modelo;
 public class Controlador implements ActionListener{
 	//Objetos && Variables
 	Vista vista = new Vista();
-	FrameConvenios frameConvenios = new FrameConvenios();
 	
 	//Constructor
 	public Controlador(Vista v) {
@@ -90,7 +89,9 @@ public class Controlador implements ActionListener{
 		//Botones panel Convenios
 			this.vista.comboBoxListaCursoConvenio.addActionListener(this);
 			this.vista.btnActualizarConvenio.addActionListener(this);
-		
+			this.vista.comboBoxTipoConvenioPanelConvenio.addActionListener(this);
+			this.vista.btnPanelCrearNuevoConvenio.addActionListener(this);
+			
 		//Botones del panel Periodos
 			this.vista.btnCrearPeriodo.addActionListener(this);
 			this.vista.btnEliminarPeriodo.addActionListener(this);
@@ -157,7 +158,7 @@ public class Controlador implements ActionListener{
 		     * ACCIONES DEL PANEL ALUMNOS
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 		    		vista.btnPanelAlumnos.setBackground(new Color(211, 211, 211));
 		    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 		    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
@@ -209,7 +210,7 @@ public class Controlador implements ActionListener{
 				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 		    }
 		    
-		  //BOTON QUE HACE VISIBLE EL PANEL DE AÑADIR ALUMNO
+		  //BOTON QUE HACE VISIBLE EL PANEL DE Aï¿½ADIR ALUMNO
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
@@ -413,7 +414,7 @@ public class Controlador implements ActionListener{
 				
 			}
 		    
-			//AL PULSAR EN UNA OPCIÓN DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
+			//AL PULSAR EN UNA OPCIï¿½N DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
 		    if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
 		    	
 				modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
@@ -439,7 +440,7 @@ public class Controlador implements ActionListener{
 						vista.panelNuevaActualizarEmpresa.setVisible(false);
 						vista.panelPeriodos.setVisible(false);
 						
-						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 			    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 			    		vista.btnPanelEmpresas.setBackground(new Color(211, 211, 211));
 			    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
@@ -477,13 +478,16 @@ public class Controlador implements ActionListener{
 		    
 		    
 			    /**
-			     * Panel convenios
+			     * PANEL CONVENIOS
 			     */
 			    	//BOTON QUE ABRE EL PANEL DE VER CONVENIOS
 				    if(e.getSource() == vista.btnPanelConvenio) {
 				    		
 				    		vista.panelListaEmpresas.setVisible(false);
 					    	vista.panelConvenios.setVisible(true);
+					    	vista.btnPanelCrearNuevoConvenio.setVisible(false);
+					    	
+					    	vista.lblNombreEmpresaConvenios.setText(listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getNombreEmpresa());
 					    	
 					    	listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
@@ -499,9 +503,28 @@ public class Controlador implements ActionListener{
 				    
 				    //BOTON QUE ACTUALIZA LOS CONVENIOS
 				    	if(e.getSource() == vista.btnActualizarConvenio) {
+				    		if(vista.listConvenios.getSelectedIndex() != -1){
+				    			
+				    			
+				    			listaConvenios = modelo.listarConvenios(sessionFactory, listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getCifEmpresa());
+				    			
+				    			
+				    			modelo.actualizarConvenio(sessionFactory, listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getIdConvenio(), listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getTipoConvenio(), 
+				    					listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getFechaAnexo(), listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getCifEmpresa());
+				    			
+				    		
+								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
+				    		
+				    		}
+				    		
 				    	
+				    	}
 				    	
-				    	
+				    	if(e.getSource() == vista.btnPanelCrearNuevoConvenio) {
+				    		
+				    		vista.panelCrearNuevoConvenio.setVisible(true);
+				    		
+				    		
 				    	}
 				
 				/**
@@ -702,7 +725,7 @@ public class Controlador implements ActionListener{
 							vista.panelConvenios.setVisible(false);
 							vista.panelNuevaActualizarEmpresa.setVisible(false);
 							
-							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 				    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 				    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 				    		vista.btnPanelPeriodos.setBackground(new Color(211, 211, 211));
@@ -777,7 +800,7 @@ public class Controlador implements ActionListener{
 		     * ACCIONES DEL PANEL PRACTICAS
 		     */
 		    if(e.getSource() == vista.btnPanelPracticas) {
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);

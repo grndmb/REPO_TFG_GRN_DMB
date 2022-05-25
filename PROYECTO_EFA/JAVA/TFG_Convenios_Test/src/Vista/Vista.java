@@ -197,6 +197,15 @@ public class Vista extends JFrame {
 		public DefaultListModel modelConvenios;
 		
 		public JButton btnActualizarConvenio;
+		
+		
+		
+		public JPanel panelCrearNuevoConvenio;
+		public JComboBox comboBoxTipoConvenioPanelConvenio;
+		public JLabel lblNombreEmpresaConvenios;
+		public JButton btnPanelCrearNuevoConvenio;
+		
+		
 	// ---------------------------------------------------------------------
 	/**
 	 * PANEL NUEVO CURSO
@@ -254,6 +263,7 @@ public class Vista extends JFrame {
 		private JLabel lblFechaInicioPeriodos;
 		private JLabel lblFechaFinPeriodos;
 		private JLabel lblNombreProfesorPeriodos;
+		private JButton btnNewButton;
 		
 		
 	/**
@@ -632,7 +642,7 @@ public class Vista extends JFrame {
             
         /**
 		 * PANEL NUEVA EMPRESA
-		*/ 
+		*/
 		panelNuevaActualizarEmpresa = new JPanel();
 		panelNuevaActualizarEmpresa.setBounds(368, 132, 1157, 648);
 		panelNuevaActualizarEmpresa.setBackground(Color.WHITE);
@@ -817,7 +827,7 @@ public class Vista extends JFrame {
 			comboBoxCodigoPostalUSUEmpresa.setBounds(633, 194, 190, 19);
 			panelNuevaActualizarEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
 			
-			btnAnadirEmpresa = new JButton("AÑADIR EMPRESA");
+			btnAnadirEmpresa = new JButton("Aï¿½ADIR EMPRESA");
 			btnAnadirEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			btnAnadirEmpresa.setBounds(457, 576, 217, 50);
 			panelNuevaActualizarEmpresa.add(btnAnadirEmpresa);	
@@ -860,37 +870,41 @@ public class Vista extends JFrame {
 			lblNewLabel.setBounds(72, 61, 295, 45);
 			panelConvenios.add(lblNewLabel);
 			
-			JPanel panelTipoConvenio = new JPanel();
-			panelTipoConvenio.setBackground(Color.WHITE);
-			panelTipoConvenio.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Convenio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelTipoConvenio.setBounds(815, 377, 211, 161);
-			panelConvenios.add(panelTipoConvenio);
-			panelTipoConvenio.setLayout(null);
-			
-			JRadioButton radioBtnFCTConvenio = new JRadioButton("FCT");
-			radioBtnFCTConvenio.setBounds(16, 40, 103, 21);
-			panelTipoConvenio.add(radioBtnFCTConvenio);
-			radioBtnFCTConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-			radioBtnFCTConvenio.setBackground(Color.WHITE);
-			
-			JRadioButton radioBtnPFEConvenio = new JRadioButton("PFE");
-			radioBtnPFEConvenio.setBounds(16, 80, 103, 21);
-			panelTipoConvenio.add(radioBtnPFEConvenio);
-			radioBtnPFEConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-			radioBtnPFEConvenio.setBackground(Color.WHITE);
+			panelCrearNuevoConvenio = new JPanel();
+			panelCrearNuevoConvenio.setBackground(Color.WHITE);
+			panelCrearNuevoConvenio.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Crear Nuevo Convenio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panelCrearNuevoConvenio.setBounds(64, 388, 962, 230);
+			panelConvenios.add(panelCrearNuevoConvenio);
+			panelCrearNuevoConvenio.setLayout(null);
 			
 			comboBoxListaCursoConvenio = new JComboBox();
+			comboBoxListaCursoConvenio.setBounds(25, 101, 421, 38);
+			panelCrearNuevoConvenio.add(comboBoxListaCursoConvenio);
 			comboBoxListaCursoConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			comboBoxListaCursoConvenio.setBackground(Color.WHITE);
-			comboBoxListaCursoConvenio.setBounds(384, 484, 421, 38);
-			panelConvenios.add(comboBoxListaCursoConvenio);
 	        
 	        JLabel lblNewLabel_2 = new JLabel("CURSO");
+	        lblNewLabel_2.setBounds(25, 43, 136, 45);
+	        panelCrearNuevoConvenio.add(lblNewLabel_2);
 	        lblNewLabel_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-	        lblNewLabel_2.setBounds(384, 429, 136, 45);
-	        panelConvenios.add(lblNewLabel_2);
 	        
-	        JLabel lblNombreEmpresaConvenios = new JLabel("");
+	        comboBoxTipoConvenioPanelConvenio = new JComboBox();
+	        comboBoxTipoConvenioPanelConvenio.setModel(new DefaultComboBoxModel(new String[] {"", "FCT", "PFE"}));
+	        comboBoxTipoConvenioPanelConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+	        comboBoxTipoConvenioPanelConvenio.setBounds(506, 101, 266, 38);
+	        panelCrearNuevoConvenio.add(comboBoxTipoConvenioPanelConvenio);
+	        
+	        JLabel lblNewLabel_2_1 = new JLabel("TIPO DE CONVENIO");
+	        lblNewLabel_2_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+	        lblNewLabel_2_1.setBounds(506, 43, 272, 45);
+	        panelCrearNuevoConvenio.add(lblNewLabel_2_1);
+	        
+	        btnNewButton = new JButton("Crear Convenio");
+	        btnNewButton.setFont(new Font("Berlin Sans FB", Font.PLAIN, 24));
+	        btnNewButton.setBounds(25, 172, 217, 38);
+	        panelCrearNuevoConvenio.add(btnNewButton);
+	        
+	        lblNombreEmpresaConvenios = new JLabel("");
 	        lblNombreEmpresaConvenios.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 	        lblNombreEmpresaConvenios.setBounds(64, 113, 1040, 45);
 	        panelConvenios.add(lblNombreEmpresaConvenios);
@@ -903,7 +917,7 @@ public class Vista extends JFrame {
             
      
             JScrollPane listPanelConvenios = new JScrollPane();
-            listPanelConvenios.setBounds(62, 168, 1003, 181);
+            listPanelConvenios.setBounds(62, 167, 1040, 130);
             listPanelConvenios.setViewportView(listConvenios);
             listConvenios.setLayoutOrientation(JList.VERTICAL);
             panelConvenios.add(listPanelConvenios);
@@ -911,8 +925,13 @@ public class Vista extends JFrame {
             btnActualizarConvenio = new JButton("Actualizar");
             btnActualizarConvenio.setBackground(Color.WHITE);
             btnActualizarConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-            btnActualizarConvenio.setBounds(64, 373, 158, 45);
+            btnActualizarConvenio.setBounds(64, 320, 158, 45);
             panelConvenios.add(btnActualizarConvenio);
+            
+            btnPanelCrearNuevoConvenio = new JButton("Crear Nuevo Convenio");
+            btnPanelCrearNuevoConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+            btnPanelCrearNuevoConvenio.setBounds(232, 320, 308, 45);
+            panelConvenios.add(btnPanelCrearNuevoConvenio);
 		
            
             
@@ -1057,7 +1076,7 @@ public class Vista extends JFrame {
 		
 			/**
 			 * PANEL PERIODOS
-			*/
+			 */
 			
 			panelPeriodos = new JPanel();
 			panelPeriodos.setBackground(Color.WHITE);
@@ -1165,5 +1184,6 @@ public class Vista extends JFrame {
 		        dateChooserFechaFinPeriodo.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 50));
 		        dateChooserFechaFinPeriodo.setBounds(193, 428, 228, 47);
 		        panelPeriodos.add(dateChooserFechaFinPeriodo);
+		        
 	}
 }

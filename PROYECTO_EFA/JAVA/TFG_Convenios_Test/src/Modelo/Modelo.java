@@ -839,11 +839,8 @@ public class Modelo {
 				
 				Comparator<Integer> comparador = Collections.reverseOrder();
 				Collections.sort(numeroCodigoConvenio, comparador);
-						
-				for (int i = 0; i < numeroCodigoConvenio.size(); i++) {
-					System.out.println(numeroCodigoConvenio.get(i));
-				}
-				
+
+				//--------------------------------------------------------------
 				
 				if(curso.isEsPublico() == true) {
 					test = "MOR/";
@@ -911,9 +908,7 @@ public class Modelo {
 			 		//Convertir Big Integer a Int
 			 		String auxComprobacionParset = String.valueOf(auxComprobacion);
 			 		int auxComprobacionN = Integer.parseInt(auxComprobacionParset);
-					
-			 		System.out.println(test);
-			 		
+								 		
 			 		
 			 		if(auxComprobacionN < 1) {
 			 			
@@ -938,8 +933,6 @@ public class Modelo {
 			 		String auxComprobacionParset = String.valueOf(auxComprobacion);
 			 		int auxComprobacionN = Integer.parseInt(auxComprobacionParset);
 					
-			 		System.out.println(test);
-			 		
 			 		
 			 		if(auxComprobacionN < 1) {
 			 	
@@ -986,72 +979,67 @@ public class Modelo {
 			queryConvenio.setParameter("empresa", empresa);
 			Convenio convenio = (Convenio) queryConvenio.getSingleResult();
 			
-			//NUEVO ID
-			String nuevoIdConvenio;
+			//----------------------------------------------------------------		
 			
-			if (!id.contains("PRIV")) {				
-				auxConvenios = auxConvenios + 1;
-				Formatter obj = new Formatter();
-		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
-				
-		        nuevoIdConvenio = id.replace(id.substring(5, 8), numeroCeros);
+			ArrayList<Integer> numeroCodigoConvenio = new ArrayList<>();
+			ArrayList<Convenio> listaConveniosPublicos = new ArrayList<Convenio>();
+			ArrayList<Convenio> listaConveniosPrivados = new ArrayList<Convenio>();
+			
 
-			}else {
+			
+				Query conveniosPublicos = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio AND idConvenio NOT LIKE :id");
+				conveniosPublicos.setParameter("tipoConvenio", tipoConvenio);
+				conveniosPublicos.setParameter("id",  "%" + "PRIV" + "%");
+				listaConveniosPublicos = (ArrayList<Convenio>) conveniosPublicos.getResultList();
 				
-				auxConvenios = auxConvenios + 1;
-				Formatter obj = new Formatter();
-		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+				for (int i = 0; i < listaConveniosPublicos.size(); i++) {
+					numeroCodigoConvenio.add(Integer.parseInt(listaConveniosPublicos.get(i).getIdConvenio().substring(5, 8)));
+				}
 				
-		        nuevoIdConvenio = id.replace(id.substring(10, 13), numeroCeros);
 				
-			}
+				Query conveniosPrivados = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio AND idConvenio LIKE :id");
+				conveniosPrivados.setParameter("tipoConvenio", tipoConvenio);
+				conveniosPrivados.setParameter("id",  "%" + "PRIV" + "%");
+				listaConveniosPrivados = (ArrayList<Convenio>) conveniosPrivados.list();
+				
+				for (int i = 0; i < listaConveniosPrivados.size(); i++) {
+					numeroCodigoConvenio.add(Integer.parseInt(listaConveniosPrivados.get(i).getIdConvenio().substring(10, 13)));
+				}	
+				
 			
 			
-			
-			/*
-			BigInteger auxConveniosQuery;
-    		Query queryCantidadConvenio = session.createSQLQuery("SELECT COUNT(*) AS NUMERO_REGISTROS_CONVENIO FROM CONVENIO WHERE TIPO_CONVENIO = :tipoConvenio");
-    		queryCantidadConvenio.setParameter("tipoConvenio", tipoConvenio);
-    		auxConveniosQuery = (BigInteger) queryCantidadConvenio.getSingleResult();
-    		
-    		//Convertir Big Integer a Int
-    		String auxConvenios1 = String.valueOf(auxConveniosQuery);
-    		int auxConvenios = Integer.parseInt(auxConvenios1);
-			
-			
-    		//Actualizar Convenio			
-			Query empresaQuery = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
-			empresaQuery.setParameter("cifEmpresa", cifEmpresa);
-			Empresa empresaActualizar = (Empresa) empresaQuery.getSingleResult();
+			Comparator<Integer> comparador = Collections.reverseOrder();
+			Collections.sort(numeroCodigoConvenio, comparador);
+				
 			
 			//NUEVO ID
 			String nuevoIdConvenio;
 			
 			if (!id.contains("PRIV")) {				
-				auxConvenios = auxConvenios + 1;
+
 				Formatter obj = new Formatter();
-		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+		        String numeroCeros = String.valueOf(obj.format("%03d",numeroCodigoConvenio.get(0) + 1));
 				
 		        nuevoIdConvenio = id.replace(id.substring(5, 8), numeroCeros);
 
 			}else {
 				
-				auxConvenios = auxConvenios + 1;
 				Formatter obj = new Formatter();
-		        String numeroCeros = String.valueOf(obj.format("%03d", auxConvenios));
+		        String numeroCeros = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 				
 		        nuevoIdConvenio = id.replace(id.substring(10, 13), numeroCeros);
 				
 			}
+			
 			
 			convenio.setIdConvenio(nuevoIdConvenio);
-			convenio.setEmpresa(empresaActualizar);
+			convenio.setEmpresa(empresa);
 			convenio.setFechaAnexo(fechaAnexo);
 			convenio.setTipoConvenio(tipoConvenio);
     		
 			session.save(convenio);
 			session.getTransaction().commit();	
-			*/
+			
 		}  catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -1246,8 +1234,8 @@ public class Modelo {
 	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
 	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
 
-	       helper.actualizarConvenio(sessionFactory, "MOR/C001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
-	       helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "FCT", fechaNacimientoUSU, "6217-KIR");
+	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
+	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/C002/22", "FCT", fechaNacimientoUSU, "9687-POK");
 	     
 
 	        
