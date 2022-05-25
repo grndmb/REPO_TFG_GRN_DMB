@@ -844,6 +844,11 @@ public class Controlador implements ActionListener{
 						listaPeriodos.get(i).getCurso().toString();
 					   }
 					this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodosPracticas, vista.listPeriodosPracticas, listaPeriodos);
+					
+			    //VACÍA LOS MODELS DE ALUMNOS, EMPRESAS Y ANEXAR
+					vista.modelAlumnosPracticas.removeAllElements();
+					vista.modelEmpresasPracticas.removeAllElements();
+					vista.modelAnexarPracticas.removeAllElements();
 		    }
 		   
 		   //ASIGNAR PERIODO
@@ -888,12 +893,13 @@ public class Controlador implements ActionListener{
 				  String curso = listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso();
 				  try {
 					listaAlumnos = modelo.listarAlumnos(sessionFactory, curso);
+					listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
 				  } catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				  }
 				  
-				  modelo.crearAnexar(sessionFactory, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaEmpresas.get(vista.listEmpresasPracticas.getSelectedIndex()), listaAlumnos.get(vista.listAlumnosPracticas.getSelectedIndex()));
+				  modelo.crearAnexar(sessionFactory, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaEmpresas.get(vista.listEmpresasPracticas.getSelectedIndex()), listaAlumnos.get(vista.listAlumnosPracticas.getSelectedIndex()), listaAnexarsPracticas);
 				
 				//RELLENAR JLIST ANEXARS
 				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);

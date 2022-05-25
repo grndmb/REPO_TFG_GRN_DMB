@@ -1207,31 +1207,40 @@ public class Modelo {
 		
 	}
 	// CREAR ANEXAR
-	public void crearAnexar (SessionFactory sessionFactory, Practica practica, Empresa empresa, Alumno alumno) throws HibernateException {
-		 
-		 Session session = null;
-
+	public void crearAnexar (SessionFactory sessionFactory, Practica practica, Empresa empresa, Alumno alumno, ArrayList <Anexar> listaAnexar) throws HibernateException {
+		 	boolean mismo = false;
 		 	try {
-		 		session = sessionFactory.getCurrentSession();
-				session.beginTransaction();
+		 		sessionFactory.getCurrentSession().beginTransaction();
 				
-				Anexar anexar = new Anexar();
-				anexar.setPractica(practica);
-				anexar.setEmpresa(empresa);
-				anexar.setAlumno(alumno);
+				//COMPRUEBO SI EXISTE EL ALUMNO ANEXADO
+		 		//NO BORRES EL COMENTARIO && listaAnexar.get(i).getEmpresa().getCifEmpresa().equals(empresa.getCifEmpresa())
+					for (int i = 0; i < listaAnexar.size(); i++) {
+						if(listaAnexar.get(i).getAlumno().getNif().equals(alumno.getNif())) {
+							mismo = true;
+						}
+					}
+					
+					if(mismo == false) {
+						Anexar anexar = new Anexar();
+						anexar.setPractica(practica);
+						anexar.setEmpresa(empresa);
+						anexar.setAlumno(alumno);
+						
+						sessionFactory.getCurrentSession().saveOrUpdate(anexar);
+						sessionFactory.getCurrentSession().getTransaction().commit();
+					}
 				
-				session.saveOrUpdate(anexar);
-				session.getTransaction().commit();
+				
 				
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			if(null != session) {
-				session.getTransaction().rollback();
+			if(null != sessionFactory.getCurrentSession()) {
+				sessionFactory.getCurrentSession().getTransaction().rollback();
 			}
 		}finally {
-			if(null != session) {
-				session.close();
+			if(null != sessionFactory.getCurrentSession()) {
+				sessionFactory.getCurrentSession().close();
 			}
 		}
 		 		 
@@ -1248,7 +1257,7 @@ public class Modelo {
 			
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
-			 
+			
 			Query query = session.createQuery("FROM Anexar");
 			listaAnexar = (ArrayList<Anexar>) query.list();
 			

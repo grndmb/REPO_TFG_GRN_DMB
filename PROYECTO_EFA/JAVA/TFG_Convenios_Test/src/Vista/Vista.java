@@ -1289,7 +1289,7 @@ public class Vista extends JFrame {
 	        panelPracticas.add(listPaneEmpresasPracticas);
 	        
 	        btnAsignarEmpresaPracticas = new JButton("ASIGNAR EMPRESA");
-	        btnAsignarEmpresaPracticas.setBackground(Color.ORANGE);
+	        btnAsignarEmpresaPracticas.setBackground(Color.CYAN);
 	        btnAsignarEmpresaPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 	        btnAsignarEmpresaPracticas.setBounds(914, 283, 218, 55);
 	        btnAsignarEmpresaPracticas.setVisible(false);
@@ -1314,8 +1314,8 @@ public class Vista extends JFrame {
             listPaneAnexarPracticas.setVisible(false);
 	        panelPracticas.add(listPaneAnexarPracticas);
 	        
-	        btnEliminarAnexarPracticas = new JButton("ELIMINAR RELACION");
-	        btnEliminarAnexarPracticas.setBackground(Color.ORANGE);
+	        btnEliminarAnexarPracticas = new JButton("ELIMINAR");
+	        btnEliminarAnexarPracticas.setBackground(Color.RED);
 	        btnEliminarAnexarPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 	        btnEliminarAnexarPracticas.setBounds(914, 536, 218, 55);
 	        btnEliminarAnexarPracticas.setVisible(false);
