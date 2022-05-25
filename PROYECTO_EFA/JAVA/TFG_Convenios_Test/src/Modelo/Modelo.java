@@ -31,6 +31,7 @@ import java.util.Comparator;
 
 
 import persistencia.Alumno;
+import persistencia.Anexar;
 import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
@@ -1205,9 +1206,93 @@ public class Modelo {
 		}
 		
 	}
+	// CREAR ANEXAR
+	public void crearAnexar (SessionFactory sessionFactory, Practica practica, Empresa empresa, Alumno alumno) throws HibernateException {
+		 
+		 Session session = null;
 
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Anexar anexar = new Anexar();
+				anexar.setPractica(practica);
+				anexar.setEmpresa(empresa);
+				anexar.setAlumno(alumno);
+				
+				session.saveOrUpdate(anexar);
+				session.getTransaction().commit();
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 		 
+	 } 
 	 
-	 
+	// LISTAR ANEXAR
+	public ArrayList<Anexar> listarAnexarsPracticas (SessionFactory sessionFactory) throws HibernateException {
+		
+		 Session session = null;
+
+		 ArrayList<Anexar> listaAnexar = new ArrayList<Anexar>();
+		 
+		 try {
+			
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			 
+			Query query = session.createQuery("FROM Anexar");
+			listaAnexar = (ArrayList<Anexar>) query.list();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+		 
+		 return listaAnexar;
+	}
+	
+	//ELIMIANR ANEXAR
+	public void eliminarAnexar (SessionFactory sessionFactory, Anexar anexar) {
+		Session session = null;
+		
+		try {
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			
+			session.delete(anexar);
+			session.getTransaction().commit();
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+	}
+	
 	public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;

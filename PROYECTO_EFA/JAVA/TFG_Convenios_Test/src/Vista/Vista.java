@@ -264,8 +264,33 @@ public class Vista extends JFrame {
 		private JLabel lblFechaFinPeriodos;
 		private JLabel lblNombreProfesorPeriodos;
 		private JButton btnNewButton;
+	
+	/**
+	 * PANEL PRACTICAS
+	 */
+	public JPanel panelPracticas;
+		public JLabel lblTituloPracticas;
 		
+		public JList listPeriodosPracticas;
+		public DefaultListModel modelPeriodosPracticas;
+		public JButton btnAsignarPeriodoPracticas;
 		
+		public JLabel lblTituloListaAlumnosPracticas;
+		public JScrollPane listPaneAlumnosPracticas;
+		public JList listAlumnosPracticas;
+		public DefaultListModel modelAlumnosPracticas;
+		
+		public JLabel lblTituloListaEmpresasPracticas;
+		public JScrollPane listPaneEmpresasPracticas;
+		public JList listEmpresasPracticas;
+		public DefaultListModel modelEmpresasPracticas;
+		public JButton btnAsignarEmpresaPracticas;
+		
+		public JLabel lblTituloListaAnexarPracticas;
+		public JScrollPane listPaneAnexarPracticas;
+		public JList listAnexarPracticas;
+		public DefaultListModel modelAnexarPracticas;
+		public JButton btnEliminarAnexarPracticas;
 	/**
 	 * Launch the application.
 	 */
@@ -299,7 +324,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * Panel Principal
-		 */
+		*/ 
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1556, 807);
 		panelPrincipal.setBackground(new Color(53, 100, 54));
@@ -866,8 +891,8 @@ public class Vista extends JFrame {
 			panelConvenios.setLayout(null);
 			
 			JLabel lblNewLabel = new JLabel("CONVENIOS");
-			lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 35));
-			lblNewLabel.setBounds(72, 61, 295, 45);
+			lblNewLabel.setFont(new Font("Agency FB", Font.BOLD, 50));
+			lblNewLabel.setBounds(49, 21, 295, 45);
 			panelConvenios.add(lblNewLabel);
 			
 			panelCrearNuevoConvenio = new JPanel();
@@ -1076,7 +1101,7 @@ public class Vista extends JFrame {
 		
 			/**
 			 * PANEL PERIODOS
-			 */
+			*/ 
 			
 			panelPeriodos = new JPanel();
 			panelPeriodos.setBackground(Color.WHITE);
@@ -1087,7 +1112,7 @@ public class Vista extends JFrame {
 			
 				lblTituloPeriodos = new JLabel("PERIODOS");
 				lblTituloPeriodos.setFont(new Font("Agency FB", Font.BOLD, 50));
-				lblTituloPeriodos.setBounds(110, 22, 190, 55);
+				lblTituloPeriodos.setBounds(49, 21, 190, 55);
 				panelPeriodos.add(lblTituloPeriodos);
 			
 				
@@ -1184,6 +1209,116 @@ public class Vista extends JFrame {
 		        dateChooserFechaFinPeriodo.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 50));
 		        dateChooserFechaFinPeriodo.setBounds(193, 428, 228, 47);
 		        panelPeriodos.add(dateChooserFechaFinPeriodo);
-		        
+		
+		
+		/**
+		 * PANEL PRACTICAS
+		*/ 
+		
+		panelPracticas = new JPanel();
+		panelPracticas.setBackground(Color.WHITE);
+		panelPracticas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelPracticas.setBounds(368, 132, 1157, 648);
+		panelPrincipal.add(panelPracticas);
+		panelPracticas.setLayout(null);
+		
+			lblTituloPracticas = new JLabel("PRÁCTICAS");
+			lblTituloPracticas.setFont(new Font("Agency FB", Font.BOLD, 50));
+			lblTituloPracticas.setBounds(49, 21, 190, 55);
+			panelPracticas.add(lblTituloPracticas);
+		
+			JLabel lblTituloListaPeriodosPracticas = new JLabel("PERIODOS");
+	        lblTituloListaPeriodosPracticas.setHorizontalAlignment(SwingConstants.CENTER);
+	        lblTituloListaPeriodosPracticas.setFont(new Font("Tahoma", Font.BOLD, 25));
+	        lblTituloListaPeriodosPracticas.setBounds(39, 101, 257, 47);
+	        panelPracticas.add(lblTituloListaPeriodosPracticas);
+			
+			listPeriodosPracticas = new JList<String>();
+			listPeriodosPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			listPeriodosPracticas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	        modelPeriodosPracticas = new DefaultListModel<>();
+	        
+            JScrollPane listPanePeriodosPracticas = new JScrollPane();
+	        listPanePeriodosPracticas.setBounds(323, 76, 559, 100);
+	        listPanePeriodosPracticas.setViewportView(listPeriodosPracticas);
+	        listPeriodosPracticas.setLayoutOrientation(JList.VERTICAL);
+	        panelPracticas.add(listPanePeriodosPracticas);
+	        
+	        btnAsignarPeriodoPracticas = new JButton("ASIGNAR PERIODO");
+	        btnAsignarPeriodoPracticas.setBackground(Color.ORANGE);
+	        btnAsignarPeriodoPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+	        btnAsignarPeriodoPracticas.setBounds(914, 100, 218, 55);
+	        panelPracticas.add(btnAsignarPeriodoPracticas);
+	        
+	        lblTituloListaAlumnosPracticas = new JLabel("ALUMNOS");
+	        lblTituloListaAlumnosPracticas.setHorizontalAlignment(SwingConstants.CENTER);
+	        lblTituloListaAlumnosPracticas.setFont(new Font("Tahoma", Font.BOLD, 25));
+	        lblTituloListaAlumnosPracticas.setBounds(39, 227, 257, 47);
+	        lblTituloListaAlumnosPracticas.setVisible(false);
+	        panelPracticas.add(lblTituloListaAlumnosPracticas);
+			
+			listAlumnosPracticas = new JList<String>();
+			listAlumnosPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			listAlumnosPracticas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	        modelAlumnosPracticas = new DefaultListModel<>();
+	        
+            listPaneAlumnosPracticas = new JScrollPane();
+            listPaneAlumnosPracticas.setBounds(323, 203, 559, 100);
+            listPaneAlumnosPracticas.setViewportView(listAlumnosPracticas);
+	        listAlumnosPracticas.setLayoutOrientation(JList.VERTICAL);
+	        listPaneAlumnosPracticas.setVisible(false);
+	        panelPracticas.add(listPaneAlumnosPracticas);
+	        
+	        lblTituloListaEmpresasPracticas = new JLabel("EMPRESAS");
+	        lblTituloListaEmpresasPracticas.setHorizontalAlignment(SwingConstants.CENTER);
+	        lblTituloListaEmpresasPracticas.setFont(new Font("Tahoma", Font.BOLD, 25));
+	        lblTituloListaEmpresasPracticas.setBounds(39, 353, 257, 47);
+	        lblTituloListaEmpresasPracticas.setVisible(false);
+	        panelPracticas.add(lblTituloListaEmpresasPracticas);
+			
+			listEmpresasPracticas = new JList<String>();
+			listEmpresasPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			listEmpresasPracticas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	        modelEmpresasPracticas = new DefaultListModel<>();
+	        
+            listPaneEmpresasPracticas = new JScrollPane();
+            listPaneEmpresasPracticas.setBounds(323, 330, 559, 100);
+            listPaneEmpresasPracticas.setViewportView(listEmpresasPracticas);
+            listEmpresasPracticas.setLayoutOrientation(JList.VERTICAL);
+            listPaneEmpresasPracticas.setVisible(false);
+	        panelPracticas.add(listPaneEmpresasPracticas);
+	        
+	        btnAsignarEmpresaPracticas = new JButton("ASIGNAR EMPRESA");
+	        btnAsignarEmpresaPracticas.setBackground(Color.ORANGE);
+	        btnAsignarEmpresaPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+	        btnAsignarEmpresaPracticas.setBounds(914, 283, 218, 55);
+	        btnAsignarEmpresaPracticas.setVisible(false);
+	        panelPracticas.add(btnAsignarEmpresaPracticas);
+	        
+	        lblTituloListaAnexarPracticas = new JLabel("ALUMNOS     <->     EMPRESAS");
+	        lblTituloListaAnexarPracticas.setHorizontalAlignment(SwingConstants.CENTER);
+	        lblTituloListaAnexarPracticas.setFont(new Font("Tahoma", Font.BOLD, 25));
+	        lblTituloListaAnexarPracticas.setBounds(277, 445, 457, 47);
+	        lblTituloListaAnexarPracticas.setVisible(false);
+	        panelPracticas.add(lblTituloListaAnexarPracticas);
+			
+			listAnexarPracticas = new JList<String>();
+			listAnexarPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			listAnexarPracticas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	        modelAnexarPracticas = new DefaultListModel<>();
+	        
+            listPaneAnexarPracticas = new JScrollPane();
+            listPaneAnexarPracticas.setBounds(92, 500, 790, 132);
+            listPaneAnexarPracticas.setViewportView(listAnexarPracticas);
+            listAnexarPracticas.setLayoutOrientation(JList.VERTICAL);
+            listPaneAnexarPracticas.setVisible(false);
+	        panelPracticas.add(listPaneAnexarPracticas);
+	        
+	        btnEliminarAnexarPracticas = new JButton("ELIMINAR RELACION");
+	        btnEliminarAnexarPracticas.setBackground(Color.ORANGE);
+	        btnEliminarAnexarPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+	        btnEliminarAnexarPracticas.setBounds(914, 536, 218, 55);
+	        btnEliminarAnexarPracticas.setVisible(false);
+	        panelPracticas.add(btnEliminarAnexarPracticas);
 	}
 }

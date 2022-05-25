@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 
 import Vista.Vista;
 import persistencia.Alumno;
+import persistencia.Anexar;
 import persistencia.Convenio;
 import persistencia.Curso;
 import persistencia.Empresa;
@@ -50,6 +51,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnPanelAlumnos.addActionListener(this);
 			this.vista.btnPanelEmpresas.addActionListener(this);
 			this.vista.btnPanelPeriodos.addActionListener(this);
+			this.vista.btnPanelPracticas.addActionListener(this);
 			
 		//BOTONES PANEL LISTA ALUMNOS
 			this.vista.btnPanelAddAlumno.addActionListener(this);
@@ -95,6 +97,12 @@ public class Controlador implements ActionListener{
 		//Botones del panel Periodos
 			this.vista.btnCrearPeriodo.addActionListener(this);
 			this.vista.btnEliminarPeriodo.addActionListener(this);
+			
+		//Botones del panel Practicas
+			this.vista.btnAsignarPeriodoPracticas.addActionListener(this);
+			this.vista.btnAsignarEmpresaPracticas.addActionListener(this);
+			this.vista.btnEliminarAnexarPracticas.addActionListener(this);
+			
 		//VISTAS
 			this.vista.panelConvenios.setVisible(false);
 			this.vista.panelPrincipal.setVisible(true);
@@ -106,6 +114,7 @@ public class Controlador implements ActionListener{
 			this.vista.panelNuevaActualizarEmpresa.setVisible(false);
 			this.vista.panelListaEmpresas.setVisible(false);
 			this.vista.panelPeriodos.setVisible(false);
+			this.vista.panelPracticas.setVisible(false);
 	}
 	
 	
@@ -126,8 +135,11 @@ public class Controlador implements ActionListener{
 		//ARRAYLIST JLIST CONVENIOS
 		ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
 		
-		//ARRAY JLIST PERIODO
+		//ARRAYLIST PERIODO
 		ArrayList<Practica> listaPeriodos = new ArrayList<Practica>();
+		
+		//ARRAYLIST ANEXARS
+		ArrayList <Anexar> listaAnexarsPracticas = new ArrayList<Anexar>();
 		
 		SessionFactory sessionFactory = null;
 
@@ -175,7 +187,7 @@ public class Controlador implements ActionListener{
 				this.vista.panelNuevaActualizarEmpresa.setVisible(false);
 				this.vista.panelListaEmpresas.setVisible(false);
 				this.vista.panelPeriodos.setVisible(false);
-				
+				this.vista.panelPracticas.setVisible(false);
 				
 				vista.comboBoxListaCursoAlumno.removeAllItems();
 				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
@@ -439,6 +451,7 @@ public class Controlador implements ActionListener{
 						vista.panelConvenios.setVisible(false);
 						vista.panelNuevaActualizarEmpresa.setVisible(false);
 						vista.panelPeriodos.setVisible(false);
+						vista.panelPracticas.setVisible(false);
 						
 						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 			    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
@@ -729,6 +742,7 @@ public class Controlador implements ActionListener{
 							vista.panelNuevoCurso.setVisible(false);
 							vista.panelConvenios.setVisible(false);
 							vista.panelNuevaActualizarEmpresa.setVisible(false);
+							vista.panelPracticas.setVisible(false);
 							
 							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 				    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
@@ -804,7 +818,19 @@ public class Controlador implements ActionListener{
 		    /**
 		     * ACCIONES DEL PANEL PRACTICAS
 		     */
+			//BOTON QUE ABRE EL PANEL DE PRACTICAS
 		    if(e.getSource() == vista.btnPanelPracticas) {
+		    	
+		    	vista.panelListaEmpresas.setVisible(false);
+		    	vista.panelListaAlumno.setVisible(false);
+		    	vista.panelNuevoActualizarAlumno.setVisible(false);
+				vista.panelNuevaPoblacion.setVisible(false);
+				vista.panelNuevoCurso.setVisible(false);
+				vista.panelConvenios.setVisible(false);
+				vista.panelNuevaActualizarEmpresa.setVisible(false);
+				vista.panelPeriodos.setVisible(false);
+				vista.panelPracticas.setVisible(true);
+		    	
 		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
@@ -812,8 +838,78 @@ public class Controlador implements ActionListener{
 	    		vista.btnPanelPracticas.setBackground(new Color(211, 211, 211));
 	    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 		    	
+	    		//RELLENAR LIST DE PERIODO			
+				   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+				   for (int i = 0; i < listaPeriodos.size(); i++) {
+						listaPeriodos.get(i).getCurso().toString();
+					   }
+					this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodosPracticas, vista.listPeriodosPracticas, listaPeriodos);
 		    }
+		   
+		   //ASIGNAR PERIODO
+		  if(e.getSource() == vista.btnAsignarPeriodoPracticas){
 			   
+			  //COMPROBAR QUE HAY UN REGISTRO SELECCIOANDO
+			  if(vista.listPeriodosPracticas.getSelectedIndex() != -1) {
+				  
+				  //MOSTRAR LA ZONA DE ALUMNOS Y EMPRESAS
+				  vista.lblTituloListaAlumnosPracticas.setVisible(true);
+				  vista.listPaneAlumnosPracticas.setVisible(true);
+				  vista.lblTituloListaEmpresasPracticas.setVisible(true);
+				  vista.listPaneEmpresasPracticas.setVisible(true);
+				  vista.btnAsignarEmpresaPracticas.setVisible(true);
+				  
+				//RELLENAR JLIST DE ALUMNOS SEGÚN EL CURSO DEL PERIODO SELECCIONADO
+				  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+				  String curso = listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso();
+				  this.recargaJLISTAlumnosPracticas(sessionFactory, curso, vista.modelAlumnosPracticas, vista.listAlumnosPracticas);
+				  
+			   //RELLENAR JLIST DE EMPRESAS
+				  listaEmpresas = modelo.listaEmpresas(sessionFactory);
+					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresasPracticas, vista.listEmpresasPracticas, listaEmpresas);
+			  }
+		   }
+		  
+		  // MUESTRA LAS RELACIONES ->  ALUMNO - EMPRESA - PERIODO  
+		  if(e.getSource() == vista.btnAsignarEmpresaPracticas){
+			  
+			//COMPROBAR QUE HAY REGISTROS SELECCIOANDOS EN EL JLIST DE ALUMNOS Y EMPRESAS
+			  if(vista.listAlumnosPracticas.getSelectedIndex() != -1 && vista.listEmpresasPracticas.getSelectedIndex() != -1) {
+				  
+				  //MOSTRAR LA ZONA DE LA RELACION ALUMNO - EMPRESA - PERIODO
+				  vista.lblTituloListaAnexarPracticas.setVisible(true);
+				  vista.listPaneAnexarPracticas.setVisible(true);
+				  vista.btnEliminarAnexarPracticas.setVisible(true);
+				  
+				//HACE EL INSERT EN LA TABLA ANEXAR ->  ALUMNO - EMPRESA - PERIODO
+				  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+				  listaEmpresas = modelo.listaEmpresas(sessionFactory);
+				  
+				  String curso = listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso();
+				  try {
+					listaAlumnos = modelo.listarAlumnos(sessionFactory, curso);
+				  } catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				  }
+				  
+				  modelo.crearAnexar(sessionFactory, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaEmpresas.get(vista.listEmpresasPracticas.getSelectedIndex()), listaAlumnos.get(vista.listAlumnosPracticas.getSelectedIndex()));
+				
+				//RELLENAR JLIST ANEXARS
+				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
+				  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas);
+				  
+			  }  
+		  }
+		//ELIMINAR RELACION ALUMNO - EMPRESA - PERIODO
+		  if(e.getSource() == vista.btnEliminarAnexarPracticas){
+			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
+			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()));
+		    	
+			//RELLENAR JLIST ANEXARS
+			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
+			  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas);
+		  }
 	}
 		
 	
@@ -1455,5 +1551,57 @@ public class Controlador implements ActionListener{
 					}
 					
 					return valido;
-				}	
+				}
+		/**
+		 * METODOS DEL PANEL PRACTICAS
+		 */
+			//METODO QUE RECARGA EL JLIST DE ALUMNOS SEGUN EL CURSO DEL PERIODO
+				public void recargaJLISTAlumnosPracticas (SessionFactory sessionFactory,String nombreCurso, DefaultListModel model, JList list) {
+					//Modelo
+					Modelo modelo = new Modelo();
+					
+					//ARRAYLIST JLIST
+					ArrayList <Alumno> listaAlumnos = new ArrayList<Alumno>();
+					
+					try {
+
+						model.removeAllElements();
+						
+						listaAlumnos = modelo.listarAlumnos(sessionFactory, nombreCurso);
+						
+						for (int i = 0; i < listaAlumnos.size(); i++) {
+								model.addElement(listaAlumnos.get(i).toString());
+								list.setModel(model);
+						}
+						
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
+		//METODO QUE RECARGA EL JLIST DE ANEXARS
+			public void recargaJLISTAnexarPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list) {
+				//Modelo
+				Modelo modelo = new Modelo();
+				
+				//ARRAYLIST JLIST
+				ArrayList <Anexar> listaAnexar = new ArrayList<Anexar>();
+				
+				try {
+
+					model.removeAllElements();
+					
+					listaAnexar = modelo.listarAnexarsPracticas(sessionFactory);
+					
+					for (int i = 0; i < listaAnexar.size(); i++) {
+							model.addElement(listaAnexar.get(i).toString());
+							list.setModel(model);
+					}
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 }
