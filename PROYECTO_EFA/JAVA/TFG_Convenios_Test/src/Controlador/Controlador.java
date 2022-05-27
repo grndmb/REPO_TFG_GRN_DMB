@@ -115,6 +115,7 @@ public class Controlador implements ActionListener{
 			this.vista.panelListaEmpresas.setVisible(false);
 			this.vista.panelPeriodos.setVisible(false);
 			this.vista.panelPracticas.setVisible(false);
+			this.vista.btnPanelCrearNuevoConvenio.setVisible(false);
 	}
 	
 	
@@ -506,9 +507,8 @@ public class Controlador implements ActionListener{
 					    	
 					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
 					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
-					    	vista.lblNombreEmpresaConvenios.setText(listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getNombreEmpresa());
+					    	vista.lblNombreEmpresaConvenios.setText(listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getNombreEmpresa());
 
-					    	
 							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 					    	
 					    	vista.comboBoxListaCursoConvenio.removeAllItems();
