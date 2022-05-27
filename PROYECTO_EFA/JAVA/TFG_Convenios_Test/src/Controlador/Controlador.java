@@ -496,6 +496,7 @@ public class Controlador implements ActionListener{
 			    	//BOTON QUE ABRE EL PANEL DE VER CONVENIOS
 				    if(e.getSource() == vista.btnPanelConvenio) {
 				    		
+				    	if(vista.listEmpresas.getSelectedIndex() != -1) {
 				    		vista.panelListaEmpresas.setVisible(false);
 					    	vista.panelConvenios.setVisible(true);
 					    	vista.btnPanelCrearNuevoConvenio.setVisible(false);
@@ -512,6 +513,7 @@ public class Controlador implements ActionListener{
 					    	
 					    	vista.comboBoxListaCursoConvenio.removeAllItems();
 							modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoConvenio);
+				    	}
 				    	
 				    }
 				    
@@ -525,10 +527,8 @@ public class Controlador implements ActionListener{
 						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 						    	
 				    			
-				    			modelo.actualizarConvenio(sessionFactory, listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getIdConvenio(), listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getTipoConvenio(), 
-				    					listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getFechaAnexo(), listaConvenios.get(vista.listEmpresas.getSelectedIndex()).getEmpresa().getCifEmpresa());
-				    			
-				    			System.out.println("Hola");
+				    			modelo.actualizarConvenio(sessionFactory, listaConvenios.get(vista.listConvenios.getSelectedIndex()).getIdConvenio(), listaConvenios.get(vista.listConvenios.getSelectedIndex()).getTipoConvenio(), 
+				    					listaConvenios.get(vista.listConvenios.getSelectedIndex()).getFechaAnexo(), listaConvenios.get(vista.listConvenios.getSelectedIndex()).getEmpresa().getCifEmpresa());
 				    		
 						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
