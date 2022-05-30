@@ -445,13 +445,24 @@ public class Modelo {
 		 try {
 			 session = sessionFactory.getCurrentSession();
 			 session.beginTransaction();
+			 ArrayList<Anexar>listaAnexar = this.listarAnexarsPracticas(sessionFactory);
 			 
-			 Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
-			 query.setParameter("nif", nif);
-			 Alumno alumno = (Alumno) query.getSingleResult();
+			 for (int i = 0; i < listaAnexar.size(); i++) {
+				if(listaAnexar.get(0).getAlumno().getNif().equals(nif)) {
+					//ELIMINA EL ANEXO
+					
+					
+					//ELIMINA EL ALUMNO
+					Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
+					 query.setParameter("nif", nif);
+					 Alumno alumno = (Alumno) query.getSingleResult();
+					 
+					 session.delete(alumno);
+					 session.getTransaction().commit();
+				}
+			}
 			 
-			 session.delete(alumno);
-			 session.getTransaction().commit();
+			 
 			 
 		 } catch (Exception e) {
 				// TODO: handle exception
