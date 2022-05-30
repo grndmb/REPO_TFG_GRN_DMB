@@ -66,7 +66,7 @@ public class Convenio implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "                                " + idConvenio + "                        " + tipoConvenio + "                          " + fechaAnexo;
+		return "  " + tipoConvenio + "                          " + fechaAnexo + "                                " + idConvenio;
 	}
 
 	

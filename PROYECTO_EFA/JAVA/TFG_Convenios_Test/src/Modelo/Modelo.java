@@ -16,6 +16,7 @@ import java.util.List;
 import javax.persistence.Parameter;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -724,7 +725,7 @@ public class Modelo {
 	  * @throws HibernateException
 	  */
 	 
-	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio, boolean organismoPublico, Date fechaAnexo) throws HibernateException {
+	 public void crearConvenio (SessionFactory sessionFactory, String cifEmpresa, String nombreCurso, String tipoConvenio, boolean organismoPublico, Date fechaAnexo, JLabel lblError2Convenio) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -916,6 +917,10 @@ public class Modelo {
 						session.save(convenio);
 						session.getTransaction().commit();	
 			 			
+			 		}else {
+			 			
+			 			lblError2Convenio.setText("ERROR. SOLO PUEDE TENER 2 CONVENIOS MAXIMOs POR TIPO");
+			 			
 			 		}
 		 		
 				}if(test.equals("MOR/")) {
@@ -939,6 +944,10 @@ public class Modelo {
 			 	
 						session.save(convenio);
 						session.getTransaction().commit();	
+			 		} else {
+			 			
+			 			lblError2Convenio.setText("ERROR. SOLO PUEDE TENER 2 CONVENIOS MAXIMOs POR TIPO");
+			 			
 			 		}
 					
 				}
@@ -975,9 +984,10 @@ public class Modelo {
 			queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
 			Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
 			
-			Query queryConvenio = session.createQuery("FROM Convenio WHERE idConvenio = :id AND empresa = :empresa");
+			Query queryConvenio = session.createQuery("FROM Convenio WHERE idConvenio = :id AND empresa = :empresa AND tipoConvenio = :tipoConvenio");
 			queryConvenio.setParameter("id", id);
 			queryConvenio.setParameter("empresa", empresa);
+			queryConvenio.setParameter("tipoConvenio", tipoConvenio);
 			Convenio convenio = (Convenio) queryConvenio.getSingleResult();
 			
 			//----------------------------------------------------------------		
@@ -1307,7 +1317,7 @@ public class Modelo {
 			SessionFactory sessionFactory = null;
 			
 		 
-		//Solo se hace una vez, al iniciar la aplicaciï¿½n
+		//Solo se hace una vez, al iniciar la aplicaciÃ¯Â¿Â½n
 			Configuration configuration = new Configuration();
 			configuration.configure("hibernate.cfg.xml");
 			sessionFactory = configuration.buildSessionFactory();
@@ -1315,18 +1325,18 @@ public class Modelo {
 			Modelo helper = new Modelo();	
 			
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-	        Date fechaNacimientoUSU = (Date) format.parse("22/12/2002");
-	        java.sql.Date fecha = new java.sql.Date(fechaNacimientoUSU.getTime());
+	        Date fecha1 = (Date) format.parse("22/12/2002");
+	        java.sql.Date fecha = new java.sql.Date(fecha1.getTime());
 			
 	 
 	    
 	        
 	       
-	       helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "PFE", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fechaNacimientoUSU);
-	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carrocería", "FCT", false, fechaNacimientoUSU);
+	      /* helper.crearConvenio(sessionFactory, "1231-FIG", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fecha);
+	       helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fecha);
+	       helper.crearConvenio(sessionFactory, "6217-KIR", "2Âº CFGM Sistemas MicroInformaticos y Redes", "PFE", false, fecha);
+	       helper.crearConvenio(sessionFactory, "2341-KLO", "2Âº FP Basica Mantenimiento de Vehiculos", "PFE", false, fecha);
+	       helper.crearConvenio(sessionFactory, "9687-POK", "2Âº CFGM CarrocerÃ­a", "FCT", false, fecha);
 
 	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
 	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/C002/22", "FCT", fechaNacimientoUSU, "9687-POK");
@@ -1335,13 +1345,13 @@ public class Modelo {
 	        
 	        
          /*
-          * 2º CFGM Carrocería
-			2º CFGM Electromecánica
-			2º CFGM Sistemas MicroInformáticos y Redes
-			2º CFGS Desarrollo de Aplicaciones Multiplataforma
-			2º CFGS Técnico Superior en Automoción
-			2º FP Básica Informática y Comunicaciones
-			2º FP Básica Mantenimiento de Vehículos
+          * 2Âº CFGM CarrocerÃ­a
+			2Âº CFGM ElectromecÃ¡nica
+			2Âº CFGM Sistemas MicroInformÃ¡ticos y Redes
+			2Âº CFGS Desarrollo de Aplicaciones Multiplataforma
+			2Âº CFGS TÃ©cnico Superior en AutomociÃ³n
+			2Âº FP BÃ¡sica InformÃ¡tica y Comunicaciones
+			2Âº FP BÃ¡sica Mantenimiento de VehÃ­culos
           */
 	  
 	 

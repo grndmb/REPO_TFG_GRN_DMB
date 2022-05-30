@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -25,6 +26,11 @@ import javax.swing.JPanel;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+
 
 import Vista.Vista;
 import persistencia.Alumno;
@@ -93,6 +99,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnActualizarConvenio.addActionListener(this);
 			this.vista.comboBoxTipoConvenioPanelConvenio.addActionListener(this);
 			this.vista.btnPanelCrearNuevoConvenio.addActionListener(this);
+			this.vista.btnCrearConvenio.addActionListener(this);
 			
 		//Botones del panel Periodos
 			this.vista.btnCrearPeriodo.addActionListener(this);
@@ -115,7 +122,9 @@ public class Controlador implements ActionListener{
 			this.vista.panelListaEmpresas.setVisible(false);
 			this.vista.panelPeriodos.setVisible(false);
 			this.vista.panelPracticas.setVisible(false);
-			this.vista.btnPanelCrearNuevoConvenio.setVisible(false);
+			this.vista.panelCrearNuevoConvenio.setVisible(false);
+			this.vista.panelCrearNuevoConvenio.setVisible(false);
+
 	}
 	
 	
@@ -150,28 +159,28 @@ public class Controlador implements ActionListener{
         
 	    //Control de las acciones de los botones
 	    
-	        //Acciones del bot�n de INICIAR
+	        //Acciones del botï¿½n de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
 		    	
 				//Mostrar panel menu
 		    	vista.panelMenu.setVisible(true);
 		    	
-		    	//Situar el lbl de EFA MORATALAZ
+		    	/*Situar el lbl de EFA MORATALAZ
 		    	vista.labelTitulo.setBounds(342, 10, 1183, 112);
 		    	vista.labelTitulo.setOpaque(true);
-		    	vista.labelTitulo.setForeground(new Color(53, 100, 54));
+		    	vista.labelTitulo.setForeground(new Color(53, 100, 54));*/
 		    	
 				vista.btnInicio.setVisible(false);
 		    
 				//MOSTRAR LOGO
-				vista.lblLogo.setVisible(true);
+				//vista.lblLogo.setVisible(true);
 				
 		    }
 		    /**
 		     * ACCIONES DEL PANEL ALUMNOS
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MEN�
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 		    		vista.btnPanelAlumnos.setBackground(new Color(211, 211, 211));
 		    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 		    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
@@ -197,7 +206,7 @@ public class Controlador implements ActionListener{
 		    }
 		    
 		    
-		    //RELLENA JLIST, EN FUNCIÓN DE LA OPCION EN EL COMBOBOX
+		    //RELLENA JLIST, EN FUNCIÃ“N DE LA OPCION EN EL COMBOBOX
 		    if(e.getSource() == vista.comboBoxListaCursoAlumno) {
 		    	
 
@@ -223,7 +232,7 @@ public class Controlador implements ActionListener{
 				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 		    }
 		    
-		  //BOTON QUE HACE VISIBLE EL PANEL DE A�ADIR ALUMNO
+		  //BOTON QUE HACE VISIBLE EL PANEL DE Aï¿½ADIR ALUMNO
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
@@ -427,7 +436,7 @@ public class Controlador implements ActionListener{
 				
 			}
 		    
-			//AL PULSAR EN UNA OPCI�N DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
+			//AL PULSAR EN UNA OPCIï¿½N DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
 		    if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
 		    	
 				modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);
@@ -454,7 +463,7 @@ public class Controlador implements ActionListener{
 						vista.panelPeriodos.setVisible(false);
 						vista.panelPracticas.setVisible(false);
 						
-						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MEN�
+						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 			    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 			    		vista.btnPanelEmpresas.setBackground(new Color(211, 211, 211));
 			    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
@@ -475,7 +484,7 @@ public class Controlador implements ActionListener{
 							vista.lblFechaActualizacionUSUEmpresa.setText(fechaActualizacion);	
 				    }
 				    
-				//AL PULSAR EN UNA POBLACI�N CARGA SU CODIGO POSTAL
+				//AL PULSAR EN UNA POBLACIï¿½N CARGA SU CODIGO POSTAL
 				    if(e.getSource() == vista.comboBoxPoblacionUSUEmpresa) {
 				    
 				    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
@@ -500,8 +509,9 @@ public class Controlador implements ActionListener{
 				    	if(vista.listEmpresas.getSelectedIndex() != -1) {
 				    		vista.panelListaEmpresas.setVisible(false);
 					    	vista.panelConvenios.setVisible(true);
-					    	vista.btnPanelCrearNuevoConvenio.setVisible(false);
-					    	
+					    	vista.btnPanelCrearNuevoConvenio.setVisible(true);
+							vista.panelCrearNuevoConvenio.setVisible(false);
+
 					    	
 					    	listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
@@ -513,6 +523,18 @@ public class Controlador implements ActionListener{
 					    	
 					    	vista.comboBoxListaCursoConvenio.removeAllItems();
 							modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoConvenio);
+				    	
+							try {
+
+					            File objetofile = new File ("src/AyudaConvenios.txt");
+					            Desktop.getDesktop().open(objetofile);
+
+					     }catch (IOException ex) {
+
+					            System.out.println(ex);
+
+					     }
+				    	
 				    	}
 				    	
 				    }
@@ -523,7 +545,7 @@ public class Controlador implements ActionListener{
 				    			
 				    			listaEmpresas = modelo.listaEmpresas(sessionFactory);
 						    	
-						    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
+						    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LISTA EMPRESAS		
 						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 						    	
 				    			
@@ -541,14 +563,62 @@ public class Controlador implements ActionListener{
 				    	if(e.getSource() == vista.btnPanelCrearNuevoConvenio) {
 				    		
 				    		vista.panelCrearNuevoConvenio.setVisible(true);
-				    		
-				    		
+				    		vista.btnPanelCrearNuevoConvenio.setVisible(false);
+
 				    	}
+				    	
+				    	if(e.getSource() == vista.btnCrearConvenio) {
+				    		
+				    		
+				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
+					    	
+					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LISTA EMPRESAS		
+					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+					    	
+					    	
+					    	//FECHA ANEXO
+					    	
+					    	String fechaAnexoString = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+					    	
+					    	java.sql.Date fecha = null;
+					    	
+						    try {
+								
+						    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+							    Date fechaAnexo = format.parse(fechaAnexoString);
+							    fecha = new java.sql.Date(fechaAnexo.getTime());
+						    	
+							} catch (Exception e2) {
+								// TODO: handle exception
+							}
+						    
+						    //----------------------------------
+					    	modelo.crearConvenio(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa(), vista.comboBoxListaCursoConvenio.getSelectedItem().toString(), 
+					    			vista.comboBoxTipoConvenioPanelConvenio.getSelectedItem().toString(), listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).isOrganismoPublico(), fecha, vista.lblError2Convenio);
+					    					    						    		
+					    	
+				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
+					    	
+					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
+					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+				    		
+							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
+
+							
+							//Rellenar List de empresas	
+				    		vista.panelCrearNuevoConvenio.setVisible(false);
+							listaEmpresas = modelo.listaEmpresas(sessionFactory);
+							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+				    	
+				    		vista.btnPanelCrearNuevoConvenio.setVisible(true);
+				    	}
+				    	
+				    	
 				
 				/**
 				 * Panel Nueva Actualizar Empresa
 				 */
-				  //BOTON QUE MUESTRA EL PANEL DE A�ADIR NUEVA EMPRESA
+				  //BOTON QUE MUESTRA EL PANEL DE Aï¿½ADIR NUEVA EMPRESA
 					if(e.getSource() == vista.btnPanelAddEmpresa){
 							this.vista.btnModificarEmpresa.setVisible(false);
 					    	this.vista.btnAnadirEmpresa.setVisible(true);
@@ -744,7 +814,7 @@ public class Controlador implements ActionListener{
 							vista.panelNuevaActualizarEmpresa.setVisible(false);
 							vista.panelPracticas.setVisible(false);
 							
-							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MEN�
+							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 				    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 				    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 				    		vista.btnPanelPeriodos.setBackground(new Color(211, 211, 211));
@@ -831,7 +901,7 @@ public class Controlador implements ActionListener{
 				vista.panelPeriodos.setVisible(false);
 				vista.panelPracticas.setVisible(true);
 		    	
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MEN�
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
@@ -845,7 +915,7 @@ public class Controlador implements ActionListener{
 					   }
 					this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodosPracticas, vista.listPeriodosPracticas, listaPeriodos);
 					
-			    //VAC�A LOS MODELS DE ALUMNOS, EMPRESAS Y ANEXAR
+			    //VACï¿½A LOS MODELS DE ALUMNOS, EMPRESAS Y ANEXAR
 					vista.modelAlumnosPracticas.removeAllElements();
 					vista.modelEmpresasPracticas.removeAllElements();
 					vista.modelAnexarPracticas.removeAllElements();
@@ -864,7 +934,7 @@ public class Controlador implements ActionListener{
 				  vista.listPaneEmpresasPracticas.setVisible(true);
 				  vista.btnAsignarEmpresaPracticas.setVisible(true);
 				  
-				//RELLENAR JLIST DE ALUMNOS SEG�N EL CURSO DEL PERIODO SELECCIONADO
+				//RELLENAR JLIST DE ALUMNOS SEGï¿½N EL CURSO DEL PERIODO SELECCIONADO
 				  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 				  String curso = listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso();
 				  this.recargaJLISTAlumnosPracticas(sessionFactory, curso, vista.modelAlumnosPracticas, vista.listAlumnosPracticas);
@@ -965,7 +1035,7 @@ public class Controlador implements ActionListener{
 				}
 				
 
-			//Metodo para validar que todo los campos del alumno est�n rellenos
+			//Metodo para validar que todo los campos del alumno estï¿½n rellenos
 				public boolean anadirAlumnoValido() {
 					boolean valido = true;
 	
@@ -1227,7 +1297,7 @@ public class Controlador implements ActionListener{
 						e.printStackTrace();
 					}
 				}
-			//Metodo para validar que todo los campos del alumno est�n rellenos
+			//Metodo para validar que todo los campos del alumno estï¿½n rellenos
 				public boolean anadirEmpresaValida() {
 					boolean valido = true;
 	
@@ -1396,7 +1466,7 @@ public class Controlador implements ActionListener{
 								}
 						}
 					
-						//Metodo para validar que todo los campos del alumno est�n rellenos
+						//Metodo para validar que todo los campos del alumno estï¿½n rellenos
 							public boolean anadirPoblacionValido() {
 								boolean valido = true;
 				
