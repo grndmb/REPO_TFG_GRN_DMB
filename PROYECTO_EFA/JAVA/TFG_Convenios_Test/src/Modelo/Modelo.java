@@ -1082,7 +1082,7 @@ public class Modelo {
 	  * @throws HibernateException
 	  */
 	 
-	 public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
+	 public ArrayList<Convenio> listarConveniosCIFEmpresa (SessionFactory sessionFactory, String cifEmpresa) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -1099,6 +1099,38 @@ public class Modelo {
 				Query convenioQuery = session.createQuery("FROM Convenio WHERE empresa = :empresa");
 				convenioQuery.setParameter("empresa", empresa);
 				
+				listaConvenios = (ArrayList<Convenio>) convenioQuery.list();
+				
+				
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+			return listaConvenios;
+		 
+		 
+	 }
+	 
+public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throws HibernateException {
+		 
+		 Session session = null;
+
+		 ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
+		 
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Query convenioQuery = session.createQuery("FROM Convenio");
+		
 				listaConvenios = (ArrayList<Convenio>) convenioQuery.list();
 				
 				

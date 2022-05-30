@@ -208,14 +208,13 @@ public class Controlador implements ActionListener{
 		    }
 		    
 		    
-		  /*  //RELLENA JLIST, EN FUNCIÃ“N DE LA OPCION EN EL COMBOBOX
+		    //RELLENA JLIST, EN FUNCIÃ“N DE LA OPCION EN EL COMBOBOX
 		    else if(e.getSource() == vista.comboBoxListaCursoAlumno) {
 		   
 				try {
-					vista.modelAlumnos.removeAllElements();
+					if(vista.comboBoxListaCursoAlumno.getSelectedIndex() != -1) {
+						vista.modelAlumnos.removeAllElements();
 						listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
-						
-						
 						
 						for (int i = 0; i < listaAlumnos.size(); i++) {
 							vista.modelAlumnos.addElement(listaAlumnos.get(i).toString());
@@ -224,7 +223,7 @@ public class Controlador implements ActionListener{
 						
 						//RELLENA EL JLIST DE LOS ALUMNOS
 						this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
-					
+					}
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -232,7 +231,7 @@ public class Controlador implements ActionListener{
 				
 		    	
 		    }
-		    */
+		    
 		  //BOTON QUE HACE VISIBLE EL PANEL DE Aï¿½ADIR ALUMNO
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
@@ -516,14 +515,13 @@ public class Controlador implements ActionListener{
 					    	listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
 					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
-					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 					    	vista.lblNombreEmpresaConvenios.setText(listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getNombreEmpresa());
 
-							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
-					    	
 					    	vista.comboBoxListaCursoConvenio.removeAllItems();
 							modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoConvenio);
 				    	
+							listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 							try {
 
 					            File objetofile = new File ("src/AyudaConvenios.txt");
@@ -546,13 +544,13 @@ public class Controlador implements ActionListener{
 				    			listaEmpresas = modelo.listaEmpresas(sessionFactory);
 						    	
 						    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LISTA EMPRESAS		
-						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+						    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 						    	
 				    			
 				    			modelo.actualizarConvenio(sessionFactory, listaConvenios.get(vista.listConvenios.getSelectedIndex()).getIdConvenio(), listaConvenios.get(vista.listConvenios.getSelectedIndex()).getTipoConvenio(), 
 				    					listaConvenios.get(vista.listConvenios.getSelectedIndex()).getFechaAnexo(), listaConvenios.get(vista.listConvenios.getSelectedIndex()).getEmpresa().getCifEmpresa());
 				    		
-						    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+						    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 				    		
 				    		}
@@ -573,7 +571,7 @@ public class Controlador implements ActionListener{
 				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
 					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LISTA EMPRESAS		
-					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+					    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 					    	
 					    	
 					    	//FECHA ANEXO
@@ -596,7 +594,7 @@ public class Controlador implements ActionListener{
 				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	
 					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
-					    	listaConvenios = modelo.listarConvenios(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
+					    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 				    		
 							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 
@@ -607,6 +605,8 @@ public class Controlador implements ActionListener{
 							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
 				    	
 				    		vista.btnPanelCrearNuevoConvenio.setVisible(true);
+				    		vista.panelConvenios.setVisible(false);
+				    		vista.panelListaEmpresas.setVisible(true);
 				    	}
 				    	
 				    	
@@ -935,22 +935,20 @@ public class Controlador implements ActionListener{
 				  String curso = listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso();
 				  this.recargaJLISTAlumnosPracticas(sessionFactory, curso, vista.modelAlumnosPracticas, vista.listAlumnosPracticas);
 				  
-			   //RELLENAR JLIST DE EMPRESAS
+			   //RELLENAR JLIST DE EMPRESAS CON DATOS DEL CONVENIO
 				  listaEmpresas = modelo.listaEmpresas(sessionFactory);
-					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresasPracticas, vista.listEmpresasPracticas, listaEmpresas);
-			  //MOSTRAR PERIODOS
+					if(vista.listAlumnosPracticas.getFirstVisibleIndex() > -1) {
+						this.recargaJLISTEmpresasPracticas(sessionFactory, vista.modelEmpresasPracticas, vista.listEmpresasPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
+					
+				//MOSTRAR PERIODOS
 				//MOSTRAR LA ZONA DE LA RELACION ALUMNO - EMPRESA - PERIODO
 					 vista.lblTituloListaAnexarPracticas.setVisible(true);
 					 vista.listPaneAnexarPracticas.setVisible(true);
 					 vista.btnEliminarAnexarPracticas.setVisible(true);
-					  
-				//HACE EL INSERT EN LA TABLA ANEXAR ->  ALUMNO - EMPRESA - PERIODO
+					
 					 listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
-					 
-					//RELLENAR JLIST ANEXARS
-					  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-					  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getIdPractica());
-			  }
+				}
+			}
 			  
 		   }
 		  
@@ -1661,6 +1659,57 @@ public class Controlador implements ActionListener{
 					}
 					
 				}
+				public void recargaJLISTEmpresasPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, Practica practica) {
+					//Modelo
+					Modelo modelo = new Modelo();
+					//lista convenios
+					ArrayList <Convenio> listaConvenios = modelo.listarConvenios(sessionFactory);
+					try {
+						model.removeAllElements();
+						
+						//RELLENA EL JLIST CON LAS EMPRESAS QUE TIENEN CONVENIO Y SEGUN EL TIPO DE PRACTICAS HAYA ELEGIDO EL USUARIO
+						for(int i = 0; i < listaConvenios.size(); i++) {
+							
+								if(listaConvenios.get(i).getTipoConvenio().equals(practica.getTipoPractica())) {
+										model.addElement(listaConvenios.get(i).toStringAnexar());
+										list.setModel(model);
+								
+							}
+							
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				/*
+				public void recargaJLISTEmpresasPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list,ArrayList <Empresa> listaEmpresas, Practica practica) {
+					//Modelo
+					Modelo modelo = new Modelo();
+					//lista convenios
+					ArrayList <Convenio> listaConvenios = modelo.listarConvenios(sessionFactory);
+					try {
+						model.removeAllElements();
+						
+						//RELLENA EL JLIST CON LAS EMPRESAS QUE TIENEN CONVENIO Y SEGUN EL TIPO DE PRACTICAS HAYA ELEGIDO EL USUARIO
+						for(int i = 0; i < listaConvenios.size(); i++) {
+							
+							for (int j = 0; j < listaEmpresas.size(); j++) {
+								
+								if(listaConvenios.get(i).getEmpresa().getCifEmpresa().equals(listaEmpresas.get(j).getCifEmpresa()) && 
+										listaConvenios.get(i).getTipoConvenio().equals(practica.getTipoPractica())) {
+										model.addElement(listaEmpresas.get(j).toString());
+										list.setModel(model);
+								}
+								
+							}
+							
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}*/
 		//METODO QUE RECARGA EL JLIST DE ANEXARS
 			public void recargaJLISTAnexarPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, int idPractica) {
 				//Modelo
