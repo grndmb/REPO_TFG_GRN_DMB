@@ -87,7 +87,7 @@ public class Modelo {
 	}
 
 	
-	public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox<String> comboBox) {
+	public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox comboBox) {
 		Session session = null;
 		
 		try {
@@ -99,7 +99,7 @@ public class Modelo {
 			
 				comboBox.addItem("");
 			for(int i=0;i<listaCursos.size();i++) {
-				comboBox.addItem(listaCursos.get(i).getNombreCurso().toString());
+				comboBox.addItem(listaCursos.get(i).getNombreCurso());
 			};
 		} catch (Exception e) {
 			// TODO: handle exception

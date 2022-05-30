@@ -175,6 +175,8 @@ public class Controlador implements ActionListener{
 				//MOSTRAR LOGO
 				//vista.lblLogo.setVisible(true);
 				
+				
+				
 		    }
 		    /**
 		     * ACCIONES DEL PANEL ALUMNOS
@@ -199,37 +201,36 @@ public class Controlador implements ActionListener{
 				this.vista.panelPeriodos.setVisible(false);
 				this.vista.panelPracticas.setVisible(false);
 				
-				vista.comboBoxListaCursoAlumno.removeAllItems();
-				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+				
 				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
-				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
+				
+				this.resetFormularioNuevoAlumno();
 		    }
 		    
 		    
 		    //RELLENA JLIST, EN FUNCIÃ“N DE LA OPCION EN EL COMBOBOX
-		    if(e.getSource() == vista.comboBoxListaCursoAlumno) {
-		    	
-
+		    else if(e.getSource() == vista.comboBoxListaCursoAlumno) {
+		   
 				try {
-
 					vista.modelAlumnos.removeAllElements();
-					
-					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
-					
-					
-					
-					for (int i = 0; i < listaAlumnos.size(); i++) {
-						vista.modelAlumnos.addElement(listaAlumnos.get(i).toString());
-						vista.listAlumnos.setModel(vista.modelAlumnos);
-					}
+						listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
+						
+						
+						
+						for (int i = 0; i < listaAlumnos.size(); i++) {
+							vista.modelAlumnos.addElement(listaAlumnos.get(i).toString());
+							vista.listAlumnos.setModel(vista.modelAlumnos);
+						}
+						
+						//RELLENA EL JLIST DE LOS ALUMNOS
+						this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 					
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-		    	//RELLENA EL JLIST DE LOS ALUMNOS
-				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
+		    	
 		    }
 		    
 		  //BOTON QUE HACE VISIBLE EL PANEL DE Aï¿½ADIR ALUMNO
@@ -373,9 +374,7 @@ public class Controlador implements ActionListener{
 					vista.panelListaAlumno.setVisible(true);
 					this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 					
-					vista.comboBoxListaCursoAlumno.removeAllItems();
 					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
-					
 					this.resetFormularioNuevoAlumno();
 		    	}
 			}
@@ -427,12 +426,12 @@ public class Controlador implements ActionListener{
 					vista.panelNuevoCurso.setVisible(false);
 					vista.panelNuevoActualizarAlumno.setVisible(true);
 					
+					//Recargamos el comboBox de cursos
+					vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
+					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
+		
 		    	}
-				//Recargamos el comboBox de cursos
-				vista.comboBoxListaCursoAlumno.removeAllItems();
-				vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
-				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
-				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
+				
 				
 			}
 		    
@@ -577,15 +576,11 @@ public class Controlador implements ActionListener{
 					    	
 					    	
 					    	//FECHA ANEXO
-					    	
-					    	String fechaAnexoString = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-					    	
 					    	java.sql.Date fecha = null;
 					    	
 						    try {
 								
-						    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-							    Date fechaAnexo = format.parse(fechaAnexoString);
+							    Date fechaAnexo = Calendar.getInstance().getTime();
 							    fecha = new java.sql.Date(fechaAnexo.getTime());
 						    	
 							} catch (Exception e2) {
@@ -1213,10 +1208,10 @@ public class Controlador implements ActionListener{
 							String observacionesEmpresa = vista.txtObservacionesEmpresa.getText();
 							
 						// FECHA ACTUALIZACION DE LOS DATOS  
-					        
-					        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-					        Date fechaActualizacionEmpresa = format.parse(vista.lblFechaActualizacionUSUEmpresa.getText());
-					        java.sql.Date fecha = new java.sql.Date(fechaActualizacionEmpresa.getTime());
+					    java.sql.Date fecha = null;
+					    	
+					    Date fechaAct = Calendar.getInstance().getTime();
+					    fecha = new java.sql.Date(fechaAct.getTime());
 					        
 						// INSERT
 							modelo.crearEmpresas(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, dniCargoPersonaContactoEmpresa, fecha, organismoPublico, observacionesEmpresa, poblacion);
@@ -1557,7 +1552,7 @@ public class Controlador implements ActionListener{
 											) {
 										valido = false;
 										
-										vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS");
+										vista.lblErroresNuevoCurso.setText("ERROR!! FALTAN CAMPOS OBLIGATORIOS curso");
 										vista.lblErroresNuevoCurso.setForeground(Color.RED);
 									}
 									
