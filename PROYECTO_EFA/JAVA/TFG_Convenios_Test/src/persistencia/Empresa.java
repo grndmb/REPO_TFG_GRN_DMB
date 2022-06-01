@@ -218,7 +218,7 @@ public class Empresa implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "           " +  nombreEmpresa;
+		return " " +  nombreEmpresa;
 	}
 
 	

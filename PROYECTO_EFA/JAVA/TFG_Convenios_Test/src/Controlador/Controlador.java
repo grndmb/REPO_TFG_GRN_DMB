@@ -1,5 +1,5 @@
 package Controlador;
-
+//IMPORTS
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +45,6 @@ import Modelo.Modelo;
 public class Controlador implements ActionListener{
 	//Objetos && Variables
 	Vista vista = new Vista();
-	
 	//Constructor
 	public Controlador(Vista v) {
 		this.vista = v;
@@ -250,6 +249,9 @@ public class Controlador implements ActionListener{
 		    	modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 		    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno, vista.comboBoxCodigoPostalUSUAlumno);	
 		    	
+		    	//LIMITO QUE PUEDA ELEGIR SOLO HASTA LA FECHA ACTUAL
+				Date fechaAct = Calendar.getInstance().getTime();
+				vista.dateChooserFechaNacimientoUSUAlumno.setMaxSelectableDate(fechaAct);
 		    }
 		    
 		   //BOTON QUE ABRE PANEL MODIFICAR ALUMNOS
@@ -371,6 +373,8 @@ public class Controlador implements ActionListener{
 					
 					vista.panelNuevoActualizarAlumno.setVisible(false);
 					vista.panelListaAlumno.setVisible(true);
+				
+					
 					this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 					
 					this.resetFormularioNuevoAlumno();
@@ -624,6 +628,10 @@ public class Controlador implements ActionListener{
 							
 							this.vista.panelListaEmpresas.setVisible(false);
 				    		this.vista.panelNuevaActualizarEmpresa.setVisible(true);
+				    		
+				    		
+				    	vista.lblErroresNuevaEmpresa.setText(" ");
+				    	this.resetFormularioNuevaEmpresa();
 					}
 			
 				//BOTON QUE HACE EL INSERT DE LA EMPRESA
@@ -642,9 +650,12 @@ public class Controlador implements ActionListener{
 				    	}
 				    }
 				 
-				 //BOTON MODIFICAR QUE ABRE EL PANEL NUEVA ACTUALIZAR EMPRESA
+				 //BOTON QUE ABRE EL PANEL NUEVA ACTUALIZAR EMPRESA
 				    if(e.getSource() == vista.btnPanelModificarEmpresa){
 				    	if(vista.listEmpresas.getSelectedIndex() != -1){
+				    		vista.lblErroresNuevaEmpresa.setText(" ");
+				    		
+				    		
 				    		//Hace visible el panel nueva actualizar la empresa y cambia el titulo por modificar 
 				    		this.vista.btnModificarEmpresa.setVisible(true);
 					    	this.vista.btnAnadirEmpresa.setVisible(false);
@@ -742,12 +753,34 @@ public class Controlador implements ActionListener{
 							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
 							
 							//RELLENAR EL COMBO BOX DE LAS POBLACIONES
+							//RECARGA LOS COMBOBOX
 							vista.comboBoxPoblacionUSUEmpresa.removeAllItems();
 							modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
 					    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
 				    	}
 				    		
 				    }
+				    
+				    //BOTON QUE HACE EL INSERT DE LA NUEVA POBLACION DEL PANEL EMPRESA
+				    if(e.getSource() == vista.btnAnadirPoblacionEmpresa) {
+				    	
+						if(this.anadirPoblacionValido() == true) {
+				    		//Llamamos al metodo que realiza el insert del nueva poblacion
+							this.crearNuevaPoblacion(sessionFactory, modelo);
+							this.vista.panelNuevaActualizarEmpresa.setVisible(false);
+							this.vista.panelNuevaPoblacion.setVisible(false);
+							this.vista.panelListaEmpresas.setVisible(true);
+							
+							//RELLENAR EL COMBO BOX DE LAS POBLACIONES
+							vista.comboBoxPoblacionUSUEmpresa.removeAllItems();
+							modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
+					    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
+					    	
+					    	//Rellenar List de empresas				
+							listaEmpresas = modelo.listaEmpresas(sessionFactory);
+							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+						}
+					}
 			    /**
 			     * Panel Nueva Poblacion
 			     */
@@ -760,21 +793,7 @@ public class Controlador implements ActionListener{
 							vista.btnAnadirPoblacionAlumno.setVisible(false);
 						}
 						
-					  //BOTON QUE HACE EL INSERT DE LA NUEVA POBLACION DEL PANEL EMPRESA
-					    if(e.getSource() == vista.btnAnadirPoblacionEmpresa) {
-					    	
-							if(this.anadirPoblacionValido() == true) {
-					    		//Llamamos al metodo que realiza el insert del nueva poblacion
-								this.crearNuevaPoblacion(sessionFactory, modelo);
-								this.vista.panelNuevaActualizarEmpresa.setVisible(true);
-								this.vista.panelNuevaPoblacion.setVisible(false);
-								
-								//RELLENAR EL COMBO BOX DE LAS POBLACIONES
-								vista.comboBoxPoblacionUSUEmpresa.removeAllItems();
-								modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
-						    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa, vista.comboBoxCodigoPostalUSUEmpresa);
-							}
-						}
+					 
 		    
 			  //BOTON QUE ELIMINA LA EMPRESA
 			    if(e.getSource() == vista.btnEliminarEmpresa) {
@@ -938,7 +957,7 @@ public class Controlador implements ActionListener{
 			   //RELLENAR JLIST DE EMPRESAS CON DATOS DEL CONVENIO
 				  listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					if(vista.listAlumnosPracticas.getFirstVisibleIndex() > -1) {
-						this.recargaJLISTEmpresasPracticas(sessionFactory, vista.modelEmpresasPracticas, vista.listEmpresasPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
+						this.recargaJLISTConveniosEmpresasPracticas(sessionFactory, vista.modelEmpresasPracticas, vista.listEmpresasPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
 					
 				//MOSTRAR PERIODOS
 				//MOSTRAR LA ZONA DE LA RELACION ALUMNO - EMPRESA - PERIODO
@@ -947,12 +966,14 @@ public class Controlador implements ActionListener{
 					 vista.btnEliminarAnexarPracticas.setVisible(true);
 					
 					 listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+					 this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica(), listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso());
+
 				}
 			}
 			  
 		   }
 		  
-		  // MUESTRA LAS RELACIONES ->  ALUMNO - EMPRESA - PERIODO  
+		  // MUESTRA LAS RELACIONES ->  ALUMNO - CONVENIO - PERIODO   
 		  if(e.getSource() == vista.btnAsignarEmpresaPracticas){
 			  
 			//COMPROBAR QUE HAY REGISTROS SELECCIOANDOS EN EL JLIST DE ALUMNOS Y EMPRESAS
@@ -960,7 +981,7 @@ public class Controlador implements ActionListener{
 				  
 				//HACE EL INSERT EN LA TABLA ANEXAR ->  ALUMNO - EMPRESA - PERIODO
 				  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
-				  listaEmpresas = modelo.listaEmpresas(sessionFactory);
+				  listaConvenios = modelo.listarConveniosTipoConvenio(sessionFactory,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica());
 				  
 				  String curso = listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso();
 				  try {
@@ -971,11 +992,11 @@ public class Controlador implements ActionListener{
 					e1.printStackTrace();
 				  }
 				  
-				  modelo.crearAnexar(sessionFactory, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaEmpresas.get(vista.listEmpresasPracticas.getSelectedIndex()), listaAlumnos.get(vista.listAlumnosPracticas.getSelectedIndex()), listaAnexarsPracticas);
+				  modelo.crearAnexar(sessionFactory, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaConvenios.get(vista.listEmpresasPracticas.getSelectedIndex()), listaAlumnos.get(vista.listAlumnosPracticas.getSelectedIndex()), listaAnexarsPracticas);
 				
 				//RELLENAR JLIST ANEXARS
 				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-				  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getIdPractica());
+				  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica(), listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso());
 				  
 			  }  
 		  }
@@ -987,7 +1008,7 @@ public class Controlador implements ActionListener{
 			//RELLENAR JLIST ANEXARS
 			  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-			  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getIdPractica());
+			  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica(), listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso());
 		  }
 	}
 		
@@ -1017,7 +1038,7 @@ public class Controlador implements ActionListener{
 					// FECHA NACIMIENTO
 						Date fechaNacimientoUSU = vista.dateChooserFechaNacimientoUSUAlumno.getDate();
 						java.sql.Date fechaNacimiento = new java.sql.Date(fechaNacimientoUSU.getTime());
-	
+						
 					// CODIGO POSTAL
 						int codigoPostal = Integer.parseInt(vista.comboBoxCodigoPostalUSUAlumno.getSelectedItem().toString());
 						
@@ -1310,7 +1331,7 @@ public class Controlador implements ActionListener{
 							   vista.txtCIFEmpresa.getText().equals("")
 							|| vista.txtNombreEmpresa.getText().equals("")
 							|| vista.txtDireccionEmpresa.getText().equals("")
-							|| vista.comboBoxPoblacionUSUEmpresa.getSelectedItem().equals("")
+							|| vista.comboBoxPoblacionUSUEmpresa.getSelectedItem() == null
 							|| vista.txtEmailEmpresa.getText().equals("")
 							|| vista.txtDNIGerenteEmpresa.getText().equals("")
 							|| vista.txtNombreGerenteEmpresa.getText().equals("")
@@ -1659,7 +1680,7 @@ public class Controlador implements ActionListener{
 					}
 					
 				}
-				public void recargaJLISTEmpresasPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, Practica practica) {
+				public void recargaJLISTConveniosEmpresasPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, Practica practica) {
 					//Modelo
 					Modelo modelo = new Modelo();
 					//lista convenios
@@ -1670,9 +1691,18 @@ public class Controlador implements ActionListener{
 						//RELLENA EL JLIST CON LAS EMPRESAS QUE TIENEN CONVENIO Y SEGUN EL TIPO DE PRACTICAS HAYA ELEGIDO EL USUARIO
 						for(int i = 0; i < listaConvenios.size(); i++) {
 							
+								//COMPRUEBA QUE EL TIPO DE CONVENIO COINCIDE CON EL DEL PERIODO
 								if(listaConvenios.get(i).getTipoConvenio().equals(practica.getTipoPractica())) {
-										model.addElement(listaConvenios.get(i).toStringAnexar());
+									//COMPRUEBA SI ES PUBLICO O PRIVADO PARA DARLE UNOS ESPACIOS U OTROS AL TO STRING
+									System.out.println(listaConvenios.get(i).getIdConvenio().substring(4,7));
+									if(listaConvenios.get(i).getIdConvenio().substring(4,8).equals("PRIV")) {
+										model.addElement(listaConvenios.get(i).toStringAnexarPRIV());
 										list.setModel(model);
+									}else {
+										model.addElement(listaConvenios.get(i).toStringAnexarPUBL());
+										list.setModel(model);
+									}
+										
 								
 							}
 							
@@ -1711,7 +1741,7 @@ public class Controlador implements ActionListener{
 					}
 				}*/
 		//METODO QUE RECARGA EL JLIST DE ANEXARS
-			public void recargaJLISTAnexarPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, int idPractica) {
+			public void recargaJLISTAnexarPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, String tipoPractica, String curso) {
 				//Modelo
 				Modelo modelo = new Modelo();
 				
@@ -1725,7 +1755,7 @@ public class Controlador implements ActionListener{
 					listaAnexar = modelo.listarAnexarsPracticas(sessionFactory);
 				
 					for (int i = 0; i < listaAnexar.size(); i++) {
-						if(listaAnexar.get(i).getPractica().getIdPractica() == idPractica) {
+						if(listaAnexar.get(i).getPractica().getTipoPractica().equals(tipoPractica) && listaAnexar.get(i).getPractica().getCurso().getNombreCurso().equals(curso)) {
 							model.addElement(listaAnexar.get(i).toString());
 							list.setModel(model);
 						}

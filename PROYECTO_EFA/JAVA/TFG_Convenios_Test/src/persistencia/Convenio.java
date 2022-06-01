@@ -70,7 +70,11 @@ public class Convenio implements java.io.Serializable {
 	}
 
 	
-	public String toStringAnexar() {
+	public String toStringAnexarPRIV() {
 	return tipoConvenio+"              "+idConvenio+"          "+empresa.getNombreEmpresa();
+	}
+	
+	public String toStringAnexarPUBL() {
+	return tipoConvenio+"              "+idConvenio+"                   "+empresa.getNombreEmpresa();
 	}
 }

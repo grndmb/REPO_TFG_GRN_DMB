@@ -345,7 +345,7 @@ public class Vista extends JFrame {
 			labelTitulo.setBounds(10, 10, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
-			btnInicio = new JButton("Iniciar Aplicaci\u00F3n");
+			btnInicio = new JButton("Iniciar Aplicación");
 			btnInicio.setBounds(530, 450, 479, 76);
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
@@ -377,7 +377,7 @@ public class Vista extends JFrame {
 			btnPanelPeriodos.setBounds(49, 210, 219, 37);
 			panelMenu.add(btnPanelPeriodos);
 			
-			btnPanelPracticas = new JButton("Practicas");
+			btnPanelPracticas = new JButton("Prácticas");
 			btnPanelPracticas.setBackground(Color.WHITE);
 			btnPanelPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelPracticas.setBounds(49, 290, 219, 37);
@@ -439,7 +439,7 @@ public class Vista extends JFrame {
             comboBoxListaCursoAlumno.setBounds(184, 114, 584, 38);
             panelListaAlumno.add(comboBoxListaCursoAlumno);
             
-            btnPanelAddAlumno = new JButton("AÃ‘ADIR NUEVO");
+            btnPanelAddAlumno = new JButton("AÑADIR NUEVO");
             btnPanelAddAlumno.setBackground(Color.GREEN);
             btnPanelAddAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
             btnPanelAddAlumno.setBounds(874, 518, 205, 55);
@@ -488,7 +488,7 @@ public class Vista extends JFrame {
 			
 			lblTelefonoAlumno = new JLabel();
 			lblTelefonoAlumno.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblTelefonoAlumno.setText("TELEFONO");
+			lblTelefonoAlumno.setText("TELÉFONO");
 			lblTelefonoAlumno.setBounds(52, 300, 311, 40);
 			panelNuevoActualizarAlumno.add(lblTelefonoAlumno);
 			
@@ -505,7 +505,7 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(lblFechaNacimientoAlumno);
 			
 			txtNIFUSUAlumno = new JTextField();
-			txtNIFUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtNIFUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtNIFUSUAlumno.setColumns(10);
 			txtNIFUSUAlumno.setBounds(380, 100, 401, 40);
 			panelNuevoActualizarAlumno.add(txtNIFUSUAlumno);
@@ -514,13 +514,13 @@ public class Vista extends JFrame {
 			restrictedtxtNIFAlumno.setLimit(9);
 			
 			txtNombreCompletoUSUAlumno = new JTextField();
-			txtNombreCompletoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtNombreCompletoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtNombreCompletoUSUAlumno.setColumns(10);
 			txtNombreCompletoUSUAlumno.setBounds(380, 150, 401, 40);
 			panelNuevoActualizarAlumno.add(txtNombreCompletoUSUAlumno);
 			
 			txtTelefonoUSUAlumno = new JTextField();
-			txtTelefonoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtTelefonoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtTelefonoUSUAlumno.setColumns(10);
 			txtTelefonoUSUAlumno.setBounds(380, 300, 401, 40);
 			panelNuevoActualizarAlumno.add(txtTelefonoUSUAlumno);
@@ -529,13 +529,14 @@ public class Vista extends JFrame {
 			restrictedtxtTelefonoUSUAlumno.setLimit(9);
 			
 			txtCorreoUSUAlumno = new JTextField();
-			txtCorreoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtCorreoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtCorreoUSUAlumno.setColumns(10);
 			txtCorreoUSUAlumno.setBounds(380, 250, 401, 40);
 			panelNuevoActualizarAlumno.add(txtCorreoUSUAlumno);
 			
 			dateChooserFechaNacimientoUSUAlumno = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
 			dateChooserFechaNacimientoUSUAlumno.setBounds(380, 200, 171, 40);
+			dateChooserFechaNacimientoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			panelNuevoActualizarAlumno.add(dateChooserFechaNacimientoUSUAlumno);
 			
 			lblTituloNuevoAlumno = new JLabel();
@@ -563,17 +564,17 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(lblCodigoPostalAlumno);
 			
 			comboBoxNombreCursoUSUAlumno = new JComboBox();
-			comboBoxNombreCursoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			comboBoxNombreCursoUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			comboBoxNombreCursoUSUAlumno.setBounds(380, 450, 401, 40);
 			panelNuevoActualizarAlumno.add(comboBoxNombreCursoUSUAlumno);
 			
 			comboBoxPoblacionUSUAlumno = new JComboBox();
-			comboBoxPoblacionUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			comboBoxPoblacionUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			comboBoxPoblacionUSUAlumno.setBounds(380, 350, 401, 40);
 			panelNuevoActualizarAlumno.add(comboBoxPoblacionUSUAlumno);
 			
 			comboBoxCodigoPostalUSUAlumno = new JComboBox();
-			comboBoxCodigoPostalUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			comboBoxCodigoPostalUSUAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			comboBoxCodigoPostalUSUAlumno.setBounds(380, 400, 171, 40);
 			panelNuevoActualizarAlumno.add(comboBoxCodigoPostalUSUAlumno);
 			
@@ -593,7 +594,7 @@ public class Vista extends JFrame {
 			panelNuevoActualizarAlumno.add(btnNuevoCursoAlumno);
 			
 			lblErroresNuevoAlumno = new JLabel();
-			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblErroresNuevoAlumno.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			lblErroresNuevoAlumno.setBounds(347, 530, 352, 60);
 			panelNuevoActualizarAlumno.add(lblErroresNuevoAlumno);
 			
@@ -637,7 +638,7 @@ public class Vista extends JFrame {
             panelListaEmpresas.add(listPaneEmpresas);
 			
             
-            btnPanelAddEmpresa = new JButton("Aï¿½ADIR NUEVA");
+            btnPanelAddEmpresa = new JButton("AÑADIR NUEVA");
             btnPanelAddEmpresa.setBackground(Color.GREEN);
             btnPanelAddEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
             btnPanelAddEmpresa.setBounds(874, 536, 205, 55);
@@ -705,19 +706,19 @@ public class Vista extends JFrame {
 				
 			lblDireccionEmpresa = new JLabel();
 			lblDireccionEmpresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblDireccionEmpresa.setText("DIRECCION");
+			lblDireccionEmpresa.setText("DIRECCIÓN");
 			lblDireccionEmpresa.setBounds(49, 180, 157, 35);
 			panelNuevaActualizarEmpresa.add(lblDireccionEmpresa);
 			
 			lblTelefono1Empresa = new JLabel();
 			lblTelefono1Empresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblTelefono1Empresa.setText("TELEFONO 1");
+			lblTelefono1Empresa.setText("TELÉFONO 1");
 			lblTelefono1Empresa.setBounds(49, 300, 157, 35);
 			panelNuevaActualizarEmpresa.add(lblTelefono1Empresa);
 				
 			lblTelefono2Empresa = new JLabel();
 			lblTelefono2Empresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblTelefono2Empresa.setText("TELEFONO 2");
+			lblTelefono2Empresa.setText("TELÉFONO 2");
 			lblTelefono2Empresa.setBounds(49, 340, 157, 35);
 			panelNuevaActualizarEmpresa.add(lblTelefono2Empresa);
 			
@@ -735,7 +736,7 @@ public class Vista extends JFrame {
 			
 			lblPaginaWebEmpresa = new JLabel();
 			lblPaginaWebEmpresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblPaginaWebEmpresa.setText("PAGINA WEB");
+			lblPaginaWebEmpresa.setText("PÁGINA WEB");
 			lblPaginaWebEmpresa.setBounds(543, 100, 268, 35);
 			panelNuevaActualizarEmpresa.add(lblPaginaWebEmpresa);
 			
@@ -765,13 +766,13 @@ public class Vista extends JFrame {
 			
 			lblFechaActualizacionEmpresa = new JLabel();
 			lblFechaActualizacionEmpresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblFechaActualizacionEmpresa.setText("FECHA ACTUALIZACION DATOS");
-			lblFechaActualizacionEmpresa.setBounds(543, 380, 268, 35);
+			lblFechaActualizacionEmpresa.setText("<html><body>FECHA ACTUALIZACIÓN  <br> DATOS <br></body></html>");
+			lblFechaActualizacionEmpresa.setBounds(543, 380, 268, 65);
 			panelNuevaActualizarEmpresa.add(lblFechaActualizacionEmpresa);
 			
 			lblOrganismoPublicoEmpresa = new JLabel();
 			lblOrganismoPublicoEmpresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblOrganismoPublicoEmpresa.setText("ORGANISMO PUBLICO");
+			lblOrganismoPublicoEmpresa.setText("ORGANISMO PÚBLICO");
 			lblOrganismoPublicoEmpresa.setBounds(543, 140, 268, 35);
 			panelNuevaActualizarEmpresa.add(lblOrganismoPublicoEmpresa);
 			
@@ -783,18 +784,18 @@ public class Vista extends JFrame {
 			
 			lblPoblacionEmpresa = new JLabel();
 			lblPoblacionEmpresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblPoblacionEmpresa.setText("POBLACION");
+			lblPoblacionEmpresa.setText("POBLACIÓN");
 			lblPoblacionEmpresa.setBounds(49, 220, 157, 35);
 			panelNuevaActualizarEmpresa.add(lblPoblacionEmpresa);
 			
 			lblCodigoPostalEmpresa = new JLabel();
 			lblCodigoPostalEmpresa.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblCodigoPostalEmpresa.setText("CODIGO POSTAL");
+			lblCodigoPostalEmpresa.setText("CÓDIGO POSTAL");
 			lblCodigoPostalEmpresa.setBounds(49, 260, 157, 35);
 			panelNuevaActualizarEmpresa.add(lblCodigoPostalEmpresa);
 			
 			txtCIFEmpresa = new JTextField();
-			txtCIFEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtCIFEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtCIFEmpresa.setBounds(215, 100, 283, 35);
 			panelNuevaActualizarEmpresa.add(txtCIFEmpresa);
 			
@@ -802,17 +803,17 @@ public class Vista extends JFrame {
 			restrictedtxtCIFEmpresa.setLimit(10);
 			
 			txtNombreEmpresa = new JTextField();
-			txtNombreEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtNombreEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtNombreEmpresa.setBounds(216, 140, 283, 35);
 			panelNuevaActualizarEmpresa.add(txtNombreEmpresa);
 				
 			txtDireccionEmpresa = new JTextField();
-			txtDireccionEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtDireccionEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtDireccionEmpresa.setBounds(215, 180, 283, 35);
 			panelNuevaActualizarEmpresa.add(txtDireccionEmpresa);
 			
 			txtTelefono1Empresa = new JTextField();
-			txtTelefono1Empresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtTelefono1Empresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtTelefono1Empresa.setBounds(215, 300, 283, 35);
 			panelNuevaActualizarEmpresa.add(txtTelefono1Empresa);
 			
@@ -820,7 +821,7 @@ public class Vista extends JFrame {
 			restrictedtxtTelefono1Empresa.setLimit(9);
 			
 			txtTelefono2Empresa = new JTextField();
-			txtTelefono2Empresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtTelefono2Empresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtTelefono2Empresa.setBounds(216, 340, 281, 35);
 			panelNuevaActualizarEmpresa.add(txtTelefono2Empresa);
 			
@@ -828,22 +829,22 @@ public class Vista extends JFrame {
 			restrictedtxtTelefono2Empresa.setLimit(9);
 			
 			txtEmailEmpresa = new JTextField();
-			txtEmailEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtEmailEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtEmailEmpresa.setBounds(216, 380, 281, 35);
 			panelNuevaActualizarEmpresa.add(txtEmailEmpresa);
 			
 			txtFaxEmpresa = new JTextField();
-			txtFaxEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtFaxEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtFaxEmpresa.setBounds(217, 420, 281, 35);
 			panelNuevaActualizarEmpresa.add(txtFaxEmpresa);
 			
 			txtPaginaWebEmpresa = new JTextField();
-			txtPaginaWebEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtPaginaWebEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtPaginaWebEmpresa.setBounds(821, 100, 300, 35);
 			panelNuevaActualizarEmpresa.add(txtPaginaWebEmpresa);
 			
 			txtDNIGerenteEmpresa = new JTextField();
-			txtDNIGerenteEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtDNIGerenteEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtDNIGerenteEmpresa.setBounds(821, 180, 300, 35);
 			panelNuevaActualizarEmpresa.add(txtDNIGerenteEmpresa);
 			
@@ -851,17 +852,17 @@ public class Vista extends JFrame {
 			restrictedtxtDNIGerenteEmpresa.setLimit(9);
 			
 			txtNombreGerenteEmpresa = new JTextField();
-			txtNombreGerenteEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtNombreGerenteEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtNombreGerenteEmpresa.setBounds(821, 220, 300, 35);
 			panelNuevaActualizarEmpresa.add(txtNombreGerenteEmpresa);
 			
 			txtPersonaContactoEmpresa = new JTextField();
-			txtPersonaContactoEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtPersonaContactoEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtPersonaContactoEmpresa.setBounds(821, 300, 300, 35);
 			panelNuevaActualizarEmpresa.add(txtPersonaContactoEmpresa);
 			
 			txtDNIPersonaContactoEmpresaEmpresa = new JTextField();
-			txtDNIPersonaContactoEmpresaEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtDNIPersonaContactoEmpresaEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtDNIPersonaContactoEmpresaEmpresa.setBounds(821, 260, 300, 35);
 			panelNuevaActualizarEmpresa.add(txtDNIPersonaContactoEmpresaEmpresa);
 			
@@ -869,7 +870,7 @@ public class Vista extends JFrame {
 			restrictedtxtDNIPersonaContactoEmpresaEmpresa.setLimit(9);
 			
 			lblFechaActualizacionUSUEmpresa = new JLabel();
-			lblFechaActualizacionUSUEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			lblFechaActualizacionUSUEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			lblFechaActualizacionUSUEmpresa.setBounds(821, 380, 300, 35);
 			panelNuevaActualizarEmpresa.add(lblFechaActualizacionUSUEmpresa);
 			
@@ -880,23 +881,23 @@ public class Vista extends JFrame {
 			panelNuevaActualizarEmpresa.add(checkBoxOrganismoPublicoUSUEmpresa);
 			
 			txtObservacionesEmpresa = new JTextField();
-			txtObservacionesEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtObservacionesEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtObservacionesEmpresa.setBounds(821, 340, 300, 35);
 			panelNuevaActualizarEmpresa.add(txtObservacionesEmpresa);
 		
 			comboBoxPoblacionUSUEmpresa = new JComboBox();
-			comboBoxPoblacionUSUEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			comboBoxPoblacionUSUEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			comboBoxPoblacionUSUEmpresa.setBounds(215, 220, 283, 35);
 			panelNuevaActualizarEmpresa.add(comboBoxPoblacionUSUEmpresa);
 			
 			comboBoxCodigoPostalUSUEmpresa = new JComboBox();
-			comboBoxCodigoPostalUSUEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			comboBoxCodigoPostalUSUEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			comboBoxCodigoPostalUSUEmpresa.setBounds(215, 260, 106, 35);
 			panelNuevaActualizarEmpresa.add(comboBoxCodigoPostalUSUEmpresa);
 			
-			btnAnadirEmpresa = new JButton("AÃ‘ADIR EMPRESA");
+			btnAnadirEmpresa = new JButton("AÑADIR EMPRESA");
 			btnAnadirEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-			btnAnadirEmpresa.setBounds(49, 538, 217, 68);
+			btnAnadirEmpresa.setBounds(49, 538, 235, 68);
 			panelNuevaActualizarEmpresa.add(btnAnadirEmpresa);	
 			
 			btnModificarEmpresa = new JButton("MODIFICAR EMPRESA");
@@ -910,7 +911,7 @@ public class Vista extends JFrame {
 			lblTituloModificarEmpresa.setBounds(49, 21, 702, 55);
 			panelNuevaActualizarEmpresa.add(lblTituloModificarEmpresa);
 			
-			btnNuevaPoblacionEmpresa = new JButton("NUEVA POBLACION");
+			btnNuevaPoblacionEmpresa = new JButton("NUEVA POBLACIÓN");
 			btnNuevaPoblacionEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
 			btnNuevaPoblacionEmpresa.setBounds(331, 260, 165, 35);
 			panelNuevaActualizarEmpresa.add(btnNuevaPoblacionEmpresa);
@@ -1015,13 +1016,13 @@ public class Vista extends JFrame {
 		
 			lblCodigoPostalPoblacion = new JLabel();
 			lblCodigoPostalPoblacion.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblCodigoPostalPoblacion.setText("CODIGO POSTAL");
+			lblCodigoPostalPoblacion.setText("CÓDIGO POSTAL");
 			lblCodigoPostalPoblacion.setBounds(49, 140, 300, 40);
 			panelNuevaPoblacion.add(lblCodigoPostalPoblacion);
 			
 			lblNombrePoblacion = new JLabel();
 			lblNombrePoblacion.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-			lblNombrePoblacion.setText("NOMBRE POBLACION");
+			lblNombrePoblacion.setText("NOMBRE POBLACIÓN");
 			lblNombrePoblacion.setBounds(49, 190, 300, 40);
 			panelNuevaPoblacion.add(lblNombrePoblacion);
 			
@@ -1032,19 +1033,19 @@ public class Vista extends JFrame {
 			panelNuevaPoblacion.add(lblProvinciaPoblacion);
 			
 			txtCodigoPostalUSUPoblacion = new JTextField();
-			txtCodigoPostalUSUPoblacion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtCodigoPostalUSUPoblacion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtCodigoPostalUSUPoblacion.setColumns(10);
 			txtCodigoPostalUSUPoblacion.setBounds(359, 140, 323, 40);
 			panelNuevaPoblacion.add(txtCodigoPostalUSUPoblacion);
 			
 			txtNombreUSUPoblacion = new JTextField();
-			txtNombreUSUPoblacion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtNombreUSUPoblacion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtNombreUSUPoblacion.setColumns(10);
 			txtNombreUSUPoblacion.setBounds(359, 190, 323, 40);
 			panelNuevaPoblacion.add(txtNombreUSUPoblacion);
 			
 			txtProvinciaUSUPoblacion = new JTextField();
-			txtProvinciaUSUPoblacion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+			txtProvinciaUSUPoblacion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			txtProvinciaUSUPoblacion.setColumns(10);
 			txtProvinciaUSUPoblacion.setBounds(359, 240, 323, 40);
 			panelNuevaPoblacion.add(txtProvinciaUSUPoblacion);
@@ -1055,18 +1056,18 @@ public class Vista extends JFrame {
 			lblTituloNuevaPoblacion.setBounds(49, 21, 550, 55);
 			panelNuevaPoblacion.add(lblTituloNuevaPoblacion);
 			
-			btnAnadirPoblacionAlumno = new JButton("AÃ‘ADIR POBLACION");
+			btnAnadirPoblacionAlumno = new JButton("AÑADIR POBLACION");
 			btnAnadirPoblacionAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 			btnAnadirPoblacionAlumno.setBounds(49, 503, 300, 61);
 			panelNuevaPoblacion.add(btnAnadirPoblacionAlumno);
 			
-			btnAnadirPoblacionEmpresa = new JButton("AÃ‘ADIR POBLACION");
+			btnAnadirPoblacionEmpresa = new JButton("AÑADIR POBLACION");
 			btnAnadirPoblacionEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 			btnAnadirPoblacionEmpresa.setBounds(49, 503, 300, 61);
 			panelNuevaPoblacion.add(btnAnadirPoblacionEmpresa);
 			
 			lblErroresNuevaPoblacion = new JLabel();
-			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblErroresNuevaPoblacion.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			lblErroresNuevaPoblacion.setBounds(247, 523, 352, 56);
 			panelNuevaPoblacion.add(lblErroresNuevaPoblacion);
 	
@@ -1107,7 +1108,7 @@ public class Vista extends JFrame {
 				
 				lblEsPublicoCurso = new JLabel();
 				lblEsPublicoCurso.setFont(new Font("Berlin Sans FB", Font.ITALIC, 20));
-				lblEsPublicoCurso.setText("ENSEÃ‘ANZA PUBLICA");
+				lblEsPublicoCurso.setText("ENSEÑANZA PÚBLICA");
 				lblEsPublicoCurso.setBounds(49, 310, 300, 40);
 				panelNuevoCurso.add(lblEsPublicoCurso);
 				
@@ -1144,13 +1145,13 @@ public class Vista extends JFrame {
 				checkBoxEsPublicoUSUCurso.setBounds(360, 310, 219, 40);
 				panelNuevoCurso.add(checkBoxEsPublicoUSUCurso);
 				
-				btnAnadirCurso = new JButton("A\u00D1ADIR CURSO");
+				btnAnadirCurso = new JButton("AÑADIR CURSO");
 				btnAnadirCurso.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 				btnAnadirCurso.setBounds(49, 503, 250, 76);
 				panelNuevoCurso.add(btnAnadirCurso);
 			
 				lblErroresNuevoCurso = new JLabel();
-				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				lblErroresNuevoCurso.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				lblErroresNuevoCurso.setBounds(247, 523, 352, 56);
 				panelNuevoCurso.add(lblErroresNuevoCurso);		
 		
@@ -1183,7 +1184,7 @@ public class Vista extends JFrame {
 		        panelPeriodos.add(listPanePeriodos);
 		        
 		        comboBoxListaCursoPeriodo = new JComboBox();
-		        comboBoxListaCursoPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		        comboBoxListaCursoPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		        comboBoxListaCursoPeriodo.setBackground(Color.WHITE);
 		        comboBoxListaCursoPeriodo.setBounds(39, 273, 382, 40);
 		        panelPeriodos.add(comboBoxListaCursoPeriodo);
@@ -1250,18 +1251,19 @@ public class Vista extends JFrame {
 		        panelPeriodos.add(comboBoxListaTipoPeriodo);
 		        
 		        comboBoxListaProfesorPeriodo = new JComboBox();
-		        comboBoxListaProfesorPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+		        comboBoxListaProfesorPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		        comboBoxListaProfesorPeriodo.setBackground(Color.WHITE);
 		        comboBoxListaProfesorPeriodo.setBounds(176, 473, 245, 40);
 		        panelPeriodos.add(comboBoxListaProfesorPeriodo);
 		        
 		        dateChooserFechaInicioPeriodo = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
-		        dateChooserFechaInicioPeriodo.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 50));
+		        dateChooserFechaInicioPeriodo.getCalendarButton().setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		        dateChooserFechaInicioPeriodo.setBounds(176, 373, 245, 40);
+		        dateChooserFechaInicioPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		        panelPeriodos.add(dateChooserFechaInicioPeriodo);
 				
 		        dateChooserFechaFinPeriodo = new JDateChooser("dd/MM/yyyy", " ##/##/####", '_');
-		        dateChooserFechaFinPeriodo.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 50));
+		        dateChooserFechaFinPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		        dateChooserFechaFinPeriodo.setBounds(176, 423, 245, 40);
 		        panelPeriodos.add(dateChooserFechaFinPeriodo);
 		
@@ -1277,7 +1279,7 @@ public class Vista extends JFrame {
 		panelPrincipal.add(panelPracticas);
 		panelPracticas.setLayout(null);
 		
-			lblTituloPracticas = new JLabel("PRÃ�CTICAS");
+			lblTituloPracticas = new JLabel("PRÁCTICAS");
 			lblTituloPracticas.setFont(new Font("Agency FB", Font.BOLD, 50));
 			lblTituloPracticas.setBounds(49, 21, 190, 55);
 			panelPracticas.add(lblTituloPracticas);
@@ -1322,9 +1324,9 @@ public class Vista extends JFrame {
 	        listPaneAlumnosPracticas.setVisible(false);
 	        panelPracticas.add(listPaneAlumnosPracticas);
 	        
-	        lblTituloListaEmpresasPracticas = new JLabel("EMPRESAS");
+	        lblTituloListaEmpresasPracticas = new JLabel("<html><body>CONVENIOS </br> EMPRESAS<br></body></html>");
 	        lblTituloListaEmpresasPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-	        lblTituloListaEmpresasPracticas.setBounds(49, 353, 134, 47);
+	        lblTituloListaEmpresasPracticas.setBounds(49, 353, 134, 50);
 	        lblTituloListaEmpresasPracticas.setVisible(false);
 	        panelPracticas.add(lblTituloListaEmpresasPracticas);
 			

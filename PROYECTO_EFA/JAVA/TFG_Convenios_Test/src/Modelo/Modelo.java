@@ -1151,6 +1151,38 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 		 
 	 }
 	 
+	public ArrayList<Convenio> listarConveniosTipoConvenio (SessionFactory sessionFactory,String tipoConvenio) throws HibernateException {
+		 
+		 Session session = null;
+	
+		 ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
+		 
+		 	try {
+		 		session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				
+				Query convenioQuery = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio");
+				convenioQuery.setParameter("tipoConvenio", tipoConvenio);
+				listaConvenios = (ArrayList<Convenio>) convenioQuery.list();
+				
+				
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+			return listaConvenios;
+		 
+		 
+	}
+
 	 public void crearPeriodoPracticas (SessionFactory sessionFactory, String tipoPractica, Date fechaInicio, Date fechaFin, String nombreCurso, String nombreProfesor) throws HibernateException {
 		 
 		 Session session = null;
@@ -1260,15 +1292,14 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 		
 	}
 	// CREAR ANEXAR
-	public void crearAnexar (SessionFactory sessionFactory, Practica practica, Empresa empresa, Alumno alumno, ArrayList <Anexar> listaAnexar) throws HibernateException {
+	public void crearAnexar (SessionFactory sessionFactory, Practica practica, Convenio convenio, Alumno alumno, ArrayList <Anexar> listaAnexar) throws HibernateException {
 		 	boolean mismo = false;
 		 	try {
 		 		sessionFactory.getCurrentSession().beginTransaction();
 				
-				//COMPRUEBO SI EXISTE EL ALUMNO ANEXADO
-		 		//NO BORRES EL COMENTARIO && listaAnexar.get(i).getEmpresa().getCifEmpresa().equals(empresa.getCifEmpresa())
+				//COMPRUEBO SI EXISTE EL ALUMNO ANEXADO A MAS DE UNA EMPRESA
 					for (int i = 0; i < listaAnexar.size(); i++) {
-						if(listaAnexar.get(i).getAlumno().getNif().equals(alumno.getNif())) {
+						if(listaAnexar.get(i).getPractica().getIdPractica() == practica.getIdPractica() && listaAnexar.get(i).getAlumno().getNif().equals(alumno.getNif())) {
 							mismo = true;
 						}
 					}
@@ -1276,7 +1307,7 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 					if(mismo == false) {
 						Anexar anexar = new Anexar();
 						anexar.setPractica(practica);
-						anexar.setEmpresa(empresa);
+						anexar.setEmpresa(convenio.getEmpresa());
 						anexar.setAlumno(alumno);
 						
 						sessionFactory.getCurrentSession().saveOrUpdate(anexar);
