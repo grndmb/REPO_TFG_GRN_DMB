@@ -94,6 +94,8 @@ public class Modelo {
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
+			comboBox.removeAllItems();
+			
 			Query query = session.createQuery("FROM Curso");
 			ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 			
@@ -163,6 +165,8 @@ public class Modelo {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
+				comboPoblacionNombre.removeAllItems();
+				
 				/**
 				 * Consulta para obtener los nombres de las poblaciones
 				 */	
@@ -192,7 +196,7 @@ public class Modelo {
 	    }
 	
 	 
-	 public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory,JComboBox comboPoblacionNombre, JComboBox comboPoblacionCP) {
+	 public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory,String nombrePoblacion, JComboBox comboPoblacionCP) {
 			
 			Session session = null; 
 			
@@ -207,7 +211,7 @@ public class Modelo {
 				 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
 				 */
 				Query query = session.createQuery("FROM Poblacion WHERE nombre = :nombre");
-				query.setParameter("nombre", comboPoblacionNombre.getSelectedItem().toString());
+				query.setParameter("nombre", nombrePoblacion);
 				ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
 				
 				for(int i=0 ; i < listaCodigoPostales.size() ; i++) {
@@ -341,18 +345,20 @@ public class Modelo {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-		 
-				Query cursoQuery = session.createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
-				cursoQuery.setParameter("nombreCurso", nombreCurso);
-				Curso curso = (Curso) cursoQuery.getSingleResult();
-
-				
-				Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso =:curso");
-				//Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso LIKE '=:curso%'");
-				alumnoQuery.setParameter("curso", curso);
-				
-				listaAlumnos = (ArrayList<Alumno>) alumnoQuery.list();
-				
+				if(!nombreCurso.equals("")){
+					Query cursoQuery = session.createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
+					cursoQuery.setParameter("nombreCurso", nombreCurso);
+					Curso curso = (Curso) cursoQuery.getSingleResult();
+					
+					Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso =:curso ORDER BY nombreCompleto ASC");
+					alumnoQuery.setParameter("curso", curso);
+					
+					listaAlumnos = (ArrayList<Alumno>) alumnoQuery.list();
+				}else {
+					Query alumnoQuery2 = sessionFactory.getCurrentSession().createQuery("FROM Alumno ORDER BY nombreCompleto ASC");
+					
+					listaAlumnos = (ArrayList<Alumno>) alumnoQuery2.list();
+				}
 		
 						
 			} catch (Exception e) {
@@ -441,28 +447,44 @@ public class Modelo {
 	 public void eliminarAlumno (SessionFactory sessionFactory, String nif) throws HibernateException {
 		 
 		 Session session = null;
-		 
+		 boolean anexado =false;
+		 session = sessionFactory.getCurrentSession();
 		 try {
-			 session = sessionFactory.getCurrentSession();
-			 session.beginTransaction();
+			 
 			 ArrayList<Anexar>listaAnexar = this.listarAnexarsPracticas(sessionFactory);
 			 
 			 for (int i = 0; i < listaAnexar.size(); i++) {
-				if(listaAnexar.get(0).getAlumno().getNif().equals(nif)) {
-					//ELIMINA EL ANEXO
+				if(listaAnexar.get(i).getAlumno().getNif().equals(nif)) {
 					
-					
-					//ELIMINA EL ALUMNO
-					Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
+					 //ELIMINA EL ALUMNO
+					 Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
 					 query.setParameter("nif", nif);
 					 Alumno alumno = (Alumno) query.getSingleResult();
 					 
 					 session.delete(alumno);
-					 session.getTransaction().commit();
+					 
+					//ELIMINA EL ANEXO
+					int idAnexado =  listaAnexar.get(i).getIdAnexado();
+					Query queryAnex = session.createQuery("FROM Anexar WHERE idAnexado = :idAnexado");
+					queryAnex.setParameter("idAnexado", idAnexado);
+					Anexar anex = (Anexar) queryAnex.getSingleResult();
+						 
+					session.delete(anex);
+					
+					anexado = true;
 				}
+				
 			}
 			 
-			 
+			if(anexado == false) {
+				//ELIMINA EL ALUMNO
+				 Query queryAlumno = session.createQuery("FROM Alumno WHERE nif = :nif");
+				 queryAlumno.setParameter("nif", nif);
+				 Alumno alumno = (Alumno) queryAlumno.getSingleResult();
+				 
+				 session.delete(alumno);
+			}
+			session.getTransaction().commit();
 			 
 		 } catch (Exception e) {
 				// TODO: handle exception
@@ -1310,7 +1332,7 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 						anexar.setEmpresa(convenio.getEmpresa());
 						anexar.setAlumno(alumno);
 						
-						sessionFactory.getCurrentSession().saveOrUpdate(anexar);
+						sessionFactory.getCurrentSession().save(anexar);
 						sessionFactory.getCurrentSession().getTransaction().commit();
 					}
 				
