@@ -1210,7 +1210,6 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 				practica.setTipoPractica(tipoPractica);
 				practica.setFechaInicio(fechaInicio);
 				practica.setFechaFin(fechaFin);
-				practica.setEnProceso(false);
 				
 				//Query Curso
 				Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
@@ -1322,7 +1321,7 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 					if(mismo == false) {
 						Anexar anexar = new Anexar();
 						anexar.setPractica(practica);
-						anexar.setEmpresa(convenio.getEmpresa());
+						anexar.setConvenio(convenio);
 						anexar.setAlumno(alumno);
 						
 						sessionFactory.getCurrentSession().save(anexar);

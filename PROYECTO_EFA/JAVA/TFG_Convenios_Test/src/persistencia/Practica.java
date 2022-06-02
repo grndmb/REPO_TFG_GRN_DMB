@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final
+// Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -16,32 +16,29 @@ public class Practica implements java.io.Serializable {
 	private String tipoPractica;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private boolean enProceso;
 	private Set anexars = new HashSet(0);
 
 	public Practica() {
 	}
 
 	public Practica(int idPractica, Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio,
-			Date fechaFin, boolean enProceso) {
+			Date fechaFin) {
 		this.idPractica = idPractica;
 		this.curso = curso;
 		this.profesor = profesor;
 		this.tipoPractica = tipoPractica;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.enProceso = enProceso;
 	}
 
 	public Practica(int idPractica, Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio,
-			Date fechaFin, boolean enProceso, Set anexars) {
+			Date fechaFin, Set anexars) {
 		this.idPractica = idPractica;
 		this.curso = curso;
 		this.profesor = profesor;
 		this.tipoPractica = tipoPractica;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.enProceso = enProceso;
 		this.anexars = anexars;
 	}
 
@@ -93,14 +90,6 @@ public class Practica implements java.io.Serializable {
 		this.fechaFin = fechaFin;
 	}
 
-	public boolean isEnProceso() {
-		return this.enProceso;
-	}
-
-	public void setEnProceso(boolean enProceso) {
-		this.enProceso = enProceso;
-	}
-
 	public Set getAnexars() {
 		return this.anexars;
 	}
@@ -109,11 +98,4 @@ public class Practica implements java.io.Serializable {
 		this.anexars = anexars;
 	}
 
-	@Override
-	public String toString() {
-		return "- " + tipoPractica + "   ("+ fechaInicio + " -- " + fechaFin + ") --> *"+curso+"*\n" ;
-	}
-
-
-	
 }

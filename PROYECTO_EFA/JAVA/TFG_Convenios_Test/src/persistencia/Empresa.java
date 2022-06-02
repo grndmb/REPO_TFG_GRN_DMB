@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final
+// Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,7 +27,6 @@ public class Empresa implements java.io.Serializable {
 	private boolean organismoPublico;
 	private String observaciones;
 	private Set convenios = new HashSet(0);
-	private Set anexars = new HashSet(0);
 
 	public Empresa() {
 	}
@@ -51,7 +50,7 @@ public class Empresa implements java.io.Serializable {
 	public Empresa(String cifEmpresa, Poblacion poblacion, String nombreEmpresa, String direccionEmpresa,
 			String emailEmpresa, Integer telefono1, Integer telefono2, String faxEmpresa, String paginaWeb,
 			String dniGerente, String nombreGerente, String dniPersonaContacto, String personaContacto,
-			Date fechaActualizacion, boolean organismoPublico, String observaciones, Set convenios, Set anexars) {
+			Date fechaActualizacion, boolean organismoPublico, String observaciones, Set convenios) {
 		this.cifEmpresa = cifEmpresa;
 		this.poblacion = poblacion;
 		this.nombreEmpresa = nombreEmpresa;
@@ -69,7 +68,6 @@ public class Empresa implements java.io.Serializable {
 		this.organismoPublico = organismoPublico;
 		this.observaciones = observaciones;
 		this.convenios = convenios;
-		this.anexars = anexars;
 	}
 
 	public String getCifEmpresa() {
@@ -208,18 +206,4 @@ public class Empresa implements java.io.Serializable {
 		this.convenios = convenios;
 	}
 
-	public Set getAnexars() {
-		return this.anexars;
-	}
-
-	public void setAnexars(Set anexars) {
-		this.anexars = anexars;
-	}
-
-	@Override
-	public String toString() {
-		return " " +  nombreEmpresa;
-	}
-
-	
 }

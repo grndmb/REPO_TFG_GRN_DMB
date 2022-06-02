@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
+<!-- Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Practica" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="practica">
         <comment>Tabla con la infomarcion de las practicas</comment>
         <id name="idPractica" type="int">
@@ -30,11 +30,6 @@
         <property generated="never" lazy="false" name="fechaFin" optimistic-lock="true" type="date" unique="false">
             <column length="10" name="FECHA_FIN" not-null="true">
                 <comment>Fecha final de la practica</comment>
-            </column>
-        </property>
-        <property generated="never" lazy="false" name="enProceso" optimistic-lock="true" type="boolean" unique="false">
-            <column name="EN_PROCESO" not-null="true">
-                <comment>Indica si la practica esta en proceso</comment>
             </column>
         </property>
         <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="anexar">
