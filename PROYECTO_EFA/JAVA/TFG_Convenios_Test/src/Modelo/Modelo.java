@@ -444,24 +444,18 @@ public class Modelo {
 	 }
 	 
 	 
-	 public void eliminarAlumno (SessionFactory sessionFactory, String nif) throws HibernateException {
+	 public void eliminarAlumno (SessionFactory sessionFactory, String nif,  ArrayList<Anexar>listaAnexar) throws HibernateException {
 		 
 		 Session session = null;
-		 boolean anexado =false;
-		 session = sessionFactory.getCurrentSession();
+		 boolean anexado = false;
+		 
 		 try {
-			 
-			 ArrayList<Anexar>listaAnexar = this.listarAnexarsPracticas(sessionFactory);
+			 session = sessionFactory.getCurrentSession();
+			 session.beginTransaction();
 			 
 			 for (int i = 0; i < listaAnexar.size(); i++) {
 				if(listaAnexar.get(i).getAlumno().getNif().equals(nif)) {
 					
-					 //ELIMINA EL ALUMNO
-					 Query query = session.createQuery("FROM Alumno WHERE nif = :nif");
-					 query.setParameter("nif", nif);
-					 Alumno alumno = (Alumno) query.getSingleResult();
-					 
-					 session.delete(alumno);
 					 
 					//ELIMINA EL ANEXO
 					int idAnexado =  listaAnexar.get(i).getIdAnexado();
@@ -476,14 +470,13 @@ public class Modelo {
 				
 			}
 			 
-			if(anexado == false) {
-				//ELIMINA EL ALUMNO
-				 Query queryAlumno = session.createQuery("FROM Alumno WHERE nif = :nif");
-				 queryAlumno.setParameter("nif", nif);
-				 Alumno alumno = (Alumno) queryAlumno.getSingleResult();
+			//ELIMINA EL ALUMNO
+			Query queryAlumno = session.createQuery("FROM Alumno WHERE nif = :nif");
+			queryAlumno.setParameter("nif", nif);
+			Alumno alumno = (Alumno) queryAlumno.getSingleResult();
 				 
-				 session.delete(alumno);
-			}
+			session.delete(alumno);
+			
 			session.getTransaction().commit();
 			 
 		 } catch (Exception e) {
@@ -1385,28 +1378,32 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 	}
 	
 	//ELIMIANR ANEXAR
-	public void eliminarAnexar (SessionFactory sessionFactory, Anexar anexar) {
-		Session session = null;
-		
-		try {
-			session = sessionFactory.getCurrentSession();
-			session.beginTransaction();
-			
-			session.delete(anexar);
-			session.getTransaction().commit();
-			
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			if(null != session) {
-				session.getTransaction().rollback();
-			}
-		}finally {
-			if(null != session) {
-				session.close();
-			}
-		}
-	}
+    public void eliminarAnexar (SessionFactory sessionFactory, Anexar anexarEliminar) {
+        Session session = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+
+            Query query = session.createQuery("FROM Anexar WHERE idAnexado = :idAnexado");
+            query.setParameter("idAnexado", anexarEliminar.getIdAnexado());
+            Anexar anexar = (Anexar) query.getSingleResult();
+
+            session.delete(anexar);
+            session.getTransaction().commit();
+
+        }catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            if(null != session) {
+                session.getTransaction().rollback();
+            }
+        }finally {
+            if(null != session) {
+                session.close();
+            }
+        }
+    }
 	
 	public static void main (String [] args) throws ParseException, InterruptedException {
 		 

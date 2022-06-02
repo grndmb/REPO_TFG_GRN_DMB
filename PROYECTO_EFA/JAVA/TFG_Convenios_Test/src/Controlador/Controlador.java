@@ -164,15 +164,15 @@ public class Controlador implements ActionListener{
 				//Mostrar panel menu
 		    	vista.panelMenu.setVisible(true);
 		    	
-		    	/*Situar el lbl de EFA MORATALAZ
+		    	//Situar el lbl de EFA MORATALAZ
 		    	vista.labelTitulo.setBounds(342, 10, 1183, 112);
 		    	vista.labelTitulo.setOpaque(true);
-		    	vista.labelTitulo.setForeground(new Color(53, 100, 54));*/
+		    	vista.labelTitulo.setForeground(new Color(53, 100, 54));
 		    	
 				vista.btnInicio.setVisible(false);
 		    
 				//MOSTRAR LOGO
-				//vista.lblLogo.setVisible(true);
+				vista.lblLogo.setVisible(true);
 				
 				
 				
@@ -348,7 +348,8 @@ public class Controlador implements ActionListener{
 		    	
 		    	try {
 					listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
-					modelo.eliminarAlumno(sessionFactory, listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif());
+					ArrayList<Anexar>listaAnexar = modelo.listarAnexarsPracticas(sessionFactory);
+					modelo.eliminarAlumno(sessionFactory, listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif(),listaAnexar);
 			    	
 			    	//RELLENA EL JLIST DE LOS ALUMNOS
 					this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
