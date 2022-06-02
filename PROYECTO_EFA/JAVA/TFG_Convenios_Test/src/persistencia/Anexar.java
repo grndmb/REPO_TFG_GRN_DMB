@@ -54,6 +54,6 @@ public class Anexar implements java.io.Serializable {
 	}
 	@Override
 	public String toString() {
-		return "- " + alumno + "                            " + convenio;
+		return "- " + alumno + "         ----       " + convenio.getEmpresa().getNombreEmpresa() + "                " + convenio.getIdConvenio();
 	}
 }

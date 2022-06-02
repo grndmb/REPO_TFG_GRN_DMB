@@ -66,11 +66,6 @@ public class Vista extends JFrame {
 			public JButton btnPanelEmpresas;
 			public JButton btnPanelPeriodos;
 			public JButton btnPanelPracticas;
-			public JButton btnPanelDocumentos;
-
-		
-		
-	// -----------------------------------------------------------
 		
 	/**
 	 * PANEL LISTA ALUMNOS	
@@ -85,8 +80,6 @@ public class Vista extends JFrame {
 		public JList listAlumnos;
 		public DefaultListModel modelAlumnos;
 
-	
-		
 	/**
 	 * PANEL NUEVO ALUMNO
 	 */
@@ -117,9 +110,6 @@ public class Vista extends JFrame {
 		public JButton btnAnadirAlumno;
 		public JButton btnModificarAlumno;
 		public JLabel lblErroresNuevoAlumno;
-		
-		// --------------------------------------------------
-		
 		
 		/**
 		 * PANEL LISTA EMPRESA
@@ -209,7 +199,6 @@ public class Vista extends JFrame {
 		public JButton btnCrearConvenio;
 		public JLabel lblError2Convenio;
 		
-	// ---------------------------------------------------------------------
 	/**
 	 * PANEL NUEVO CURSO
 	 */
@@ -262,10 +251,10 @@ public class Vista extends JFrame {
 		
 		public JList listPeriodos;
 		public DefaultListModel modelPeriodos;	
-		private JLabel lblTipoPeriodos;
-		private JLabel lblFechaInicioPeriodos;
-		private JLabel lblFechaFinPeriodos;
-		private JLabel lblNombreProfesorPeriodos;
+		public JLabel lblTipoPeriodos;
+		public JLabel lblFechaInicioPeriodos;
+		public JLabel lblFechaFinPeriodos;
+		public JLabel lblNombreProfesorPeriodos;
 		
 	
 	/**
@@ -294,6 +283,24 @@ public class Vista extends JFrame {
 		public JList listAnexarPracticas;
 		public DefaultListModel modelAnexarPracticas;
 		public JButton btnEliminarAnexarPracticas;
+		
+		public JButton btnPanelDocumentos;
+		
+	/**
+	* PANEL DOCUMENTOS
+	*/
+	public JPanel panelDocumentos;
+		public JLabel lblTituloDocumentos;
+		public JButton btnGuardarDocumentos;
+		public JCheckBox checkBoxAnexo0;
+		public JCheckBox checkBoxAnexo0A;
+		public JCheckBox chckbxAnexo1;
+		public JCheckBox checkBoxAnexo2;
+		public JCheckBox checkBoxAnexo3;
+		public JCheckBox checkBoxAnexo4FCT;
+		public JCheckBox checkBoxAnexo4PFE;
+		public JLabel lblFCToPFEDocumentos;
+		public JButton btnAtrasDocumentos;
 	/**
 	 * Launch the application.
 	 */
@@ -327,7 +334,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * Panel Principal
-		*/ 
+		*/
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1556, 807);
 		panelPrincipal.setBackground(new Color(53, 100, 54));
@@ -383,12 +390,6 @@ public class Vista extends JFrame {
 			btnPanelPracticas.setBounds(49, 290, 219, 37);
 			panelMenu.add(btnPanelPracticas);
 			
-			btnPanelDocumentos = new JButton("Documentos");
-			btnPanelDocumentos.setBackground(Color.WHITE);
-			btnPanelDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelDocumentos.setBounds(49, 491, 219, 37);
-			panelMenu.add(btnPanelDocumentos);
-			
 			lblLogo = new JLabel("");
 			lblLogo.setBounds(20, 10, 324, 112);
 			lblLogo.setBackground(Color.WHITE);
@@ -396,12 +397,9 @@ public class Vista extends JFrame {
 			lblLogo.setIcon(new ImageIcon("imagenes/logoEfa.png"));
 			panelPrincipal.add(lblLogo);
 			
-			
-			// -----------------------------------------------------------------
-			
 			/**
 			 * PANEL ALUMNOS	
-			 */
+			*/ 
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -1073,7 +1071,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			 */
+			*/ 
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1157, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -1361,7 +1359,7 @@ public class Vista extends JFrame {
 	        modelAnexarPracticas = new DefaultListModel<>();
 	        
             listPaneAnexarPracticas = new JScrollPane();
-            listPaneAnexarPracticas.setBounds(49, 500, 790, 117);
+            listPaneAnexarPracticas.setBounds(49, 500, 790, 120);
             listPaneAnexarPracticas.setViewportView(listAnexarPracticas);
             listAnexarPracticas.setLayoutOrientation(JList.VERTICAL);
             listPaneAnexarPracticas.setVisible(false);
@@ -1370,11 +1368,106 @@ public class Vista extends JFrame {
 	        btnEliminarAnexarPracticas = new JButton("ELIMINAR");
 	        btnEliminarAnexarPracticas.setBackground(Color.RED);
 	        btnEliminarAnexarPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-	        btnEliminarAnexarPracticas.setBounds(864, 533, 218, 55);
+	        btnEliminarAnexarPracticas.setBounds(864, 500, 218, 55);
 	        btnEliminarAnexarPracticas.setVisible(false);
 	        panelPracticas.add(btnEliminarAnexarPracticas);
 	        
-	        
-	        
+	        btnPanelDocumentos = new JButton("DOCUMENTOS");
+			btnPanelDocumentos.setBackground(Color.PINK);
+			btnPanelDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			btnPanelDocumentos.setBounds(864, 565, 218, 55);
+			btnPanelDocumentos.setVisible(false);
+			panelPracticas.add(btnPanelDocumentos);
+
+		/**
+		* PANEL DOCUMENTOS
+		*/
+
+		panelDocumentos = new JPanel();
+		panelDocumentos.setBackground(Color.WHITE);
+		panelDocumentos.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelDocumentos.setBounds(368, 132, 1157, 648);
+		panelPrincipal.add(panelDocumentos);
+		panelDocumentos.setLayout(null);
+
+			lblTituloDocumentos = new JLabel("DOCUMENTOS");
+			lblTituloDocumentos.setFont(new Font("Agency FB", Font.BOLD, 50));
+			lblTituloDocumentos.setBounds(49, 21, 252, 55);
+			panelDocumentos.add(lblTituloDocumentos);
+
+			JLabel lblTituloSeleccionDocumentos = new JLabel("SELECCIONA LOS DOCUMENTOS QUE DESEA GUARDAR");
+			lblTituloSeleccionDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+			lblTituloSeleccionDocumentos.setBounds(49, 102, 618, 47);
+			panelDocumentos.add(lblTituloSeleccionDocumentos);
+
+			JLabel lblInfoRutaDocumentos = new JLabel("LOS DOCUMENTOS SE GUARDARÁN EN EL DISCO LOCAL C:");
+			lblInfoRutaDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			lblInfoRutaDocumentos.setForeground(new Color(255, 140, 0));
+			lblInfoRutaDocumentos.setBounds(580, 580, 534, 47);
+			panelDocumentos.add(lblInfoRutaDocumentos);
+
+			lblFCToPFEDocumentos = new JLabel("DOCUMENTOS DE -> ");
+			lblFCToPFEDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+			lblFCToPFEDocumentos.setBounds(226, 183, 271, 47);
+			panelDocumentos.add(lblFCToPFEDocumentos);
+			
+			btnGuardarDocumentos = new JButton("GUARDAR");
+			btnGuardarDocumentos.setBackground(new Color(64, 224, 208));
+			btnGuardarDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			btnGuardarDocumentos.setBounds(226, 511, 271, 55);
+			btnGuardarDocumentos.setVisible(true);
+			panelDocumentos.add(btnGuardarDocumentos);
+			
+			btnAtrasDocumentos = new JButton("ATRÁS");
+			btnAtrasDocumentos.setBackground(new Color(127, 255, 212));
+			btnAtrasDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			btnAtrasDocumentos.setBounds(49, 580, 128, 55);
+			btnAtrasDocumentos.setVisible(true);
+			panelDocumentos.add(btnAtrasDocumentos);
+			
+			checkBoxAnexo0 = new JCheckBox("     ANEXO 0");
+			checkBoxAnexo0.setBackground(new Color(255, 255, 255));
+			checkBoxAnexo0.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo0.setBounds(226, 248, 166, 33);
+			panelDocumentos.add(checkBoxAnexo0);
+			
+			checkBoxAnexo0A = new JCheckBox("     ANEXO 0A");
+			checkBoxAnexo0A.setBackground(new Color(255, 255, 255));
+			checkBoxAnexo0A.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo0A.setBounds(226, 283, 166, 33);
+			panelDocumentos.add(checkBoxAnexo0A);
+			
+			chckbxAnexo1 = new JCheckBox("     ANEXO 1");
+			chckbxAnexo1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			chckbxAnexo1.setBackground(Color.WHITE);
+			chckbxAnexo1.setBounds(226, 318, 166, 33);
+			panelDocumentos.add(chckbxAnexo1);
+			
+			checkBoxAnexo2 = new JCheckBox("     ANEXO 2");
+			checkBoxAnexo2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo2.setBackground(Color.WHITE);
+			checkBoxAnexo2.setBounds(226, 353, 166, 33);
+			panelDocumentos.add(checkBoxAnexo2);
+			
+			checkBoxAnexo3 = new JCheckBox("     ANEXO 3");
+			checkBoxAnexo3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo3.setBackground(Color.WHITE);
+			checkBoxAnexo3.setBounds(226, 388, 166, 33);
+			panelDocumentos.add(checkBoxAnexo3);
+			
+			checkBoxAnexo4FCT = new JCheckBox("     ANEXO 4");
+			checkBoxAnexo4FCT.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo4FCT.setBackground(Color.WHITE);
+			checkBoxAnexo4FCT.setBounds(226, 423, 166, 33);
+			panelDocumentos.add(checkBoxAnexo4FCT);
+			
+			checkBoxAnexo4PFE = new JCheckBox("     ANEXO 4");
+			checkBoxAnexo4PFE.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo4PFE.setBackground(Color.WHITE);
+			checkBoxAnexo4PFE.setBounds(226, 388, 166, 33);
+			checkBoxAnexo4PFE.setVisible(false);
+			panelDocumentos.add(checkBoxAnexo4PFE);
+
+		        
 	}
 }

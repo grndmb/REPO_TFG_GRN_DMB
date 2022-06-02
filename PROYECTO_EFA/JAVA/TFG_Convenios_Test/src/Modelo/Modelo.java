@@ -346,7 +346,7 @@ public class Modelo {
 				session.beginTransaction();
 				
 				if(!nombreCurso.equals("")){
-					Query cursoQuery = session.createQuery("FROM Curso WHERE nombreCurso =:nombreCurso");
+					Query cursoQuery = session.createQuery("FROM Curso WHERE nombreCurso =:nombreCurso ");
 					cursoQuery.setParameter("nombreCurso", nombreCurso);
 					Curso curso = (Curso) cursoQuery.getSingleResult();
 					
@@ -582,7 +582,7 @@ public class Modelo {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				Query queryEmpresa = session.createQuery("FROM Empresa");
+				Query queryEmpresa = session.createQuery("FROM Empresa ORDER BY nombreEmpresa");
 				listaEmpresa = (ArrayList<Empresa>) queryEmpresa.list();
 		 
 			} catch (Exception e) {
@@ -619,7 +619,7 @@ public class Modelo {
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				Query queryEmpresa = session.createQuery("FROM Empresa WHERE nombreEmpresa LIKE :nombreEmpresa");
+				Query queryEmpresa = session.createQuery("FROM Empresa WHERE nombreEmpresa LIKE :nombreEmpresa ORDER BY nombreEmpresa");
 				queryEmpresa.setParameter("nombreEmpresa", "%" + nombreEmpresa + "%");
 		 
 				listaEmpresa = (ArrayList<Empresa>) queryEmpresa.list();
@@ -1277,7 +1277,7 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 	/*
 	 * 
 	 */
-	public void eliminarPeriodoPractica (SessionFactory sessionFactory, int idPractica) throws HibernateException{
+	public void eliminarPeriodoPractica (SessionFactory sessionFactory, int idPractica, ArrayList<Anexar>listaAnexar) throws HibernateException{
 		
 		Session session = null;
 		
@@ -1285,6 +1285,22 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
+			//ELIMINAMOS ANEXAR
+			for (int i = 0; i < listaAnexar.size(); i++) {
+				if(listaAnexar.get(i).getPractica().getIdPractica() == idPractica) {
+					
+					//ELIMINA EL ANEXO
+					int idAnexado =  listaAnexar.get(i).getIdAnexado();
+					Query queryAnex = session.createQuery("FROM Anexar WHERE idAnexado = :idAnexado");
+					queryAnex.setParameter("idAnexado", idAnexado);
+					Anexar anex = (Anexar) queryAnex.getSingleResult();
+						 
+					session.delete(anex);
+				}
+				
+			}
+			
+			//ELIMINAMOS EL PERIODO
 			Query query = session.createQuery("FROM Practica WHERE idPractica = :idPractica");
 			query.setParameter("idPractica", idPractica);
 			Practica practica = (Practica) query.getSingleResult();
@@ -1384,11 +1400,7 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Query query = session.createQuery("FROM Anexar WHERE idAnexado = :idAnexado");
-            query.setParameter("idAnexado", anexarEliminar.getIdAnexado());
-            Anexar anexar = (Anexar) query.getSingleResult();
-
-            session.delete(anexar);
+            session.delete(anexarEliminar);
             session.getTransaction().commit();
 
         }catch (Exception e) {

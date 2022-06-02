@@ -108,6 +108,11 @@ public class Controlador implements ActionListener{
 			this.vista.btnAsignarPeriodoPracticas.addActionListener(this);
 			this.vista.btnAsignarEmpresaPracticas.addActionListener(this);
 			this.vista.btnEliminarAnexarPracticas.addActionListener(this);
+			this.vista.btnPanelDocumentos.addActionListener(this);
+			
+		//Botones del panel Documentos
+			this.vista.btnGuardarDocumentos.addActionListener(this);
+			this.vista.btnAtrasDocumentos.addActionListener(this);
 			
 		//VISTAS
 			this.vista.panelConvenios.setVisible(false);
@@ -122,7 +127,7 @@ public class Controlador implements ActionListener{
 			this.vista.panelPeriodos.setVisible(false);
 			this.vista.panelPracticas.setVisible(false);
 			this.vista.panelCrearNuevoConvenio.setVisible(false);
-			this.vista.panelCrearNuevoConvenio.setVisible(false);
+			this.vista.panelDocumentos.setVisible(false);
 
 	}
 	
@@ -186,7 +191,6 @@ public class Controlador implements ActionListener{
 		    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 		    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
 		    		vista.btnPanelPracticas.setBackground(Color.WHITE);
-		    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 		    	//PANELES CONSULTAS
 		    	vista.panelListaAlumno.setVisible(true);
 		    	
@@ -199,6 +203,7 @@ public class Controlador implements ActionListener{
 				this.vista.panelListaEmpresas.setVisible(false);
 				this.vista.panelPeriodos.setVisible(false);
 				this.vista.panelPracticas.setVisible(false);
+				this.vista.panelDocumentos.setVisible(false);
 				
 				vista.comboBoxListaCursoAlumno.removeAllItems();
 				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
@@ -464,13 +469,13 @@ public class Controlador implements ActionListener{
 						vista.panelNuevaActualizarEmpresa.setVisible(false);
 						vista.panelPeriodos.setVisible(false);
 						vista.panelPracticas.setVisible(false);
+						vista.panelDocumentos.setVisible(false);
 						
 						//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 			    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 			    		vista.btnPanelEmpresas.setBackground(new Color(211, 211, 211));
 			    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
 			    		vista.btnPanelPracticas.setBackground(Color.WHITE);
-			    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 						
 						//RELLENA EL JLIST DEL PANEL LISTAR EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
@@ -550,9 +555,13 @@ public class Controlador implements ActionListener{
 						    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LISTA EMPRESAS		
 						    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 						    	
+						    	//FECHA DE HOY
+						    	java.sql.Date fecha = null;
+						    	Date fechaAct = Calendar.getInstance().getTime();
+							    fecha = new java.sql.Date(fechaAct.getTime());
 				    			
 				    			modelo.actualizarConvenio(sessionFactory, listaConvenios.get(vista.listConvenios.getSelectedIndex()).getIdConvenio(), listaConvenios.get(vista.listConvenios.getSelectedIndex()).getTipoConvenio(), 
-				    					listaConvenios.get(vista.listConvenios.getSelectedIndex()).getFechaAnexo(), listaConvenios.get(vista.listConvenios.getSelectedIndex()).getEmpresa().getCifEmpresa());
+				    					fecha, listaConvenios.get(vista.listConvenios.getSelectedIndex()).getEmpresa().getCifEmpresa());
 				    		
 						    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
@@ -571,46 +580,29 @@ public class Controlador implements ActionListener{
 				    	
 				    	if(e.getSource() == vista.btnCrearConvenio) {
 				    		
-				    		
 				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
-					    	
-					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LISTA EMPRESAS		
 					    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 					    	
 					    	
 					    	//FECHA ANEXO
 					    	java.sql.Date fecha = null;
 					    	
-						    try {
-								
-							    Date fechaAnexo = Calendar.getInstance().getTime();
-							    fecha = new java.sql.Date(fechaAnexo.getTime());
+							Date fechaAnexo = Calendar.getInstance().getTime();
+							fecha = new java.sql.Date(fechaAnexo.getTime());
 						    	
-							} catch (Exception e2) {
-								// TODO: handle exception
-							}
-						    
-						    //----------------------------------
+						    //INSERT DEL CONVENIO
 					    	modelo.crearConvenio(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa(), vista.comboBoxListaCursoConvenio.getSelectedItem().toString(), 
 					    			vista.comboBoxTipoConvenioPanelConvenio.getSelectedItem().toString(), listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).isOrganismoPublico(), fecha, vista.lblError2Convenio);
-					    					    						    		
+					    				
 					    	
-				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
-					    	
-					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS		
+					    	//RELLENA JLIST CON LOS CONVENIOS DE LA EMPRESA SELECCIONADA EJN EL PANEL LSITA EMPRESAS
+					    	listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
-				    		
 							this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
 
 							
-							//Rellenar List de empresas	
 				    		vista.panelCrearNuevoConvenio.setVisible(false);
-							listaEmpresas = modelo.listaEmpresas(sessionFactory);
-							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
-				    	
 				    		vista.btnPanelCrearNuevoConvenio.setVisible(true);
-				    		vista.panelConvenios.setVisible(false);
-				    		vista.panelListaEmpresas.setVisible(true);
 				    	}
 				    	
 				    	
@@ -825,13 +817,13 @@ public class Controlador implements ActionListener{
 							vista.panelConvenios.setVisible(false);
 							vista.panelNuevaActualizarEmpresa.setVisible(false);
 							vista.panelPracticas.setVisible(false);
+							vista.panelDocumentos.setVisible(false);
 							
 							//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 				    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 				    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 				    		vista.btnPanelPeriodos.setBackground(new Color(211, 211, 211));
 				    		vista.btnPanelPracticas.setBackground(Color.WHITE);
-				    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 							
 						   //RELLENA EL COMBO BOX DE CURSOS
 						   this.vista.comboBoxListaCursoPeriodo.removeAllItems();
@@ -884,7 +876,8 @@ public class Controlador implements ActionListener{
 			    	
 			    	try {
 						listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
-						modelo.eliminarPeriodoPractica(sessionFactory, listaPeriodos.get(vista.listPeriodos.getSelectedIndex()).getIdPractica());
+						listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
+						modelo.eliminarPeriodoPractica(sessionFactory, listaPeriodos.get(vista.listPeriodos.getSelectedIndex()).getIdPractica(),listaAnexarsPracticas);
 				    	
 				    	//RELLENA EL JLIST DE LOS PERIODOS
 						listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
@@ -912,13 +905,13 @@ public class Controlador implements ActionListener{
 				vista.panelNuevaActualizarEmpresa.setVisible(false);
 				vista.panelPeriodos.setVisible(false);
 				vista.panelPracticas.setVisible(true);
+				vista.panelDocumentos.setVisible(false);
 		    	
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
+				//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
 	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
 	    		vista.btnPanelPracticas.setBackground(new Color(211, 211, 211));
-	    		vista.btnPanelDocumentos.setBackground(Color.WHITE);
 		    	
 	    		//RELLENAR LIST DE PERIODO			
 				   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
@@ -961,9 +954,10 @@ public class Controlador implements ActionListener{
 					 vista.lblTituloListaAnexarPracticas.setVisible(true);
 					 vista.listPaneAnexarPracticas.setVisible(true);
 					 vista.btnEliminarAnexarPracticas.setVisible(true);
-					
+					 vista.btnPanelDocumentos.setVisible(true);
+					 
 					 listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
-					 this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica(), listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso());
+					 this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
 
 				}
 			}
@@ -993,7 +987,8 @@ public class Controlador implements ActionListener{
 				
 				//RELLENAR JLIST ANEXARS
 				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-				  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica(), listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso());
+				  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+				  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
 				  
 			  }  
 		  }
@@ -1005,7 +1000,48 @@ public class Controlador implements ActionListener{
 			//RELLENAR JLIST ANEXARS
 			  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-			  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica(), listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getCurso().getNombreCurso());
+			  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
+		  }
+	/**
+	 * ACCIONES PANEL DOCUEMENTOS
+	 */
+		  //BOTON QUE ABRE EL PANEL DE DOCUMENTOS
+		  if(e.getSource() == vista.btnPanelDocumentos) {
+			  if(vista.listAnexarPracticas.getSelectedIndex() != -1){
+				  vista.panelPracticas.setVisible(false);
+				  vista.panelDocumentos.setVisible(true);
+				  
+				  //INGRESAR TIPO DE DOCUMENTOS FCT/PFE
+				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
+				  for (int i = 0; i < listaAnexarsPracticas.size(); i++) {
+					  System.out.println(vista.listAnexarPracticas.getSelectedValue().toString());
+					  if(listaAnexarsPracticas.get(i).toString().equals(vista.listAnexarPracticas.getSelectedValue().toString())) {
+						  if(listaAnexarsPracticas.get(i).getPractica().getTipoPractica().equals("FCT")) {
+							  vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE FCT");
+							//SI ES FCT SE MUESTRA EL ANEXO 3 Y ANEXO 4 FCT
+							  	 vista.btnGuardarDocumentos.setBounds(226, 480, 271, 55);
+								 vista.checkBoxAnexo4FCT.setVisible(true);
+								 vista.checkBoxAnexo3.setVisible(true);
+								 vista.checkBoxAnexo4PFE.setVisible(false);
+							  
+						  }else if(listaAnexarsPracticas.get(i).getPractica().getTipoPractica().equals("PFE")){
+							 vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE PFE");
+							//SI ES PFE, NO SE MUESTRA EL ANEXO 3 ni el ANEXO 4 FCT
+							 vista.btnGuardarDocumentos.setBounds(226, 430, 271, 55);
+							 vista.checkBoxAnexo4FCT.setVisible(false);
+							 vista.checkBoxAnexo3.setVisible(false);
+							 vista.checkBoxAnexo4PFE.setVisible(true);
+						  }
+					 }
+				}
+				  
+			  }
+		  }
+		  
+		  //BOTON ATRAS QUE NOS VUELVE AL PANEL DE PRACTICAS
+		  if(e.getSource() == vista.btnAtrasDocumentos) {
+			  vista.panelPracticas.setVisible(true);
+			  vista.panelDocumentos.setVisible(false);
 		  }
 	}
 		
@@ -1713,36 +1749,8 @@ public class Controlador implements ActionListener{
 						e1.printStackTrace();
 					}
 				}
-				/*
-				public void recargaJLISTEmpresasPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list,ArrayList <Empresa> listaEmpresas, Practica practica) {
-					//Modelo
-					Modelo modelo = new Modelo();
-					//lista convenios
-					ArrayList <Convenio> listaConvenios = modelo.listarConvenios(sessionFactory);
-					try {
-						model.removeAllElements();
-						
-						//RELLENA EL JLIST CON LAS EMPRESAS QUE TIENEN CONVENIO Y SEGUN EL TIPO DE PRACTICAS HAYA ELEGIDO EL USUARIO
-						for(int i = 0; i < listaConvenios.size(); i++) {
-							
-							for (int j = 0; j < listaEmpresas.size(); j++) {
-								
-								if(listaConvenios.get(i).getEmpresa().getCifEmpresa().equals(listaEmpresas.get(j).getCifEmpresa()) && 
-										listaConvenios.get(i).getTipoConvenio().equals(practica.getTipoPractica())) {
-										model.addElement(listaEmpresas.get(j).toString());
-										list.setModel(model);
-								}
-								
-							}
-							
-						}
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}*/
 		//METODO QUE RECARGA EL JLIST DE ANEXARS
-			public void recargaJLISTAnexarPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, String tipoPractica, String curso) {
+			public void recargaJLISTAnexarPracticas (SessionFactory sessionFactory, DefaultListModel model, JList list, Practica practica) {
 				//Modelo
 				Modelo modelo = new Modelo();
 				
@@ -1756,7 +1764,7 @@ public class Controlador implements ActionListener{
 					listaAnexar = modelo.listarAnexarsPracticas(sessionFactory);
 				
 					for (int i = 0; i < listaAnexar.size(); i++) {
-						if(listaAnexar.get(i).getPractica().getTipoPractica().equals(tipoPractica) && listaAnexar.get(i).getPractica().getCurso().getNombreCurso().equals(curso)) {
+						if(listaAnexar.get(i).getPractica().getIdPractica() == practica.getIdPractica()) {
 							model.addElement(listaAnexar.get(i).toString());
 							list.setModel(model);
 						}
