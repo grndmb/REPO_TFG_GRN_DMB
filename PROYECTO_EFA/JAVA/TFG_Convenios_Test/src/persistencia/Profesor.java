@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final
+// Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final
 
 import java.util.HashSet;
 import java.util.Set;

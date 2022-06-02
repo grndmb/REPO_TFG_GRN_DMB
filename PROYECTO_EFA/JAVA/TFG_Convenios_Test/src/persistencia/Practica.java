@@ -97,5 +97,8 @@ public class Practica implements java.io.Serializable {
 	public void setAnexars(Set anexars) {
 		this.anexars = anexars;
 	}
-
+	@Override
+	public String toString() {
+		return "- " + tipoPractica + "   ("+ fechaInicio + " -- " + fechaFin + ") --> *"+curso+"*\n" ;
+	}
 }

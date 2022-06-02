@@ -52,5 +52,8 @@ public class Anexar implements java.io.Serializable {
 	public void setPractica(Practica practica) {
 		this.practica = practica;
 	}
-
+	@Override
+	public String toString() {
+		return "- " + alumno + "                            " + convenio;
+	}
 }

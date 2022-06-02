@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+<!-- Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
     <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Empresa" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="empresa">
         <comment>Tabla con la informacion de la empresa</comment>
         <id name="cifEmpresa" type="string">
@@ -89,6 +89,14 @@
                 </column>
             </key>
             <one-to-many class="persistencia.Convenio" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="anexar">
+            <key on-delete="noaction">
+                <column length="10" name="CIF_EMPRESA" not-null="true">
+                    <comment>Identificador de la empresa</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencia.Anexar" embed-xml="true" not-found="exception"/>
         </set>
     </class>
 </hibernate-mapping>

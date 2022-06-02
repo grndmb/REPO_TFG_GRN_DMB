@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final
+// Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,31 +14,27 @@ public class Curso implements java.io.Serializable {
 	private String clave;
 	private int horasFct;
 	private boolean esPublico;
-	private int codigoProyecto;
 	private Set practicas = new HashSet(0);
 	private Set alumnos = new HashSet(0);
 
 	public Curso() {
 	}
 
-	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico,
-			int codigoProyecto) {
+	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico) {
 		this.nombreCurso = nombreCurso;
 		this.nombreAbrev = nombreAbrev;
 		this.clave = clave;
 		this.horasFct = horasFct;
 		this.esPublico = esPublico;
-		this.codigoProyecto = codigoProyecto;
 	}
 
-	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico,
-			int codigoProyecto, Set practicas, Set alumnos) {
+	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico, Set practicas,
+			Set alumnos) {
 		this.nombreCurso = nombreCurso;
 		this.nombreAbrev = nombreAbrev;
 		this.clave = clave;
 		this.horasFct = horasFct;
 		this.esPublico = esPublico;
-		this.codigoProyecto = codigoProyecto;
 		this.practicas = practicas;
 		this.alumnos = alumnos;
 	}
@@ -83,14 +79,6 @@ public class Curso implements java.io.Serializable {
 		this.esPublico = esPublico;
 	}
 
-	public int getCodigoProyecto() {
-		return this.codigoProyecto;
-	}
-
-	public void setCodigoProyecto(int codigoProyecto) {
-		this.codigoProyecto = codigoProyecto;
-	}
-
 	public Set getPracticas() {
 		return this.practicas;
 	}
@@ -105,6 +93,11 @@ public class Curso implements java.io.Serializable {
 
 	public void setAlumnos(Set alumnos) {
 		this.alumnos = alumnos;
+	}
+
+	@Override
+	public String toString() {
+		return "" + nombreAbrev;
 	}
 
 }
