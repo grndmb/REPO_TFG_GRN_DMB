@@ -163,7 +163,7 @@ public class Controlador implements ActionListener{
         
 	    //Control de las acciones de los botones
 	    
-	        //Acciones del botï¿½n de INICIAR
+	        //Acciones del botón de INICIAR
 		    if(e.getSource() == vista.btnInicio) {
 		    	
 				//Mostrar panel menu
@@ -212,7 +212,7 @@ public class Controlador implements ActionListener{
 		    }
 		    
 		    
-		    //RELLENA JLIST, EN FUNCIÃ“N DE LA OPCION EN EL COMBOBOX
+		    //RELLENA JLIST, EN FUNCIÓN DE LA OPCIÓN EN EL COMBOBOX
 		    else if(e.getSource() == vista.comboBoxListaCursoAlumno) {
 		   
 				try {
@@ -236,7 +236,7 @@ public class Controlador implements ActionListener{
 		    	
 		    }
 		    
-		  //BOTON QUE HACE VISIBLE EL PANEL DE Aï¿½ADIR ALUMNO
+		  //BOTON QUE HACE VISIBLE EL PANEL DE AÑADIR ALUMNO
 		    if(e.getSource() == vista.btnPanelAddAlumno) {
 		    	
 		    	vista.panelListaAlumno.setVisible(false);
