@@ -111,8 +111,8 @@ public class DatosDocumentos {
 
 					  fields.get("resolucion").setValue("");
 					  
-				      String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-					  fields.get("añoCurso").setValue(añoAux); 
+				      String yearAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+					  fields.get("aï¿½oCurso").setValue(yearAux); 
 					  
 					  fields.get("manzanares").setValue("Manzanares");
 					  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
