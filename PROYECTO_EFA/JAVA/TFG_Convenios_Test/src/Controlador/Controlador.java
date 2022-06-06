@@ -162,12 +162,14 @@ public class Controlador implements ActionListener{
 		    	vista.panelMenu.setVisible(true);
 		    	
 		    	//Situar el lbl de EFA MORATALAZ
+		    	vista.labelTitulo.setVisible(true);
 		    	vista.labelTitulo.setBounds(342, 10, 1183, 112);
-		    	vista.labelTitulo.setOpaque(true);
-		    	vista.labelTitulo.setForeground(new Color(53, 100, 54));
+		    	vista.labelTitulo.setText("EFA MORATALAZ");
+		    	//vista.labelTitulo.setOpaque(true);
+		    	//vista.labelTitulo.setForeground(new Color(53, 100, 54));
 		    	
 				vista.btnInicio.setVisible(false);
-		    
+				vista.lblLogoInicio.setVisible(false);
 				//MOSTRAR LOGO
 				vista.lblLogo.setVisible(true);
 				
@@ -1004,7 +1006,6 @@ public class Controlador implements ActionListener{
 				  //INGRESAR TIPO DE DOCUMENTOS FCT/PFE
 				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
 				  for (int i = 0; i < listaAnexarsPracticas.size(); i++) {
-					  System.out.println(vista.listAnexarPracticas.getSelectedValue().toString());
 					  if(listaAnexarsPracticas.get(i).toString().equals(vista.listAnexarPracticas.getSelectedValue().toString())) {
 						  
 						  if(listaAnexarsPracticas.get(i).getPractica().getTipoPractica().equals("FCT")) {
@@ -1252,7 +1253,11 @@ public class Controlador implements ActionListener{
 					
 						// TELEFONO 1 Y TELEFONO 2
 							int telefono1 = Integer.parseInt(vista.txtTelefono1Empresa.getText());
-							int telefono2 = Integer.parseInt(vista.txtTelefono2Empresa.getText());
+							int telefono2 = 0;
+							if(!vista.txtTelefono2Empresa.getText().equals("")){
+								telefono2 = Integer.parseInt(vista.txtTelefono2Empresa.getText());
+							}
+							
 	
 						// FAX
 							String faxEmpresa = vista.txtFaxEmpresa.getText();
@@ -1477,7 +1482,7 @@ public class Controlador implements ActionListener{
 					
 					for (int i = 0; i < listaEmpresas.size(); i++) {
 						
-						model.addElement(listaEmpresas.get(i).toString());
+						model.addElement(listaEmpresas.get(i));
 						list.setModel(model);
 					}
 					
@@ -1527,7 +1532,7 @@ public class Controlador implements ActionListener{
 										String nombrePoblacion = vista.txtNombreUSUPoblacion.getText();
 									
 									// PROVINCIA
-										String provincia = vista.txtClaveUSUCurso.getText();
+										String provincia = vista.txtProvinciaUSUPoblacion.getText();
 										
 								        
 									// INSERT
@@ -1809,11 +1814,22 @@ public class Controlador implements ActionListener{
 								listaAnex.add(anexars.get(i));
 								tipo = anexars.get(i).getPractica().getTipoPractica();
 							}
+							
+						}
+						if(vista.checkBoxAnexo1.isSelected() == true) {
+							
+							if(anexars.get(i).getPractica().getIdPractica() == practica.getIdPractica()){
+								listaAnex.add(anexars.get(i));
+								tipo = anexars.get(i).getPractica().getTipoPractica();
+							}
 						}
 					}
 					
 					//Compruebo si es FCT o PFE
 					if(tipo.equals("FCT")) {
+						/**
+						 * FCT_anexo 0FORM
+						 */
 						convenio = listaAnex.get(0).getConvenio();
 						datosDocumentos.rellenarPDF_FCTAnexo0(tipo+"_Anexo 0FORM", tipo, listaAnex.get(0), datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
 						for (int i = 1; i < listaAnex.size(); i++) {
@@ -1824,7 +1840,30 @@ public class Controlador implements ActionListener{
 							}
 							
 						}
+						/**
+						 * FCT_anexo 1FORM
+						 */
+						ArrayList <Alumno> alumnos = new ArrayList<Alumno>();
+						convenio = listaAnex.get(0).getConvenio();
+						
+						for (int i = 1; i < listaAnex.size(); i++) {
+							if(convenio != listaAnex.get(i).getConvenio()) {
+								alumnos.add(listaAnex.get(i-1).getAlumno());
+							}
+						
+						}
+						datosDocumentos.rellenarPDF_FCTAnexo1(tipo+"_Anexo 1FORM", tipo, listaAnex.get(0),alumnos, datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
+						for (int i = 1; i < listaAnex.size(); i++) {
+							if(convenio != listaAnex.get(i).getConvenio()) {
+								datosDocumentos.rellenarPDF_FCTAnexo1(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 1FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), alumnos, datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
+								vista.lblInfoRutaDocumentos.setVisible(true);
+							}
+						
+						}
 					}else if(tipo.equals("PFE")) {
+						/**
+						 * FCT_anexo 0FORM
+						 */
 						convenio = listaAnex.get(0).getConvenio();
 						datosDocumentos.rellenarPDF_PFEAnexo0(tipo+"_Anexo 0FORM",tipo, listaAnex.get(0), datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
 						for (int i = 1; i < listaAnex.size(); i++) {
@@ -1835,6 +1874,20 @@ public class Controlador implements ActionListener{
 							}
 							
 						}
+						/**
+						 * PFE_anexo 1FORM
+						 */
+						convenio = listaAnex.get(0).getConvenio();
+						datosDocumentos.rellenarPDF_FCTAnexo0(tipo+"_Anexo 0FORM", tipo, listaAnex.get(0), datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
+						for (int i = 1; i < listaAnex.size(); i++) {
+							
+							if(convenio != listaAnex.get(i).getConvenio()) {
+								datosDocumentos.rellenarPDF_FCTAnexo0(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 0FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
+								vista.lblInfoRutaDocumentos.setVisible(true);
+							}
+							
+						}
+						
 					}
 					
 					

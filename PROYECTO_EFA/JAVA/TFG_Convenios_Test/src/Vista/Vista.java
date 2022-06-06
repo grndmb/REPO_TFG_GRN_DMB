@@ -58,6 +58,7 @@ public class Vista extends JFrame {
 	 */
 	public JPanel panelPrincipal;
 		public JButton btnInicio;
+		public JLabel lblLogoInicio;
 		public JLabel labelTitulo;
 		public JLabel lblLogo;
 		
@@ -294,7 +295,7 @@ public class Vista extends JFrame {
 		public JButton btnGuardarDocumentos;
 		public JCheckBox checkBoxAnexo0;
 		public JCheckBox checkBoxAnexo0A;
-		public JCheckBox chckbxAnexo1;
+		public JCheckBox checkBoxAnexo1;
 		public JCheckBox checkBoxAnexo2;
 		public JCheckBox checkBoxAnexo3;
 		public JCheckBox checkBoxAnexo4FCT;
@@ -345,7 +346,7 @@ public class Vista extends JFrame {
 		contentPane.add(panelPrincipal);
 			panelPrincipal.setLayout(null);
 			
-			labelTitulo = new JLabel("EFA MORATALAZ");
+			labelTitulo = new JLabel("GENERADOR DE DOCUMENTOS");
 			labelTitulo.setBackground(new Color(255, 255, 255));
 			labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 			labelTitulo.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 60));
@@ -353,8 +354,14 @@ public class Vista extends JFrame {
 			labelTitulo.setBounds(10, 10, 1538, 114);
 			panelPrincipal.add(labelTitulo);
 			
+			lblLogoInicio = new JLabel("");
+			lblLogoInicio.setBackground(new Color(255, 255, 255));
+			lblLogoInicio.setIcon(new ImageIcon("imagenes/MORATALAZ_BLANCO_INICIO.png"));
+			lblLogoInicio.setBounds(450, 180, 643, 300);
+			panelPrincipal.add(lblLogoInicio);
+			
 			btnInicio = new JButton("Iniciar Aplicación");
-			btnInicio.setBounds(530, 450, 479, 76);
+			btnInicio.setBounds(540, 600, 479, 76);
 			btnInicio.setBackground(new Color(255, 255, 255));
 			btnInicio.setForeground(new Color(0, 128, 0));
 			btnInicio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 40));
@@ -392,10 +399,10 @@ public class Vista extends JFrame {
 			panelMenu.add(btnPanelPracticas);
 			
 			lblLogo = new JLabel("");
-			lblLogo.setBounds(20, 10, 324, 112);
+			lblLogo.setBounds(60, 0, 271, 127);
 			lblLogo.setBackground(Color.WHITE);
 			lblLogo.setVisible(false);
-			lblLogo.setIcon(new ImageIcon("imagenes/logoEfa.png"));
+			lblLogo.setIcon(new ImageIcon("imagenes/MORATALAZ_BLANCO.png"));
 			panelPrincipal.add(lblLogo);
 			
 			/**
@@ -1439,11 +1446,11 @@ public class Vista extends JFrame {
 			checkBoxAnexo0A.setBounds(226, 283, 166, 33);
 			panelDocumentos.add(checkBoxAnexo0A);
 			
-			chckbxAnexo1 = new JCheckBox("     ANEXO 1");
-			chckbxAnexo1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			chckbxAnexo1.setBackground(Color.WHITE);
-			chckbxAnexo1.setBounds(226, 318, 166, 33);
-			panelDocumentos.add(chckbxAnexo1);
+			checkBoxAnexo1 = new JCheckBox("     ANEXO 1");
+			checkBoxAnexo1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			checkBoxAnexo1.setBackground(Color.WHITE);
+			checkBoxAnexo1.setBounds(226, 318, 166, 33);
+			panelDocumentos.add(checkBoxAnexo1);
 			
 			checkBoxAnexo2 = new JCheckBox("     ANEXO 2");
 			checkBoxAnexo2.setFont(new Font("Tahoma", Font.PLAIN, 20));

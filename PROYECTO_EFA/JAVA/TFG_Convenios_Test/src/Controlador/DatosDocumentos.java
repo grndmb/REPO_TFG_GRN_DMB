@@ -116,7 +116,7 @@ public class DatosDocumentos {
 					  fields.get("resolucion").setValue("");
 					  
 				      String yearAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-					  fields.get("aÃ±oCurso").setValue(yearAux); 
+					  fields.get("añoCurso").setValue(yearAux); 
 					  
 					  fields.get("manzanares").setValue("Manzanares");
 					  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
@@ -155,7 +155,7 @@ public class DatosDocumentos {
 				  
 				  int comprobarMes = LocalDate.now().getMonthValue();
 				  String cursoAcademico = cursoAcademicoYear(comprobarMes);
-				  fields.get("aÃ±oHoy").setValue(cursoAcademico);
+				  fields.get("añoHoy").setValue(cursoAcademico);
 				  
 				  for (int i = 0; i < listaAlumnos.size(); i++) {
 					  fields.get("nombreAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNombreCompleto());
