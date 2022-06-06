@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -16,17 +14,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -37,10 +29,8 @@ import Vista.Vista;
 import persistencia.Alumno;
 import persistencia.Anexar;
 import persistencia.Convenio;
-import persistencia.Curso;
 import persistencia.DatosEfa;
 import persistencia.Empresa;
-import persistencia.Poblacion;
 import persistencia.Practica;
 import Modelo.Modelo;
 
