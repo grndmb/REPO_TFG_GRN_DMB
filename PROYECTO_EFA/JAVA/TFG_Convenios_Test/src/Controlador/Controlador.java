@@ -251,7 +251,7 @@ public class Controlador implements ActionListener{
 				vista.dateChooserFechaNacimientoUSUAlumno.setMaxSelectableDate(fechaAct);
 		    }
 		    
-		   //BOTON QUE ABRE PANEL MODIFICAR ALUMNOS
+		   //BOTON QUE ABRE PANEL MODIFICCAR ALUMNOS
 		    if(e.getSource() == vista.btnPanelModificarAlumno) {
 		    	if(vista.listAlumnos.getSelectedIndex() != -1){
 			    	vista.panelListaAlumno.setVisible(false);
