@@ -154,8 +154,8 @@ public class DatosDocumentos {
 				  fields.get("nombreCurso").setValue(anexado.getAlumno().getCurso().getNombreCurso());
 				  
 				  int comprobarMes = LocalDate.now().getMonthValue();
-				  String cursoAcademico = cursoAcademicoYear(comprobarMes);
-				  fields.get("cursoAcademico").setValue(cursoAcademico);
+				  String cursoAcademico = this.cursoAcademicoYear(comprobarMes);
+				  fields.get("cursoAcademico").setValue("eyyy");
 				  
 				  for (int i = 0; i < listaAlumnos.size(); i++) {
 					  fields.get("nombreAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNombreCompleto());
@@ -210,7 +210,7 @@ public class DatosDocumentos {
 				  fields.get("nombreCurso").setValue(anexado.getAlumno().getCurso().getNombreCurso());
 				  
 				  int comprobarMes = LocalDate.now().getMonthValue();
-				  String cursoAcademico = cursoAcademicoYear(comprobarMes);
+				  String cursoAcademico = this.cursoAcademicoYear(comprobarMes);
 				  fields.get("cursoAcademico").setValue(cursoAcademico);
 				  
 				  for (int i = 0; i < listaAlumnos.size(); i++) {
@@ -246,7 +246,7 @@ public class DatosDocumentos {
 	  
 	  
 	  
-	private String cursoAcademicoYear(int test) {
+	public String cursoAcademicoYear(int test) {
 		
 		String cursoAcademicoYear = "";
 		
