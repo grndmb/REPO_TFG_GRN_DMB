@@ -997,7 +997,7 @@ public class Controlador implements ActionListener{
 	
 		  //BOTON QUE ABRE EL PANEL DE DOCUMENTOS
 		  if(e.getSource() == vista.btnPanelDocumentos) {
-			  if(vista.listAnexarPracticas.getSelectedIndex() != -1){
+			  if(vista.modelAnexarPracticas.size()>0){
 				  vista.panelPracticas.setVisible(false);
 				  vista.panelDocumentos.setVisible(true);
 				  vista.lblInfoRutaDocumentos.setVisible(false);
@@ -1039,20 +1039,16 @@ public class Controlador implements ActionListener{
 				  try {
 					  
 					  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-					  for (int i = 0; i < listaAnexarsPracticas.size(); i++) {
-						  System.out.println(vista.listAnexarPracticas.getSelectedValue().toString());
-						  if(listaAnexarsPracticas.get(i).toString().equals(vista.listAnexarPracticas.getSelectedValue().toString())) {
-							  this.seleccionarDocumentos(listaAnexarsPracticas.get(i), datosEfa);
-						 }
-					}
 					  
+					  this.seleccionarDocumentos(listaAnexarsPracticas, datosEfa);
+						 
 				  } catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				  }
-			  }
-		  }
-		  
+		  	}
+		  }	  
+ 
 		  //BOTON ATRAS QUE NOS VUELVE AL PANEL DE PRACTICAS
 		  if(e.getSource() == vista.btnAtrasDocumentos) {
 			  vista.panelPracticas.setVisible(true);
@@ -1797,12 +1793,20 @@ public class Controlador implements ActionListener{
 			 * @throws IOException 
 			 */
 				//METODO QUE SELECCIONA LOS DOCUMENTOS SEGUN LOS CHECKBOX SELECCIONADOS
-				public void seleccionarDocumentos(Anexar anexado, DatosEfa datosEfa) throws IOException {
+				public void seleccionarDocumentos(ArrayList <Anexar> anexars, DatosEfa datosEfa) throws IOException {
 					DatosDocumentos datosDocumentos =  new DatosDocumentos();
-
-					if(vista.checkBoxAnexo0.isSelected() == true) {
-						datosDocumentos.rellenarPDFAnexo0(anexado.getPractica().getTipoPractica()+"_Anexo 0FORM", anexado.getPractica().getTipoPractica(), anexado, datosEfa);
-						vista.lblInfoRutaDocumentos.setVisible(true);
+					
+					for(int i=0;i<anexars.size();i++) {
+						if(vista.checkBoxAnexo0.isSelected() == true) {
+							if(anexars.get(i).getPractica().getTipoPractica().equals("FCT")){
+								datosDocumentos.rellenarPDF_FCTAnexo0(anexars.get(i).getPractica().getTipoPractica()+"_Anexo 0FORM", anexars.get(i).getPractica().getTipoPractica(), anexars.get(i), datosEfa,anexars.get(i).getAlumno().getNif());
+								vista.lblInfoRutaDocumentos.setVisible(true);
+							}else {
+								//datosDocumentos.rellenarPDF_PFEAnexo0(anexars.get(i).getPractica().getTipoPractica()+"_Anexo 0FORM", anexars.get(i).getPractica().getTipoPractica(), anexars.get(i), datosEfa,i);
+								//vista.lblInfoRutaDocumentos.setVisible(true);
+							}
+							
+						}
 					}
 				}
 }	
