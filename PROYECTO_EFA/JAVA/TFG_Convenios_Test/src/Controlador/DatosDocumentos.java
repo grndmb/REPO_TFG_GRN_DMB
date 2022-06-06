@@ -14,14 +14,14 @@ import persistencia.DatosEfa;
 
 public class DatosDocumentos {
 	//RELLENA EL FCT_ANEXO 0FORM.pdf
-	  public void rellenarPDF_FCTAnexo0(String nombreArchivoSinExtension,String tipo,Anexar anexado, DatosEfa datosEfa, String nif) throws IOException {
+	  public void rellenarPDF_FCTAnexo0(String nombreArchivoSinExtension,String tipo,Anexar anexado, DatosEfa datosEfa, String cif) throws IOException {
 		
 		try {
 			//Initialize PDF document
 		      //RUTA ACTUAL
 				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 				//RUTA AL MODIFICAR EL ARCHIVO
-				String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/"+nombreArchivoSinExtension+"_"+nif+".pdf";
+				String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
 			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
@@ -64,15 +64,15 @@ public class DatosDocumentos {
 		}
 	}
 	//RELLENA EL PFE_ANEXO 0FORM.pdf 
-	  public void rellenarPDF_PFEAnexo0(String nombreArchivoSinExtension,String tipo,Anexar anexado, DatosEfa datosEfa) throws IOException {
+	  public void rellenarPDF_PFEAnexo0(String nombreArchivoSinExtension,String tipo,Anexar anexado, DatosEfa datosEfa,String cif) throws IOException {
 			
 			try {
 				//Initialize PDF document
 			      //RUTA ACTUAL
 					String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 					//RUTA AL MODIFICAR EL ARCHIVO
-					//String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/formularioAnexo0.pdf";
-					String rutaModificado = "C:/Users/david/Desktop/PDF/pruebaAnexo0.pdf";
+					String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
+					//String rutaModificado = "C:/Users/david/Desktop/PDF/pruebaAnexo0.pdf";
 
 				  PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
@@ -105,8 +105,8 @@ public class DatosDocumentos {
 
 					  fields.get("resolucion").setValue("");
 					  
-				      String aÃ±oAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-					  fields.get("aÃ±oCurso").setValue(aÃ±oAux); 
+				      String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+					  fields.get("añoCurso").setValue(añoAux); 
 					  
 					  fields.get("manzanares").setValue("Manzanares");
 					  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
