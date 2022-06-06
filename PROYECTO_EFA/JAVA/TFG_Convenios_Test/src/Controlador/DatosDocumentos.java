@@ -155,7 +155,7 @@ public class DatosDocumentos {
 				  
 				  int comprobarMes = LocalDate.now().getMonthValue();
 				  String cursoAcademico = cursoAcademicoYear(comprobarMes);
-				  fields.get("a�oHoy").setValue(cursoAcademico);
+				  fields.get("cursoAcademico").setValue(cursoAcademico);
 				  
 				  for (int i = 0; i < listaAlumnos.size(); i++) {
 					  fields.get("nombreAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNombreCompleto());
