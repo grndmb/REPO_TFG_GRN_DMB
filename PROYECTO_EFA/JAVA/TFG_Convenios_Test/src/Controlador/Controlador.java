@@ -1,4 +1,5 @@
 package Controlador;
+import java.awt.Checkbox;
 //IMPORTS
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,7 @@ import persistencia.Alumno;
 import persistencia.Anexar;
 import persistencia.Convenio;
 import persistencia.Curso;
+import persistencia.DatosEfa;
 import persistencia.Empresa;
 import persistencia.Poblacion;
 import persistencia.Practica;
@@ -1002,20 +1004,19 @@ public class Controlador implements ActionListener{
 			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
 			  this.recargaJLISTAnexarPracticas(sessionFactory, vista.modelAnexarPracticas, vista.listAnexarPracticas, listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()));
 		  }
-	/**
-	 * ACCIONES PANEL DOCUEMENTOS
-	 */
+	
 		  //BOTON QUE ABRE EL PANEL DE DOCUMENTOS
 		  if(e.getSource() == vista.btnPanelDocumentos) {
 			  if(vista.listAnexarPracticas.getSelectedIndex() != -1){
 				  vista.panelPracticas.setVisible(false);
 				  vista.panelDocumentos.setVisible(true);
-				  
+				  vista.lblInfoRutaDocumentos.setVisible(false);
 				  //INGRESAR TIPO DE DOCUMENTOS FCT/PFE
 				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
 				  for (int i = 0; i < listaAnexarsPracticas.size(); i++) {
 					  System.out.println(vista.listAnexarPracticas.getSelectedValue().toString());
 					  if(listaAnexarsPracticas.get(i).toString().equals(vista.listAnexarPracticas.getSelectedValue().toString())) {
+						  
 						  if(listaAnexarsPracticas.get(i).getPractica().getTipoPractica().equals("FCT")) {
 							  vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE FCT");
 							//SI ES FCT SE MUESTRA EL ANEXO 3 Y ANEXO 4 FCT
@@ -1035,6 +1036,30 @@ public class Controlador implements ActionListener{
 					 }
 				}
 				  
+			  }
+		  }
+		/**
+		 * ACCIONES PANEL DOCUEMENTOS
+		*/
+		  //BOTON GUARDAR
+		  if(e.getSource() == vista.btnGuardarDocumentos) {
+			  if(vista.checkBoxAnexo0.isSelected() == true) {
+				  DatosEfa datosEfa = modelo.listarDatosEfa(sessionFactory);
+				  
+				  try {
+					  
+					  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
+					  for (int i = 0; i < listaAnexarsPracticas.size(); i++) {
+						  System.out.println(vista.listAnexarPracticas.getSelectedValue().toString());
+						  if(listaAnexarsPracticas.get(i).toString().equals(vista.listAnexarPracticas.getSelectedValue().toString())) {
+							  this.seleccionarDocumentos(listaAnexarsPracticas.get(i), datosEfa);
+						 }
+					}
+					  
+				  } catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				  }
 			  }
 		  }
 		  
@@ -1776,4 +1801,18 @@ public class Controlador implements ActionListener{
 					e1.printStackTrace();
 				}
 			}
-}
+		
+			/**
+			 * METODOS DEL PANEL DOCUMENTOS
+			 * @throws IOException 
+			 */
+				//METODO QUE SELECCIONA LOS DOCUMENTOS SEGUN LOS CHECKBOX SELECCIONADOS
+				public void seleccionarDocumentos(Anexar anexado, DatosEfa datosEfa) throws IOException {
+					DatosDocumentos datosDocumentos =  new DatosDocumentos();
+
+					if(vista.checkBoxAnexo0.isSelected() == true) {
+						datosDocumentos.rellenarPDFAnexo0(anexado.getPractica().getTipoPractica()+"_Anexo 0FORM", anexado.getPractica().getTipoPractica(), anexado, datosEfa);
+						vista.lblInfoRutaDocumentos.setVisible(true);
+					}
+				}
+}	

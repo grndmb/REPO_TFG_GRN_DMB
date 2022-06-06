@@ -35,6 +35,7 @@ import persistencia.Alumno;
 import persistencia.Anexar;
 import persistencia.Convenio;
 import persistencia.Curso;
+import persistencia.DatosEfa;
 import persistencia.Empresa;
 import persistencia.Poblacion;
 import persistencia.Practica;
@@ -1416,6 +1417,39 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
         }
     }
 	
+    //LISTAR DATOS EFA
+    public DatosEfa listarDatosEfa (SessionFactory sessionFactory) throws HibernateException {
+		
+		 Session session = null;
+
+		 DatosEfa datosEfa = new DatosEfa();
+		 
+		 try {
+			
+			session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+			
+			Query query = session.createQuery("FROM DatosEfa WHERE nombre = :nombre");
+			query.setParameter("nombre", "EFA MORATALAZ");
+			datosEfa = (DatosEfa) query.getSingleResult();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if(null != session) {
+				session.getTransaction().rollback();
+			}
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		 
+		 
+		 return datosEfa;
+	}
+    
 	public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;

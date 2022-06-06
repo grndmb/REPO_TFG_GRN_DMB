@@ -301,6 +301,7 @@ public class Vista extends JFrame {
 		public JCheckBox checkBoxAnexo4PFE;
 		public JLabel lblFCToPFEDocumentos;
 		public JButton btnAtrasDocumentos;
+		public JLabel lblInfoRutaDocumentos;
 	/**
 	 * Launch the application.
 	 */
@@ -1400,10 +1401,11 @@ public class Vista extends JFrame {
 			lblTituloSeleccionDocumentos.setBounds(49, 102, 618, 47);
 			panelDocumentos.add(lblTituloSeleccionDocumentos);
 
-			JLabel lblInfoRutaDocumentos = new JLabel("LOS DOCUMENTOS SE GUARDARÁN EN EL DISCO LOCAL C:");
+			lblInfoRutaDocumentos = new JLabel("LOS DOCUMENTOS SE HAN EN EL DISCO LOCAL C:");
 			lblInfoRutaDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			lblInfoRutaDocumentos.setForeground(new Color(255, 140, 0));
 			lblInfoRutaDocumentos.setBounds(580, 580, 534, 47);
+			lblInfoRutaDocumentos.setVisible(false);
 			panelDocumentos.add(lblInfoRutaDocumentos);
 
 			lblFCToPFEDocumentos = new JLabel("DOCUMENTOS DE -> ");
