@@ -1,7 +1,10 @@
 package Controlador;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.itextpdf.forms.PdfAcroForm;
@@ -10,6 +13,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 
+import persistencia.Alumno;
 import persistencia.Anexar;
 import persistencia.DatosEfa;
 
@@ -112,7 +116,7 @@ public class DatosDocumentos {
 					  fields.get("resolucion").setValue("");
 					  
 				      String yearAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-					  fields.get("a�oCurso").setValue(yearAux); 
+					  fields.get("añoCurso").setValue(yearAux); 
 					  
 					  fields.get("manzanares").setValue("Manzanares");
 					  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
@@ -127,6 +131,78 @@ public class DatosDocumentos {
 				e.printStackTrace();
 			}
 		}
+	  
+	//RELLENA EL FCT_ANEXO 1FORM
+	  public void rellenarPDF_FCTAnexo1(String nombreArchivoSinExtension,String tipo,Anexar anexado,  ArrayList<Alumno> listaAlumnos, DatosEfa datosEfa, String cif) throws IOException {
+		
+		try {
+			//Initialize PDF document
+		      //RUTA ACTUAL
+				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
+				//RUTA AL MODIFICAR EL ARCHIVO
+				String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
+			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
+
+		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
+
+		        Map <String, PdfFormField> fields = form.getFormFields();
+		          fields.get("idConvenio").setValue(anexado.getConvenio().getIdConvenio());
+		          fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
+				  fields.get("nombreEfa").setValue(datosEfa.getNombre());
+				  fields.get("nombreEmpresa").setValue(anexado.getConvenio().getEmpresa().getNombreEmpresa());
+				  fields.get("direccionEmpresa").setValue(anexado.getConvenio().getEmpresa().getDireccionEmpresa());
+				  fields.get("nombreCurso").setValue(anexado.getAlumno().getCurso().getNombreCurso());
+				  
+				  int comprobarMes = LocalDate.now().getMonthValue();
+				  String cursoAcademico = cursoAcademicoYear(comprobarMes);
+				  fields.get("añoHoy").setValue(cursoAcademico);
+				  
+				  for (int i = 0; i < listaAlumnos.size(); i++) {
+					  fields.get("nombreAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNombreCompleto());
+					  fields.get("dniAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNif());
+					  fields.get("poblacionAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getPoblacion().getNombre());
+					  fields.get("horasPracticasAlumno" + (i + 1)).setValue(String.valueOf(anexado.getAlumno().getCurso().getHorasFct()));
+					  fields.get("fechaInicioAlumno" + (i + 1)).setValue(String.valueOf(anexado.getPractica().getFechaInicio()));
+					  fields.get("fechaFinAlumno" + (i + 1)).setValue(String.valueOf(anexado.getPractica().getFechaInicio()));
+				  }
+				  
+				  
+				  fields.get("nombreProfesorPractica").setValue(anexado.getPractica().getProfesor().getNombre());
+				  fields.get("nombrePersonaContactoEmpresa").setValue(anexado.getConvenio().getEmpresa().getPersonaContacto());
+				  fields.get("manzanares").setValue("Manzanares");
+				  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
+				  fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
+				  fields.get("nombreDirectorEmpresa").setValue(anexado.getConvenio().getEmpresa().getNombreGerente());
+
+				  
+				  pdfDoc.close();
+				  
+				  System.out.println("pdfCreado");
+				  
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	  
+	  
+	  
+	private String cursoAcademicoYear(int test) {
+		
+		String cursoAcademicoYear = "";
+		
+		if(test < 8) {
+			  cursoAcademicoYear = String.valueOf(LocalDate.now().getYear() - 1) + "/" + String.valueOf(LocalDate.now().getYear());
+			  
+		  }else if(test > 8) {
+			  cursoAcademicoYear = String.valueOf(LocalDate.now().getYear()) + "/" + String.valueOf(LocalDate.now().getYear() + 1);
+		  }
+		
+		return cursoAcademicoYear;
+	}
+	  
+	  
+	  
+	  
 	public static void main(String[] args) throws Exception {
 		DatosDocumentos datosDocumentos =  new DatosDocumentos();
 		try {

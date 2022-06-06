@@ -8,6 +8,8 @@ import java.math.BigInteger;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -1497,9 +1499,6 @@ public class Modelo {
 	        java.sql.Date fecha = new java.sql.Date(fecha1.getTime());
 			
 	 
-	    
-	        
-	       
 	     /* helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fecha, null);
 	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fecha, null);
 	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "PFE", false, fecha, null);
