@@ -142,7 +142,6 @@ public class DatosDocumentos {
 				//RUTA AL MODIFICAR EL ARCHIVO
 				String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
 			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
-
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
 
 		        Map <String, PdfFormField> fields = form.getFormFields();
