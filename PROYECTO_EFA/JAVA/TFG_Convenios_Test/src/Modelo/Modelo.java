@@ -9,6 +9,7 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -790,14 +791,21 @@ public class Modelo {
 									
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
-									
-									idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
+							        
+							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        
+							        String año = añoAux.substring(2);
+							        
+									idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 									
 								}else {
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 									
-									idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
+							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        
+							        String año = añoAux.substring(2);							        
+									idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 								}
 								
 								
@@ -809,13 +817,19 @@ public class Modelo {
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 									
-									idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
+							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        
+							        String año = añoAux.substring(2);							        
+									idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 									
 								}else {
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 									
-									idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
+							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        
+							        String año = añoAux.substring(2);							        
+									idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 								}
 								
 							}
@@ -879,13 +893,21 @@ public class Modelo {
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-						idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
-						
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+				        
+				        String año = añoAux.substring(2);
+				        
+						idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
+				
 					}else {
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-						idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+				        
+				        String año = añoAux.substring(2);
+				        
+						idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 					}
 					
 					
@@ -897,13 +919,21 @@ public class Modelo {
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-						idConvenio = test + "A" +  numeroCompletoConvenio + "/22";
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+				        
+				        String año = añoAux.substring(2);
+				        
+						idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 						
 					}else {
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-						idConvenio = test + "C" +  numeroCompletoConvenio + "/22";
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+				        
+				        String año = añoAux.substring(2);
+				        
+						idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 					}
 					
 				}
@@ -1135,7 +1165,7 @@ public class Modelo {
 		 
 	 }
 	 
-public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throws HibernateException {
+	 public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -1470,11 +1500,11 @@ public ArrayList<Convenio> listarConvenios (SessionFactory sessionFactory) throw
 	    
 	        
 	       
-	      /* helper.crearConvenio(sessionFactory, "1231-FIG", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fecha);
-	       helper.crearConvenio(sessionFactory, "4331-PAT", "2Âº CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fecha);
-	       helper.crearConvenio(sessionFactory, "6217-KIR", "2Âº CFGM Sistemas MicroInformaticos y Redes", "PFE", false, fecha);
-	       helper.crearConvenio(sessionFactory, "2341-KLO", "2Âº FP Basica Mantenimiento de Vehiculos", "PFE", false, fecha);
-	       helper.crearConvenio(sessionFactory, "9687-POK", "2Âº CFGM CarrocerÃ­a", "FCT", false, fecha);
+	     /* helper.crearConvenio(sessionFactory, "1231-FIG", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "PFE", true, fecha, null);
+	       helper.crearConvenio(sessionFactory, "4331-PAT", "2º CFGS Desarrollo de Aplicaciones Multiplataforma", "FCT", true, fecha, null);
+	       helper.crearConvenio(sessionFactory, "6217-KIR", "2º CFGM Sistemas MicroInformaticos y Redes", "PFE", false, fecha, null);
+	       helper.crearConvenio(sessionFactory, "2341-KLO", "2º FP Basica Mantenimiento de Vehiculos", "PFE", false, fecha, null);
+	       helper.crearConvenio(sessionFactory, "9687-POK", "2º CFGM Carrocería", "FCT", false, fecha, null);
 
 	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/A001/22", "PFE", fechaNacimientoUSU, "1231-FIG");
 	       //helper.actualizarConvenio(sessionFactory, "MOR/PRIV/C002/22", "FCT", fechaNacimientoUSU, "9687-POK");

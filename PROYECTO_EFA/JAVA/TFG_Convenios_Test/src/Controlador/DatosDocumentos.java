@@ -1,6 +1,6 @@
 package Controlador;
 import java.io.IOException;
-
+import java.util.Calendar;
 import java.util.Map;
 
 import com.itextpdf.forms.PdfAcroForm;
@@ -22,7 +22,7 @@ public class DatosDocumentos {
 				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 				//RUTA AL MODIFICAR EL ARCHIVO
 				String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/"+nombreArchivoSinExtension+"_"+nif+".pdf";
-			  PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
+			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
 
@@ -53,9 +53,12 @@ public class DatosDocumentos {
 
 				  fields.get("manzanares").setValue("Manzanares");
 				  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
+				  
+				  
 				  pdfDoc.close();
-		        pdfDoc.close();
-		        System.out.println("pdfCreado");
+				  
+				  System.out.println("pdfCreado");
+				  
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,15 +71,17 @@ public class DatosDocumentos {
 			      //RUTA ACTUAL
 					String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 					//RUTA AL MODIFICAR EL ARCHIVO
-					String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/formularioAnexo0.pdf";
+					//String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/formularioAnexo0.pdf";
+					String rutaModificado = "C:/Users/david/Desktop/PDF/pruebaAnexo0.pdf";
+
 				  PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
 			        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
 
 			        Map <String, PdfFormField> fields = form.getFormFields();
-			          fields.get("numeroConvenio").setValue(anexado.getConvenio().getIdConvenio());
+			          fields.get("idConvenio").setValue(anexado.getConvenio().getIdConvenio());
 			          fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
-					  fields.get("dNIDirector").setValue(datosEfa.getDniDirector());
+					  fields.get("dniDirectorEfa").setValue(datosEfa.getDniDirector());
 					  fields.get("nombreEfa").setValue(datosEfa.getNombre());
 					  fields.get("nombrePoblacionEfa").setValue(datosEfa.getPoblacion().getNombre());
 					  fields.get("provinciaPoblacionEfa").setValue(datosEfa.getPoblacion().getProvincia());
@@ -98,11 +103,20 @@ public class DatosDocumentos {
 					  fields.get("telefono1Empresa").setValue(Integer.toString(anexado.getConvenio().getEmpresa().getTelefono1()));
 					  fields.get("emailEmpresa").setValue(anexado.getConvenio().getEmpresa().getEmailEmpresa());
 
+					  fields.get("resolucion").setValue("");
+					  
+				      String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+					  fields.get("añoCurso").setValue(añoAux); 
+					  
 					  fields.get("manzanares").setValue("Manzanares");
 					  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
+					  
+					  
 					  pdfDoc.close();
-			        pdfDoc.close();
-			        System.out.println("pdfCreado");
+			        
+					  
+					  System.out.println("pdfCreado");
+					  
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -111,6 +125,9 @@ public class DatosDocumentos {
 		DatosDocumentos datosDocumentos =  new DatosDocumentos();
 		try {
 			//datosDocumentos.manipulatePdf("FCT_Anexo 0FORM", "FCT", "JUAN CARLOS LOPEZ CAMIN", "77382232P","EFA MORATALAZ");
+			
+			//datosDocumentos.rellenarPDF_PFEAnexo0("", null, null, null);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
