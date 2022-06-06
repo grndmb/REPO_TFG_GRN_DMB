@@ -411,7 +411,7 @@ public class Vista extends JFrame {
 			
 			JLabel lblTituloAlumnos = new JLabel("ALUMNOS");
 			lblTituloAlumnos.setFont(new Font("Agency FB", Font.BOLD, 50));
-			lblTituloAlumnos.setBounds(49, 21, 262, 55);
+			lblTituloAlumnos.setBounds(49, 21, 183, 55);
 			panelListaAlumno.add(lblTituloAlumnos);
 		
 			

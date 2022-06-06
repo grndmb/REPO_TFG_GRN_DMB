@@ -1040,8 +1040,11 @@ public class Controlador implements ActionListener{
 					  
 					  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
 					  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
+					  DatosDocumentos dd = new DatosDocumentos();
+					  dd.crearDirectorio();
 					  this.seleccionarDocumentos(listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaAnexarsPracticas, datosEfa);
-						 
+					 
+					  
 				  } catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

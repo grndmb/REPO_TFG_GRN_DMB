@@ -1,4 +1,5 @@
 package Controlador;
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Map;
@@ -13,6 +14,11 @@ import persistencia.Anexar;
 import persistencia.DatosEfa;
 
 public class DatosDocumentos {
+	//CREA LA CARPETA DOCUMENTOS_APP_TFG
+	public void crearDirectorio() {
+		File carpeta = new File("C:/DOCUMENTOS_APP_TFG");
+		carpeta.mkdir();
+	}
 	//RELLENA EL FCT_ANEXO 0FORM.pdf
 	  public void rellenarPDF_FCTAnexo0(String nombreArchivoSinExtension,String tipo,Anexar anexado, DatosEfa datosEfa, String cif) throws IOException {
 		
@@ -21,7 +27,7 @@ public class DatosDocumentos {
 		      //RUTA ACTUAL
 				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 				//RUTA AL MODIFICAR EL ARCHIVO
-				String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
+				String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
 			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
@@ -71,7 +77,7 @@ public class DatosDocumentos {
 			      //RUTA ACTUAL
 					String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 					//RUTA AL MODIFICAR EL ARCHIVO
-					String rutaModificado = "C:/DOCUMENTOS_PRUEBAS_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
+					String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
 					//String rutaModificado = "C:/Users/david/Desktop/PDF/pruebaAnexo0.pdf";
 
 				  PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
