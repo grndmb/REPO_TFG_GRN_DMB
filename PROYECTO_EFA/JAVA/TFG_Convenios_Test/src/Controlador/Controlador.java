@@ -439,9 +439,9 @@ public class Controlador implements ActionListener{
 		    
 			//AL PULSAR EN UNA OPCIï¿½N DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
 		    if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
-		    	
-				modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUAlumno);
-				
+		    	if(vista.comboBoxPoblacionUSUAlumno.getSelectedItem() != null) {
+		    		modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUAlumno);
+		    	}
 		    }
 		    // -------------------------------------------		   
 			// -------------------------------------------
