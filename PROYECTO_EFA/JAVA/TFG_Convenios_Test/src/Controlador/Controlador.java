@@ -35,7 +35,7 @@ import persistencia.Practica;
 import Modelo.Modelo;
 
 public class Controlador implements ActionListener{
-	//Objetos && Variables
+	//Objetos && Variabless
 	Vista vista = new Vista();
 	//Constructor
 	public Controlador(Vista v) {
