@@ -989,7 +989,7 @@ public class Controlador implements ActionListener{
 		//ELIMINAR RELACION ALUMNO - EMPRESA - PERIODO
 		  if(e.getSource() == vista.btnEliminarAnexarPracticas){
 			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()).getIdAnexado());
+			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()+1).getIdAnexado());
 		    	
 			//RELLENAR JLIST ANEXARS
 			  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
@@ -1004,29 +1004,25 @@ public class Controlador implements ActionListener{
 				  vista.panelDocumentos.setVisible(true);
 				  vista.lblInfoRutaDocumentos.setVisible(false);
 				  //INGRESAR TIPO DE DOCUMENTOS FCT/PFE
-				  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-				  for (int i = 0; i < listaAnexarsPracticas.size(); i++) {
-					  if(listaAnexarsPracticas.get(i).toString().equals(vista.listAnexarPracticas.getSelectedValue().toString())) {
-						  
-						  if(listaAnexarsPracticas.get(i).getPractica().getTipoPractica().equals("FCT")) {
-							  vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE FCT");
-							//SI ES FCT SE MUESTRA EL ANEXO 3 Y ANEXO 4 FCT
-							  	 vista.btnGuardarDocumentos.setBounds(226, 480, 271, 55);
-								 vista.checkBoxAnexo4FCT.setVisible(true);
-								 vista.checkBoxAnexo3.setVisible(true);
-								 vista.checkBoxAnexo4PFE.setVisible(false);
-							  
-						  }else if(listaAnexarsPracticas.get(i).getPractica().getTipoPractica().equals("PFE")){
-							 vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE PFE");
-							//SI ES PFE, NO SE MUESTRA EL ANEXO 3 ni el ANEXO 4 FCT
-							 vista.btnGuardarDocumentos.setBounds(226, 430, 271, 55);
-							 vista.checkBoxAnexo4FCT.setVisible(false);
-							 vista.checkBoxAnexo3.setVisible(false);
-							 vista.checkBoxAnexo4PFE.setVisible(true);
-						  }
-					 }
-				}
+				  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 				  
+					if (listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica().equals("FCT")) {
+
+							vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE FCT");
+							// SI ES FCT SE MUESTRA EL ANEXO 3 Y ANEXO 4 FCT
+							vista.btnGuardarDocumentos.setBounds(226, 480, 271, 55);
+							vista.checkBoxAnexo4FCT.setVisible(true);
+							vista.checkBoxAnexo3.setVisible(true);
+							vista.checkBoxAnexo4PFE.setVisible(false);
+
+					} else if (listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()).getTipoPractica().equals("PFE")) {
+							vista.lblFCToPFEDocumentos.setText("DOCUMENTOS DE PFE");
+							// SI ES PFE, NO SE MUESTRA EL ANEXO 3 ni el ANEXO 4 FCT
+							vista.btnGuardarDocumentos.setBounds(226, 430, 271, 55);
+							vista.checkBoxAnexo4FCT.setVisible(false);
+							vista.checkBoxAnexo3.setVisible(false);
+							vista.checkBoxAnexo4PFE.setVisible(true);
+					}
 			  }
 		  }
 		/**

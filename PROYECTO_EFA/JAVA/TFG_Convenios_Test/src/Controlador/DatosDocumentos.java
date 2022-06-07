@@ -37,7 +37,7 @@ public class DatosDocumentos {
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
 
 		        Map <String, PdfFormField> fields = form.getFormFields();
-		          fields.get("numeroConvenio").setValue(anexado.getConvenio().getIdConvenio());
+		          fields.get("numeroConvenio").setValue(String.valueOf(anexado.getConvenio().getIdConvenio()));
 		          fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
 				  fields.get("dNIDirector").setValue(datosEfa.getDniDirector());
 				  fields.get("nombreEfa").setValue(datosEfa.getNombre());
