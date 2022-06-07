@@ -1426,14 +1426,18 @@ public class Modelo {
 	}
 	
 	//ELIMIANR ANEXAR
-    public void eliminarAnexar (SessionFactory sessionFactory, Anexar anexarEliminar) {
+    public void eliminarAnexar (SessionFactory sessionFactory, int idAnexado) {
         Session session = null;
 
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            session.delete(anexarEliminar);
+            Query query = session.createQuery("FROM Anexar WHERE idAnexado = :idAnexado");
+            query.setParameter("idAnexado", idAnexado);
+            Anexar anex = (Anexar) query.getSingleResult();
+            
+            session.delete(anex);
             session.getTransaction().commit();
 
         }catch (Exception e) {

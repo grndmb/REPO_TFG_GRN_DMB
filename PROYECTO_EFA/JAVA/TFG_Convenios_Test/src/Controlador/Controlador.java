@@ -989,7 +989,7 @@ public class Controlador implements ActionListener{
 		//ELIMINAR RELACION ALUMNO - EMPRESA - PERIODO
 		  if(e.getSource() == vista.btnEliminarAnexarPracticas){
 			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()));
+			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()).getIdAnexado());
 		    	
 			//RELLENAR JLIST ANEXARS
 			  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
@@ -1030,7 +1030,7 @@ public class Controlador implements ActionListener{
 			  }
 		  }
 		/**
-		 * ACCIONES PANEL DOCUEMENTOS
+		 * ACCIONES PANEL DOCUMENTOS
 		*/
 		  //BOTON GUARDAR
 		  if(e.getSource() == vista.btnGuardarDocumentos) {
