@@ -15,6 +15,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 
 import persistencia.Alumno;
 import persistencia.Anexar;
+import persistencia.Convenio;
 import persistencia.DatosEfa;
 
 public class DatosDocumentos {
@@ -133,7 +134,7 @@ public class DatosDocumentos {
 		}
 	  
 	//RELLENA EL FCT_ANEXO 1FORM
-	  public void rellenarPDF_FCTAnexo1(String nombreArchivoSinExtension,String tipo,Anexar anexado,  ArrayList<Alumno> listaAlumnos, DatosEfa datosEfa, String cif) throws IOException {
+	  public void rellenarPDF_FCTAnexo1(String nombreArchivoSinExtension,String tipo, Convenio convenio,  ArrayList<Anexar> listaAlumnos, DatosEfa datosEfa, String cif) throws IOException {
 		
 		try {
 			//Initialize PDF document
@@ -145,33 +146,35 @@ public class DatosDocumentos {
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
 
 		        Map <String, PdfFormField> fields = form.getFormFields();
-		          fields.get("idConvenio").setValue(anexado.getConvenio().getIdConvenio());
-		          fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
+		          fields.get("idConvenio").setValue(convenio.getIdConvenio());
+		          fields.get("fechaAnexo").setValue(String.valueOf(convenio.getFechaAnexo()));
 				  fields.get("nombreEfa").setValue(datosEfa.getNombre());
-				  fields.get("nombreEmpresa").setValue(anexado.getConvenio().getEmpresa().getNombreEmpresa());
-				  fields.get("direccionEmpresa").setValue(anexado.getConvenio().getEmpresa().getDireccionEmpresa());
-				  fields.get("nombreCurso").setValue(anexado.getAlumno().getCurso().getNombreCurso());
+				  fields.get("nombreEmpresa").setValue(convenio.getEmpresa().getNombreEmpresa());
+				  fields.get("direccionEmpresa").setValue(convenio.getEmpresa().getDireccionEmpresa());
+				  fields.get("nombreCurso").setValue(listaAlumnos.get(0).getAlumno().getCurso().getNombreCurso());
 				  
 				  int comprobarMes = LocalDate.now().getMonthValue();
 				  String cursoAcademico = this.cursoAcademicoYear(comprobarMes);
-				  fields.get("cursoAcademico").setValue("eyyy");
-				  
+				  String c1 = cursoAcademico.substring(2, 5);
+				  String c2 = cursoAcademico.substring(7, 9);
+				  fields.get("cursoAcademico").setValue(c1 + c2);
+				  				  
 				  for (int i = 0; i < listaAlumnos.size(); i++) {
-					  fields.get("nombreAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNombreCompleto());
-					  fields.get("dniAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getNif());
-					  fields.get("poblacionAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getPoblacion().getNombre());
-					  fields.get("horasPracticasAlumno" + (i + 1)).setValue(String.valueOf(anexado.getAlumno().getCurso().getHorasFct()));
-					  fields.get("fechaInicioAlumno" + (i + 1)).setValue(String.valueOf(anexado.getPractica().getFechaInicio()));
-					  fields.get("fechaFinAlumno" + (i + 1)).setValue(String.valueOf(anexado.getPractica().getFechaInicio()));
+					  fields.get("nombreAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getAlumno().getNombreCompleto());
+					  fields.get("dniAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getAlumno().getNif());
+					  fields.get("poblacionAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getAlumno().getPoblacion().getNombre());
+					  fields.get("horasPracticasAlumno" + (i + 1)).setValue(String.valueOf(listaAlumnos.get(i).getAlumno().getCurso().getHorasFct()));
+					  fields.get("fechaInicioAlumno" + (i + 1)).setValue(String.valueOf(listaAlumnos.get(i).getPractica().getFechaInicio()));
+					  fields.get("fechaFinAlumno" + (i + 1)).setValue(String.valueOf(listaAlumnos.get(i).getPractica().getFechaFin()));
 				  }
 				  
 				  
-				  fields.get("nombreProfesorPractica").setValue(anexado.getPractica().getProfesor().getNombre());
-				  fields.get("nombrePersonaContactoEmpresa").setValue(anexado.getConvenio().getEmpresa().getPersonaContacto());
+				  fields.get("nombreProfesorPractica").setValue(listaAlumnos.get(0).getPractica().getProfesor().getNombre());
+				  fields.get("nombrePersonaContactoEmpresa").setValue(convenio.getEmpresa().getNombreEmpresa());
 				  fields.get("manzanares").setValue("Manzanares");
-				  fields.get("fechaAnexo").setValue(String.valueOf(anexado.getConvenio().getFechaAnexo()));
+				  fields.get("fechaAnexo").setValue(String.valueOf(convenio.getFechaAnexo()));
 				  fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
-				  fields.get("nombreDirectorEmpresa").setValue(anexado.getConvenio().getEmpresa().getNombreGerente());
+				  fields.get("nombreDirectorEmpresa").setValue(convenio.getEmpresa().getNombreGerente());
 
 				  
 				  pdfDoc.close();

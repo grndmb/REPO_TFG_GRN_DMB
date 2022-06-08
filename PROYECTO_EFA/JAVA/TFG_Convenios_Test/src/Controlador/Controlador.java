@@ -13,6 +13,7 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -201,6 +202,7 @@ public class Controlador implements ActionListener{
 				
 				vista.comboBoxListaCursoAlumno.removeAllItems();
 				modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxListaCursoAlumno);
+				
 				
 				this.resetFormularioNuevoAlumno();
 		    }
@@ -989,7 +991,7 @@ public class Controlador implements ActionListener{
 		//ELIMINAR RELACION ALUMNO - EMPRESA - PERIODO
 		  if(e.getSource() == vista.btnEliminarAnexarPracticas){
 			  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
-			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()+1).getIdAnexado());
+			  modelo.eliminarAnexar(sessionFactory, listaAnexarsPracticas.get(vista.listAnexarPracticas.getSelectedIndex()).getIdAnexado());
 		    	
 			//RELLENAR JLIST ANEXARS
 			  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
@@ -1037,7 +1039,7 @@ public class Controlador implements ActionListener{
 					  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 					  DatosDocumentos dd = new DatosDocumentos();
 					  dd.crearDirectorio();
-					  this.seleccionarDocumentos(listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaAnexarsPracticas, datosEfa);
+					  this.seleccionarDocumentos(sessionFactory ,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaAnexarsPracticas, datosEfa, modelo);
 				  } catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1050,7 +1052,7 @@ public class Controlador implements ActionListener{
 					  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
 					  DatosDocumentos dd = new DatosDocumentos();
 					  dd.crearDirectorio();
-					  this.seleccionarDocumentos(listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaAnexarsPracticas, datosEfa);
+					  this.seleccionarDocumentos(sessionFactory ,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaAnexarsPracticas, datosEfa, modelo);
 				  } catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1806,15 +1808,19 @@ public class Controlador implements ActionListener{
 			 * @throws IOException 
 			 */
 				//METODO QUE SELECCIONA LOS DOCUMENTOS SEGUN LOS CHECKBOX SELECCIONADOS
-				public void seleccionarDocumentos(Practica practica,ArrayList <Anexar> anexars, DatosEfa datosEfa) throws IOException {
+				public void seleccionarDocumentos(SessionFactory sessionFactory, Practica practica,ArrayList <Anexar> anexars, DatosEfa datosEfa, Modelo modelo) throws IOException {
 					DatosDocumentos datosDocumentos =  new DatosDocumentos();
+					
 					Convenio convenio = new Convenio();
+					ArrayList <Convenio> listaConvenioAnexados = new ArrayList<Convenio>();
+					ArrayList <Anexar> listaAnexosAlumnos = new ArrayList<Anexar>();
+					
 					String tipo = "";
 					ArrayList <Anexar> listaAnex = new ArrayList<Anexar>();
 					//OBTENEMOS LOS ANEXARS QUE COINCIDEN CON EL PERIODO DE PRACTICAS SELECCIONADO
 					
 						if(vista.checkBoxAnexo0.isSelected() == true) {
-							for(int i=0;i<anexars.size();i++) {
+							for(int i = 0 ; i < anexars.size() ; i++) {
 								if(anexars.get(i).getPractica().getIdPractica() == practica.getIdPractica()){
 									listaAnex.add(anexars.get(i));
 									tipo = anexars.get(i).getPractica().getTipoPractica();
@@ -1862,24 +1868,49 @@ public class Controlador implements ActionListener{
 							
 							//Compruebo si es FCT o PFE
 							if(tipo.equals("FCT")) {
+								
+								
+								
+								
 								/**
 								 * FCT_anexo 1FORM
 								 */
-								ArrayList <Alumno> alumnos = new ArrayList<Alumno>();
-								convenio = listaAnex.get(0).getConvenio();
+								
+								
+								for (int i = 0; i < listaAnex.size(); i++) {
+									if(this.existeIdConvenio(listaAnex.get(i).getConvenio(), listaConvenioAnexados) == false) {
+										listaConvenioAnexados.add(listaAnex.get(i).getConvenio());	
+									}
+								}
+								
+								
+								
+								for (int i = 0; i < listaConvenioAnexados.size(); i++) {
+									
+									listaAnexosAlumnos = modelo.rellenarFCTAnexo1(sessionFactory, listaConvenioAnexados.get(i).getId());
+									datosDocumentos.rellenarPDF_FCTAnexo1(listaConvenioAnexados.get(i).getTipoConvenio() + "_Anexo 1FORM", listaConvenioAnexados.get(i).getTipoConvenio(), listaConvenioAnexados.get(i), listaAnexosAlumnos, datosEfa, listaConvenioAnexados.get(i).getEmpresa().getCifEmpresa());
+
+								}
+
+								/*
+								for (int i = 0; i < listaAnexosAlumnos.size(); i++) {
+									System.out.println(listaAnexosAlumnos.get(i));
+								}
+								
 								
 								for (int i = 1; i < listaAnex.size(); i++) {
-									if(convenio != listaAnex.get(i).getConvenio()) {
+									if(convenio.getIdConvenio() != listaAnex.get(i).getConvenio().getIdConvenio()) {
 										alumnos.add(listaAnex.get(i-1).getAlumno());
 									}
 								}
-								datosDocumentos.rellenarPDF_FCTAnexo1(tipo+"_Anexo 1FORM", tipo, listaAnex.get(0),alumnos, datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
+								
+								datosDocumentos.rellenarPDF_FCTAnexo1(tipo+"_Anexo 1FORM", tipo, listaAnex.get(0), listaAnexosAlumnos, datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
 								for (int i = 1; i < listaAnex.size(); i++) {
-									if(convenio != listaAnex.get(i).getConvenio()) {
-										datosDocumentos.rellenarPDF_FCTAnexo1(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 1FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), alumnos, datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
+									if(convenio.getIdConvenio() != listaAnex.get(i).getConvenio().getIdConvenio()) {
+										datosDocumentos.rellenarPDF_FCTAnexo1(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 1FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), listaAnexosAlumnos, datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
 										vista.lblInfoRutaDocumentos.setVisible(true);
 									}
-								}
+								}*/
 							}else if(tipo.equals("PFE")) {
 								/**
 								 * PFE_anexo 1FORM
@@ -1896,6 +1927,18 @@ public class Controlador implements ActionListener{
 							}
 					}
 			}	
+				
+				private boolean existeIdConvenio(Convenio convenio, ArrayList <Convenio> listaConveniosAnexados) {
+				   boolean existe = false;
+
+				   for(int i = 0 ; i < listaConveniosAnexados.size() ; i++)   {
+				      if(listaConveniosAnexados.get(i).getId() == convenio.getId()) {
+				         existe = true;
+				      }
+				   }
+
+				   return existe;
+				}
 	}
 
 

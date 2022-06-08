@@ -1,5 +1,5 @@
 -- -----------------------------------
-DROP DATABASE BASE_DATOS_CONVENIO;
+-- DROP DATABASE BASE_DATOS_CONVENIO;
 CREATE DATABASE BASE_DATOS_CONVENIO;
 USE BASE_DATOS_CONVENIO;
 -- -----------------------------------
@@ -172,11 +172,11 @@ INSERT INTO CURSO (NOMBRE_CURSO, NOMBRE_ABREV, CLAVE, HORAS_FCT, ES_PUBLICO) VAL
 
 INSERT INTO EMPRESA (CIF_EMPRESA, NOMBRE_EMPRESA, DIRECCION_EMPRESA, TELEFONO_1, TELEFONO_2, EMAIL_EMPRESA, FAX_EMPRESA, PAGINA_WEB, 
 					NOMBRE_GERENTE, DNI_GERENTE, PERSONA_CONTACTO, DNI_PERSONA_CONTACTO, FECHA_ACTUALIZACION, ORGANISMO_PUBLICO, OBSERVACIONES, CODIGO_POSTAL) VALUES
-("1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "12345678D", "2022-04-09", true, "Trabajo DAM", 2022),
-("4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022),
-("9687-POK", "AgroRoncero", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022),
-("2341-KLO", "GuillermoAgroKILO", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022),
-("6217-KIR", "PepeVillalta", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 2022);
+("1231-FIG", "INDRA", "Ronda de Toleado", 987654321, 123456789, "indra@minsait.com", "123213", "indra.com", "Angel Sevilla", "98754321M", "Carlos", "12345678D", "2022-04-09", true, "Trabajo DAM", 13230),
+("4331-PAT", "Agroviti", "Carretera de Solana", 123456789, 987654321, "agroviti@roncero.com", "987654", "agroviti.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230),
+("9687-POK", "AgroRoncero", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230),
+("2341-KLO", "GuillermoAgroKILO", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230),
+("6217-KIR", "PepeVillalta", "Carretera de Valdepenas", 536367264, 987654321, "agro@roncero.com", "313412", "agro.roncero.com", "Pedro Roncero", "45321758K", "Jose", "12345678R", "2020-03-12", false, "Trabajo Carroceria", 13230);
 -- INSERT PROFESORES
 INSERT INTO PROFESOR (DNI_PROFESOR, NOMBRE) VALUES
 	("76546676P", "David Montero Bellón"),
@@ -205,6 +205,12 @@ DELETE FROM CONVENIO;
 
 SELECT * FROM PROFESOR;
 DELETE FROM PROFESOR;
+
+SELECT * FROM ANEXAR;
+
+
+SELECT * FROM ANEXAR WHERE ID_CONVENIO = '1';
+
 -- ---------------------------
 
 -- ---------------------------
@@ -227,6 +233,8 @@ SELECT * , SUBSTRING(ID_CONVENIO, 11, 3) AS NUMERO_CODIGO FROM CONVENIO WHERE TI
 SELECT * , SUBSTRING(ID_CONVENIO, 6, 3) AS NUMERO_CODIGO FROM CONVENIO WHERE TIPO_CONVENIO = 'PFE' AND ID_CONVENIO NOT LIKE '%PRIV%' AND SUBSTRING(ID_CONVENIO, 5,1) = 'C' ORDER BY ID_CONVENIO DESC;
 
 SELECT * , SUBSTRING(ID_CONVENIO, 11, 3) AS NUMERO_CODIGO FROM CONVENIO WHERE TIPO_CONVENIO = 'PFE';
+
+
 
 UPDATE CURSO
 SET NOMBRE_ABREV = '2'

@@ -1486,6 +1486,41 @@ public class Modelo {
 		 return datosEfa;
 	}
     
+    public ArrayList<Anexar> rellenarFCTAnexo1 (SessionFactory sessionFactory, int idConvenioAI) {
+    	
+    	 ArrayList <Anexar> listaAnexos = null;
+    	 Session session = null;
+    	
+    	try {
+			
+    		session = sessionFactory.getCurrentSession();
+			session.beginTransaction();
+    		
+			Query queryConvenio = sessionFactory.getCurrentSession().createQuery("FROM Convenio WHERE id = :idConvenioAI");
+			queryConvenio.setParameter("idConvenioAI", idConvenioAI);
+    		Convenio convenio = (Convenio) queryConvenio.getSingleResult();
+			
+			
+			Query queryAnexar = sessionFactory.getCurrentSession().createQuery("FROM Anexar WHERE convenio = :convenio");
+			queryAnexar.setParameter("convenio", convenio);
+    		listaAnexos = (ArrayList) queryAnexar.list();
+    	
+    		for (int i = 0; i < listaAnexos.size(); i++) {
+				System.out.println(listaAnexos.get(i));
+			}
+    		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			if(null != session) {
+				session.close();
+			}
+		}
+		return listaAnexos;
+    	
+    }
+    
+    
 	public static void main (String [] args) throws ParseException, InterruptedException {
 		 
 			SessionFactory sessionFactory = null;
