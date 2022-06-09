@@ -1486,7 +1486,7 @@ public class Modelo {
 		 return datosEfa;
 	}
     
-    public ArrayList<Anexar> rellenarFCTAnexo1 (SessionFactory sessionFactory, int idConvenioAI) {
+    public ArrayList<Anexar> rellenarAnexo1 (SessionFactory sessionFactory, int idConvenioAI) {
     	
     	 ArrayList <Anexar> listaAnexos = null;
     	 Session session = null;

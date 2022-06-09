@@ -1817,8 +1817,9 @@ public class Controlador implements ActionListener{
 					
 					String tipo = "";
 					ArrayList <Anexar> listaAnex = new ArrayList<Anexar>();
-					//OBTENEMOS LOS ANEXARS QUE COINCIDEN CON EL PERIODO DE PRACTICAS SELECCIONADO
-					
+						/**
+						 * ANEXO 0
+						 */
 						if(vista.checkBoxAnexo0.isSelected() == true) {
 							for(int i = 0 ; i < anexars.size() ; i++) {
 								if(anexars.get(i).getPractica().getIdPractica() == practica.getIdPractica()){
@@ -1832,32 +1833,32 @@ public class Controlador implements ActionListener{
 								/**
 								 * FCT_anexo 0FORM
 								 */
-								convenio = listaAnex.get(0).getConvenio();
-								datosDocumentos.rellenarPDF_FCTAnexo0(tipo+"_Anexo 0FORM", tipo, listaAnex.get(0), datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
-								for (int i = 1; i < listaAnex.size(); i++) {
-									
-									if(convenio != listaAnex.get(i).getConvenio()) {
-										datosDocumentos.rellenarPDF_FCTAnexo0(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 0FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
-										vista.lblInfoRutaDocumentos.setVisible(true);
+								for (int i = 0; i < listaAnex.size(); i++) {
+									if(this.existeIdConvenio(listaAnex.get(i).getConvenio(), listaConvenioAnexados) == false) {
+										listaConvenioAnexados.add(listaAnex.get(i).getConvenio());	
 									}
-									
+								}
+								for (int i = 0; i < listaConvenioAnexados.size(); i++) {
+									datosDocumentos.rellenarPDF_FCTAnexo0(listaConvenioAnexados.get(i).getTipoConvenio()+"_Anexo 0FORM", listaConvenioAnexados.get(i).getTipoConvenio(), listaConvenioAnexados.get(i), datosEfa,listaConvenioAnexados.get(i).getEmpresa().getCifEmpresa());
+									vista.lblInfoRutaDocumentos.setVisible(true);
 								}
 							}else if(tipo.equals("PFE")) {
 								/**
-								 * FCT_anexo 0FORM
+								 * PFE_anexo 0FORM
 								 */
-								convenio = listaAnex.get(0).getConvenio();
-								datosDocumentos.rellenarPDF_PFEAnexo0(tipo+"_Anexo 0FORM",tipo, listaAnex.get(0), datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
-								for (int i = 1; i < listaAnex.size(); i++) {
-									
-									if(convenio != listaAnex.get(i).getConvenio()) {
-										datosDocumentos.rellenarPDF_PFEAnexo0(tipo+"_Anexo 0FORM",tipo, listaAnex.get(i), datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
-										vista.lblInfoRutaDocumentos.setVisible(true);
+								for (int i = 0; i < listaAnex.size(); i++) {
+									if(this.existeIdConvenio(listaAnex.get(i).getConvenio(), listaConvenioAnexados) == false) {
+										listaConvenioAnexados.add(listaAnex.get(i).getConvenio());	
 									}
-									
+								}
+								for (int i = 0; i < listaConvenioAnexados.size(); i++) {
+									datosDocumentos.rellenarPDF_PFEAnexo0(listaConvenioAnexados.get(i).getTipoConvenio()+"_Anexo 0FORM", listaConvenioAnexados.get(i).getTipoConvenio(), listaConvenioAnexados.get(i), datosEfa,listaConvenioAnexados.get(i).getEmpresa().getCifEmpresa());
+									vista.lblInfoRutaDocumentos.setVisible(true);
 								}	
 							}
-							
+						/**
+						* ANEXO 1
+						*/	
 						}if(vista.checkBoxAnexo1.isSelected() == true) {
 							for(int i=0;i<anexars.size();i++) {
 								if(anexars.get(i).getPractica().getIdPractica() == practica.getIdPractica()){
@@ -1868,61 +1869,30 @@ public class Controlador implements ActionListener{
 							
 							//Compruebo si es FCT o PFE
 							if(tipo.equals("FCT")) {
-								
-								
-								
-								
 								/**
 								 * FCT_anexo 1FORM
 								 */
-								
-								
 								for (int i = 0; i < listaAnex.size(); i++) {
 									if(this.existeIdConvenio(listaAnex.get(i).getConvenio(), listaConvenioAnexados) == false) {
 										listaConvenioAnexados.add(listaAnex.get(i).getConvenio());	
 									}
 								}
-								
-								
-								
 								for (int i = 0; i < listaConvenioAnexados.size(); i++) {
-									
-									listaAnexosAlumnos = modelo.rellenarFCTAnexo1(sessionFactory, listaConvenioAnexados.get(i).getId());
+									listaAnexosAlumnos = modelo.rellenarAnexo1(sessionFactory, listaConvenioAnexados.get(i).getId());
 									datosDocumentos.rellenarPDF_FCTAnexo1(listaConvenioAnexados.get(i).getTipoConvenio() + "_Anexo 1FORM", listaConvenioAnexados.get(i).getTipoConvenio(), listaConvenioAnexados.get(i), listaAnexosAlumnos, datosEfa, listaConvenioAnexados.get(i).getEmpresa().getCifEmpresa());
-
 								}
-
-								/*
-								for (int i = 0; i < listaAnexosAlumnos.size(); i++) {
-									System.out.println(listaAnexosAlumnos.get(i));
-								}
-								
-								
-								for (int i = 1; i < listaAnex.size(); i++) {
-									if(convenio.getIdConvenio() != listaAnex.get(i).getConvenio().getIdConvenio()) {
-										alumnos.add(listaAnex.get(i-1).getAlumno());
-									}
-								}
-								
-								datosDocumentos.rellenarPDF_FCTAnexo1(tipo+"_Anexo 1FORM", tipo, listaAnex.get(0), listaAnexosAlumnos, datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
-								for (int i = 1; i < listaAnex.size(); i++) {
-									if(convenio.getIdConvenio() != listaAnex.get(i).getConvenio().getIdConvenio()) {
-										datosDocumentos.rellenarPDF_FCTAnexo1(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 1FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), listaAnexosAlumnos, datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
-										vista.lblInfoRutaDocumentos.setVisible(true);
-									}
-								}*/
 							}else if(tipo.equals("PFE")) {
 								/**
 								 * PFE_anexo 1FORM
 								 */
-								convenio = listaAnex.get(0).getConvenio();
-								datosDocumentos.rellenarPDF_FCTAnexo0(tipo+"_Anexo 0FORM", tipo, listaAnex.get(0), datosEfa,listaAnex.get(0).getConvenio().getEmpresa().getCifEmpresa());
-								for (int i = 1; i < listaAnex.size(); i++) {
-									
-									if(convenio != listaAnex.get(i).getConvenio()) {
-										datosDocumentos.rellenarPDF_FCTAnexo0(listaAnex.get(i).getPractica().getTipoPractica()+"_Anexo 0FORM", listaAnex.get(i).getPractica().getTipoPractica(), listaAnex.get(i), datosEfa,listaAnex.get(i).getConvenio().getEmpresa().getCifEmpresa());
-										vista.lblInfoRutaDocumentos.setVisible(true);
+								for (int i = 0; i < listaAnex.size(); i++) {
+									if(this.existeIdConvenio(listaAnex.get(i).getConvenio(), listaConvenioAnexados) == false) {
+										listaConvenioAnexados.add(listaAnex.get(i).getConvenio());	
 									}
+								}
+								for (int i = 0; i < listaConvenioAnexados.size(); i++) {
+									listaAnexosAlumnos = modelo.rellenarAnexo1(sessionFactory, listaConvenioAnexados.get(i).getId());
+									datosDocumentos.rellenarPDF_PFEAnexo1(listaConvenioAnexados.get(i).getTipoConvenio() + "_Anexo 1FORM", listaConvenioAnexados.get(i).getTipoConvenio(), listaConvenioAnexados.get(i), listaAnexosAlumnos, datosEfa, listaConvenioAnexados.get(i) .getEmpresa().getCifEmpresa());
 								}
 							}
 					}
