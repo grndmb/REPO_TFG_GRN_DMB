@@ -976,23 +976,27 @@ public class Modelo {
 					
 					if(organismoPublico == true) {
 						
+						//Formateamos para sacar el numero con 3 digitos
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-				        
+				        //Tomamos el año actual del ordenador
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));         
 				        String año = añoAux.substring(2);
 				        
+				        //Formamos el codigo del convenio
 						idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 				
 					}else {
+						
+						//Formateamos para sacar el numero con 3 digitos
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-				        
+				        //Tomamos el año actual del ordenador
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));   
 				        String año = añoAux.substring(2);
-				        
+				        //Formamos el codigo del convenio
 						idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 					}
 					
@@ -1002,23 +1006,28 @@ public class Modelo {
 				
 					if(organismoPublico == true) {
 						
+						//Formateamos para sacar el numero con 3 digitos
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
-						
-				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-				        
+
+				        //Tomamos el año actual del ordenador
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));         
 				        String año = añoAux.substring(2);
 				        
+				        //Formamos el codigo del convenio
 						idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 						
 					}else {
+						
+						//Formateamos para sacar el numero con 3 digitos
 						Formatter obj = new Formatter();
 				        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", numeroCodigoConvenio.get(0) + 1));
 						
-				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-				        
+				        //Tomamos el año actual del ordenador
+				        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 	        
 				        String año = añoAux.substring(2);
 				        
+				        //Formamos el codigo del convenio
 						idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 					}
 					
@@ -1029,6 +1038,7 @@ public class Modelo {
 				Convenio convenio = new Convenio();
 				convenio.setIdConvenio(idConvenio);
 				
+				//Consulta para recoger la empresa a la que pertenece el convenio
 				Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 				empresaQuery.setParameter("cifEmpresa", cifEmpresa);
 				Empresa empresa = (Empresa) empresaQuery.getSingleResult();
@@ -1062,7 +1072,7 @@ public class Modelo {
 			 			
 			 		}else {
 			 			
-			 			lblError2Convenio.setText("ERROR. SOLO PUEDE TENER 2 CONVENIOS MAXIMOs POR TIPO");
+			 			lblError2Convenio.setText("ERROR. SOLO PUEDE TENER 2 CONVENIOS MAXIMOS POR TIPO");
 			 			
 			 		}
 		 		
