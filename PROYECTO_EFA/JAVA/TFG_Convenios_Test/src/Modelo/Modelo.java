@@ -64,9 +64,12 @@ public class Modelo {
 		Session session = null;
 		
 		try {
+			
+			//Crear sesion e iniciar transaccion
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
+			//Creamos un objeto de tipo Curso para hacer el insert
 			Curso curso = new Curso();
 			curso.setNombreCurso(nombreCurso);
 			curso.setNombreAbrev(nombreAbrev);
@@ -90,23 +93,33 @@ public class Modelo {
 		}
 	}
 
-	
+	/**
+	 * Metodo para rellenar el ComboBox del panel Alumnos
+	 * @param sessionFactory
+	 * @param comboBox
+	 */
 	public void rellenarComboBoxCursos (SessionFactory sessionFactory, JComboBox comboBox) {
 		Session session = null;
 		
 		try {
+			
+			//Crear sesion e iniciar transaccion
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
 			comboBox.removeAllItems();
 			
+			//Hacemos una consulta a la tabla de Curso para que devuelva todos los valores de esa tabla y almacenarlos en un arraylist
 			Query query = session.createQuery("FROM Curso");
 			ArrayList<Curso> listaCursos = (ArrayList<Curso>) query.list();
 			
 				comboBox.addItem("");
+				
 			for(int i=0;i<listaCursos.size();i++) {
 				comboBox.addItem(listaCursos.get(i).getNombreCurso());
 			};
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -136,9 +149,12 @@ public class Modelo {
 		 Session session = null;
 			
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
+				//Creamos un objeto Poblacion para hacer el insert
 				Poblacion poblacion = new Poblacion();
 				poblacion.setCodigoPostal(codigoPostal);
 				poblacion.setNombre(nombre);
@@ -161,19 +177,24 @@ public class Modelo {
 		 
 	 }
 
-	
+	/**
+	 * Metodo para rellenar el ComboBox de las ciudades de los paneles de Alumnos y Empresas
+	 * @param sessionFactory
+	 * @param comboPoblacionNombre
+	 */
 	 public void rellenarComboBoxNombreCiudad (SessionFactory sessionFactory, JComboBox comboPoblacionNombre) {
 			Session session = null;
 			
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
 				comboPoblacionNombre.removeAllItems();
 				
-				/**
-				 * Consulta para obtener los nombres de las poblaciones
-				 */	
+				//Consulta para obtener los nombres de las poblaciones ordenadas alfabeticamente
+				
 				Query query = session.createQuery("FROM Poblacion GROUP BY Nombre ORDER BY Nombre ASC");
 				ArrayList<Poblacion> listaNombresPoblacion = (ArrayList<Poblacion>) query.list();
 				
@@ -200,20 +221,27 @@ public class Modelo {
 	    }
 	
 	 
+	 /**
+	  * Metodo para rellenar el ComboBox del codigo postal de los paneles de Alumnos y Empresas
+	  * dependiendo de la eleccion del usuario en el ComboBox de ciudad
+	  * @param sessionFactory
+	  * @param nombrePoblacion
+	  * @param comboPoblacionCP
+	  */
 	 public void rellenarComboBoxCodigoPostal (SessionFactory sessionFactory,String nombrePoblacion, JComboBox comboPoblacionCP) {
 			
 			Session session = null; 
 			
 			try {
 				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
 				comboPoblacionCP.removeAllItems();
 				
-				/**
-				 * Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
-				 */
+				//Consulta para obtener los codigos postales de la ciudad seleccionada en el combobox anterior.
+				 
 				Query query = session.createQuery("FROM Poblacion WHERE nombre = :nombre");
 				query.setParameter("nombre", nombrePoblacion);
 				ArrayList<Poblacion> listaCodigoPostales = (ArrayList<Poblacion>) query.list();
@@ -237,16 +265,22 @@ public class Modelo {
 			
 		}
 	 
+	 /**
+	  * Metodo para rellenar el ComboBox de profesores en panel Perido
+	  * @param sessionFactory
+	  * @param comboProfesor
+	  */
 	 public void rellenarComboBoxProfesor (SessionFactory sessionFactory, JComboBox comboProfesor) {
 			Session session = null;
 			
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
-				/**
-				 * Consulta para obtener los nombres de las poblaciones
-				 */	
+				//Consulta para obtener los nombres de las poblaciones
+				 
 				Query query = session.createQuery("FROM Profesor GROUP BY Nombre ORDER BY Nombre ASC");
 				ArrayList<Profesor> listaProfesor = (ArrayList<Profesor>) query.list();
 				
@@ -290,9 +324,12 @@ public class Modelo {
 		Session session = null;
 		
 		try {
+			
+			//Crear sesion e iniciar transaccion
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
+			//Creamos un objeto Alumno para hacer el insert
 			Alumno alumno = new Alumno();
 			alumno.setNif(nif);
 			alumno.setNombreCompleto(nombreCompleto);
@@ -300,13 +337,14 @@ public class Modelo {
 			alumno.setCorreo(correo);
 			alumno.setFechaNacimiento(fechaNacimiento);
 			
+			//Consulta para sacar la poblacion del alumno
 			Query poblacionQuery = session.createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
 			poblacionQuery.setParameter("codigoPostal", codigoPostal);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 	
 			alumno.setPoblacion(pb);
 			
-			
+			//Consulta para sacar el curso del alumno
 			Query queryCurso = session.createQuery("FROM Curso WHERE nombreCurso = :nombreCurso");
 			queryCurso.setParameter("nombreCurso", nombreCurso);
 			Curso curso = (Curso) queryCurso.getSingleResult();
@@ -345,20 +383,30 @@ public class Modelo {
 		 Session session = null;
 		 
 		 ArrayList<Alumno> listaAlumnos = new ArrayList<Alumno>();
+		 
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
+				//Dependiento de la eleccion del usuario en el combobox de cursos, el jlist listará unos valores de alumnos u otros
 				if(!nombreCurso.equals("")){
+					
+					//Consulta para sacar todos los cursos
 					Query cursoQuery = session.createQuery("FROM Curso WHERE nombreCurso =:nombreCurso ");
 					cursoQuery.setParameter("nombreCurso", nombreCurso);
 					Curso curso = (Curso) cursoQuery.getSingleResult();
 					
+					//Consulta para listar los alumnos dependiendo del curso que el usuario haya elegido, en caso de que haya elegido alguno
 					Query alumnoQuery = sessionFactory.getCurrentSession().createQuery("FROM Alumno WHERE curso =:curso ORDER BY nombreCompleto ASC");
 					alumnoQuery.setParameter("curso", curso);
 					
 					listaAlumnos = (ArrayList<Alumno>) alumnoQuery.list();
+					
 				}else {
+					
+					//Consulta para sacar todos los alumnos ordenados por orden alfabetico
 					Query alumnoQuery2 = sessionFactory.getCurrentSession().createQuery("FROM Alumno ORDER BY nombreCompleto ASC");
 					
 					listaAlumnos = (ArrayList<Alumno>) alumnoQuery2.list();
@@ -399,6 +447,7 @@ public class Modelo {
 		 Session session=null;
 
 		 try {
+			 
 			//Crear sesion e iniciar transaccion
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
@@ -429,7 +478,6 @@ public class Modelo {
 			alumno.setCurso(curso);
 			
 			
-			
 			session.update(alumno);
 			session.getTransaction().commit();
 
@@ -454,6 +502,8 @@ public class Modelo {
 		 boolean anexado = false;
 		 
 		 try {
+			 
+			//Crear sesion e iniciar transaccion
 			 session = sessionFactory.getCurrentSession();
 			 session.beginTransaction();
 			 
@@ -463,6 +513,8 @@ public class Modelo {
 					 
 					//ELIMINA EL ANEXO
 					int idAnexado =  listaAnexar.get(i).getIdAnexado();
+					
+					//Consulta para recoger el anexo al que el alumno está (Foreing Key)
 					Query queryAnex = session.createQuery("FROM Anexar WHERE idAnexado = :idAnexado");
 					queryAnex.setParameter("idAnexado", idAnexado);
 					Anexar anex = (Anexar) queryAnex.getSingleResult();
@@ -524,6 +576,8 @@ public class Modelo {
 		 Session session = null;
 			
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
@@ -545,6 +599,7 @@ public class Modelo {
 				empresa.setOrganismoPublico(organismoPublico);
 				empresa.setObservaciones(observaciones);
 				
+				//Consulta para recoger la poblacion
 				Query poblacionQuery = session.createQuery("FROM Poblacion WHERE nombre =:nombre");
 				poblacionQuery.setParameter("nombre", poblacion);
 				Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
@@ -583,6 +638,8 @@ public class Modelo {
 		 ArrayList<Empresa> listaEmpresa = new ArrayList<Empresa>();
 		 
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
@@ -620,9 +677,12 @@ public class Modelo {
 		 ArrayList<Empresa> listaEmpresa = new ArrayList<Empresa>();
 		 
 			try {
+				
+				//Crear sesion e iniciar transaccion
 				session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
+				//Consulta para listar las empresas ordenadas por orden alfabetico
 				Query queryEmpresa = session.createQuery("FROM Empresa WHERE nombreEmpresa LIKE :nombreEmpresa ORDER BY nombreEmpresa");
 				queryEmpresa.setParameter("nombreEmpresa", "%" + nombreEmpresa + "%");
 		 
@@ -679,7 +739,7 @@ public class Modelo {
 			empresa.setOrganismoPublico(organismoPublico);
 			empresa.setObservaciones(observaciones);
 			
-			//Consulta poblacion
+			//Consulta poblacion de la empresa
 			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
 			poblacionQuery.setParameter("nombre", poblacion);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
@@ -712,14 +772,17 @@ public class Modelo {
 		 Session session = null;
 		 
 		 try {
+			 
+			//Crear sesion e iniciar transaccion
 			 session = sessionFactory.getCurrentSession();
 			 session.beginTransaction();
 			 
+			 //Consulta para recoger la empresa cuyo id sea el mismo al pasado por parametro
 			 Query queryEmpresa = session.createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 			 queryEmpresa.setParameter("cifEmpresa", cifEmpresa);
 			 Empresa empresa = (Empresa) queryEmpresa.getSingleResult();
 			
-			 
+			 //Consulta para recoger el convenio al que este asignado la empresa para eliminarlo
 			 Query queryConvenio = session.createQuery("FROM Convenio WHERE empresa = :empresa");
 			 queryConvenio.setParameter("empresa", empresa);
 			 ArrayList <Convenio> listaConvenios = (ArrayList<Convenio>) queryConvenio.list();
@@ -760,6 +823,8 @@ public class Modelo {
 		 Session session = null;
 
 		 	try {
+		 		
+		 		//Crear sesion e iniciar transaccion
 		 		session = sessionFactory.getCurrentSession();
 				session.beginTransaction();
 				
@@ -784,53 +849,67 @@ public class Modelo {
 				/*
 				 * INSERTAR EL PRIMER CONVENIO
 				 */
+						//Si no hay ningun convenio creado, se creará con el numero 1
 						if(listaConvenios.isEmpty()) {
 							
+							//Curso seleccionado es publico
 							if(curso.isEsPublico() == true) {
 								test = "MOR/";
 								
 								if(organismoPublico == true) {
 									
+									//Formateamos para sacar el numero con 3 digitos
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 							        
+							        //Tomamos el año actual del ordenador
 							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
-							        
 							        String año = añoAux.substring(2);
 							        
+							        //Formamos el codigo del convenio
 									idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 									
 								}else {
+									//Formateamos para sacar el numero con 3 digitos
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 									
-							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        //Tomamos el año actual del ordenador
+							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));    
+							        String año = añoAux.substring(2);		
 							        
-							        String año = añoAux.substring(2);							        
+							      //Formamos el codigo del convenio
 									idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 								}
 								
-								
+						//Curso seleccionado es privado
 							}else {
 								test = "MOR/PRIV/";
 							
 								if(organismoPublico == true) {
 									
+									//Formateamos para sacar el numero con 3 digitos
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 									
+							      //Tomamos el año actual del ordenador
 							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        String año = añoAux.substring(2);	
 							        
-							        String año = añoAux.substring(2);							        
+							      //Formamos el codigo del convenio
 									idConvenio = test + "A" +  numeroCompletoConvenio + "/" + año;
 									
 								}else {
+									
+									//Formateamos para sacar el numero con 3 digitos
 									Formatter obj = new Formatter();
 							        String numeroCompletoConvenio = String.valueOf(obj.format("%03d", 1));
 									
-							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 
+							        //Tomamos el año actual del ordenador
+							        String añoAux = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)); 							        
+							        String año = añoAux.substring(2);	
 							        
-							        String año = añoAux.substring(2);							        
+							        //Formamos el codigo del convenio
 									idConvenio = test + "C" +  numeroCompletoConvenio + "/" + año;
 								}
 								
@@ -841,6 +920,7 @@ public class Modelo {
 							Convenio convenio = new Convenio();
 							convenio.setIdConvenio(idConvenio);
 							
+							//Consulta para recoger la empresa que ha sido seleccionada a partir del CIF
 							Query empresaQuery = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa = :cifEmpresa");
 							empresaQuery.setParameter("cifEmpresa", cifEmpresa);
 							Empresa empresa = (Empresa) empresaQuery.getSingleResult();
@@ -855,38 +935,42 @@ public class Modelo {
 						} else {
 				//----------------------------------------------------------------		
 				
+				//Diferenciamos entre codigos de convenio publicos y privados
+				// para que, a la hora de generar el codigo, se tomen diferentes substrings
 				ArrayList<Integer> numeroCodigoConvenio = new ArrayList<>();
 				ArrayList<Convenio> listaConveniosPublicos = new ArrayList<Convenio>();
 				ArrayList<Convenio> listaConveniosPrivados = new ArrayList<Convenio>();
 				
-
-				
+					//Consulta para recoger la lista de convenios, cuyo tipo de convenio sea el pasado por parametro y sea publico
 					Query conveniosPublicos = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio AND idConvenio NOT LIKE :id");
 					conveniosPublicos.setParameter("tipoConvenio", tipoConvenio);
 					conveniosPublicos.setParameter("id",  "%" + "PRIV" + "%");
 					listaConveniosPublicos = (ArrayList<Convenio>) conveniosPublicos.getResultList();
 					
+					//Recogemos la lista de convenios publicos y hacemos un substring para sacar los numeros
 					for (int i = 0; i < listaConveniosPublicos.size(); i++) {
 						numeroCodigoConvenio.add(Integer.parseInt(listaConveniosPublicos.get(i).getIdConvenio().substring(5, 8)));
 					}
 					
-					
+					//Consulta para recoger la lista de convenios, cuyo tipo de convenio sea el pasado por parametro y sea privado
 					Query conveniosPrivados = session.createQuery("FROM Convenio WHERE tipoConvenio = :tipoConvenio AND idConvenio LIKE :id");
 					conveniosPrivados.setParameter("tipoConvenio", tipoConvenio);
 					conveniosPrivados.setParameter("id",  "%" + "PRIV" + "%");
 					listaConveniosPrivados = (ArrayList<Convenio>) conveniosPrivados.list();
 					
+					//Recogemos la lista de convenios privados y hacemos un substring para sacar los numeros
 					for (int i = 0; i < listaConveniosPrivados.size(); i++) {
 						numeroCodigoConvenio.add(Integer.parseInt(listaConveniosPrivados.get(i).getIdConvenio().substring(10, 13)));
 					}	
 					
 				
-				
+				//Ordenamos las dos listas de los codigos de los convenios (publicos y privados) de mayor a menor
 				Comparator<Integer> comparador = Collections.reverseOrder();
 				Collections.sort(numeroCodigoConvenio, comparador);
 
 				//--------------------------------------------------------------
 				
+				//El curso seleccionado es publico
 				if(curso.isEsPublico() == true) {
 					test = "MOR/";
 					
