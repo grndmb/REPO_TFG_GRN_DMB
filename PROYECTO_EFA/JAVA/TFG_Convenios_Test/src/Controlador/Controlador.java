@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 import Vista.Vista;
+import net.bytebuddy.asm.Advice.This;
 import persistencia.Alumno;
 import persistencia.Anexar;
 import persistencia.Convenio;
@@ -50,6 +51,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnPanelEmpresas.addActionListener(this);
 			this.vista.btnPanelPeriodos.addActionListener(this);
 			this.vista.btnPanelPracticas.addActionListener(this);
+			this.vista.btnPanelInstrucciones.addActionListener(this);
 			
 		//BOTONES PANEL LISTA ALUMNOS
 			this.vista.btnPanelAddAlumno.addActionListener(this);
@@ -108,6 +110,7 @@ public class Controlador implements ActionListener{
 			this.vista.btnAtrasDocumentos.addActionListener(this);
 			
 		//VISTAS
+			this.vista.panelInstrucciones.setVisible(false);
 			this.vista.panelConvenios.setVisible(false);
 			this.vista.panelPrincipal.setVisible(true);
 			this.vista.panelListaAlumno.setVisible(false);
@@ -173,9 +176,38 @@ public class Controlador implements ActionListener{
 				vista.lblLogoInicio.setVisible(false);
 				//MOSTRAR LOGO
 				vista.lblLogo.setVisible(true);
+				//MOSTRAR EL PANEL DE INSTRUCCIONES
+				vista.panelInstrucciones.setVisible(true);
 				
+				//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
+	    		vista.btnPanelInstrucciones.setBackground(new Color(211, 211, 211));
+	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
+	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
+	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
+	    		vista.btnPanelPracticas.setBackground(Color.WHITE);
 				
-				
+		    }
+		    if(e.getSource() == vista.btnPanelInstrucciones) {
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
+		    	vista.btnPanelInstrucciones.setBackground(new Color(211, 211, 211));
+	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
+	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
+	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
+	    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+	    		
+	    		//PANELES 
+		    	this.vista.panelInstrucciones.setVisible(true);
+		    	this.vista.panelConvenios.setVisible(false);
+				this.vista.panelNuevoActualizarAlumno.setVisible(false);
+				this.vista.panelNuevaPoblacion.setVisible(false);
+				this.vista.panelNuevoCurso.setVisible(false);
+				this.vista.panelNuevaActualizarEmpresa.setVisible(false);
+				this.vista.panelListaEmpresas.setVisible(false);
+				this.vista.panelPeriodos.setVisible(false);
+				this.vista.panelPracticas.setVisible(false);
+				this.vista.panelDocumentos.setVisible(false);
+				this.vista.panelListaAlumno.setVisible(false);
+	    		
 		    }
 		    /**
 		     * ACCIONES DEL PANEL ALUMNOS
@@ -186,10 +218,12 @@ public class Controlador implements ActionListener{
 		    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 		    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
 		    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+		    		vista.btnPanelInstrucciones.setBackground(Color.WHITE);
 		    	//PANELES CONSULTAS
 		    	vista.panelListaAlumno.setVisible(true);
 		    	
-		    	//PANELES INSERTS
+		    	//PANELES 
+		    	vista.panelInstrucciones.setVisible(false);
 		    	this.vista.panelConvenios.setVisible(false);
 				this.vista.panelNuevoActualizarAlumno.setVisible(false);
 				this.vista.panelNuevaPoblacion.setVisible(false);
@@ -339,9 +373,6 @@ public class Controlador implements ActionListener{
 				//Volvemos al panel Alumno
 				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelListaAlumno.setVisible(true);
-				
-				
-		    	
 		    }
 		   
 		   //BOTON QUE ELIMINA EL ALUMNO
@@ -445,9 +476,6 @@ public class Controlador implements ActionListener{
 		    		modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUAlumno);
 		    	}
 		    }
-		    // -------------------------------------------		   
-			// -------------------------------------------
-
 		    
 			/**
 			 * ACCIONES DEL PANEL EMPRESA
@@ -456,6 +484,7 @@ public class Controlador implements ActionListener{
 				    if(e.getSource() == vista.btnPanelEmpresas) {
 				    	
 				    	//DEJAR DE MOSTRAR PANEL DISTINTO AL PANEL EMPRESA
+				    	vista.panelInstrucciones.setVisible(false);
 				    	vista.panelListaEmpresas.setVisible(true);
 				    	vista.panelListaAlumno.setVisible(false);
 				    	vista.panelNuevoActualizarAlumno.setVisible(false);
@@ -472,6 +501,7 @@ public class Controlador implements ActionListener{
 			    		vista.btnPanelEmpresas.setBackground(new Color(211, 211, 211));
 			    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
 			    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+			    		vista.btnPanelInstrucciones.setBackground(Color.WHITE);
 						
 						//RELLENA EL JLIST DEL PANEL LISTAR EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
@@ -804,7 +834,7 @@ public class Controlador implements ActionListener{
 				//BOTON QUE ABRE EL PANEL DE PERIODOS
 					   if(e.getSource() == vista.btnPanelPeriodos) {
 						   this.vista.panelPeriodos.setVisible(true);
-						   
+						   	vista.panelInstrucciones.setVisible(false);
 						    vista.panelListaEmpresas.setVisible(false);
 					    	vista.panelListaAlumno.setVisible(false);
 					    	vista.panelNuevoActualizarAlumno.setVisible(false);
@@ -820,6 +850,7 @@ public class Controlador implements ActionListener{
 				    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 				    		vista.btnPanelPeriodos.setBackground(new Color(211, 211, 211));
 				    		vista.btnPanelPracticas.setBackground(Color.WHITE);
+				    		vista.btnPanelInstrucciones.setBackground(Color.WHITE);
 							
 						   //RELLENA EL COMBO BOX DE CURSOS
 						   this.vista.comboBoxListaCursoPeriodo.removeAllItems();
@@ -891,7 +922,7 @@ public class Controlador implements ActionListener{
 		     */
 			//BOTON QUE ABRE EL PANEL DE PRACTICAS
 		    if(e.getSource() == vista.btnPanelPracticas) {
-		    	
+		    	vista.panelInstrucciones.setVisible(false);
 		    	vista.panelListaEmpresas.setVisible(false);
 		    	vista.panelListaAlumno.setVisible(false);
 		    	vista.panelNuevoActualizarAlumno.setVisible(false);
@@ -908,6 +939,7 @@ public class Controlador implements ActionListener{
 	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 	    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
 	    		vista.btnPanelPracticas.setBackground(new Color(211, 211, 211));
+	    		vista.btnPanelInstrucciones.setBackground(Color.WHITE);
 		    	
 	    		//RELLENAR LIST DE PERIODO			
 				   listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);

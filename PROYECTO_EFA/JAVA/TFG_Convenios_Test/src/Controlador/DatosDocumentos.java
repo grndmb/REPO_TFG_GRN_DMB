@@ -21,7 +21,7 @@ import persistencia.DatosEfa;
 public class DatosDocumentos {
 	//CREA LA CARPETA DOCUMENTOS_APP_TFG
 	public void crearDirectorio() {
-		File carpeta = new File("C:/DOCUMENTOS_APP_TFG");
+		File carpeta = new File("C:/DOCUMENTOS_APP_EFA");
 		carpeta.mkdir();
 	}
 	//RELLENA EL FCT_ANEXO 0FORM.pdf
@@ -32,7 +32,7 @@ public class DatosDocumentos {
 		      //RUTA ACTUAL
 				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 				//RUTA AL MODIFICAR EL ARCHIVO
-				String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"___"+cifempresa+"___.pdf";
+				String rutaModificado = "C:/DOCUMENTOS_APP_EFA/"+nombreArchivoSinExtension+"___"+cifempresa+"___.pdf";
 			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);

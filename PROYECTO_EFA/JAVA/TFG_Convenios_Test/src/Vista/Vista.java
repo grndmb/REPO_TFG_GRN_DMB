@@ -67,7 +67,14 @@ public class Vista extends JFrame {
 			public JButton btnPanelEmpresas;
 			public JButton btnPanelPeriodos;
 			public JButton btnPanelPracticas;
-		
+			public JButton btnPanelInstrucciones;
+	/**
+	 *PANEL INSTRUCCIONES 	
+	 */
+	public JPanel panelInstrucciones;
+	public JLabel lblInstrucciones;
+	
+	
 	/**
 	 * PANEL LISTA ALUMNOS	
 	 */
@@ -377,26 +384,32 @@ public class Vista extends JFrame {
 			btnPanelAlumnos = new JButton("Alumnos");
 			btnPanelAlumnos.setBackground(Color.WHITE);
 			btnPanelAlumnos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelAlumnos.setBounds(49, 50, 219, 37);
+			btnPanelAlumnos.setBounds(53, 206, 219, 37);
 			panelMenu.add(btnPanelAlumnos);
 			
 			btnPanelEmpresas = new JButton("Empresas");
 			btnPanelEmpresas.setBackground(Color.WHITE);
 			btnPanelEmpresas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelEmpresas.setBounds(49, 130, 219, 37);
+			btnPanelEmpresas.setBounds(53, 286, 219, 37);
 			panelMenu.add(btnPanelEmpresas);
 			
 			btnPanelPeriodos = new JButton("Periodos");
 			btnPanelPeriodos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelPeriodos.setBackground(Color.WHITE);
-			btnPanelPeriodos.setBounds(49, 210, 219, 37);
+			btnPanelPeriodos.setBounds(53, 366, 219, 37);
 			panelMenu.add(btnPanelPeriodos);
 			
 			btnPanelPracticas = new JButton("Prácticas");
 			btnPanelPracticas.setBackground(Color.WHITE);
 			btnPanelPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelPracticas.setBounds(49, 290, 219, 37);
+			btnPanelPracticas.setBounds(53, 446, 219, 37);
 			panelMenu.add(btnPanelPracticas);
+			
+			btnPanelInstrucciones = new JButton("Instrucciones");
+			btnPanelInstrucciones.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
+			btnPanelInstrucciones.setBackground(Color.WHITE);
+			btnPanelInstrucciones.setBounds(53, 126, 219, 37);
+			panelMenu.add(btnPanelInstrucciones);
 			
 			lblLogo = new JLabel("");
 			lblLogo.setBounds(60, 0, 271, 127);
@@ -406,8 +419,33 @@ public class Vista extends JFrame {
 			panelPrincipal.add(lblLogo);
 			
 			/**
-			 * PANEL ALUMNOS	
+			 * PANEL INSTRUCCIONES	
 			*/ 
+			
+			panelInstrucciones = new JPanel();
+			panelInstrucciones.setBackground(Color.WHITE);
+			panelInstrucciones.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+			panelInstrucciones.setBounds(368, 132, 1157, 648);
+			panelPrincipal.add(panelInstrucciones);
+			panelInstrucciones.setLayout(null);
+			
+			lblInstrucciones = new JLabel("");
+			lblInstrucciones.setBounds(49, 101, 1070, 535);
+			lblInstrucciones.setBackground(Color.WHITE);
+			lblInstrucciones.setVisible(true);
+			lblInstrucciones.setIcon(new ImageIcon("imagenes/instrucciones.png"));
+			panelInstrucciones.add(lblInstrucciones);
+			
+			JLabel lblTituloInstrucciones = new JLabel("INSTRUCCIONES");
+			lblTituloInstrucciones.setFont(new Font("Agency FB", Font.BOLD, 50));
+			lblTituloInstrucciones.setBounds(49, 21, 297, 70);
+			panelInstrucciones.add(lblTituloInstrucciones);
+		
+		
+			
+			/**
+			 * PANEL ALUMNOS	
+			*/
 			
 			panelListaAlumno = new JPanel();
 			panelListaAlumno.setBackground(Color.WHITE);
@@ -470,7 +508,7 @@ public class Vista extends JFrame {
 
 		/**
 		 * PANEL NUEVO ALUMNO
-	     */
+	    */
            
 		panelNuevoActualizarAlumno = new JPanel();
 		panelNuevoActualizarAlumno.setBounds(368, 132, 1157, 648);
@@ -618,7 +656,7 @@ public class Vista extends JFrame {
 
     	/**
     	 * PANEL EMPRESAS
-     	 */
+     	*/
 
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
@@ -1079,7 +1117,7 @@ public class Vista extends JFrame {
 	
 			/**
 			 * Panel nuevo Curso
-			*/ 
+			*/
 			panelNuevoCurso = new JPanel();
 			panelNuevoCurso.setBounds(368, 132, 1157, 648);
 			panelNuevoCurso.setBackground(Color.WHITE);
@@ -1276,7 +1314,7 @@ public class Vista extends JFrame {
 		
 		/**
 		 * PANEL PRACTICAS
-		*/
+		 */
 		
 		panelPracticas = new JPanel();
 		panelPracticas.setBackground(Color.WHITE);
@@ -1476,7 +1514,6 @@ public class Vista extends JFrame {
 			checkBoxAnexo4PFE.setBounds(226, 388, 166, 33);
 			checkBoxAnexo4PFE.setVisible(false);
 			panelDocumentos.add(checkBoxAnexo4PFE);
-
 		        
 	}
 }
