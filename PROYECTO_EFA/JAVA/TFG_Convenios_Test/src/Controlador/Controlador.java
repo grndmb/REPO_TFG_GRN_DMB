@@ -758,8 +758,8 @@ public class Controlador implements ActionListener{
 				    
 				//BOTON QUE ACTUALIZA LA EMPRESA
 				    if(e.getSource() == vista.btnModificarEmpresa){
-				    	
-				    	if(this.anadirEmpresaValida() == true && this.existeNuevaEmpresa(sessionFactory) == true) {
+				    					    	
+				    	if(this.anadirEmpresaValida() == true) {
 				    		//Llamamos al metodo que realiza el insert de la nueva empresa
 				    		this.actualizarEmpresa(sessionFactory, modelo);
 				    		this.vista.panelNuevaActualizarEmpresa.setVisible(false);
@@ -1350,7 +1350,9 @@ public class Controlador implements ActionListener{
 						
 						// CIF
 							String cifEmpresa = vista.txtCIFEmpresa.getText();
-						
+							System.out.println(cifEmpresa);
+							System.out.println("hola");
+
 						// NOMBRE
 							String nombreEmpresa = vista.txtNombreEmpresa.getText();
 						
@@ -1362,7 +1364,6 @@ public class Controlador implements ActionListener{
 						
 						// CORREO
 							String emailEmpresa = vista.txtEmailEmpresa.getText();
-							System.out.println(emailEmpresa);
 							
 						// TELEFONO 1 Y TELEFONO 2
 							int telefono1 = Integer.parseInt(vista.txtTelefono1Empresa.getText());

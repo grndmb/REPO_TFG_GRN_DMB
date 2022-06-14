@@ -375,7 +375,7 @@ public class Vista extends JFrame {
 			panelPrincipal.add(btnInicio);
 			
 			panelMenu = new JPanel();
-			panelMenu.setBackground(new Color(51, 204, 102));
+			panelMenu.setBackground(new Color(0, 204, 51));
 			panelMenu.setBorder(new MatteBorder(5, 3, 5, 3, (Color) new Color(0, 0, 0)));
 			panelMenu.setBounds(20, 132, 324, 648);
 			panelPrincipal.add(panelMenu);
@@ -384,31 +384,31 @@ public class Vista extends JFrame {
 			btnPanelAlumnos = new JButton("Alumnos");
 			btnPanelAlumnos.setBackground(Color.WHITE);
 			btnPanelAlumnos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelAlumnos.setBounds(53, 206, 219, 37);
+			btnPanelAlumnos.setBounds(53, 67, 219, 37);
 			panelMenu.add(btnPanelAlumnos);
 			
 			btnPanelEmpresas = new JButton("Empresas");
 			btnPanelEmpresas.setBackground(Color.WHITE);
 			btnPanelEmpresas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelEmpresas.setBounds(53, 286, 219, 37);
+			btnPanelEmpresas.setBounds(53, 147, 219, 37);
 			panelMenu.add(btnPanelEmpresas);
 			
 			btnPanelPeriodos = new JButton("Periodos");
 			btnPanelPeriodos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelPeriodos.setBackground(Color.WHITE);
-			btnPanelPeriodos.setBounds(53, 366, 219, 37);
+			btnPanelPeriodos.setBounds(53, 227, 219, 37);
 			panelMenu.add(btnPanelPeriodos);
 			
 			btnPanelPracticas = new JButton("Prácticas");
 			btnPanelPracticas.setBackground(Color.WHITE);
 			btnPanelPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
-			btnPanelPracticas.setBounds(53, 446, 219, 37);
+			btnPanelPracticas.setBounds(53, 307, 219, 37);
 			panelMenu.add(btnPanelPracticas);
 			
 			btnPanelInstrucciones = new JButton("Instrucciones");
 			btnPanelInstrucciones.setFont(new Font("Berlin Sans FB", Font.PLAIN, 30));
 			btnPanelInstrucciones.setBackground(Color.WHITE);
-			btnPanelInstrucciones.setBounds(53, 126, 219, 37);
+			btnPanelInstrucciones.setBounds(53, 505, 219, 37);
 			panelMenu.add(btnPanelInstrucciones);
 			
 			lblLogo = new JLabel("");
