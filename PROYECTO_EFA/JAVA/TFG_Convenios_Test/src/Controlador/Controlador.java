@@ -1270,7 +1270,7 @@ public class Controlador implements ActionListener{
 		
 		//METODOS DEL PANEL NUEVA EMPRESA
 			
-			//Metodo para hacer el insert del nuevo Alumno en la base de datos
+			//Metodo para hacer el insert de la nueva Empresa en la base de datos
 				public void crearNuevaEmpresa(SessionFactory sessionFactory, Modelo modelo) {
 					
 					try {
@@ -1362,7 +1362,8 @@ public class Controlador implements ActionListener{
 						
 						// CORREO
 							String emailEmpresa = vista.txtEmailEmpresa.getText();
-					
+							System.out.println(emailEmpresa);
+							
 						// TELEFONO 1 Y TELEFONO 2
 							int telefono1 = Integer.parseInt(vista.txtTelefono1Empresa.getText());
 							int telefono2 = Integer.parseInt(vista.txtTelefono2Empresa.getText());
@@ -1448,9 +1449,7 @@ public class Controlador implements ActionListener{
 					Session session = null; 
 					Modelo modelo= new Modelo();
 					try {
-						
-						session = sessionFactory.getCurrentSession();
-						session.beginTransaction();
+
 						String cifEmpresa = vista.txtCIFEmpresa.getText();
 						
 						//LISTA EMPRESAS
@@ -1458,7 +1457,7 @@ public class Controlador implements ActionListener{
 						
 						//Comprobamos si existe
 						 
-						for(int i = 0;i<empresas.size();i++){
+						for(int i = 0 ; i < empresas.size() ; i++){
 							if(empresas.get(i).getCifEmpresa().equals(cifEmpresa)) {
 								vista.lblErroresNuevaEmpresa.setText("ERROR!! LA EMPRESA YA EXISTE");
 								vista.lblErroresNuevaEmpresa.setForeground(Color.RED);
@@ -1473,13 +1472,6 @@ public class Controlador implements ActionListener{
 						
 					} catch (Exception e) {
 						e.printStackTrace();
-						if(null != session) {
-							session.getTransaction().rollback();
-						}
-					}finally {
-						if(null != session) {
-							session.close();
-						}
 					}
 					
 					return existe;
