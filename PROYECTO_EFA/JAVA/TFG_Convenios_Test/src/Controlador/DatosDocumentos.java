@@ -82,7 +82,7 @@ public class DatosDocumentos {
 			      //RUTA ACTUAL
 					String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 					//RUTA AL MODIFICAR EL ARCHIVO
-					String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"_"+cif+".pdf";
+					String rutaModificado = "C:/DOCUMENTOS_APP_EFA/"+nombreArchivoSinExtension+"_"+cif+".pdf";
 					//String rutaModificado = "C:/Users/david/Desktop/PDF/pruebaAnexo0.pdf";
 
 				  PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
@@ -141,7 +141,7 @@ public class DatosDocumentos {
 		      //RUTA ACTUAL
 				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 				//RUTA AL MODIFICAR EL ARCHIVO
-				String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"___"+cif+"___.pdf";
+				String rutaModificado = "C:/DOCUMENTOS_APP_EFA/"+nombreArchivoSinExtension+"___"+cif+"___.pdf";
 			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
 
@@ -194,7 +194,7 @@ public class DatosDocumentos {
 		      //RUTA ACTUAL
 				String rutaActual = "DOCUMENTOS/"+tipo+"/"+nombreArchivoSinExtension+".pdf";
 				//RUTA AL MODIFICAR EL ARCHIVO
-				String rutaModificado = "C:/DOCUMENTOS_APP_TFG/"+nombreArchivoSinExtension+"_"+cifEmpresa+".pdf";
+				String rutaModificado = "C:/DOCUMENTOS_APP_EFA/"+nombreArchivoSinExtension+"_"+cifEmpresa+".pdf";
 			    PdfDocument pdfDoc = new PdfDocument(new PdfReader(rutaActual), new PdfWriter(rutaModificado));
 
 		        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
@@ -220,7 +220,7 @@ public class DatosDocumentos {
 					  fields.get("dniAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getAlumno().getNif());
 					  fields.get("poblacionAlumno" + (i + 1)).setValue(listaAlumnos.get(i).getAlumno().getPoblacion().getNombre());
 					  fields.get("fechaInicioAlumno" + (i + 1)).setValue(String.valueOf(listaAlumnos.get(i).getPractica().getFechaInicio()));
-					  fields.get("fechaFinAlumno" + (i + 1)).setValue(String.valueOf(listaAlumnos.get(i).getPractica().getFechaInicio()));
+					  fields.get("fechaFinAlumno" + (i + 1)).setValue(String.valueOf(listaAlumnos.get(i).getPractica().getFechaFin()));
 					  fields.get("horasAlumno" + (i + 1)).setValue("100");
 				  }
 				  
