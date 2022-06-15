@@ -484,20 +484,23 @@ public class Vista extends JFrame {
             panelListaAlumno.add(comboBoxListaCursoAlumno);
             
             btnPanelAddAlumno = new JButton("AÑADIR NUEVO");
-            btnPanelAddAlumno.setBackground(Color.GREEN);
-            btnPanelAddAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelAddAlumno.setForeground(Color.WHITE);
+            btnPanelAddAlumno.setBackground(new Color(0, 102, 51));
+            btnPanelAddAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
             btnPanelAddAlumno.setBounds(874, 518, 205, 55);
             panelListaAlumno.add(btnPanelAddAlumno);
             
             btnPanelModificarAlumno = new JButton("MODIFICAR");
-            btnPanelModificarAlumno.setBackground(Color.ORANGE);
-            btnPanelModificarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelModificarAlumno.setForeground(Color.WHITE);
+            btnPanelModificarAlumno.setBackground(new Color(255, 153, 0));
+            btnPanelModificarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
             btnPanelModificarAlumno.setBounds(874, 230, 205, 55);
             panelListaAlumno.add(btnPanelModificarAlumno);
             
             btnEliminarAlumno = new JButton("ELIMINAR");
-            btnEliminarAlumno.setBackground(Color.RED);
-            btnEliminarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnEliminarAlumno.setForeground(Color.WHITE);
+            btnEliminarAlumno.setBackground(new Color(255, 51, 0));
+            btnEliminarAlumno.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
             btnEliminarAlumno.setBounds(874, 312, 205, 55);
             panelListaAlumno.add(btnEliminarAlumno);
             
@@ -1238,14 +1241,16 @@ public class Vista extends JFrame {
 		        panelPeriodos.add(comboBoxListaCursoPeriodo);
 		        
 		        btnCrearPeriodo = new JButton("CREAR PERIODO");
-		        btnCrearPeriodo.setBackground(Color.ORANGE);
+		        btnCrearPeriodo.setForeground(Color.WHITE);
+		        btnCrearPeriodo.setBackground(new Color(0, 102, 51));
 		        btnCrearPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 		        btnCrearPeriodo.setBounds(39, 545, 382, 55);
 		        panelPeriodos.add(btnCrearPeriodo);
 		        
 		        btnEliminarPeriodo = new JButton("ELIMINAR PERIODO");
-		        btnEliminarPeriodo.setBackground(Color.RED);
-		        btnEliminarPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		        btnEliminarPeriodo.setForeground(Color.WHITE);
+		        btnEliminarPeriodo.setBackground(new Color(255, 51, 0));
+		        btnEliminarPeriodo.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 		        btnEliminarPeriodo.setBounds(462, 545, 653, 55);
 		        panelPeriodos.add(btnEliminarPeriodo);
 		        
@@ -1349,7 +1354,8 @@ public class Vista extends JFrame {
 	        panelPracticas.add(listPanePeriodosPracticas);
 	        
 	        btnAsignarPeriodoPracticas = new JButton("ASIGNAR PERIODO");
-	        btnAsignarPeriodoPracticas.setBackground(Color.ORANGE);
+	        btnAsignarPeriodoPracticas.setForeground(Color.WHITE);
+	        btnAsignarPeriodoPracticas.setBackground(new Color(0, 102, 51));
 	        btnAsignarPeriodoPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 	        btnAsignarPeriodoPracticas.setBounds(864, 100, 218, 55);
 	        panelPracticas.add(btnAsignarPeriodoPracticas);
@@ -1391,7 +1397,8 @@ public class Vista extends JFrame {
 	        panelPracticas.add(listPaneEmpresasPracticas);
 	        
 	        btnAsignarEmpresaPracticas = new JButton("ASIGNAR EMPRESA");
-	        btnAsignarEmpresaPracticas.setBackground(Color.CYAN);
+	        btnAsignarEmpresaPracticas.setForeground(Color.WHITE);
+	        btnAsignarEmpresaPracticas.setBackground(new Color(0, 153, 255));
 	        btnAsignarEmpresaPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 	        btnAsignarEmpresaPracticas.setBounds(864, 295, 218, 55);
 	        btnAsignarEmpresaPracticas.setVisible(false);
@@ -1416,14 +1423,16 @@ public class Vista extends JFrame {
 	        panelPracticas.add(listPaneAnexarPracticas);
 	        
 	        btnEliminarAnexarPracticas = new JButton("ELIMINAR");
-	        btnEliminarAnexarPracticas.setBackground(Color.RED);
+	        btnEliminarAnexarPracticas.setForeground(Color.WHITE);
+	        btnEliminarAnexarPracticas.setBackground(new Color(255, 51, 0));
 	        btnEliminarAnexarPracticas.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 	        btnEliminarAnexarPracticas.setBounds(864, 500, 218, 55);
 	        btnEliminarAnexarPracticas.setVisible(false);
 	        panelPracticas.add(btnEliminarAnexarPracticas);
 	        
 	        btnPanelDocumentos = new JButton("DOCUMENTOS");
-			btnPanelDocumentos.setBackground(Color.PINK);
+	        btnPanelDocumentos.setForeground(Color.WHITE);
+			btnPanelDocumentos.setBackground(new Color(119, 136, 153));
 			btnPanelDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			btnPanelDocumentos.setBounds(864, 565, 218, 55);
 			btnPanelDocumentos.setVisible(false);
@@ -1450,7 +1459,7 @@ public class Vista extends JFrame {
 			lblTituloSeleccionDocumentos.setBounds(49, 102, 618, 47);
 			panelDocumentos.add(lblTituloSeleccionDocumentos);
 
-			lblInfoRutaDocumentos = new JLabel("LOS DOCUMENTOS SE HAN EN EL DISCO LOCAL C:");
+			lblInfoRutaDocumentos = new JLabel("LOS DOCUMENTOS SE HAN GUARDADO EN LA CARPETA DOCUMENTOS_APP_EFA");
 			lblInfoRutaDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			lblInfoRutaDocumentos.setForeground(new Color(255, 140, 0));
 			lblInfoRutaDocumentos.setBounds(580, 580, 534, 47);
@@ -1463,16 +1472,18 @@ public class Vista extends JFrame {
 			panelDocumentos.add(lblFCToPFEDocumentos);
 			
 			btnGuardarDocumentos = new JButton("GUARDAR");
-			btnGuardarDocumentos.setBackground(new Color(64, 224, 208));
-			btnGuardarDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+			btnGuardarDocumentos.setForeground(Color.WHITE);
+			btnGuardarDocumentos.setBackground(new Color(51, 102, 102));
+			btnGuardarDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 			btnGuardarDocumentos.setBounds(226, 511, 271, 55);
 			btnGuardarDocumentos.setVisible(true);
 			panelDocumentos.add(btnGuardarDocumentos);
 			
 			btnAtrasDocumentos = new JButton("ATRÁS");
-			btnAtrasDocumentos.setBackground(new Color(127, 255, 212));
-			btnAtrasDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-			btnAtrasDocumentos.setBounds(49, 580, 128, 55);
+			btnAtrasDocumentos.setForeground(Color.WHITE);
+			btnAtrasDocumentos.setBackground(new Color(204, 0, 0));
+			btnAtrasDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+			btnAtrasDocumentos.setBounds(49, 560, 128, 70);
 			btnAtrasDocumentos.setVisible(true);
 			panelDocumentos.add(btnAtrasDocumentos);
 			
