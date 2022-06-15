@@ -72,7 +72,6 @@ public class Vista extends JFrame {
 	 *PANEL INSTRUCCIONES 	
 	 */
 	public JPanel panelInstrucciones;
-	public JLabel lblInstrucciones;
 	
 	
 	/**
@@ -429,17 +428,70 @@ public class Vista extends JFrame {
 			panelPrincipal.add(panelInstrucciones);
 			panelInstrucciones.setLayout(null);
 			
-			lblInstrucciones = new JLabel("");
-			lblInstrucciones.setBounds(49, 101, 1070, 535);
-			lblInstrucciones.setBackground(Color.WHITE);
-			lblInstrucciones.setVisible(true);
-			lblInstrucciones.setIcon(new ImageIcon("imagenes/instrucciones.png"));
-			panelInstrucciones.add(lblInstrucciones);
-			
 			JLabel lblTituloInstrucciones = new JLabel("INSTRUCCIONES");
 			lblTituloInstrucciones.setFont(new Font("Agency FB", Font.BOLD, 50));
 			lblTituloInstrucciones.setBounds(49, 21, 297, 70);
 			panelInstrucciones.add(lblTituloInstrucciones);
+			
+			JLabel lblInst1 = new JLabel("<html><body> 1º  Revisar los datos de los Alumnos</body></html>\r\n");
+			lblInst1.setFont(new Font("Arial", Font.BOLD, 20));
+			lblInst1.setBounds(49, 77, 1060, 52);
+			panelInstrucciones.add(lblInst1);
+			
+			JLabel lblPulseSobre = new JLabel("<html><body>- Pulse sobre el botón \"Alumnos\" y seleccione el curso para filtrar por el mismo.\r\n <br>- Una vez ha lozalizado el curso, puede consultar los datos de un alumno, seleccionando \r\n   el alumno y pulsando   en \"Modificar\", ahí podrá ver todos los datos del alumno y si es preciso,\r\n   modificarlos.\r\n <br>- También puede Añadir nuevos alumnos o eliminarlos seleccionando uno de ellos<hr></body></html>");
+			lblPulseSobre.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
+			lblPulseSobre.setBounds(49, 103, 1060, 124);
+			panelInstrucciones.add(lblPulseSobre);
+			
+			JLabel lblRevisarLos = new JLabel("2º  Revisar los datos de la Empresa");
+			lblRevisarLos.setFont(new Font("Arial", Font.BOLD, 20));
+			lblRevisarLos.setBounds(49, 195, 1060, 52);
+			panelInstrucciones.add(lblRevisarLos);
+			
+			JLabel lblPulseSobre_2 = new JLabel("<html><body>- Pulse sobre el botón \"Empresas\" y una vez dentro, introduce el nombre de la empresa en el buscador y pulse \"buscar\".\r\n <br>- Una vez ha localizado la empresa, puede consultar sus datos, seleccionandola y pulsando en \"Modificar\", ahí podrá ver todos los datos de la empresa y si es preciso, modificarlos.\r\n <br>- También puede Añadir nuevas empresas o eliminarlas seleccionando una de ellas.<hr></body></html>\r\n");
+			lblPulseSobre_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
+			lblPulseSobre_2.setBounds(49, 215, 1060, 124);
+			panelInstrucciones.add(lblPulseSobre_2);
+			
+			JLabel lblRevisarLos_2 = new JLabel("3º Revisar los convenios de la Empresa");
+			lblRevisarLos_2.setFont(new Font("Arial", Font.BOLD, 20));
+			lblRevisarLos_2.setBounds(49, 305, 1060, 52);
+			panelInstrucciones.add(lblRevisarLos_2);
+			
+			JLabel lblPulseSobre_2_1 = new JLabel("<html><body>- Pulse sobre el botón \"Empresas\", una vez dentro busque y seleccione la empresa a consultar, después pulse en \"Ver convenio\" y accederá a un panel donde se pueden consultar, actualizar o crear convenios.\r\n<hr></body></html>\r\n");
+			lblPulseSobre_2_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
+			lblPulseSobre_2_1.setBounds(49, 333, 1060, 70);
+			panelInstrucciones.add(lblPulseSobre_2_1);
+			
+			JLabel lblRevisarLos_2_1 = new JLabel("4º Crear Periodo de Prácticas");
+			lblRevisarLos_2_1.setFont(new Font("Arial", Font.BOLD, 20));
+			lblRevisarLos_2_1.setBounds(49, 375, 1060, 52);
+			panelInstrucciones.add(lblRevisarLos_2_1);
+			
+			JLabel lblPulseSobre_2_1_1 = new JLabel("<html><body>- Pulse sobre el botón  \" Periodos \" , una vez dentro rellene el formulario con todos los datos del periodo y pulse \" Crear Periodo \".                                                                                                                                       \r\n<hr></body></html>\r\n");
+			lblPulseSobre_2_1_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
+			lblPulseSobre_2_1_1.setBounds(49, 399, 1060, 52);
+			panelInstrucciones.add(lblPulseSobre_2_1_1);
+			
+			JLabel lblAsignarPeriodo = new JLabel("5º Asignar Periodo de Practica");
+			lblAsignarPeriodo.setFont(new Font("Arial", Font.BOLD, 20));
+			lblAsignarPeriodo.setBounds(49, 427, 1060, 52);
+			panelInstrucciones.add(lblAsignarPeriodo);
+			
+			JLabel lblPulseSobre_2_2 = new JLabel("<html><body>- Pulse sobre el botón \"Empresas\" y una vez dentro, introduce el nombre de la empresa en el buscador y pulse \"buscar\".\r\n <br>- Una vez ha localizado la empresa, puede consultar sus datos, seleccionandola y pulsando en \"Modificar\", ahí podrá ver todos los datos de la empresa y si es preciso, modificarlos.\r\n <br>- También puede Añadir nuevas empresas o eliminarlas seleccionando una de ellas.<hr></body></html>\r\n");
+			lblPulseSobre_2_2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
+			lblPulseSobre_2_2.setBounds(49, 449, 1060, 124);
+			panelInstrucciones.add(lblPulseSobre_2_2);
+			
+			JLabel lblRevisarLos_2_1_1 = new JLabel("6º Acceder a los documentos\r\n\t");
+			lblRevisarLos_2_1_1.setFont(new Font("Arial", Font.BOLD, 20));
+			lblRevisarLos_2_1_1.setBounds(49, 540, 1060, 52);
+			panelInstrucciones.add(lblRevisarLos_2_1_1);
+			
+			JLabel lblPulseSobre_2_1_1_1 = new JLabel("<html><body>-Para acceder a los documentos creados, haga click en el Explorador de archivos de su ordenador, en la parte izquierda pulsar sobre \"Disco Local (C:)\" y para finalizar podrá ver la carpeta con los documentos generados.                                                                                                                                      \r\n<hr></body></html>\r\n");
+			lblPulseSobre_2_1_1_1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
+			lblPulseSobre_2_1_1_1.setBounds(49, 578, 1060, 52);
+			panelInstrucciones.add(lblPulseSobre_2_1_1_1);
 		
 		
 			
@@ -660,7 +712,6 @@ public class Vista extends JFrame {
     	/**
     	 * PANEL EMPRESAS
      	*/
-
 			panelListaEmpresas = new JPanel();
 			panelListaEmpresas.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 			panelListaEmpresas.setBackground(Color.WHITE);
@@ -1056,7 +1107,7 @@ public class Vista extends JFrame {
             
 		/**
 		 *  Panel nueva Poblacion
-		 */
+		*/ 
 		panelNuevaPoblacion = new JPanel();
 		panelNuevaPoblacion.setBounds(368, 132, 1157, 648);
 		panelNuevaPoblacion.setBackground(Color.WHITE);
@@ -1528,7 +1579,6 @@ public class Vista extends JFrame {
 			checkBoxAnexo4PFE.setBackground(Color.WHITE);
 			checkBoxAnexo4PFE.setBounds(226, 388, 166, 33);
 			checkBoxAnexo4PFE.setVisible(false);
-			panelDocumentos.add(checkBoxAnexo4PFE);
-		        
+			panelDocumentos.add(checkBoxAnexo4PFE);      
 	}
 }
