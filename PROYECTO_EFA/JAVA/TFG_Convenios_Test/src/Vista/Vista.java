@@ -683,28 +683,32 @@ public class Vista extends JFrame {
 			
             
             btnPanelAddEmpresa = new JButton("AÑADIR NUEVA");
-            btnPanelAddEmpresa.setBackground(Color.GREEN);
-            btnPanelAddEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelAddEmpresa.setForeground(Color.WHITE);
+            btnPanelAddEmpresa.setBackground(new Color(0, 102, 51));
+            btnPanelAddEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
             btnPanelAddEmpresa.setBounds(874, 536, 205, 55);
             panelListaEmpresas.add(btnPanelAddEmpresa);
             
             
             btnPanelModificarEmpresa = new JButton("MODIFICAR");
-            btnPanelModificarEmpresa.setBackground(Color.ORANGE);
-            btnPanelModificarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnPanelModificarEmpresa.setForeground(Color.WHITE);
+            btnPanelModificarEmpresa.setBackground(new Color(255, 153, 0));
+            btnPanelModificarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
             btnPanelModificarEmpresa.setBounds(874, 328, 205, 55);
             panelListaEmpresas.add(btnPanelModificarEmpresa);
             
             
             btnEliminarEmpresa = new JButton("ELIMINAR");
-            btnEliminarEmpresa.setBackground(Color.RED);
-            btnEliminarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+            btnEliminarEmpresa.setForeground(Color.WHITE);
+            btnEliminarEmpresa.setBackground(new Color(255, 51, 0));
+            btnEliminarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
             btnEliminarEmpresa.setBounds(874, 411, 205, 55);
             panelListaEmpresas.add(btnEliminarEmpresa);
             
             btnPanelConvenio = new JButton("VER CONVENIO");
-            btnPanelConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-            btnPanelConvenio.setBackground(new Color(0, 204, 255));
+            btnPanelConvenio.setForeground(Color.WHITE);
+            btnPanelConvenio.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
+            btnPanelConvenio.setBackground(new Color(0, 153, 255));
             btnPanelConvenio.setBounds(874, 210, 205, 55);
             panelListaEmpresas.add(btnPanelConvenio);
             

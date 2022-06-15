@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -63,7 +64,9 @@ public class DatosDocumentos {
 				  fields.get("emailEmpresa").setValue(convenio.getEmpresa().getEmailEmpresa());
 
 				  fields.get("manzanares").setValue("Manzanares");
-				  fields.get("fechaAnexo").setValue(String.valueOf(convenio.getFechaAnexo()));
+				  
+				  String fecha = this.fechaHoy();
+				  fields.get("fechaAnexo").setValue(fecha);
 				  
 				  
 				  pdfDoc.close();
@@ -120,7 +123,8 @@ public class DatosDocumentos {
 					  fields.get("añoCurso").setValue(yearAux); 
 					  
 					  fields.get("manzanares").setValue("Manzanares");
-					  fields.get("fechaAnexo").setValue(String.valueOf(convenio.getFechaAnexo()));
+					  String fecha = this.fechaHoy();
+					  fields.get("fechaAnexo").setValue(fecha);
 					  
 					  
 					  pdfDoc.close();
@@ -172,7 +176,8 @@ public class DatosDocumentos {
 				  fields.get("nombreProfesorPractica").setValue(listaAlumnos.get(0).getPractica().getProfesor().getNombre());
 				  fields.get("nombrePersonaContactoEmpresa").setValue(convenio.getEmpresa().getNombreEmpresa());
 				  fields.get("manzanares").setValue("Manzanares");
-				  fields.get("fechaAnexo").setValue(String.valueOf(convenio.getFechaAnexo()));
+				  String fecha = this.fechaHoy();
+				  fields.get("fechaAnexo").setValue(fecha);
 				  fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
 				  fields.get("nombreDirectorEmpresa").setValue(convenio.getEmpresa().getNombreGerente());
 
@@ -231,7 +236,10 @@ public class DatosDocumentos {
 				  fields.get("dniPersonaContacto").setValue(convenio.getEmpresa().getDniPersonaContacto());
 				  
 				  fields.get("manzanares").setValue("Manzanares");
-				  fields.get("fechaAnexo").setValue(String.valueOf(convenio.getFechaAnexo()));
+				  
+				  String fecha = this.fechaHoy();
+				  
+				  fields.get("fechaAnexo").setValue(fecha);
 				  fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
 				  fields.get("nombreDirectorEmpresa").setValue(convenio.getEmpresa().getNombreGerente());
 
@@ -275,6 +283,12 @@ public class DatosDocumentos {
 			e.printStackTrace();
 		}
 		
+	}
+	public String fechaHoy() {
+		java.sql.Date fecha = null;
+		  Date fechaAct = Calendar.getInstance().getTime();
+		  fecha = new java.sql.Date(fechaAct.getTime());
+		 return String.valueOf(fecha);
 	}
 }
 

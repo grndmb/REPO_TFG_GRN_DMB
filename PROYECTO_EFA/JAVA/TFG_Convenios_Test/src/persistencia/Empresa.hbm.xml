@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Empresa" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="empresa">
-        <comment>Tabla con la informacion de la empresa</comment>
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Empresa" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="EMPRESA">
         <id name="cifEmpresa" type="string">
             <column length="10" name="CIF_EMPRESA"/>
             <generator class="assigned"/>
@@ -82,21 +81,13 @@
                 <comment>Observaciones</comment>
             </column>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="convenios" optimistic-lock="true" sort="unsorted" table="convenio">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="convenios" optimistic-lock="true" sort="unsorted" table="CONVENIO">
             <key on-delete="noaction">
                 <column length="10" name="CIF_EMPRESA" not-null="true">
                     <comment>Identificador de la empresa</comment>
                 </column>
             </key>
             <one-to-many class="persistencia.Convenio" embed-xml="true" not-found="exception"/>
-        </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="anexar">
-            <key on-delete="noaction">
-                <column length="10" name="CIF_EMPRESA" not-null="true">
-                    <comment>Identificador de la empresa</comment>
-                </column>
-            </key>
-            <one-to-many class="persistencia.Anexar" embed-xml="true" not-found="exception"/>
         </set>
     </class>
 </hibernate-mapping>

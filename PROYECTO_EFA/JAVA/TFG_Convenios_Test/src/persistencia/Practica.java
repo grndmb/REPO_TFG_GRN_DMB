@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final
+// Generated 14 jun. 2022 12:36:32 by Hibernate Tools 5.4.21.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class Practica implements java.io.Serializable {
 
-	private int idPractica;
+	private Integer idPractica;
 	private Curso curso;
 	private Profesor profesor;
 	private String tipoPractica;
@@ -21,9 +21,7 @@ public class Practica implements java.io.Serializable {
 	public Practica() {
 	}
 
-	public Practica(int idPractica, Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio,
-			Date fechaFin) {
-		this.idPractica = idPractica;
+	public Practica(Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio, Date fechaFin) {
 		this.curso = curso;
 		this.profesor = profesor;
 		this.tipoPractica = tipoPractica;
@@ -31,9 +29,7 @@ public class Practica implements java.io.Serializable {
 		this.fechaFin = fechaFin;
 	}
 
-	public Practica(int idPractica, Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio,
-			Date fechaFin, Set anexars) {
-		this.idPractica = idPractica;
+	public Practica(Curso curso, Profesor profesor, String tipoPractica, Date fechaInicio, Date fechaFin, Set anexars) {
 		this.curso = curso;
 		this.profesor = profesor;
 		this.tipoPractica = tipoPractica;
@@ -42,11 +38,11 @@ public class Practica implements java.io.Serializable {
 		this.anexars = anexars;
 	}
 
-	public int getIdPractica() {
+	public Integer getIdPractica() {
 		return this.idPractica;
 	}
 
-	public void setIdPractica(int idPractica) {
+	public void setIdPractica(Integer idPractica) {
 		this.idPractica = idPractica;
 	}
 
@@ -98,7 +94,7 @@ public class Practica implements java.io.Serializable {
 		this.anexars = anexars;
 	}
 	@Override
-	public String toString() {
-		return "- " + tipoPractica + "   ("+ fechaInicio + " -- " + fechaFin + ") --> *"+curso+"*\n" ;
-	}
+    public String toString() {
+        return "- " + tipoPractica + "   ("+ fechaInicio + " -- " + fechaFin + ") --> "+curso+"\n" ;
+    }
 }

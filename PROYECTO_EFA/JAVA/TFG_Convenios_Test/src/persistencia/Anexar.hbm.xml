@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Anexar" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="anexar">
-        <comment>Tabla con la informacion de anexar alumno, empresa y practica</comment>
-        <id name="idAnexado" type="int">
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Anexar" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="ANEXAR">
+        <id name="idAnexado" type="java.lang.Integer">
             <column name="ID_ANEXADO"/>
-            <generator class="assigned"/>
+            <generator class="identity"/>
         </id>
         <many-to-one class="persistencia.Alumno" embed-xml="true" fetch="select" insert="true" name="alumno" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column length="9" name="NIF_ALUMNO" not-null="true">

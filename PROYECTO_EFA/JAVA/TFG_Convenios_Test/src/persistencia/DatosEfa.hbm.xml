@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.DatosEfa" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="datos_efa">
-        <comment>Tabla con la informacion de EFA MORATALAZ</comment>
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.DatosEfa" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="DATOS_EFA">
         <id name="nombre" type="string">
             <column length="20" name="NOMBRE"/>
             <generator class="assigned"/>

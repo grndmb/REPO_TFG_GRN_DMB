@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Poblacion" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="poblacion">
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Poblacion" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="POBLACION">
         <id name="codigoPostal" type="int">
             <column name="CODIGO_POSTAL"/>
             <generator class="assigned"/>
@@ -12,7 +12,7 @@
         <property generated="never" lazy="false" name="provincia" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="PROVINCIA" not-null="true"/>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="empresas" optimistic-lock="true" sort="unsorted" table="empresa">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="empresas" optimistic-lock="true" sort="unsorted" table="EMPRESA">
             <key on-delete="noaction">
                 <column name="CODIGO_POSTAL" not-null="true">
                     <comment>Codigo postal de la poblacion</comment>
@@ -20,13 +20,13 @@
             </key>
             <one-to-many class="persistencia.Empresa" embed-xml="true" not-found="exception"/>
         </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="datosEfas" optimistic-lock="true" sort="unsorted" table="datos_efa">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="datosEfas" optimistic-lock="true" sort="unsorted" table="DATOS_EFA">
             <key on-delete="noaction">
                 <column name="CODIGO_POSTAL" not-null="true"/>
             </key>
             <one-to-many class="persistencia.DatosEfa" embed-xml="true" not-found="exception"/>
         </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="alumnos" optimistic-lock="true" sort="unsorted" table="alumno">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="alumnos" optimistic-lock="true" sort="unsorted" table="ALUMNO">
             <key on-delete="noaction">
                 <column name="CODIGO_POSTAL" not-null="true">
                     <comment>Codigo postal de la poblacion</comment>

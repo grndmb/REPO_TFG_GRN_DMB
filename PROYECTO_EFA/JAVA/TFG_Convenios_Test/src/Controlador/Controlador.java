@@ -1097,6 +1097,7 @@ public class Controlador implements ActionListener{
 			  vista.panelPracticas.setVisible(true);
 			  vista.panelDocumentos.setVisible(false);
 		  }
+		  //cerrar session factory
 	}
 		
 	

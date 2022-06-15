@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 2 jun. 2022 16:39:39 by Hibernate Tools 5.4.32.Final
+// Generated 14 jun. 2022 12:36:38 by Hibernate Tools 5.4.21.Final
 
 import java.util.List;
 import java.util.logging.Level;
@@ -85,7 +85,7 @@ public class PracticaHome {
 		}
 	}
 
-	public Practica findById(int id) {
+	public Practica findById(java.lang.Integer id) {
 		logger.log(Level.INFO, "getting Practica instance with id: " + id);
 		try {
 			Practica instance = (Practica) sessionFactory.getCurrentSession().get("persistencia.Practica", id);

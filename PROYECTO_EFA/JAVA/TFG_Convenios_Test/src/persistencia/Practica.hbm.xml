@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 2 jun. 2022 16:39:34 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Practica" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="practica">
-        <comment>Tabla con la infomarcion de las practicas</comment>
-        <id name="idPractica" type="int">
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Practica" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="PRACTICA">
+        <id name="idPractica" type="java.lang.Integer">
             <column name="ID_PRACTICA"/>
-            <generator class="assigned"/>
+            <generator class="identity"/>
         </id>
         <many-to-one class="persistencia.Curso" embed-xml="true" fetch="select" insert="true" name="curso" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column length="200" name="NOMBRE_CURSO" not-null="true">
@@ -32,7 +31,7 @@
                 <comment>Fecha final de la practica</comment>
             </column>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="anexar">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="anexars" optimistic-lock="true" sort="unsorted" table="ANEXAR">
             <key on-delete="noaction">
                 <column name="ID_PRACTICA" not-null="true">
                     <comment>Identificador de LA PRACTICA</comment>

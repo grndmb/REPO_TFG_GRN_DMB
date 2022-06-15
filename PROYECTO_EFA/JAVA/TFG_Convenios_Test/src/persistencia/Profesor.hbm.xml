@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Profesor" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="profesor">
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Profesor" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="PROFESOR">
         <id name="dniProfesor" type="string">
             <column length="9" name="DNI_PROFESOR"/>
             <generator class="assigned"/>
@@ -11,7 +11,7 @@
                 <comment>Nombre del profesor</comment>
             </column>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="practica">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="PRACTICA">
             <key on-delete="noaction">
                 <column length="9" name="DNI_PROFESOR" not-null="true">
                     <comment>DNI del profesor responsable de las practicas</comment>

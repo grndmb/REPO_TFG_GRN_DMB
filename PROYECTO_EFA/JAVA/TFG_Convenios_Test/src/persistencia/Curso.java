@@ -1,5 +1,5 @@
 package persistencia;
-// Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final
+// Generated 14 jun. 2022 12:36:32 by Hibernate Tools 5.4.21.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +12,7 @@ public class Curso implements java.io.Serializable {
 	private String nombreCurso;
 	private String nombreAbrev;
 	private String clave;
+	private String codProyecto;
 	private int horasFct;
 	private boolean esPublico;
 	private Set practicas = new HashSet(0);
@@ -20,19 +21,22 @@ public class Curso implements java.io.Serializable {
 	public Curso() {
 	}
 
-	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico) {
+	public Curso(String nombreCurso, String nombreAbrev, String clave, String codProyecto, int horasFct,
+			boolean esPublico) {
 		this.nombreCurso = nombreCurso;
 		this.nombreAbrev = nombreAbrev;
 		this.clave = clave;
+		this.codProyecto = codProyecto;
 		this.horasFct = horasFct;
 		this.esPublico = esPublico;
 	}
 
-	public Curso(String nombreCurso, String nombreAbrev, String clave, int horasFct, boolean esPublico, Set practicas,
-			Set alumnos) {
+	public Curso(String nombreCurso, String nombreAbrev, String clave, String codProyecto, int horasFct,
+			boolean esPublico, Set practicas, Set alumnos) {
 		this.nombreCurso = nombreCurso;
 		this.nombreAbrev = nombreAbrev;
 		this.clave = clave;
+		this.codProyecto = codProyecto;
 		this.horasFct = horasFct;
 		this.esPublico = esPublico;
 		this.practicas = practicas;
@@ -61,6 +65,14 @@ public class Curso implements java.io.Serializable {
 
 	public void setClave(String clave) {
 		this.clave = clave;
+	}
+
+	public String getCodProyecto() {
+		return this.codProyecto;
+	}
+
+	public void setCodProyecto(String codProyecto) {
+		this.codProyecto = codProyecto;
 	}
 
 	public int getHorasFct() {
@@ -94,10 +106,8 @@ public class Curso implements java.io.Serializable {
 	public void setAlumnos(Set alumnos) {
 		this.alumnos = alumnos;
 	}
-
 	@Override
-	public String toString() {
-		return "" + nombreAbrev;
-	}
-
+    public String toString() {
+        return "" + nombreAbrev;
+    }
 }

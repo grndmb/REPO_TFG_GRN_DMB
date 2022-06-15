@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 17 may. 2022 10:17:02 by Hibernate Tools 5.4.32.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 jun. 2022 12:36:33 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
-    <class catalog="base_datos_convenio" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Curso" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="curso">
-        <comment>Tabla con la informacion de curso</comment>
+    <class catalog="bdConveniosEFAM" dynamic-insert="false" dynamic-update="false" mutable="true" name="persistencia.Curso" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="CURSO">
         <id name="nombreCurso" type="string">
             <column length="200" name="NOMBRE_CURSO"/>
             <generator class="assigned"/>
@@ -14,7 +13,12 @@
         </property>
         <property generated="never" lazy="false" name="clave" optimistic-lock="true" type="string" unique="false">
             <column length="20" name="CLAVE" not-null="true">
-                <comment>Clave del curso</comment>
+                <comment>Clave de proyecto</comment>
+            </column>
+        </property>
+        <property generated="never" lazy="false" name="codProyecto" optimistic-lock="true" type="string" unique="false">
+            <column length="6" name="COD_PROYECTO" not-null="true">
+                <comment>Clave de proyecto</comment>
             </column>
         </property>
         <property generated="never" lazy="false" name="horasFct" optimistic-lock="true" type="int" unique="false">
@@ -24,10 +28,10 @@
         </property>
         <property generated="never" lazy="false" name="esPublico" optimistic-lock="true" type="boolean" unique="false">
             <column name="ES_PUBLICO" not-null="true">
-                <comment>Ensenanza publica o privada</comment>
+                <comment>Enseñanza publica o privada</comment>
             </column>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="practica">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="practicas" optimistic-lock="true" sort="unsorted" table="PRACTICA">
             <key on-delete="noaction">
                 <column length="200" name="NOMBRE_CURSO" not-null="true">
                     <comment>Nombre del curso asignado a las practicas</comment>
@@ -35,7 +39,7 @@
             </key>
             <one-to-many class="persistencia.Practica" embed-xml="true" not-found="exception"/>
         </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="alumnos" optimistic-lock="true" sort="unsorted" table="alumno">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="alumnos" optimistic-lock="true" sort="unsorted" table="ALUMNO">
             <key on-delete="noaction">
                 <column length="200" name="NOMBRE_CURSO" not-null="true">
                     <comment>Identificador del curso</comment>
