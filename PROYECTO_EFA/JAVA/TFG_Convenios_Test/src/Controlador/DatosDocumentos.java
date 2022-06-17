@@ -71,8 +71,6 @@ public class DatosDocumentos {
 				  
 				  pdfDoc.close();
 				  
-				  System.out.println("pdfCreado");
-				  
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,11 +124,8 @@ public class DatosDocumentos {
 					  String fecha = this.fechaHoy();
 					  fields.get("fechaAnexo").setValue(fecha);
 					  
-					  
 					  pdfDoc.close();
 			        
-					  
-					  System.out.println("pdfCreado");
 					  
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -183,8 +178,6 @@ public class DatosDocumentos {
 
 				  
 				  pdfDoc.close();
-				  
-				  System.out.println("pdfCreado");
 				  
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -242,12 +235,8 @@ public class DatosDocumentos {
 				  fields.get("fechaAnexo").setValue(fecha);
 				  fields.get("nombreDirectorEfa").setValue(datosEfa.getNombreDirector());
 				  fields.get("nombreDirectorEmpresa").setValue(convenio.getEmpresa().getNombreGerente());
-
 				  
 				  pdfDoc.close();
-				  
-				  System.out.println("pdfCreado");
-				  
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

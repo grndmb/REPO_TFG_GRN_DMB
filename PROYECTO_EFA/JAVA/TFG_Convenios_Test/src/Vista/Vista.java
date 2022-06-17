@@ -1510,10 +1510,10 @@ public class Vista extends JFrame {
 			lblTituloSeleccionDocumentos.setBounds(49, 102, 618, 47);
 			panelDocumentos.add(lblTituloSeleccionDocumentos);
 
-			lblInfoRutaDocumentos = new JLabel("LOS DOCUMENTOS SE HAN GUARDADO EN LA CARPETA DOCUMENTOS_APP_EFA");
+			lblInfoRutaDocumentos = new JLabel("DOCUMENTOS GUARDADOS EN CARPETA DOCUMENTOS_APP_EFA");
 			lblInfoRutaDocumentos.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 			lblInfoRutaDocumentos.setForeground(new Color(255, 140, 0));
-			lblInfoRutaDocumentos.setBounds(580, 580, 534, 47);
+			lblInfoRutaDocumentos.setBounds(509, 580, 618, 47);
 			lblInfoRutaDocumentos.setVisible(false);
 			panelDocumentos.add(lblInfoRutaDocumentos);
 

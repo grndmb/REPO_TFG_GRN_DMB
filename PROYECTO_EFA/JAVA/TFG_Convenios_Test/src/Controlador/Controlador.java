@@ -39,6 +39,7 @@ import Modelo.Modelo;
 public class Controlador implements ActionListener{
 	//Objetos && Variabless
 	Vista vista = new Vista();
+	DatosDocumentos dd = new DatosDocumentos();
 	//Constructor
 	public Controlador(Vista v) {
 		this.vista = v;
@@ -124,7 +125,8 @@ public class Controlador implements ActionListener{
 			this.vista.panelPracticas.setVisible(false);
 			this.vista.panelCrearNuevoConvenio.setVisible(false);
 			this.vista.panelDocumentos.setVisible(false);
-
+			
+		
 	}
 	
 	
@@ -1049,6 +1051,9 @@ public class Controlador implements ActionListener{
 		  //BOTON QUE ABRE EL PANEL DE DOCUMENTOS
 		  if(e.getSource() == vista.btnPanelDocumentos) {
 			  if(vista.modelAnexarPracticas.size()>0){
+				//CREAMOS LA CARPETA DONDE SE GUARDARÁN LOS DOCUMENTOS
+					dd.crearDirectorio();
+				  
 				  vista.panelPracticas.setVisible(false);
 				  vista.panelDocumentos.setVisible(true);
 				  vista.lblInfoRutaDocumentos.setVisible(false);
@@ -1084,8 +1089,6 @@ public class Controlador implements ActionListener{
 				  try {
 					  listaAnexarsPracticas = modelo.listarAnexarsPracticas(sessionFactory);
 					  listaPeriodos = modelo.listarPeriodoPracticas(sessionFactory);
-					  DatosDocumentos dd = new DatosDocumentos();
-					  dd.crearDirectorio();
 					  this.seleccionarDocumentos(sessionFactory ,listaPeriodos.get(vista.listPeriodosPracticas.getSelectedIndex()), listaAnexarsPracticas, datosEfa, modelo);
 				  } catch (IOException e1) {
 					// TODO Auto-generated catch block
