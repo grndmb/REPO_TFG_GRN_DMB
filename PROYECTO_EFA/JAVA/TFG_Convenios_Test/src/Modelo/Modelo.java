@@ -709,7 +709,7 @@ public class Modelo {
 	 
 	 public void actualizarEmpresa (SessionFactory sessionFactory, String cifEmpresa, String nombreEmpresa, String direccionEmpresa, int telefono1, int telefono2, 
 			 String emailEmpresa, String faxEmpresa, String paginaWeb, String nombreGerente, String dniGerente, 
-			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, String poblacion) throws HibernateException {
+			 String personaContacto, String dniPersonaContacto, Date fechaActualizacion, boolean organismoPublico,String observaciones, int codigoPostal) throws HibernateException {
 		 
 		 Session session = null;
 
@@ -740,8 +740,8 @@ public class Modelo {
 			empresa.setObservaciones(observaciones);
 			
 			//Consulta poblacion de la empresa
-			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE nombre =:nombre");
-			poblacionQuery.setParameter("nombre", poblacion);
+			Query poblacionQuery = sessionFactory.getCurrentSession().createQuery("FROM Poblacion WHERE codigoPostal =:codigoPostal");
+			poblacionQuery.setParameter("codigoPostal", codigoPostal);
 			Poblacion pb = (Poblacion) poblacionQuery.getSingleResult();
 	
 			empresa.setPoblacion(pb);

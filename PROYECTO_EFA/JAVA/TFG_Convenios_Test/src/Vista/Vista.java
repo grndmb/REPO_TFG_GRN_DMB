@@ -1004,7 +1004,7 @@ public class Vista extends JFrame {
 			
 			btnModificarEmpresa = new JButton("MODIFICAR EMPRESA");
 			btnModificarEmpresa.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-			btnModificarEmpresa.setBounds(49, 538, 217, 68);
+			btnModificarEmpresa.setBounds(49, 538, 337, 68);
 			panelNuevaActualizarEmpresa.add(btnModificarEmpresa);	
 			
 			lblTituloModificarEmpresa = new JLabel();

@@ -213,7 +213,7 @@ public class DatosDocumentos {
 				  fields.get("cifEmpresa").setValue(convenio.getEmpresa().getCifEmpresa());
 				  fields.get("emailEmpresa").setValue(convenio.getEmpresa().getEmailEmpresa());
 				  fields.get("claveCurso").setValue(listaAlumnos.get(0).getAlumno().getCurso().getClave());
-				  fields.get("familiaProfesionalCurso").setValue("No mires, pa que miras");
+				  fields.get("familiaProfesionalCurso").setValue("");
 				  fields.get("nombreCurso").setValue(listaAlumnos.get(0).getAlumno().getCurso().getNombreCurso());
 				  
 				  int comprobarMes = LocalDate.now().getMonthValue();

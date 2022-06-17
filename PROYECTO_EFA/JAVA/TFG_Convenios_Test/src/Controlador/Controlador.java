@@ -156,7 +156,7 @@ public class Controlador implements ActionListener{
 		Configuration configuration = new Configuration();
 	    configuration.configure("hibernate.cfg.xml");
 	    sessionFactory = configuration.buildSessionFactory();
-        
+     try {   
 	    //Control de las acciones de los botones
 	    
 	        //Acciones del botón de INICIAR
@@ -759,7 +759,22 @@ public class Controlador implements ActionListener{
 				//BOTON QUE ACTUALIZA LA EMPRESA
 				    if(e.getSource() == vista.btnModificarEmpresa){
 				    					    	
-				    	if(this.anadirEmpresaValida() == true) {
+				    	if(this.anadirEmpresaValida() == true ) {
+				    		//Llamamos al metodo que realiza el insert de la nueva empresa
+				    		this.actualizarEmpresa(sessionFactory, modelo);
+				    		this.vista.panelNuevaActualizarEmpresa.setVisible(false);
+					    	this.vista.panelListaEmpresas.setVisible(true);
+				    		
+					    	//Rellenar List de empresas				
+							listaEmpresas = modelo.listaEmpresas(sessionFactory);
+							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
+							
+							//RELLENAR EL COMBO BOX DE LAS POBLACIONES
+							//RECARGA LOS COMBOBOX
+							vista.comboBoxPoblacionUSUEmpresa.removeAllItems();
+							modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
+					    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUEmpresa);
+				    	}else if (vista.btnModificarEmpresa.isVisible() == true) {
 				    		//Llamamos al metodo que realiza el insert de la nueva empresa
 				    		this.actualizarEmpresa(sessionFactory, modelo);
 				    		this.vista.panelNuevaActualizarEmpresa.setVisible(false);
@@ -1097,7 +1112,14 @@ public class Controlador implements ActionListener{
 			  vista.panelPracticas.setVisible(true);
 			  vista.panelDocumentos.setVisible(false);
 		  }
-		  //cerrar session factory
+		
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}finally {
+			if(null != sessionFactory) {
+				sessionFactory.close();
+			}
+		}
 	}
 		
 	
@@ -1361,7 +1383,7 @@ public class Controlador implements ActionListener{
 							String direccionEmpresa = vista.txtDireccionEmpresa.getText();
 							
 						// POBLACION
-							String poblacion = vista.comboBoxPoblacionUSUEmpresa.getSelectedItem().toString();
+							int cp = Integer.parseInt(vista.comboBoxCodigoPostalUSUEmpresa.getSelectedItem().toString());
 						
 						// CORREO
 							String emailEmpresa = vista.txtEmailEmpresa.getText();
@@ -1406,7 +1428,7 @@ public class Controlador implements ActionListener{
 					        java.sql.Date fecha = new java.sql.Date(fechaActualizacionEmpresa.getTime());
 					        
 						// INSERT
-							modelo.actualizarEmpresa(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, dniCargoPersonaContactoEmpresa, fechaActualizacionEmpresa, organismoPublico, observacionesEmpresa, poblacion);
+							modelo.actualizarEmpresa(sessionFactory, cifEmpresa, nombreEmpresa, direccionEmpresa, telefono1, telefono2, emailEmpresa, faxEmpresa, paginaWebEmpresa, nombreGerenteEmpresa, dniGerenteEmpresa, personaContactoEmpresa, dniCargoPersonaContactoEmpresa, fechaActualizacionEmpresa, organismoPublico, observacionesEmpresa, cp);
 					
 						// RESET FORMULARIO NUEVA EMPRESA
 							this.resetFormularioNuevaEmpresa();
