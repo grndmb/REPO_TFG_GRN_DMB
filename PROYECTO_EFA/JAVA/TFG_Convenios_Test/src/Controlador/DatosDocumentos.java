@@ -258,21 +258,6 @@ public class DatosDocumentos {
 		return cursoAcademicoYear;
 	}
 	  
-	  
-	  
-	  
-	public static void main(String[] args) throws Exception {
-		DatosDocumentos datosDocumentos =  new DatosDocumentos();
-		try {
-			//datosDocumentos.manipulatePdf("FCT_Anexo 0FORM", "FCT", "JUAN CARLOS LOPEZ CAMIN", "77382232P","EFA MORATALAZ");
-			
-			//datosDocumentos.rellenarPDF_PFEAnexo0("", null, null, null);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
 	public String fechaHoy() {
 		java.sql.Date fecha = null;
 		  Date fechaAct = Calendar.getInstance().getTime();
