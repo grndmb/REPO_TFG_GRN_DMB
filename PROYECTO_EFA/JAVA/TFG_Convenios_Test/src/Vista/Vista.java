@@ -320,6 +320,7 @@ public class Vista extends JFrame {
                     Controlador controlador = new Controlador(frame);
                     frame.setVisible(true);
                     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    frame.set;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -37,17 +37,17 @@ import persistencia.Practica;
 import Modelo.Modelo;
 
 public class Controlador implements ActionListener{
-	//Objetos && Variabless
+	//OBJETOS
 	Vista vista = new Vista();
 	DatosDocumentos dd = new DatosDocumentos();
-	//Constructor
+	//CONSTRUCTOR
 	public Controlador(Vista v) {
 		this.vista = v;
 		
-		//Botones Panel Inicio
+		//BOTONES PANEL INICIO
 			this.vista.btnInicio.addActionListener(this);
 		
-		//Botones Menu
+		//BOTONES MENÚ
 			this.vista.btnPanelAlumnos.addActionListener(this);
 			this.vista.btnPanelEmpresas.addActionListener(this);
 			this.vista.btnPanelPeriodos.addActionListener(this);
@@ -67,11 +67,11 @@ public class Controlador implements ActionListener{
 			this.vista.btnModificarAlumno.addActionListener(this);
 			this.vista.btnEliminarAlumno.addActionListener(this);
 			
-		//Botones Panel Nueva Poblacion
+		//BOTONES PANEL NUEVA POBLACIÓN
 			this.vista.btnAnadirPoblacionAlumno.addActionListener(this);
 			this.vista.btnAnadirPoblacionEmpresa.addActionListener(this);
 			
-		//Botones Panel Nuevo Curso
+		//BOTONES PANEL NUEVO CURSO
 			this.vista.btnAnadirCurso.addActionListener(this);
 			
 			
@@ -83,30 +83,30 @@ public class Controlador implements ActionListener{
 			this.vista.btnBuscarListaEmpresas.addActionListener(this);
 			this.vista.btnPanelAddEmpresa.addActionListener(this);
 			
-		//Botones Panel Nueva Actualiazar Empresa
+		//BOTONES PANEL NUEVA ACTUALIZAR EMPRESA
 			this.vista.btnAnadirEmpresa.addActionListener(this);
 			this.vista.btnModificarEmpresa.addActionListener(this);
 			this.vista.comboBoxPoblacionUSUEmpresa.addActionListener(this);
 			this.vista.btnNuevaPoblacionEmpresa.addActionListener(this);
 		
-		//Botones panel Convenios
+		//BOTONES PANEL CONVENIOS
 			this.vista.comboBoxListaCursoConvenio.addActionListener(this);
 			this.vista.btnActualizarConvenio.addActionListener(this);
 			this.vista.comboBoxTipoConvenioPanelConvenio.addActionListener(this);
 			this.vista.btnPanelCrearNuevoConvenio.addActionListener(this);
 			this.vista.btnCrearConvenio.addActionListener(this);
 			
-		//Botones del panel Periodos
+		//BOTONES PANEL PERIODOS
 			this.vista.btnCrearPeriodo.addActionListener(this);
 			this.vista.btnEliminarPeriodo.addActionListener(this);
 			
-		//Botones del panel Practicas
+		//BOTONES PANEL PRACTICAS
 			this.vista.btnAsignarPeriodoPracticas.addActionListener(this);
 			this.vista.btnAsignarEmpresaPracticas.addActionListener(this);
 			this.vista.btnEliminarAnexarPracticas.addActionListener(this);
 			this.vista.btnPanelDocumentos.addActionListener(this);
 			
-		//Botones del panel Documentos
+		//BOTONES PANEL DOCUMENTOS
 			this.vista.btnGuardarDocumentos.addActionListener(this);
 			this.vista.btnAtrasDocumentos.addActionListener(this);
 			
@@ -131,23 +131,23 @@ public class Controlador implements ActionListener{
 	
 	
 	
-	//Controlador de eventos
+	//CONTROLADOR DE EVENTOS DE TODOS LOS BOTONES DE LA APLICACIÓN
 	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		Modelo modelo = new Modelo();
 		
-		//ARRAYLIST JLIST Alumnos 
+		//ARRAYLIST JLIST ALUMNOS 
 		ArrayList <Alumno> listaAlumnos = new ArrayList<Alumno>();
 		
-		//ARRAYLIST JLIST Empresas
+		//ARRAYLIST JLIST EMPRESAS
 		ArrayList <Empresa> listaEmpresas = new ArrayList<Empresa>();
 		
 		//ARRAYLIST JLIST CONVENIOS
 		ArrayList<Convenio> listaConvenios = new ArrayList<Convenio>();
 		
-		//ARRAYLIST PERIODO
+		//ARRAYLIST PERIODOS
 		ArrayList<Practica> listaPeriodos = new ArrayList<Practica>();
 		
 		//ARRAYLIST ANEXARS
@@ -158,21 +158,18 @@ public class Controlador implements ActionListener{
 		Configuration configuration = new Configuration();
 	    configuration.configure("hibernate.cfg.xml");
 	    sessionFactory = configuration.buildSessionFactory();
-     try {   
-	    //Control de las acciones de los botones
+     try {  
 	    
-	        //Acciones del botón de INICIAR
+	        //ACCIONES DEL BOTÓN INICIAR
 		    if(e.getSource() == vista.btnInicio) {
 		    	
-				//Mostrar panel menu
+				//MUESTRA EL PANEL DEL MENÚ
 		    	vista.panelMenu.setVisible(true);
 		    	
-		    	//Situar el lbl de EFA MORATALAZ
+		    	//SITÚA EL LABEL DE EFA MORATALAZ
 		    	vista.labelTitulo.setVisible(true);
 		    	vista.labelTitulo.setBounds(342, 10, 1183, 112);
 		    	vista.labelTitulo.setText("EFA MORATALAZ");
-		    	//vista.labelTitulo.setOpaque(true);
-		    	//vista.labelTitulo.setForeground(new Color(53, 100, 54));
 		    	
 				vista.btnInicio.setVisible(false);
 				vista.lblLogoInicio.setVisible(false);
@@ -190,7 +187,7 @@ public class Controlador implements ActionListener{
 				
 		    }
 		    if(e.getSource() == vista.btnPanelInstrucciones) {
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
 		    	vista.btnPanelInstrucciones.setBackground(new Color(211, 211, 211));
 	    		vista.btnPanelAlumnos.setBackground(Color.WHITE);
 	    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
@@ -215,7 +212,7 @@ public class Controlador implements ActionListener{
 		     * ACCIONES DEL PANEL ALUMNOS
 		     */
 		    if(e.getSource() == vista.btnPanelAlumnos) {
-		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENï¿½
+		    	//CAMBIOS DE COLORES DE FONDO BOTONES DEL MENÚ
 		    		vista.btnPanelAlumnos.setBackground(new Color(211, 211, 211));
 		    		vista.btnPanelEmpresas.setBackground(Color.WHITE);
 		    		vista.btnPanelPeriodos.setBackground(Color.WHITE);
@@ -311,7 +308,7 @@ public class Controlador implements ActionListener{
 			    		
 						listaAlumnos = modelo.listarAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno.getSelectedItem().toString());
 					
-						//Seteamos los valores del alumno seleccioando
+						//SETEAMOS LOS VALORES DEL ALUMNO SELECCIONADO
 						vista.txtNIFUSUAlumno.setText(listaAlumnos.get(vista.listAlumnos.getSelectedIndex()).getNif());
 						
 						Session session = null;
@@ -369,10 +366,10 @@ public class Controlador implements ActionListener{
 		    	//RELLENA EL JLIST DE LOS ALUMNOS
 				this.recargaJLISTAlumnos(sessionFactory, vista.comboBoxListaCursoAlumno, vista.modelAlumnos, vista.listAlumnos);
 				
-				//Selecciona el curso del alumno, si el mismo se modifica
+				//SELECCIONA DEL CURSO 
 				vista.comboBoxListaCursoAlumno.setSelectedItem(vista.comboBoxNombreCursoUSUAlumno.getSelectedItem());
 				
-				//Volvemos al panel Alumno
+				//VOLVEMOS AL PANEL LISTA ALUMNOS
 				vista.panelNuevoActualizarAlumno.setVisible(false);
 				vista.panelListaAlumno.setVisible(true);
 		    }
@@ -401,7 +398,7 @@ public class Controlador implements ActionListener{
 		    if(e.getSource() == vista.btnAnadirAlumno) {
 			
 		    	if(this.anadirAlumnoValido() == true && this.existeNuevoAlumno(sessionFactory) == true) {
-		    		//Llamamos al metodo que realiza el insert del nuevo alumno
+		    		//LLAMAMOS AL MÉTODO QUE REALIZA EL INSERT DEL ALUMNO
 					this.crearNuevoAlumno(sessionFactory, modelo);
 					
 					vista.panelNuevoActualizarAlumno.setVisible(false);
@@ -427,18 +424,18 @@ public class Controlador implements ActionListener{
 		    if(e.getSource() == vista.btnAnadirPoblacionAlumno) {
 		    	
 				if(this.anadirPoblacionValido() == true) {
-		    		//Llamamos al metodo que realiza el insert del nueva poblacion
+					//LLAMAMOS AL MÉTODO QUE REALIZA EL INSERT DE LA POBLACIÓN
 					this.crearNuevaPoblacion(sessionFactory, modelo);
 					
-					//Volvemos al panel Alumno
+					//VOLVEMOS AL PANEL LISTA ALUMNOS
 					vista.panelNuevaPoblacion.setVisible(false);
 					vista.panelNuevoActualizarAlumno.setVisible(true);
 					
-					//Recargamos el comboBox de poblaciones
+					//RECARGAMOS EL COMBOBOX DE POBLACIONES
 					vista.comboBoxPoblacionUSUAlumno.removeAllItems();
 					
 					
-					//sELECCIONAMOS LA POBLACION CREADA
+					//SELECCIONAMOS LA POBLACION CREADA
 						vista.comboBoxPoblacionUSUAlumno.setSelectedItem(vista.txtNombreUSUPoblacion.getText().toString());
 						modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUAlumno);
 						modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUAlumno.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUAlumno);
@@ -454,14 +451,14 @@ public class Controlador implements ActionListener{
 			}if(e.getSource() == vista.btnAnadirCurso) {
 		    	
 				if(this.anadirCursoValido() == true) {
-		    		//Llamamos al metodo que realiza el insert del nuevo curso
+					//LLAMAMOS AL MÉTODO QUE REALIZA EL INSERT DEL NUEVO CURSO
 					this.crearNuevoCurso(sessionFactory, modelo);
 					
-					//Volvemos al panel Alumno
+					//VOLVEMOS AL PANEL LISTA ALUMNOS
 					vista.panelNuevoCurso.setVisible(false);
 					vista.panelNuevoActualizarAlumno.setVisible(true);
 					
-					//Recargamos el comboBox de cursos
+					//RECARGAMOS EL COMBOBOX DE CURSOS
 					vista.comboBoxNombreCursoUSUAlumno.removeAllItems();
 					modelo.rellenarComboBoxCursos(sessionFactory, vista.comboBoxNombreCursoUSUAlumno);
 					vista.comboBoxListaCursoAlumno.removeAllItems();
@@ -472,7 +469,7 @@ public class Controlador implements ActionListener{
 				
 			}
 		    
-			//AL PULSAR EN UNA OPCIï¿½N DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
+			//AL PULSAR EN UNA OPCIÓN DEL COMBOBOX DE POBLACIO,CARGA SU CODIGO POSTAL
 		    if(e.getSource() == vista.comboBoxPoblacionUSUAlumno) {
 		    	if(vista.comboBoxPoblacionUSUAlumno.getSelectedItem() != null) {
 		    		modelo.rellenarComboBoxCodigoPostal(sessionFactory,vista.comboBoxPoblacionUSUAlumno.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUAlumno);
@@ -482,7 +479,7 @@ public class Controlador implements ActionListener{
 			/**
 			 * ACCIONES DEL PANEL EMPRESA
 			 */
-				//BOTON QUE ABRE EL PANEL DONDE SE LSTAN LAS EMPRESAS
+				//BOTON QUE ABRE EL PANEL DONDE SE LISTAN LAS EMPRESAS
 				    if(e.getSource() == vista.btnPanelEmpresas) {
 				    	
 				    	//DEJAR DE MOSTRAR PANEL DISTINTO AL PANEL EMPRESA
@@ -530,7 +527,7 @@ public class Controlador implements ActionListener{
 			    //BOTON BUSCAR DEL PANEL LISTAR EMPRESAS 
 			    
 				    if(e.getSource() == vista.btnBuscarListaEmpresas) {
-			    	//Rellenar List de empresas				
+			    	//RELLENA LA LISTA DE LAS EMPRESAS			
 					listaEmpresas = modelo.listaEmpresasFiltro(sessionFactory, vista.txtFiltroListaEmpresa.getText());
 					this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
 				    }
@@ -593,24 +590,19 @@ public class Controlador implements ActionListener{
 				    		
 						    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 								this.recargaJLISTVerConvenio(sessionFactory, vista.modelConvenios, vista.listConvenios, listaConvenios);
-				    		
 				    		}
-				    		
-				    	
 				    	}
 				    	
 				    	if(e.getSource() == vista.btnPanelCrearNuevoConvenio) {
 				    		
 				    		vista.panelCrearNuevoConvenio.setVisible(true);
 				    		vista.btnPanelCrearNuevoConvenio.setVisible(false);
-
 				    	}
 				    	
 				    	if(e.getSource() == vista.btnCrearConvenio) {
 				    		
 				    		listaEmpresas = modelo.listaEmpresas(sessionFactory);
 					    	listaConvenios = modelo.listarConveniosCIFEmpresa(sessionFactory, listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
-					    	
 					    	
 					    	//FECHA ANEXO
 					    	java.sql.Date fecha = null;
@@ -675,7 +667,7 @@ public class Controlador implements ActionListener{
 				    		vista.lblErroresNuevaEmpresa.setText(" ");
 				    		
 				    		
-				    		//Hace visible el panel nueva actualizar la empresa y cambia el titulo por modificar 
+				    		//HACE VISIBLE EL PANEL NUEVA ACTUALIZAR EMPRESA Y CAMBIA EL TÍTULO POR MODIFICAR 
 				    		this.vista.btnModificarEmpresa.setVisible(true);
 					    	this.vista.btnAnadirEmpresa.setVisible(false);
 					    	
@@ -696,7 +688,7 @@ public class Controlador implements ActionListener{
 					    		
 								listaEmpresas = modelo.listaEmpresas(sessionFactory);
 							
-								//Seteamos los valores de la empresa seleccionada
+								//SETEAMOS LOS VALORES DE LA EMPRESA SELECCIONADA
 								
 								Session session = null;
 								
@@ -704,7 +696,6 @@ public class Controlador implements ActionListener{
 									session = sessionFactory.getCurrentSession();
 									session.beginTransaction();
 									
-									//CIF
 									vista.txtCIFEmpresa.setText(listaEmpresas.get(vista.listEmpresas.getSelectedIndex()).getCifEmpresa());
 									
 									Query query = sessionFactory.getCurrentSession().createQuery("FROM Empresa WHERE cifEmpresa =:cifEmpresa");
@@ -762,12 +753,12 @@ public class Controlador implements ActionListener{
 				    if(e.getSource() == vista.btnModificarEmpresa){
 				    					    	
 				    	if(this.anadirEmpresaValida() == true ) {
-				    		//Llamamos al metodo que realiza el insert de la nueva empresa
+				    		//LLAMAMOS AL MÉTODO QUE ACTUALIZA LA EMPRESA
 				    		this.actualizarEmpresa(sessionFactory, modelo);
 				    		this.vista.panelNuevaActualizarEmpresa.setVisible(false);
 					    	this.vista.panelListaEmpresas.setVisible(true);
 				    		
-					    	//Rellenar List de empresas				
+					    	//SE RELLENA LA LISTA DE EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
 							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
 							
@@ -777,12 +768,12 @@ public class Controlador implements ActionListener{
 							modelo.rellenarComboBoxNombreCiudad(sessionFactory, vista.comboBoxPoblacionUSUEmpresa);
 					    	modelo.rellenarComboBoxCodigoPostal(sessionFactory, vista.comboBoxPoblacionUSUEmpresa.getSelectedItem().toString(), vista.comboBoxCodigoPostalUSUEmpresa);
 				    	}else if (vista.btnModificarEmpresa.isVisible() == true) {
-				    		//Llamamos al metodo que realiza el insert de la nueva empresa
+				    		//LLAMAMOS AL MÉTODO QUE ACTUALIZA LA EMPRESA
 				    		this.actualizarEmpresa(sessionFactory, modelo);
 				    		this.vista.panelNuevaActualizarEmpresa.setVisible(false);
 					    	this.vista.panelListaEmpresas.setVisible(true);
 				    		
-					    	//Rellenar List de empresas				
+					    	//SE RELLENA LA LISTA DE EMPRESAS			
 							listaEmpresas = modelo.listaEmpresas(sessionFactory);
 							this.recargaJLISTEmpresas(sessionFactory, vista.modelEmpresas, vista.listEmpresas, listaEmpresas);
 							
@@ -965,7 +956,7 @@ public class Controlador implements ActionListener{
 					   }
 					this.recargaJLISTPeriodos(sessionFactory, vista.modelPeriodosPracticas, vista.listPeriodosPracticas, listaPeriodos);
 					
-			    //VACï¿½A LOS MODELS DE ALUMNOS, EMPRESAS Y ANEXAR
+			    //VACÍA LOS MODELS DE ALUMNOS, EMPRESAS Y ANEXAR
 					vista.modelAlumnosPracticas.removeAllElements();
 					vista.modelEmpresasPracticas.removeAllElements();
 					vista.modelAnexarPracticas.removeAllElements();
@@ -1172,7 +1163,7 @@ public class Controlador implements ActionListener{
 				}
 				
 
-			//Metodo para validar que todo los campos del alumno estï¿½n rellenos
+			//Metodo para validar que todo los campos del alumno están rellenos
 				public boolean anadirAlumnoValido() {
 					boolean valido = true;
 	
@@ -1202,16 +1193,11 @@ public class Controlador implements ActionListener{
 					
 					return valido;
 				}
-			
-				
-				
 				
 			//Metodo para validar si el alumno que se desea crear, existe
 				public boolean existeNuevoAlumno (SessionFactory sessionFactory) {
 					boolean existe = true;
 					Session session = null; 
-					
-					
 					
 					try {
 						
@@ -1246,7 +1232,6 @@ public class Controlador implements ActionListener{
 					
 					return existe;
 				}
-			
 				
 			//Metodo para restablecer el formulario de nuevoAlumno
 				public void resetFormularioNuevoAlumno() {
